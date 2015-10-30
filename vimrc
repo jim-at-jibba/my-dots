@@ -113,6 +113,7 @@ set ruler                       " show the cursor position all the time
 ""Theme
 set encoding=utf8
 colorscheme solarized
+set background=dark
 
 
 "" Whitespace
