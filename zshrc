@@ -54,6 +54,7 @@ plugins=(git)
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="/usr/local/mysql/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -92,3 +93,10 @@ alias ..='cd ../'
 
 # GIT
 alias gs='git status'
+
+# Apache
+alias evhost='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
+alias ehosts='sudo vim /etc/hosts'
+alias reapac='sudo apachectl restart'
+alias sapac='sudo apachectl start'
+alias stapac='sudo apachectl stop'
