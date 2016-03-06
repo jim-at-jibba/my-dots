@@ -1,10 +1,11 @@
-#### COLOUR
+
 
 tm_icon="♟"
 tm_color_active=colour213
 tm_color_inactive=colour241
 tm_color_feature=colour4
 tm_color_music=colour203
+tm_color_session=colour220
 
 # separators
 tm_separator_left_bold="◀"
@@ -12,10 +13,10 @@ tm_separator_left_thin="❮"
 tm_separator_right_bold="▶"
 tm_separator_right_thin="❯"
 
-set -g status-left-length 32
+set -g status-left-length 150
 set -g status-right-length 150
 set -g status-interval 5
-
+set -g status-justify centre
 
 # default statusbar colors
 # set-option -g status-bg colour0
@@ -56,8 +57,9 @@ tm_vox="#[fg=$tm_color_music]#(osascript ~/dotfiles/applescripts/vox.scpt)"
 
 tm_date="#[fg=$tm_color_inactive] %R %d %b"
 tm_host="#[fg=$tm_color_feature,bold]#h"
-tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S"
+tm_session_name="#[fg=$tm_color_session,bold]$tm_icon #S : "
 tm_online="#[fg=$tm_color_feature,bold]Online: #{online_status}"
+tm_ip="#[fg=$tm_color_feature]#(curl icanhazip.com) #[fg=$tm_color_music]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=$tm_color_active]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
 
-set -g status-left $tm_session_name' '
+set -g status-left $tm_session_name' '$tm_ip
 set -g status-right $tm_vox' '$tm_spotify' '$tm_date' '$tm_online
