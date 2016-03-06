@@ -61,7 +61,7 @@ if !exists('g:airline_symbols')
    let g:airline_symbols = {}
    endif
 let g:airline_symbols.space = "\ua0"
-let g:airline_theme='solarized'
+let g:airline_theme='luna'
 set t_Co=256
 
 " Enable the list of buffers
@@ -87,9 +87,8 @@ set timeoutlen=50               " avoids delay in switching to normal from inser
 ""Theme
 let g:enable_bold_font = 1
 set encoding=utf8
-colorscheme solarized
-syntax enable
-set background=light
+colorscheme flattened_light
+"set background=light
 
 
 "" Whitespace
