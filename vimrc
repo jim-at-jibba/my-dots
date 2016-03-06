@@ -23,6 +23,14 @@ Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'duythinht/inori'
 Plugin 'romainl/flattened'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jnurmine/Zenburn'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-markdown'
+Plugin 'othree/html5.vim'
+Plugin 'elzr/vim-json'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -87,9 +95,8 @@ set timeoutlen=50               " avoids delay in switching to normal from inser
 ""Theme
 let g:enable_bold_font = 1
 set encoding=utf8
-colorscheme solarized
-syntax enable
-set background=light
+colorscheme zenburn
+ "set background=light
 
 
 "" Whitespace
