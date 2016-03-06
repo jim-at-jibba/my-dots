@@ -95,13 +95,8 @@ set timeoutlen=50               " avoids delay in switching to normal from inser
 ""Theme
 let g:enable_bold_font = 1
 set encoding=utf8
-<<<<<<< HEAD
-colorscheme flattened_light
-"set background=light
-=======
 colorscheme zenburn
  "set background=light
->>>>>>> d07b5e13878e4dff6200d93799ecc7a93cb7765a
 
 
 "" Whitespace
