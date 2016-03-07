@@ -1,3 +1,5 @@
+let mapleader=','
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -84,15 +86,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Basic settings
 """""""""""""""""""""""""""""
 
-set nocompatible                " choose no compatibility with legacy vi
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
 set number                      " Show line numbers
 set ruler                       " show the cursor position all the time
-set timeoutlen=50               " avoids delay in switching to normal from insert - turned off to allow jj binding to escape 
+"set timeoutlen=50               " avoids delay in switching to normal from insert - turned off to allow jj binding to escape 
 
-""Theme
+"Theme
 let g:enable_bold_font = 1
 set encoding=utf8
 colorscheme zenburn
@@ -103,7 +104,6 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-let mapleader = ','
 
 set smartcase
 set ignorecase
