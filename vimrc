@@ -1,4 +1,4 @@
-let mapleader=','
+let mapleader=' '
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -109,15 +109,31 @@ set ignorecase
 set noantialias
 set laststatus=2
 
+
+"===========[ Search ] ==================
+
+set hlsearch
+set incsearch
+
 "===========[ Mappings ]==================
 
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
-"SAVE
+
+" Save
 inoremap <c-s> <ESC>:w<CR>
 nnoremap <c-s> <ESC>:w<CR>
+
+" remaps ;
 nnoremap ; :
+
+" Simple highlight removal
+nnoremap <leader><space> :nohlsearch<cr> 
+
 
 "===========[ Auto-Command ] =============
 
 " Automatically source vimrc file on save
-autocmd BufWritePost .vimrc source %
+augroup autosourcing
+  autocmd!
+  autocmd BufWritePost .vimrc source %
+augroup END
