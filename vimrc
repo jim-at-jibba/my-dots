@@ -1,3 +1,5 @@
+let mapleader=','
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -10,8 +12,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Plugins
-"""""""""""""""""""""""""""""""""""""
+"=============[ Plugins ]===========
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Chiel92/vim-autoformat'
@@ -56,15 +58,15 @@ map <F9> :NERDTreeFind<CR>
 " autoformat
 noremap <F3> :Autoformat<CR>
 
-" CtrlP Settigns
-""""""""""""""""""""""""
+"===============[  CtrlP Settigns ]=============
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignored files in git ignore
 
-" Airline setting
-""""""""""""""""""""""""
+"==============[  Airline setting ] ===========
+
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -82,25 +84,21 @@ let g:bufferline_echo = 0
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
  
-" Basic settings
-"""""""""""""""""""""""""""""
+"=============[ Basic settings ]============
 
-set nocompatible                " choose no compatibility with legacy vi
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
 set number                      " Show line numbers
 set ruler                       " show the cursor position all the time
-set timeoutlen=50               " avoids delay in switching to normal from insert - turned off to allow jj binding to escape 
+"set timeoutlen=50               " avoids delay in switching to normal from insert - turned off to allow jj binding to escape 
 
-""Theme
+"============[ Theme ]====================
 let g:enable_bold_font = 1
 set encoding=utf8
 colorscheme zenburn
- "set background=light
+set guifont=Sauce\ Code\ Powerline:h14
 
-
-"" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
@@ -110,3 +108,16 @@ set smartcase
 set ignorecase
 set noantialias
 set laststatus=2
+
+"===========[ Mappings ]==================
+
+nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+"SAVE
+inoremap <c-s> <ESC>:w<CR>
+nnoremap <c-s> <ESC>:w<CR>
+nnoremap ; :
+
+"===========[ Auto-Command ] =============
+
+" Automatically source vimrc file on save
+autocmd BufWritePost .vimrc source %

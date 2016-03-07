@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/Users/jim-at-jibba/.oh-my-zsh
+  export ZSH=/Users/jim-at-gravitywell/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -67,9 +67,6 @@ source $ZSH/oh-my-zsh.sh
  else
    export EDITOR='mvim'
  fi
-
-# Tmuxinator config
-source ~/.bin/tmuxinator.zsh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
