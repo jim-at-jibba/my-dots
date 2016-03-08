@@ -64,6 +64,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignored files in git ignore
+let g:ctrlp_custom_ignore = 'node_modules\DS_Store\git'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30'
 
 " Mappings
 nnoremap <c-R> :CtrlPBufTag<cr>         " Allows search for Methods in current file
