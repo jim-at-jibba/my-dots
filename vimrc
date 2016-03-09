@@ -58,6 +58,9 @@ map <F9> :NERDTreeFind<CR>
 " autoformat
 noremap <F3> :Autoformat<CR>
 
+" vim-json
+set conceallevel=0
+
 "===============[  CtrlP Settigns ]=============
 
 let g:ctrlp_map = '<c-p>'
