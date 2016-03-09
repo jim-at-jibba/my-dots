@@ -12,8 +12,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"=============[ Plugins ]===========
 
+
+
+
+"==============[  Pluggins ] ==========="
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Chiel92/vim-autoformat'
@@ -34,6 +37,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rizzatti/dash.vim'
+Plugin 'tpope/vim-vinegar.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,7 +55,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " Toggle nerdtree with F10
-map <F10> :NERDTreeToggle<CR>
+map <leader>1 :NERDTreeToggle<CR>
 " Current file in nerdtree
 map <F9> :NERDTreeFind<CR>
 
@@ -61,8 +65,11 @@ noremap <F3> :Autoformat<CR>
 " vim-json
 set conceallevel=0
 
-"===============[  CtrlP Settigns ]=============
 
+
+
+
+"==============[  CtrlP Settings ] ==========="
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -75,8 +82,11 @@ nnoremap <c-R> :CtrlPBufTag<cr>         " Allows search for Methods in current f
 nnoremap <leader>r :CtrlPMRUFiles<cr>
 
 
-"==============[  Airline setting ] ===========
 
+
+
+
+"==============[  Airline setting ] ==========="
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -94,16 +104,36 @@ let g:bufferline_echo = 0
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
  
-"=============[ Basic settings ]============
 
+
+
+
+"==============[  Split Settings ] ==========="
+set splitbelow
+set splitright
+
+" Simplier mappings for switching
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+
+
+
+
+
+"==============[  Basic Settings ] ==========="
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
 set number                      " Show line numbers
 set ruler                       " show the cursor position all the time
-"set timeoutlen=50               " avoids delay in switching to normal from insert - turned off to allow jj binding to escape 
 
-"============[ Theme ]====================
+
+
+
+
+"==============[  Theme Settings ] ==========="
 let g:enable_bold_font = 1
 set encoding=utf8
 colorscheme zenburn
@@ -121,14 +151,23 @@ set noantialias
 set laststatus=2
 
 
-"===========[ Search ] ==================
+
+
+
+"==============[  Search Settings ] ==========="
 
 set hlsearch
 set incsearch
 
-"===========[ Mappings ]==================
 
+
+
+
+"==============[  Mappings ] ==========="
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+
+" Add simple highlight removal
+nnoremap<leader><space> :nihlsearch
 
 " Save
 inoremap <c-s> <ESC>:w<CR>
@@ -141,8 +180,10 @@ nnoremap ; :
 nnoremap <leader><space> :nohlsearch<cr> 
 
 
-"===========[ Auto-Command ] =============
 
+
+
+"==============[  Auto-Commands ] ==========="
 " Automatically source vimrc file on save
 augroup autosourcing
   autocmd!
