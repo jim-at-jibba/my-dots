@@ -79,6 +79,12 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# TaskWarrior
+##############
+td () { task delete "$1"; }
+alias tl='task List'
+alias tc='task calendar'
+
 # Git
 ##########
 alias gs='git status'
@@ -93,4 +99,3 @@ alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
 
-td () { task delete "$1"; }
