@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/Users/jim-at-jibba/.oh-my-zsh
+  export ZSH=/Users/jim-at-gravitywell/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -82,10 +82,11 @@ source $ZSH/oh-my-zsh.sh
 ##########
 alias gs='git status'
 alias gr='git remote -v'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # General
 ##########
 alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
-
+alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
