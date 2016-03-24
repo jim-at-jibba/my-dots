@@ -23,7 +23,7 @@ ZSH_THEME="sorin"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -78,11 +78,20 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# TaskWarrior
+##############
+td () { task delete "$1"; }
+alias tl='task List'
+alias tc='task calendar'
+
 # Git
 ##########
 alias gs='git status'
 alias gr='git remote -v'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias ga='git add .'
+alias gpush='git push'
+alias gpull='git pull'
 
 # General
 ##########

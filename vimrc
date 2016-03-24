@@ -63,6 +63,9 @@ let NERDTreeHijackNetrw = 0
 " autoformat
 noremap <F3> :Autoformat<CR>
 
+" vim-json
+set conceallevel=0
+
 
 
 
