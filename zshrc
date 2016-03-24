@@ -78,11 +78,22 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 # TaskWarrior
 ##############
-td () { task delete "$1"; }
+td () { task delete "$1"; }           # Delete task
+tdone () { task "$1" done; }          # Mark task Done
+tag () { task add "$1" pro:General }  # Add task to general list
+
 alias tl='task List'
 alias tc='task calendar'
+alias tlg='task pro:General list'
+alias ts='task sync'
 
 # Git
 ##########
