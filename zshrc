@@ -89,3 +89,4 @@ alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
 
+td () { task delete "$1"; }
