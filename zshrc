@@ -93,3 +93,8 @@ alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
 
+# TaskWarrior
+##############
+alias tl='task list'
+alias tc='task calendar'
+
