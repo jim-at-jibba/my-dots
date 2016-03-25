@@ -58,6 +58,7 @@ filetype plugin indent on    " required
 map <leader>1 :NERDTreeToggle<CR>
 " Current file in nerdtree
 map <F9> :NERDTreeFind<CR>
+let NERDTreeHijackNetrw = 0
 
 " autoformat
 noremap <F3> :Autoformat<CR>
@@ -81,6 +82,7 @@ let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30'
 nnoremap <c-R> :CtrlPBufTag<cr>         " Allows search for Methods in current file
 nnoremap <leader>r :CtrlPMRUFiles<cr>
 
+nnoremap <leader>p :CtrlP<cr>
 
 
 
@@ -132,12 +134,10 @@ set ruler                       " show the cursor position all the time
 
 
 
-
 "==============[  Theme Settings ] ==========="
 let g:enable_bold_font = 1
 set encoding=utf8
 colorscheme zenburn
-set guifont=Sauce\ Code\ Powerline:h14
 
 
 set nowrap                      " don't wrap lines
@@ -179,6 +179,8 @@ nnoremap ; :
 " Simple highlight removal
 nnoremap <leader><space> :nohlsearch<cr> 
 
+" Ctags
+nnoremap <leader>f :tag<space>
 
 
 
@@ -189,3 +191,9 @@ augroup autosourcing
   autocmd!
   autocmd BufWritePost .vimrc source %
 augroup END
+
+
+"==============[  Notes and Tips ] ==========="
+" - Press 'zz' to center current line
+" - `Ctrl + ]` goes to method under cursor
+" - `Ctrl + ^` - flip between 2 active windows
