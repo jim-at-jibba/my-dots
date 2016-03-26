@@ -91,7 +91,7 @@ td () { task delete "$1"; }           # Delete task
 tdone () { task "$1" done; }          # Mark task Done
 tag () { task add "$1" pro:General }  # Add task to general list
 
-alias tl='task List'
+alias tl='task list'
 alias tc='task calendar'
 alias tlg='task pro:General list'
 alias ts='task sync'

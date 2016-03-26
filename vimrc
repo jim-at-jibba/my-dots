@@ -193,7 +193,10 @@ augroup autosourcing
 augroup END
 
 
+
+
+
 "==============[  Notes and Tips ] ==========="
 " - Press 'zz' to center current line
 " - `Ctrl + ]` goes to method under cursor
-" - `Ctrl + ^` - flip between 2 active windows
+" - `Ctrl + ^` - flip back to previous edit location
