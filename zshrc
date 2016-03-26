@@ -83,6 +83,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias v='cd /Volumes'
 
 # TaskWarrior
 ##############
