@@ -38,6 +38,8 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-vinegar.git'
+Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
+Plugin 'skwp/greplace.vim'                    " Search and replace
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -149,6 +151,8 @@ set smartcase
 set ignorecase
 set noantialias
 set laststatus=2
+highlight LineNr ctermbg=none
+highlight SignColumn ctermbg=none
 
 
 
@@ -159,6 +163,9 @@ set laststatus=2
 set hlsearch
 set incsearch
 
+" Greplace settings - using Ag for search
+set grepprg=ag
+let g:grep_cmd_opts = '--line-numbers --noheading'
 
 
 
@@ -200,3 +207,6 @@ augroup END
 " - Press 'zz' to center current line
 " - `Ctrl + ]` goes to method under cursor
 " - `Ctrl + ^` - flip back to previous edit location
+" - :Ag to search
+" - :Gsearch to start search and replace
+" - select lines to change then `:s/searchFor/replaceWith`
