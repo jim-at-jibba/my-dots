@@ -146,6 +146,7 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+set copyindent
 
 set smartcase
 set ignorecase
@@ -210,3 +211,4 @@ augroup END
 " - :Ag to search
 " - :Gsearch to start search and replace
 " - select lines to change then `:s/searchFor/replaceWith`
+" - :set paste / :set nopaste allows pasting with good formatting.
