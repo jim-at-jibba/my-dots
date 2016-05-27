@@ -111,3 +111,7 @@ alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
+
+# Python
+##########
+alias python='python3'
