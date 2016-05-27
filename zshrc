@@ -73,6 +73,9 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# Auto Jump initialisation
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -111,3 +114,9 @@ alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
+alias w='curl -4 wttr.in/bristol'
+
+# Python
+##########
+alias python='python3'
+
