@@ -52,7 +52,7 @@ plugins=(git)
 
 # User configuration
 
-  export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -123,3 +123,8 @@ alias w='curl -4 wttr.in/bristol'
 ##########
 alias python='python3'
 
+# Vagrant
+alias vu='vagrant up'
+alias vh='vagrant halt'
+alias vp='vagrant provision'
+alias vd='vagrant destroy'
