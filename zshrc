@@ -120,3 +120,13 @@ alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-10 | pbcopy'
+
+# Python
+##########
+alias python='python3'
+
+# Vagrant
+alias vu='vagrant up'
+alias vh='vagrant halt'
+alias vp='vagrant provision'
+alias vd='vagrant destroy'

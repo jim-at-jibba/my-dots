@@ -40,6 +40,7 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-vinegar.git'
 Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
 Plugin 'skwp/greplace.vim'                    " Search and replace
+Plugin 'darthmall/vim-vue'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -146,6 +147,7 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+set copyindent
 
 set smartcase
 set ignorecase
@@ -192,6 +194,15 @@ nnoremap <leader>f :tag<space>
 
 
 
+
+"==============[  Framework-Specific ] ==========="
+nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a reminder to add these kinds of shortcuts
+
+
+
+
+
+
 "==============[  Auto-Commands ] ==========="
 " Automatically source vimrc file on save
 augroup autosourcing
@@ -210,3 +221,5 @@ augroup END
 " - :Ag to search
 " - :Gsearch to start search and replace
 " - select lines to change then `:s/searchFor/replaceWith`
+" - :set paste / :set nopaste allows pasting with good formatting.
+" - open current file in `:! open %`
