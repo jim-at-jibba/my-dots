@@ -48,11 +48,12 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git task thefuck chucknorris)
 
 # User configuration
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  export PATH="/usr/local/mysql/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -75,6 +76,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Auto Jump initialisation
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+# Drupal Console initialisation
+source "$HOME/.console/console.rc" 2>/dev/null
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -115,3 +119,4 @@ alias l='ls -la'
 alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
+alias generate='date | md5 | cut -c1-10 | pbcopy'
