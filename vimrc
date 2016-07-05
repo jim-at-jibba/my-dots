@@ -153,7 +153,7 @@ set noantialias
 set laststatus=2
 highlight LineNr ctermbg=none
 highlight SignColumn ctermbg=none
-
+set autochdir
 
 
 
