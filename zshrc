@@ -97,6 +97,7 @@ alias v='cd /Volumes'
 td () { task delete "$1"; }           # Delete task
 tdone () { task "$1" done; }          # Mark task Done
 tag () { task add "$1" pro:General }  # Add task to general list
+tf () { task pro:"$1" list }          # List tasks for a certain project
 
 alias tl='task list'
 alias tc='task calendar'
