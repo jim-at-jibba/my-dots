@@ -41,6 +41,8 @@ Plugin 'tpope/vim-vinegar.git'
 Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
+Plugin 'mattn/emmet-vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -69,7 +71,8 @@ noremap <F3> :Autoformat<CR>
 " vim-json
 set conceallevel=0
 
-
+" Vim Emmet
+let g:user_emmet_leader_key='<c-d>'
 
 
 
