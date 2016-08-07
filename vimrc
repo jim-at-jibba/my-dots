@@ -41,6 +41,8 @@ Plugin 'tpope/vim-vinegar.git'
 Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
+Plugin 'mattn/emmet-vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -69,7 +71,8 @@ noremap <F3> :Autoformat<CR>
 " vim-json
 set conceallevel=0
 
-
+" Vim Emmet
+let g:user_emmet_leader_key='<c-d>'
 
 
 
@@ -147,6 +150,7 @@ set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
+set copyindent
 
 set smartcase
 set ignorecase
@@ -154,7 +158,7 @@ set noantialias
 set laststatus=2
 highlight LineNr ctermbg=none
 highlight SignColumn ctermbg=none
-
+set autochdir
 
 
 
@@ -220,4 +224,5 @@ augroup END
 " - :Ag to search
 " - :Gsearch to start search and replace
 " - select lines to change then `:s/searchFor/replaceWith`
+" - :set paste / :set nopaste allows pasting with good formatting.
 " - open current file in `:! open %`

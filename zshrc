@@ -48,11 +48,12 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git task thefuck)
 
 # User configuration
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+  export PATH="/usr/local/mysql/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -76,6 +77,9 @@ source $ZSH/oh-my-zsh.sh
 # Auto Jump initialisation
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
+# Drupal Console initialisation
+source "$HOME/.console/console.rc" 2>/dev/null
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -93,6 +97,7 @@ alias v='cd /Volumes'
 td () { task delete "$1"; }           # Delete task
 tdone () { task "$1" done; }          # Mark task Done
 tag () { task add "$1" pro:General }  # Add task to general list
+tf () { task pro:"$1" list }          # List tasks for a certain project
 
 alias tl='task list'
 alias tc='task calendar'
@@ -115,8 +120,14 @@ alias l='ls -la'
 alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
+alias generate='date | md5 | cut -c1-10 | pbcopy'
 
 # Python
 ##########
 alias python='python3'
 
+# Vagrant
+alias vu='vagrant up'
+alias vh='vagrant halt'
+alias vp='vagrant provision'
+alias vd='vagrant destroy'
