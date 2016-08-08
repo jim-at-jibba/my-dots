@@ -42,7 +42,11 @@ Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
 Plugin 'mattn/emmet-vim'
-
+Plugin 'scrooloose/syntastic'                 " Syntax checking
+Plugin 'tpope/vim-surround'
+Plugin 'AutoComplPop'
+Plugin 'ervandew/supertab'
+Plugin 'mxw/vim-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -93,6 +97,17 @@ nnoremap <leader>p :CtrlP<cr>
 
 
 
+"============[  BACKUP SETTINGS  ]========="
+"set nobackup
+"set nowritebackup
+" set backupcopy=yes
+" set backupdir=~/.vimbackups/.backup//
+" set directory=~/.vimbackups/.swp//
+" set undodir=~/.vimbackups/.undo//
+
+
+
+
 
 "==============[  Airline setting ] ==========="
 let g:airline_powerline_fonts = 1
@@ -111,7 +126,42 @@ let g:bufferline_echo = 0
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
- 
+
+
+
+
+
+"==============[  Syntastic  ]==============="
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_signs = 1
+let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_css_csslint_args="--ignore=unique-headings,qualified-headings,adjoining-classes,universal-selector,floats,important,box-model"
+"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+let g:syntastic_ignore_files = ['.sqg$']
+let g:syntastic_html_tidy_exec = 'tidy5'
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticError SpellBad
+highlight link SyntasticWarning SpellCap
+
+
+"SYNTASTIC SASS
+let g:syntastic_scss_checkers = ['scss_lint']
 
 
 
@@ -208,11 +258,11 @@ nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a rem
 
 "==============[  Auto-Commands ] ==========="
 " Automatically source vimrc file on save
-augroup autosourcing
-  autocmd!
-  autocmd BufWritePost .vimrc source %
-augroup END
-
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC | AirlineRefresh
+    autocmd BufWritePost $MYVIMRC AirlineRefresh
+augroup END " }
 
 
 
