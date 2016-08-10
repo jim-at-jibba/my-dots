@@ -1,11 +1,11 @@
 
 
-tm_icon="♟"
-tm_color_active=colour213
+tm_icon=" 👾  "
+tm_color_active=colour20
 tm_color_inactive=colour241
 tm_color_feature=colour4
-tm_color_music=colour203
-tm_color_session=colour220
+tm_color_music=colour129
+tm_color_session=colour92
 
 # separators
 tm_separator_left_bold="◀"

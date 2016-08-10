@@ -44,9 +44,16 @@ Plugin 'darthmall/vim-vue'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/syntastic'                 " Syntax checking
 Plugin 'tpope/vim-surround'
-Plugin 'AutoComplPop'
-Plugin 'ervandew/supertab'
 Plugin 'mxw/vim-jsx'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'gregsexton/matchtag'
+Plugin 'heavenshell/vim-jsdoc'
+Plugin 'sumpygump/php-documentor-vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'evidens/vim-twig'
+Plugin 'rakr/vim-two-firewatch'
+Plugin 'raimondi/delimitmate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,6 +78,8 @@ let NERDTreeHijackNetrw = 0
 
 " autoformat
 noremap <F3> :Autoformat<CR>
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
 
 " vim-json
 set conceallevel=0
@@ -78,6 +87,8 @@ set conceallevel=0
 " Vim Emmet
 let g:user_emmet_leader_key='<c-d>'
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exclude_patterns = ['scp://.*']
 
 
 "==============[  CtrlP Settings ] ==========="
@@ -96,14 +107,13 @@ nnoremap <leader>p :CtrlP<cr>
 
 
 
-
 "============[  BACKUP SETTINGS  ]========="
 "set nobackup
 "set nowritebackup
-" set backupcopy=yes
-" set backupdir=~/.vimbackups/.backup//
-" set directory=~/.vimbackups/.swp//
-" set undodir=~/.vimbackups/.undo//
+set backupcopy=yes
+set backupdir=~/.vimbackups/.backup//
+set directory=~/.vimbackups/.swp//
+set undodir=~/.vimbackups/.undo//
 
 
 
@@ -115,8 +125,7 @@ if !exists('g:airline_symbols')
    let g:airline_symbols = {}
    endif
 let g:airline_symbols.space = "\ua0"
-let g:airline_theme='luna'
-set t_Co=256
+let g:airline_theme='twofirewatch'
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -166,6 +175,52 @@ let g:syntastic_scss_checkers = ['scss_lint']
 
 
 
+
+"==============[  Easy Motion  ]============="
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key
+" binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+
+
+
+
+"==============[ JS and PHP Doc  ]==========="
+" JSDOC
+au BufRead,BufNewFile *.js     inoremap <buffer> <C-d> :JsDoc<CR>
+
+"PHP DOC
+au BufRead,BufNewFile *.php     inoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.php     nnoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.php     vnoremap <buffer> <C-d> :call PhpDocRange()<CR>
+au BufRead,BufNewFile *.inc     inoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.inc     nnoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.inc     vnoremap <buffer> <C-d> :call PhpDocRange()<CR>
+au BufRead,BufNewFile *.module  inoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.module  nnoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.module  vnoremap <buffer> <C-d> :call PhpDocRange()<CR>
+au BufRead,BufNewFile *.install inoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.install nnoremap <buffer> <C-d> :call PhpDoc()<CR>
+au BufRead,BufNewFile *.install vnoremap <buffer> <C-d> :call PhpDocRange()<CR>
+
+
+
+"==============[  Autocomplete  ]============"
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+
+
 "==============[  Split Settings ] ==========="
 set splitbelow
 set splitright
@@ -186,29 +241,57 @@ set encoding=utf-8
 set showcmd                     " display incomplete commands
 set number                      " Show line numbers
 set ruler                       " show the cursor position all the time
+set scrolloff=8
+set undofile
+set relativenumber
+
+" Hides scrollbars
+set guioptions-=r
+set guioptions-=l
+set guioptions-=R
+set guioptions-=L
+
+"Font
+set guifont=Inconsolata-dz\ for\ Powerline:h15
+
+set ignorecase
+set smartcase
+set gdefault
+set showmatch
+
 
 
 
 
 "==============[  Theme Settings ] ==========="
-let g:enable_bold_font = 1
+"let g:enable_bold_font = 1
 set encoding=utf8
-colorscheme zenburn
-
+set background=light " or light if you prefer the light version
+let g:two_firewatch_italics=1
+colo two-firewatch
 
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
+set backspace=indent,eol,start  " backspace through everything in insert model
 set copyindent
 
 set smartcase
 set ignorecase
-set noantialias
 set laststatus=2
 highlight LineNr ctermbg=none
 highlight SignColumn ctermbg=none
 set autochdir
+
+
+
+
+
+"==========[  Leader keybindings  ]==========
+nnoremap <leader>i =i{
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 
 
 
@@ -239,7 +322,7 @@ nnoremap <c-s> <ESC>:w<CR>
 nnoremap ; :
 
 " Simple highlight removal
-nnoremap <leader><space> :nohlsearch<cr> 
+nnoremap <leader><space> :nohlsearch<cr>
 
 " Ctags
 nnoremap <leader>f :tag<space>
@@ -264,9 +347,17 @@ augroup reload_vimrc " {
     autocmd BufWritePost $MYVIMRC AirlineRefresh
 augroup END " }
 
+" Save on losing focus
+function! FocusLostWrite()
+  execute '!normal wa'
+endfunction
+autocmd FocusLost * silent! wall
 
-
-
+"Stuff to tidy5
+" REMOVE WHITESPACE ON SAVE
+ ":autocmd BufWritePost * :StripWhitespace
+ "let blacklist = ['md', 'markdown', 'mdown']
+ ":autocmd BufWritePost * if index(blacklist, &ft) < 0 | :StripWhitespace
 "==============[  Notes and Tips ] ==========="
 " - Press 'zz' to center current line
 " - `Ctrl + ]` goes to method under cursor
