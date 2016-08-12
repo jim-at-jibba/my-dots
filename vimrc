@@ -54,6 +54,9 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'evidens/vim-twig'
 Plugin 'rakr/vim-two-firewatch'
 Plugin 'raimondi/delimitmate'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -310,6 +313,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "==============[  Mappings ] ==========="
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>es :e ~/.vim/snippets/
 
 " Add simple highlight removal
 nnoremap<leader><space> :nihlsearch
@@ -327,14 +331,13 @@ nnoremap <leader><space> :nohlsearch<cr>
 " Ctags
 nnoremap <leader>f :tag<space>
 
-
+" Swap double quotes for single quote
+nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
 
 
 
 "==============[  Framework-Specific ] ==========="
-nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a reminder to add these kinds of shortcuts
-
-
+"nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a reminder to add these kinds of shortcuts
 
 
 
@@ -367,3 +370,5 @@ autocmd FocusLost * silent! wall
 " - select lines to change then `:s/searchFor/replaceWith`
 " - :set paste / :set nopaste allows pasting with good formatting.
 " - open current file in `:! open %`
+" - `shift + >` & `shift + <` - will move selected code in or out 
+" - `vat` - selects around the tag
