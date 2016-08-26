@@ -57,6 +57,7 @@ Plugin 'raimondi/delimitmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+Plugin 'csscomb/vim-csscomb.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -174,6 +175,16 @@ highlight link SyntasticWarning SpellCap
 
 "SYNTASTIC SASS
 let g:syntastic_scss_checkers = ['scss_lint']
+
+
+
+
+
+"=================[  CSSComb  ]================"
+" Map bc to run CSScomb. bc stands for beautify css
+autocmd FileType css noremap <buffer> <leader>bc :CSScomb<CR>
+" Automatically comb your CSS on save
+autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb             
 
 
 
@@ -330,6 +341,7 @@ nnoremap <leader><space> :nohlsearch<cr>
 
 " Ctags
 nnoremap <leader>f :tag<space>
+set tags=./tags,tags;$HOME
 
 " Swap double quotes for single quote
 nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
@@ -371,4 +383,4 @@ autocmd FocusLost * silent! wall
 " - :set paste / :set nopaste allows pasting with good formatting.
 " - open current file in `:! open %`
 " - `shift + >` & `shift + <` - will move selected code in or out 
-" - `vat` - selects around the tag
+" - `vat`
