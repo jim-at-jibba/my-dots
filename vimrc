@@ -112,7 +112,21 @@ let g:bufferline_echo = 0
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
  
+"diables scrollbars
+set guioptions-=r
+set guioptions-=l
+set guioptions-=R
+set guioptions-=L
+"Font
+"set guifont=droid\ sans\ mono\ for\ powerline:h12
+set guifont=Sauce\ Code\ Powerline:h14
 
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
 
 
 
