@@ -140,6 +140,12 @@ let g:bufferline_echo = 0
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
 
 
 
