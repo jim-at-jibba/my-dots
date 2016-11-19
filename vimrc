@@ -273,6 +273,8 @@ set guioptions-=L
 
 "Font
 set guifont=Inconsolata-dz\ for\ Powerline:h15
+"set macligatures
+"set guifont=Fira\ Code:h15
 
 set gdefault
 set showmatch
@@ -331,7 +333,7 @@ nnoremap <leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>es :e ~/.vim/snippets/
 
 " Add simple highlight removal
-nnoremap<leader><space> :nihlsearch
+nnoremap <leader>c :nohl<CR>
 
 " Save
 inoremap <c-s> <ESC>:w<CR>
