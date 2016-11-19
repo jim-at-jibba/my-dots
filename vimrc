@@ -115,7 +115,7 @@ nnoremap <leader>p :CtrlP<cr>
 "set nobackup
 "set nowritebackup
 set backupcopy=yes
-set backupdir=~/.vimbackups/.backup//
+set backupdir=~/.vimbackups/.backups//
 set directory=~/.vimbackups/.swp//
 set undodir=~/.vimbackups/.undo//
 

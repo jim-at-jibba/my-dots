@@ -1,3 +1,5 @@
 # Ignore vim generated swap files
 *.swp
 *.un~
+npm-debug.log
+morning-routine-cli/*

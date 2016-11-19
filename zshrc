@@ -53,7 +53,7 @@ plugins=(git task thefuck)
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
+  export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
