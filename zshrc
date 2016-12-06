@@ -136,3 +136,6 @@ alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vp='vagrant provision'
 alias vd='vagrant destroy'
+
+# Raspberry pi
+alias vncAlexa='open vnc://pi@192.168.1.147:5901'
