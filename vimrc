@@ -115,7 +115,7 @@ nnoremap <leader>p :CtrlP<cr>
 "set nobackup
 "set nowritebackup
 set backupcopy=yes
-set backupdir=~/.vimbackups/.backup//
+set backupdir=~/.vimbackups/.backups//
 set directory=~/.vimbackups/.swp//
 set undodir=~/.vimbackups/.undo//
 
@@ -190,7 +190,7 @@ let g:syntastic_scss_checkers = ['scss_lint']
 " Map bc to run CSScomb. bc stands for beautify css
 autocmd FileType css noremap <buffer> <leader>bc :CSScomb<CR>
 " Automatically comb your CSS on save
-autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb             
+autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb
 
 
 
@@ -273,9 +273,9 @@ set guioptions-=L
 
 "Font
 set guifont=Inconsolata-dz\ for\ Powerline:h15
+"set macligatures
+"set guifont=Fira\ Code:h15
 
-set ignorecase
-set smartcase
 set gdefault
 set showmatch
 
@@ -333,7 +333,7 @@ nnoremap <leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>es :e ~/.vim/snippets/
 
 " Add simple highlight removal
-nnoremap<leader><space> :nihlsearch
+nnoremap <leader>c :nohl<CR>
 
 " Save
 inoremap <c-s> <ESC>:w<CR>
@@ -342,14 +342,11 @@ nnoremap <c-s> <ESC>:w<CR>
 " remaps ;
 nnoremap ; :
 
-" Simple highlight removal
-nnoremap <leader><space> :nohlsearch<cr>
-
 " Ctags
 nnoremap <leader>f :tag<space>
 set tags=./tags,tags;$HOME
 
-" Swap double quotes for single quote
+" Swap double quotes for single quote in whole file
 nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
 
 
@@ -377,8 +374,9 @@ autocmd FocusLost * silent! wall
 "Stuff to tidy5
 " REMOVE WHITESPACE ON SAVE
  ":autocmd BufWritePost * :StripWhitespace
- "let blacklist = ['md', 'markdown', 'mdown']
- ":autocmd BufWritePost * if index(blacklist, &ft) < 0 | :StripWhitespace
+ let blacklist = ['md', 'markdown', 'mdown']
+ :autocmd BufWritePost * if index(blacklist, &ft) < 0 | :StripWhitespace
+
 "==============[  Notes and Tips ] ==========="
 " - Press 'zz' to center current line
 " - `Ctrl + ]` goes to method under cursor
@@ -388,5 +386,6 @@ autocmd FocusLost * silent! wall
 " - select lines to change then `:s/searchFor/replaceWith`
 " - :set paste / :set nopaste allows pasting with good formatting.
 " - open current file in `:! open %`
-" - `shift + >` & `shift + <` - will move selected code in or out 
-" - `vat`
+" - `shift + >` & `shift + <` - will move selected code in or out
+" - `vat` - visual select all tags
+" - `r` to refresh nerdtree window

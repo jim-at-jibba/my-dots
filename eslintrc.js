@@ -5,16 +5,20 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+      "eslint:recommended",
+      "plugin:meteor/recommended"
+    ],
     "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
+    "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "jsx": true
+    },
+    "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "meteor"
     ],
     "globals": {
         "$": true,
@@ -27,6 +31,8 @@ module.exports = {
         "React": true
       },
     "rules": {
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "no-console": 0,
         "indent": [
             "error",
