@@ -121,6 +121,7 @@ alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-10 | pbcopy'
 alias f='fuck'
+alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 
 # gcalcli
 ##########
@@ -136,3 +137,4 @@ alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vp='vagrant provision'
 alias vd='vagrant destroy'
+alias vl='vagrant global-status'
