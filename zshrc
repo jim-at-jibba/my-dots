@@ -138,3 +138,4 @@ alias vl='vagrant global-status'
 # Dev Shit
 ###########
 alias bs='browser-sync start --server --files "**/*.*"'
+

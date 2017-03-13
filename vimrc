@@ -38,7 +38,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-vinegar.git'
-Plugin 'rking/ag.vim'                         " Uses ag - the silver surfer
+Plugin 'mileszs/ack.vim'
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
 Plugin 'mattn/emmet-vim'
@@ -58,6 +58,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'csscomb/vim-csscomb.git'
+Plugin 'trotter/autojump.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -109,7 +110,9 @@ nnoremap <leader>r :CtrlPMRUFiles<cr>
 
 nnoremap <leader>p :CtrlP<cr>
 
-
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 "============[  BACKUP SETTINGS  ]========="
 "set nobackup
