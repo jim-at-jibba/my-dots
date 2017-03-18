@@ -119,13 +119,10 @@ alias l='ls -la'
 alias svim='source ~/.vimrc'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
-alias generate='date | md5 | cut -c1-10 | pbcopy'
+alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
-
-# gcalcli
-##########
-gqa () { gcalcli quick --calendar="jamesg2.best@googlemail.com" "$1"; }          # Create quick entry in diary
-alias gc='gcalcli calw --calendar="jamesg2.best@googlemail.com"'
+alias morning='node ~/dotfiles/morning-routine-cli/index.js'
+alias tree='tree -L 2 -I "node_module"'
 
 # Python
 ##########
@@ -139,3 +136,10 @@ alias vd='vagrant destroy'
 
 # Raspberry pi
 alias vncAlexa='open vnc://pi@192.168.1.147:5901'
+
+alias vl='vagrant global-status'
+
+# Dev Shit
+###########
+alias bs='browser-sync start --server --files "**/*.*"'
+

@@ -1,0 +1,10 @@
+read -p "Are you sure? CHECK YOUR PATH!!!!! " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo 'Syncing sawdays...'
+    rsync -avzh --delete --exclude ".git/" --filter=":- .gitignore" /Users/jim-at-gravitywell/Code/Sites/ezp/ gw@gw-sawdays:/var/www/sandbox/
+else
+    echo 'Rsync cancelled'
+fi
+
