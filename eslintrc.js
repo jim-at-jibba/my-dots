@@ -3,7 +3,8 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": [
       "eslint:recommended",
@@ -18,7 +19,7 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "meteor"
+        "jest"
     ],
     "globals": {
         "$": true,
