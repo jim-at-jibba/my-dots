@@ -1,9 +1,9 @@
 
 
 tm_icon=" 👾  "
-tm_color_active=colour20
+tm_color_active=colour123
 tm_color_inactive=colour241
-tm_color_feature=colour4
+tm_color_feature=colour74
 tm_color_music=colour129
 tm_color_session=colour92
 

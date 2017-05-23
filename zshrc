@@ -53,7 +53,7 @@ export NVM_DIR="$HOME/.nvm"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git task thefuck nvm)
+plugins=(git task thefuck nvm docker teamocil)
 
 # User configuration
 
@@ -129,6 +129,7 @@ alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
 alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 alias tree='tree -L 2 -I "node_module"'
+alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
 
 # Python
 ##########
@@ -151,3 +152,4 @@ alias bs='browser-sync start --server --files "**/*.*"'
 
 # Tooling
 alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
+

@@ -1,7 +1,7 @@
 let mapleader=' '
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype plugin on                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -59,6 +59,8 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'csscomb/vim-csscomb.git'
 Plugin 'trotter/autojump.vim'
+Plugin 'vimwiki/vimwiki'
+Plugin 'suan/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -374,7 +376,27 @@ function! FocusLostWrite()
 endfunction
 autocmd FocusLost * silent! wall
 
-"Stuff to tidy5
+
+
+
+
+"==============[  VimWiki ] ==========="
+" Run multiple wikis "
+let g:vimwiki_list = [
+                      \{'path': '~/Dropbox/VimWiki/personal.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
+                      \{'path': '~/Dropbox/VimWiki/tech.wiki'},
+                \]
+let g:vimwiki_global_ext=0
+
+
+
+
+
+
+"==============[  VimWiki ] ==========="
+let g:instant_markdown_autostart = 0
+
+" Stuff to tidy5
 " REMOVE WHITESPACE ON SAVE
  ":autocmd BufWritePost * :StripWhitespace
  let blacklist = ['md', 'markdown', 'mdown']
