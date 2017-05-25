@@ -53,6 +53,7 @@ plugins=(git task thefuck)
 
 # User configuration
 
+  export ANDROID_HOME=${HOME}/Library/Android/sdk
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
   export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -74,6 +75,10 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Auto Jump initialisation
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
@@ -128,7 +133,7 @@ alias tree='tree -L 2 -I "node_module"'
 
 # Python
 ##########
-alias python='python3'
+#alias python='python3'
 
 # Vagrant
 alias vu='vagrant up'
