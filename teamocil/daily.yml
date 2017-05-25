@@ -1,0 +1,9 @@
+windows:
+  - name: Daily
+    root: ~/
+    layout: tiled
+    panes:
+      - htop
+      - w
+      - tl
+      - vim

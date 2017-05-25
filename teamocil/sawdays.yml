@@ -1,0 +1,7 @@
+windows:
+  - name: Sawdays
+    root: ~/Code/Work/ezp
+    layout: even-horizontal
+    panes:
+      - gs
+      - pwd

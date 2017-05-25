@@ -3,11 +3,11 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": [
       "eslint:recommended",
-      "plugin:meteor/recommended"
     ],
     "parserOptions": {
     "ecmaFeatures": {
@@ -18,8 +18,9 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "meteor"
+        "jest"
     ],
+    "parser": "babel-eslint",
     "globals": {
         "$": true,
         "Npm": true,
