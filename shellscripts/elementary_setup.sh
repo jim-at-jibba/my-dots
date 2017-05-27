@@ -29,13 +29,15 @@ apt-get update
 
 echo "Installing all the new programs"
 ### Grabbign all the needed tools ###
-apt-get install -y plank elementary-tweaks paper-gtk-theme paper-icon-theme plank-themer albert zsh tmux virtualbox git
+apt-get install -y plank elementary-tweaks paper-gtk-theme paper-icon-theme plank-themer albert zsh tmux virtualbox git krita
 cd /tmp/ && ./Replace.sh;cd
 
 ### Installing oh-my-zsh
 echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# Exiting new zsh shell to continue install
+exit
 ### Installing NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 

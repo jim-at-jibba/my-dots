@@ -53,10 +53,11 @@ export NVM_DIR="$HOME/.nvm"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git task thefuck nvm)
+plugins=(git task thefuck nvm docker teamocil)
 
 # User configuration
 
+  export ANDROID_HOME=${HOME}/Library/Android/sdk
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
   export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -78,6 +79,10 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Auto Jump initialisation
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
@@ -129,10 +134,11 @@ alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
 alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 alias tree='tree -L 2 -I "node_module"'
+alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
 
 # Python
 ##########
-alias python='python3'
+#alias python='python3'
 
 # Vagrant
 alias vu='vagrant up'
@@ -151,6 +157,5 @@ alias bs='browser-sync start --server --files "**/*.*"'
 
 # Tooling
 alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
-
 
 source "/home/rohm/.oh-my-zsh/custom/themes/spaceship.zsh-theme"

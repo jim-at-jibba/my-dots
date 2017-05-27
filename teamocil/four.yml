@@ -1,0 +1,9 @@
+windows:
+  - name: four
+    root: ~/
+    layout: tiled
+    panes:
+      - clear
+      - clear
+      - clear
+      - clear

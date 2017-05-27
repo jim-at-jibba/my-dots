@@ -20,6 +20,7 @@ module.exports = {
         "react",
         "jest"
     ],
+    "parser": "babel-eslint",
     "globals": {
         "$": true,
         "Npm": true,
