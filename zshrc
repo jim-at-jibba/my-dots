@@ -158,3 +158,4 @@ alias bs='browser-sync start --server --files "**/*.*"'
 # Tooling
 alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
 
+source "/home/rohm/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
