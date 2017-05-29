@@ -384,7 +384,7 @@ autocmd FocusLost * silent! wall
 " Run multiple wikis "
 let g:vimwiki_list = [
                       \{'path': '~/Dropbox/VimWiki/personal.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
-                      \{'path': '~/Dropbox/VimWiki/tech.wiki'},
+                      \{'path': '~/Dropbox/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
                 \]
 let g:vimwiki_global_ext=0
 
