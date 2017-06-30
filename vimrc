@@ -61,6 +61,9 @@ Plugin 'csscomb/vim-csscomb.git'
 Plugin 'trotter/autojump.vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'cocopon/iceberg.vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'elixir-lang/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,7 +137,7 @@ if !exists('g:airline_symbols')
    let g:airline_symbols = {}
    endif
 let g:airline_symbols.space = "\ua0"
-let g:airline_theme='twofirewatch'
+let g:airline_theme='nord'
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -291,9 +294,9 @@ set showmatch
 "==============[  Theme Settings ] ==========="
 "let g:enable_bold_font = 1
 set encoding=utf8
-set background=light " or light if you prefer the light version
-let g:two_firewatch_italics=1
-colo two-firewatch
+" set background=dark " or light if you prefer the light version
+let g:nord_italic_comments=1
+colorscheme nord
 
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
