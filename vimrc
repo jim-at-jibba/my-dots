@@ -42,7 +42,6 @@ Plugin 'mileszs/ack.vim'
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
 Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/syntastic'                 " Syntax checking
 Plugin 'tpope/vim-surround'
 Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
@@ -64,6 +63,8 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'cocopon/iceberg.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'mitermayer/vim-prettier'
+Plugin 'w0rp/ale'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -154,42 +155,6 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-
-
-
-
-"==============[  Syntastic  ]==============="
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_balloons = 1
-let g:syntastic_enable_signs = 1
-let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_php_checkers = ['php', 'phpmd']
-let g:syntastic_css_csslint_args="--ignore=unique-headings,qualified-headings,adjoining-classes,universal-selector,floats,important,box-model"
-"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let syntastic_mode_map = { 'passive_filetypes': ['html'] }
-let g:syntastic_ignore_files = ['.sqg$']
-let g:syntastic_html_tidy_exec = 'tidy5'
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticError SpellBad
-highlight link SyntasticWarning SpellCap
-
-
-"SYNTASTIC SASS
-let g:syntastic_scss_checkers = ['scss_lint']
-
 
 
 
@@ -356,6 +321,16 @@ set tags=./tags,tags;$HOME
 
 " Swap double quotes for single quote in whole file
 nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
+
+
+
+
+
+"==============[  Prettier Settings] ==========="
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
+
+
 
 
 
