@@ -23,13 +23,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'duythinht/inori'
 Plugin 'romainl/flattened'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jnurmine/Zenburn'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-markdown'
 Plugin 'othree/html5.vim'
@@ -37,7 +32,6 @@ Plugin 'elzr/vim-json'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-fugitive'
-Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-vinegar.git'
 Plugin 'mileszs/ack.vim'
 Plugin 'skwp/greplace.vim'                    " Search and replace
@@ -52,7 +46,6 @@ Plugin 'heavenshell/vim-jsdoc'
 Plugin 'sumpygump/php-documentor-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'evidens/vim-twig'
-Plugin 'rakr/vim-two-firewatch'
 Plugin 'raimondi/delimitmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -123,6 +116,8 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+
+nnoremap <Leader>\todo :Ack TODO .<CR>
 "============[  BACKUP SETTINGS  ]========="
 "set nobackup
 "set nowritebackup
