@@ -5,6 +5,7 @@ filetype plugin on                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -65,6 +66,8 @@ Plugin 'arcticicestudio/nord-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'mitermayer/vim-prettier'
 Plugin 'w0rp/ale'
+Plugin 'junegunn/fzf.vim'
+Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -245,7 +248,7 @@ set guioptions-=R
 set guioptions-=L
 
 "Font
-set guifont=Inconsolata-dz\ for\ Powerline:h15
+set guifont=Inconsolata-dz\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 "set macligatures
 "set guifont=Fira\ Code:h15
 
@@ -275,7 +278,10 @@ set laststatus=2
 highlight LineNr ctermbg=none
 highlight SignColumn ctermbg=none
 set autochdir
-
+" Removed wierd brackets in nerdtree
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 
 
@@ -326,9 +332,16 @@ nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
 
 
 
-"==============[  Prettier Settings] ==========="
+"==============[  Prettier Settings  ] ==========="
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
+autocmd BufWritePre *.js,*.css,*.scss,*.less,*.graphql Prettier
+
+
+
+
+
+"==============[  JSX Settings  ] ==========="
+let g:jsx_ext_required = 0
 
 
 
@@ -336,6 +349,7 @@ autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
 
 "==============[  Framework-Specific ] ==========="
 "nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a reminder to add these kinds of shortcuts
+
 
 
 
