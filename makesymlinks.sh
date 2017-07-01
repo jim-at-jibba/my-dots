@@ -11,7 +11,7 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 files="vimrc zsh zshrc tmux.conf scss-lint.yml eslintrc.js csscomb.json editorconfig teamocil"    # list of files/folders to symlink in homedir
 
 ##########
-
+# Creating link to snippets 
 # create dotfiles_old in homedir
 echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
 mkdir -p $olddir
