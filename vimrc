@@ -61,6 +61,7 @@ Plugin 'mitermayer/vim-prettier'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'kien/rainbow_parentheses.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -383,6 +384,36 @@ let g:vimwiki_global_ext=0
 "==============[  VimWiki ] ==========="
 let g:instant_markdown_autostart = 0
 
+
+
+
+
+"==============[  VimWiki ] ==========="
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+
+
+
+
 " Stuff to tidy5
 " REMOVE WHITESPACE ON SAVE
  ":autocmd BufWritePost * :StripWhitespace
@@ -401,3 +432,4 @@ let g:instant_markdown_autostart = 0
 " - `shift + >` & `shift + <` - will move selected code in or out
 " - `vat` - visual select all tags
 " - `r` to refresh nerdtree window
+" - Ctrl + w x moves split
