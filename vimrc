@@ -331,6 +331,10 @@ nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
 "==============[  Prettier Settings  ] ==========="
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.css,*.scss,*.less,*.graphql Prettier
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
+" none|es5|all
+ let g:prettier#config#trailing_comma = 'none'
 
 
 

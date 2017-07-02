@@ -6,7 +6,7 @@ To symlink snippets `ln -s ~/dotfiles/snippets/* ~/.vim/snippets`
 ## Brew
 
 - Ack
-
+- youtube-dl
 
 ## NPM
 
