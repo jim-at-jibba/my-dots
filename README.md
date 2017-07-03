@@ -8,6 +8,7 @@ To symlink snippets `ln -s ~/dotfiles/snippets/* ~/.vim/snippets`
 - Ack
 - youtube-dl
 - shpotify
+- vim --with-lua --with-override-system-vi
 
 
 ## NPM
