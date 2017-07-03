@@ -47,22 +47,21 @@ Plugin 'sumpygump/php-documentor-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'evidens/vim-twig'
 Plugin 'raimondi/delimitmate'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'csscomb/vim-csscomb.git'
 Plugin 'trotter/autojump.vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'cocopon/iceberg.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'mitermayer/vim-prettier'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'kien/rainbow_parentheses.vim'
-
+Plugin 'ap/vim-css-color'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'ervandew/supertab'
+Plugin 'valloric/youcompleteme'
+Plugin 'sirver/ultisnips'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -305,7 +304,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "==============[  Mappings ] ==========="
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
-nmap <Leader>es :e ~/.vim/snippets/
+nmap <Leader>es :e ~/.vim/UltiSnips/
 
 " Add simple highlight removal
 nnoremap <leader>c :nohl<CR>
@@ -387,6 +386,20 @@ let g:vimwiki_global_ext=0
 
 "==============[  VimWiki ] ==========="
 let g:instant_markdown_autostart = 0
+
+
+
+
+
+"==============[  Ultisnip and youcompleteme] ==========="
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
 
