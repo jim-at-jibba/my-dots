@@ -5,6 +5,7 @@ filetype plugin on                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -22,13 +23,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'duythinht/inori'
 Plugin 'romainl/flattened'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jnurmine/Zenburn'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-markdown'
 Plugin 'othree/html5.vim'
@@ -36,13 +32,11 @@ Plugin 'elzr/vim-json'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tpope/vim-fugitive'
-Plugin 'rizzatti/dash.vim'
 Plugin 'tpope/vim-vinegar.git'
 Plugin 'mileszs/ack.vim'
 Plugin 'skwp/greplace.vim'                    " Search and replace
 Plugin 'darthmall/vim-vue'
 Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/syntastic'                 " Syntax checking
 Plugin 'tpope/vim-surround'
 Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
@@ -52,7 +46,6 @@ Plugin 'heavenshell/vim-jsdoc'
 Plugin 'sumpygump/php-documentor-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'evidens/vim-twig'
-Plugin 'rakr/vim-two-firewatch'
 Plugin 'raimondi/delimitmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -64,6 +57,11 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'cocopon/iceberg.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'mitermayer/vim-prettier'
+Plugin 'w0rp/ale'
+Plugin 'junegunn/fzf.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'kien/rainbow_parentheses.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,6 +117,8 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+
+nnoremap <Leader>\todo :Ack TODO .<CR>
 "============[  BACKUP SETTINGS  ]========="
 "set nobackup
 "set nowritebackup
@@ -154,42 +154,6 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-
-
-
-
-"==============[  Syntastic  ]==============="
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_balloons = 1
-let g:syntastic_enable_signs = 1
-let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_php_checkers = ['php', 'phpmd']
-let g:syntastic_css_csslint_args="--ignore=unique-headings,qualified-headings,adjoining-classes,universal-selector,floats,important,box-model"
-"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let syntastic_mode_map = { 'passive_filetypes': ['html'] }
-let g:syntastic_ignore_files = ['.sqg$']
-let g:syntastic_html_tidy_exec = 'tidy5'
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticError SpellBad
-highlight link SyntasticWarning SpellCap
-
-
-"SYNTASTIC SASS
-let g:syntastic_scss_checkers = ['scss_lint']
-
 
 
 
@@ -280,7 +244,7 @@ set guioptions-=R
 set guioptions-=L
 
 "Font
-set guifont=Inconsolata-dz\ for\ Powerline:h15
+set guifont=Inconsolata-dz\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 "set macligatures
 "set guifont=Fira\ Code:h15
 
@@ -310,7 +274,10 @@ set laststatus=2
 highlight LineNr ctermbg=none
 highlight SignColumn ctermbg=none
 set autochdir
-
+" Removed wierd brackets in nerdtree
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 
 
@@ -359,8 +326,30 @@ nmap <Leader>rdq :%s/\"\([^"]*\)\"/'\1'/g
 
 
 
+
+
+"==============[  Prettier Settings  ] ==========="
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.css,*.scss,*.less,*.graphql Prettier
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
+" none|es5|all
+ let g:prettier#config#trailing_comma = 'none'
+
+
+
+
+
+"==============[  JSX Settings  ] ==========="
+let g:jsx_ext_required = 0
+
+
+
+
+
 "==============[  Framework-Specific ] ==========="
 "nmap <leader>es :e server.js<CR> "Shortcut to open server js. This is just a reminder to add these kinds of shortcuts
+
 
 
 
@@ -399,6 +388,36 @@ let g:vimwiki_global_ext=0
 "==============[  VimWiki ] ==========="
 let g:instant_markdown_autostart = 0
 
+
+
+
+
+"==============[  VimWiki ] ==========="
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+
+
+
+
 " Stuff to tidy5
 " REMOVE WHITESPACE ON SAVE
  ":autocmd BufWritePost * :StripWhitespace
@@ -417,3 +436,4 @@ let g:instant_markdown_autostart = 0
 " - `shift + >` & `shift + <` - will move selected code in or out
 " - `vat` - visual select all tags
 " - `r` to refresh nerdtree window
+" - Ctrl + w x moves split

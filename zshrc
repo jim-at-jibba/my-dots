@@ -76,9 +76,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Auto Jump initialisation
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
@@ -156,4 +153,5 @@ alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plug
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
