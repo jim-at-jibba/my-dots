@@ -508,3 +508,6 @@ let g:rbpt_loadcmd_toggle = 0
 " - `vat` - visual select all tags
 " - `r` to refresh nerdtree window
 " - Ctrl + w x moves split
+" - Visulally select test you want to copy to the clipboard and use :w !pbcopy
+" - Visulally select test you want to copy to the clipboard and use "+y
+" - 
