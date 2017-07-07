@@ -65,6 +65,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'muansari96/vimify'
+Plugin 'scrooloose/nerdcommenter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -489,6 +491,29 @@ let g:rbpt_loadcmd_toggle = 0
 
 
 
+"==============[  NERD COMMENTER] ==========="
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+
+
 " Stuff to tidy5
 " REMOVE WHITESPACE ON SAVE
  ":autocmd BufWritePost * :StripWhitespace
@@ -510,4 +535,4 @@ let g:rbpt_loadcmd_toggle = 0
 " - Ctrl + w x moves split
 " - Visulally select test you want to copy to the clipboard and use :w !pbcopy
 " - Visulally select test you want to copy to the clipboard and use "+y
-" - 
+" -
