@@ -47,20 +47,18 @@ Plugin 'sumpygump/php-documentor-vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'evidens/vim-twig'
 Plugin 'raimondi/delimitmate'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'csscomb/vim-csscomb.git'
 Plugin 'trotter/autojump.vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'cocopon/iceberg.vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'mitermayer/vim-prettier'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'ap/vim-css-color'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet'
@@ -310,7 +308,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "==============[  Mappings ] ==========="
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
-nmap <Leader>es :e ~/.vim/snippets/
+nmap <Leader>es :e ~/.vim/UltiSnips/
 
 " Add simple highlight removal
 nnoremap <leader>c :nohl<CR>
