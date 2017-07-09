@@ -9,6 +9,9 @@ To symlink snippets `ln -s ~/dotfiles/snippets/* ~/.vim/snippets`
 - youtube-dl
 - shpotify
 - vim --with-lua --with-override-system-vi
+- tmux
+- reattach-to-user-namespace
+
 
 
 ## NPM

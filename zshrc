@@ -6,6 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded. pygmalion
 ZSH_THEME="spaceship"
 
+SPACESHIP_PROMPT_SYMBOL='🦄 '
+
 SPACESHIP_TIME_SHOW=true
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -170,3 +172,6 @@ alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plug
 
 
 
+
+
+source "/Users/jamesbest/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
