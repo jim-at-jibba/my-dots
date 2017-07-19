@@ -173,5 +173,4 @@ alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plug
 
 
 
-
-source "/Users/jamesbest/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+source ~/dotfiles/tiny.env
