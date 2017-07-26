@@ -307,7 +307,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 
 "==============[  Mappings ] ==========="
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
-nmap <Leader>es :e ~/.vim/UltiSnips/
+nmap <Leader>es :e ~/dotfiles/snippets/
 
 " Add simple highlight removal
 nnoremap <leader>c :nohl<CR>
@@ -318,6 +318,9 @@ nnoremap <c-s> <ESC>:w<CR>
 
 " remaps ;
 nnoremap ; :
+
+" Makes buffer delete without killing split
+command Bd bp\|bd \#
 
 " Ctags
 nnoremap <leader>f :tag<space>
@@ -453,6 +456,8 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+let g:neosnippet#snippets_directory='~/dotfiles/snippets'
+
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -532,4 +537,4 @@ let g:NERDTrimTrailingWhitespace = 1
 " - Ctrl + w x moves split
 " - Visulally select test you want to copy to the clipboard and use :w !pbcopy
 " - Visulally select test you want to copy to the clipboard and use "+y
-" -
+" - bp | bd # Deletes buffer without closing split

@@ -131,6 +131,8 @@ alias f='fuck'
 alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 alias tree='tree -L 2 -I "node_module"'
 alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 # Python
 ##########
