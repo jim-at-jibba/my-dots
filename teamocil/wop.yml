@@ -1,0 +1,17 @@
+windows:
+  - name: wop-dev
+    root: ~/Code/Work/adelie-refactor
+    layout: tiled
+    panes:
+      - commands:
+        - name mock-endpoints
+        - cd ~/Code/Work/adelie-mock-endpoints
+        - nodemon index.js
+      - clear
+      - clear
+      - commands:
+        - name WOP
+        - cd ./src
+        - export ADELIE_CONTROL_NODE='true'
+        - export NODE_ENV='development'
+        - meteor
