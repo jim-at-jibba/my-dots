@@ -51,7 +51,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git task thefuck nvm docker teamocil)
+plugins=(git teamocil zsh-completions)
 
 # User configuration
 
@@ -59,6 +59,8 @@ plugins=(git task thefuck nvm docker teamocil)
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
   export PATH="$HOME/.composer/vendor/bin:$PATH"
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,6 +86,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Drupal Console initialisation
 source "$HOME/.console/console.rc" 2>/dev/null
+
+# Teamocil Autocomplete
+alias tee='teamocil'
+compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -131,6 +137,12 @@ alias f='fuck'
 alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 alias tree='tree -L 2 -I "node_module"'
 alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
+# tmux
+
+name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
 
 # Python
 ##########
@@ -166,6 +178,9 @@ slist() { spotify play list "$1" } # play list
 
 # Tooling
 alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
+
+# Gravitywell Specific
+alias sshAdelie='ssh -i ~/.ssh/AdelieWebOrdering.pem  ec2-user@52.214.85.193'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
