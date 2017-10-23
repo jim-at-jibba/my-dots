@@ -1,0 +1,456 @@
+*vimagit*    vimagit is an attempt to reproduce the magnificent Magit to vim.
+
+Author:            Jerome Reybert
+Plugin Homepage:   <https://github.com/jreybert/vimagit>
+
+===============================================================================
+
+                               _  _ _ _  _ ____ ____ _ ___     .   ~
+                               |  | | |\/| |__| | __ |  |    --|-- ~
+                                \/  | |  | |  | |__] |  |      '   ~
+                                                             ----- ~
+
+===============================================================================
+CONTENTS                                                      *vimagit-contents*
+
+  1.  Introduction ................. |vimagit-introduction|
+  2.  Installation ................. |vimagit-installation|
+  3.  TL;DR ........................ |vimagit-TL;DR|
+  4.  Usage ........................ |vimagit-usage|
+  5.  Options ...................... |vimagit-options|
+  6.  FAQ .......................... |vimagit-FAQ|
+
+
+===============================================================================
+1. INTRODUCTION                                           *vimagit-introduction*
+
+vimagit is a plugin which try to mimic the fantastic magit emacs plugin. If you
+already know the original plugin, give it a try. If you never have heard about
+magit (or maybe emacs), this is IMO the most efficient way to stage hunks and
+craft nice commits.
+
+===============================================================================
+2. INSTALLATION                                           *vimagit-installation*
+
+The plugin hierarchy tree respects the vim plugin standard. It is compatible
+with pathogen (and most probably vundle).
+
+To install:
+>
+  cd ~/.vim/bundle
+  git clone https://github.com/jreybert/vimagit
+<
+
+===============================================================================
+3. TL;DR                                                         *vimagit-TL;DR*
+
+This is the minimal required set of command you must know to start playing
+with vimagit. See |vimagit-commands| for a complete description.
+
+To simply test vimagit, modify/add/delete/rename some files in a git
+repository and open vim.
+
+> :Magit
+Open magit buffer with :Magit command.
+
+> <C-n>
+Jump to next hunk with <C-n>. The cursor should be on the header of a hunk.
+
+> S
+If the hunk is in "Unstage changes" section, press S in Normal mode: the
+hunk is now staged, and appears in "Staged changes" section. The opposite is
+also possible, i.e. unstage a hunk from "Staged section".
+
+If you move the cursor to the file header and press S, the whole file is
+staged.
+
+> CC
+Once you have stage all the required changes, type CC. A new section
+`Commit message` appears and cursor move to it. Type your commit message, in
+Insert mode this time. Once it's done, write your commit message with :w (or
+:x, :wq, ZZ).
+
+Voila! you created your first commit with vimagit!
+
+===============================================================================
+4. USAGE                                                         *vimagit-usage*
+
+MODES                                                            *vimagit-modes*
+
+vimagit buffer has modes. Mappings may have different behavior, depending on
+current mode and curosr position.
+
+For the moment, vimagit counts only two modes.
+
+STAGE MODE                                                  *vimagit-stage-mode*
+
+This is the default mode. In this mode, you can stage and unstage hunks,
+refresh vimagit buffer...
+
+COMMIT MODE                                                *vimagit-commit-mode*
+
+In this mode, `Commit message` section is open, you can write your commit
+message and validate your commit.
+Commit mode has two flavors.
+
+* `normal`: current commit will be a new commit.
+* `amend`: current commit will be meld with previous commit.
+  * Previous commit message is shown in `Commit message` section.
+  * Use this flavor if you forgot something in the previous commit.
+
+By the way, you can also perform all stage mode actions in commit mode.
+
+SECTIONS                                                      *vimagit-sections*
+
+IMPORTANT: mappings can have different meanings regarding the cursor position.
+
+There are 5 sections:
+* Info: this section display some information about the git repository, like
+  the current branch and the HEAD commit.
+* Commit message: this section appears in commit mode (see below). It contains
+  the message to be committed.
+* Staged changes: this sections contains all staged files/hunks, ready to
+  commit.
+* Unstaged changes: this section contains all unstaged and untracked
+  files/hunks.
+* Stash list: this section contains all stahes.
+
+INLINE MODIFICATIONS                               *vimagit-inline-modification*
+
+* It is possible to modify the content to be staged or unstaged in magit
+  buffer, with some limitations:
+  * only lines starting with a + sign can be modified
+  * no line can be deleted
+
+VISUAL SELECTION                                      *vimagit-visual-selection*
+
+It is possible to stage part of hunk, by different ways:
+* By visually selecting some lines, then staging the selection with S.
+* By marking some lines "to be staged" with M, then staging these selected
+  lines with S.
+* Staging individual lines with L.
+
+Visual selection and marked lines have some limitations for the moment:
+* It only work for "staging", not for "unstaging".
+* Selection/marks must be within a single hunk.
+* Marks not within the hunk currently staged are lost during stage process magit
+  buffer refresh.
+
+COMMANDS                                                      *vimagit-commands*
+
+                                                            *magit#show_magit()*
+Function to open magit buffer. This buffer will handle the git repository
+including focused file.
+It is possible to handle multiple git repositories within one vim instance.
+Each git repository will have its own buffer.
+
+It takes 3 parameters:
+  * orientation (mandatory): it can be
+      - 'v', curent window is split vertically, and magit is displayed in new
+        buffer
+      - 'h', curent window is split horizontally, and magit is displayed in
+        new buffer
+      - 'c', magit is displayed in current buffer
+  * show_all_files: define how file diffs are shown by default for this session
+    (see |vimagit-g:magit_default_show_all_files|)
+  * foldlevel: set default magit buffer foldlevel for this session
+    (see |vimagit-g:magit_default_fold_level|)
+
+                                                                        *:Magit*
+  :Magit     open magit buffer in a vertical split (see |magit#show_magit()|)
+
+                                                                    *:MagitOnly*
+  :MagitOnly open magit buffer in current window (see |magit#show_magit()|)
+You can create a bash alias like magit="vim -c MagitOnly"
+
+
+MAPPINGS                                                      *vimagit-mappings*
+
+For each mapping, user can redefine the behavior with its own mapping. Each
+variable is described below as           *vimagit-g:magit_nameofmapping_mapping*
+
+For example, to redefine the <leader>M mapping, user should add this line in
+its |vimrc|:
+let g:magit_show_magit_mapping='m'
+
+Mapping update                                          *vimagit-mapping-update*
+--------------
+
+Since vimagit 1.7, jump mappings have changed:
+   Jump next hunk : N -> <C-n>
+   Jump prev hunk : P -> <C-p>
+
+Global mappings
+---------------
+Following mappings are broadly set, and are applied in all vim buffers.
+
+                                      *vimagit-<leader>M*
+                                      *vimagit-g:magit_show_magit_mapping*
+ <leader>M  Open Magit buffer
+
+Local mappings
+--------------
+Following mappings are set locally, for magit buffer only, in normal mode.
+
+                                      *vimagit-<CR>*  *magit#open_close_folding()*
+                                      *vimagit-g:magit_folding_toggle_mapping*
+  <CR>      All file diffs are hidden by default. To see the changes in a
+            file, move cursor to the filename line, and press Enter. You can
+            close the changes display retyping Enter.
+
+                                      *vimagit-zo*   *magit#open_close_folding(1)*
+                                      *vimagit-g:magit_folding_open_mapping*
+  zo,zO     Typing zo on a file will unhide its diffs.
+
+                                      *vimagit-zc*   *magit#open_close_folding(0)*
+                                      *vimagit-g:magit_folding_close_mapping*
+  zc,zC     Typing zc on a file will hide its diffs.
+
+                                      *vimagit-S*            *magit#stage_hunk(0)*
+                                                           *magit#stage_vselect()*
+                                      *vimagit-g:magit_stage_hunk_mapping*
+  S         If cursor is in a hunk, stage/unstage hunk at cursor position.
+            If cursor is in diff header, stage/unstage whole file at cursor
+            position.
+            If some lines in the hunk are selected (see |visual-use|), stage
+            only selected lines (only works for staging).
+            If some lines in the hunk are marked (see |vimagit-M|), stage only
+            these lines (only works for staging).
+            When cursor is in "Unstaged changes" section, it will stage the
+            hunk/file.
+            On the other side, when cursor is in "Staged changes" section, it
+            will unstage hunk/file.
+
+                                      *vimagit-F*             *magit#stage_file()*
+                                      *vimagit-g:magit_stage_file_mapping*
+  F         Stage/unstage the whole file at cursor position.
+            When cursor is in "Unstaged changes" section, it will stage the
+            file.
+            On the other side, when cursor is in "Staged changes" section, it
+            will unstage file.
+
+                                      *vimagit-L*
+  L         Stage the line under the cursor (only works for staging)
+
+                                      *vimagit-M*
+  M
+            Mark the current line to be staged.
+            If some lines in the hunk are selected (see |visual-use|), mark
+            selected lines.
+            To staged marked lines, press S (see |vimagit-S|) in the current
+            hunk.
+
+                                    *vimagit-DDD*           magit#stage_hunk(1)*
+                                    *vimagit-g:magit_discard_hunk_mapping*
+  DDD       If cursor is in a hunk, discard hunk at cursor position.
+            If cursor is in diff header, discard whole file at cursor
+            position.
+            Only works in "Unstaged changes" section.
+
+                                    *vimagit-E*                *magit#jump_to()*
+  E         If cursor is in a hunk, cursor will move in the file containing
+            this hunk, at the line of the beginning of the hunk.
+             - if the file is already visible in a |window|, cursor moves to
+               this window at the hunk line
+             - if there is more than one window open, cursor moves to last
+               accessed window and open buffer at the hunk line
+             - if there is only magit window opened, split vertically, moves
+               cursor to new split and open buffer at the hunk line
+            E means 'edit'.
+            NOTE: this function is extremely powerful, just give it a try!
+
+                                    *vimagit-<C-n>*          *magit#jump_hunk()*
+                                    *vimagit-<C-p>*
+                                    *vimagit-g:magit_jump_next_hunk*
+                                    *vimagit-g:magit_jump_prev_hunk*
+  <C-n>,<C-p>  Move to Next or Previous hunk.
+
+                                    *vimagit-CC*    *magit#commit_command('CC')*
+                                    *vimagit-g:magit_commit_mapping*
+  CC        From `stage mode`, set commit mode in `normal` flavor and show empty
+            "Commit message" section.
+            From `commit mode`, commit all staged changes with commit flavor
+            (`normal` or `amend`) with message in "Commit message" section.
+
+                                    *vimagit-:w*
+  :w :x :wq ZZ
+            From `commit mode`, commit all staged changes with commit flavor
+            (`normal` or `amend`) with message in "Commit message" section.
+
+                                    *vimagit-CA*    *magit#commit_command('CA')*
+                                    *vimagit-g:magit_commit_amend_mapping*
+  CA        From `stage mode` or `commit mode`: set commit mode in amend
+            flavor, and display "Commit message" section with previous commit
+            message.
+            Commit will be meld with previous commit.
+
+                                    *vimagit-CF*    *magit#commit_command('CF')*
+                                    *vimagit-g:magit_commit_fixup_mapping*
+  CF        From `stage mode`: amend the staged changes into the previous
+            commit, without modifying previous commit message.
+
+                                    *vimagit-CU*      *magit#close_commit()*
+                                    *vimagit-g:magit_close_commit_mapping*
+  CU        From `commit mode`: go back to stage mode (current commit message
+            will be lost).
+
+                                    *vimagit-I*            *magit#ignore_file()*
+                                    *vimagit-g:magit_ignore_mapping*
+  I         Add the file under the cursor in .gitgnore
+
+                                    *vimagit-R*          *magit#update_buffer()*
+                                    *vimagit-g:magit_reload_mapping*
+  R         Refresh magit buffer.
+
+                                                           *magit#update_diff()*
+                                    *vimagit--* *vimagit-g:magit_diff_shrink*
+                                    *vimagit-+* *vimagit-g:magit_diff_enlarge*
+                                    *vimagit-0* *vimagit-g:magit_diff_reset*
+  -,+,0     Shrink,enlarge,reset diff context
+
+                                    *vimagit-q*
+                                    *vimagit-g:magit_close_mapping*
+  q         close magit buffer.
+
+                                    *vimagit-?*            *magit#toggle_help()*
+                                    *vimagit-g:magit_toggle_help_mapping*
+  ?         Toggle help showing in magit buffer
+
+AUTOCMD                                                        *vimagit-autocmd*
+
+Magit will raise some events at some point. User can plug some specific
+commands to these events (see |vimagit-autocmd_example|).
+
+VimagitBufferInit                                    *vimagit-VimagitBufferInit*
+
+This event is raised when the magit buffer is initialized (i.e. each time
+|magit#show_magit()| is called.
+
+VimagitRefresh                                          *vimagit-VimagitRefresh*
+
+This event is raised every time the magit buffer is refreshed, event if no
+file is updated.
+
+VimagitUpdateFile                                    *vimagit-VimagitUpdateFile*
+
+This event is raised each time a file status is updated in magit buffer
+(typically when a file or a hunk is staged or unstaged). The variable
+|g:magit_last_updated_buffer| is set to the last updated file, with its
+absolute path.
+
+Note: |g:magit_last_updated_buffer| will be updated and VimagitUpdateFile event
+will be raised only if the buffer is currently opened in vim.
+
+VimagitEnterCommit                                  *vimagit-VimagitEnterCommit*
+
+This event is raised when the commit section opens and the cursor is
+placed in this section. For example, the user may want to go straight into
+insert mode when committing, defining this |autocmd| in vimrc:
+>
+  autocmd User VimagitEnterCommit startinsert
+<
+
+VimagitLeaveCommit                                  *vimagit-VimagitLeaveCommit*
+
+This event is raised when the commit section is closed, because the user
+finished to write its commit message or canceled it. For example, the user
+wants to set the |textwidth| of the vimagit buffer while editing a commit
+message, defining these |autocmd| in vimrc:
+>
+  autocmd User VimagitEnterCommit setlocal textwidth=72
+  autocmd User VimagitLeaveCommit setlocal textwidth=0
+<
+
+Autocmd example                                        *vimagit-autocmd_example*
+---------------
+
+The following example calls the vim-gitgutter refresh function on a specific
+buffer each time vimagit update the git status of this file.
+>
+  autocmd User VimagitUpdateFile
+    \ if ( exists("*gitgutter#process_buffer") ) |
+    \ 	call gitgutter#process_buffer(bufnr(g:magit_last_updated_buffer), 0) |
+    \ endif
+<
+The following example is already embeded in vimagit plugin (see
+|vimagit-g:magit_refresh_gitgutter|), then you shouldn't add this particular
+example to your vimrc.
+
+===============================================================================
+5. OPTIONS                                                     *vimagit-options*
+
+User can define in its prefered |vimrc| some options.
+
+                                                       *vimagit-g:magit_enabled*
+To enable or disable vimagit plugin.
+Default value is 1.
+let g:magit_enabled=[01]
+
+                                                       *vimagit-g:magit_git_cmd*
+
+Git command, may be simply simply "git" if git is in your path. Defualt is "git"
+let g:magit_git_cmd="git"
+
+                                                     *vimagit-g:magit_show_help*
+To disable chatty inline help in magit buffer (default 1)
+let g:magit_show_help=[01]
+
+                                            *vimagit-g:magit_commit_title_limit*
+
+Text is grayed if first line of commit message exceed this number of character
+(default 50)
+
+let g:magit_commit_title_limit=[0..300]
+
+                                        *vimagit-g:magit_default_show_all_files*
+When this variable is set to 0, all diff files are hidden by default.
+When this variable is set to 1, all diff for modified files are shown by default.
+When this variable is set to 2, all diff for all files are shown by default.
+Default value is 1.
+NB: for repository with large number of differences, display may be slow.
+let g:magit_default_show_all_files=[012]
+
+                                            *vimagit-g:magit_default_fold_level*
+Default foldlevel for magit buffer.
+When set to 0, both filenames and hunks are folded.
+When set to 1, filenames are unfolded and hunks are folded.
+When set to 2, filenames and hunks are unfolded.
+Default value is 1.
+let g:magit_default_fold_level=[012]
+
+                                                  *vimagit-g:magit_auto_foldopen*
+When stage/unstage a hunk, cursor goes to the closest hunk in the same section.
+This option automatically opens the fold of the hunk cursor has jump to.
+Default value is 1.
+let g:magit_auto_foldopen=[01]
+
+                                              *vimagit-g:magit_default_sections*
+With this variable, the user is able to choose which sections are displayed in
+magit buffer, and in which order.
+Default value:
+let g:magit_default_sections = ['info', 'global_help', 'commit', 'staged', 'unstaged']
+
+                                             *vimagit-g:magit_warning_max_lines*
+This variable is the maximum number of diff lines that vimagit will display
+without warning the user. If the number of diff lines to display is greater than
+this variable, vimagit will ask a confirmation to the user before refreshing the
+buffer. If user answer is 'yes', vimagit will display diff lines as expected.
+If user answer is 'no', vimagit will close all file diffs before refreshing.
+Defaulty value is 10000.
+let g:magit_warning_max_lines=val
+
+                                   *vimagit-g:magit_discard_untracked_do_delete*
+When set to 1, discard an untracked file will indeed delete this file.
+Default value is 0.
+let g:magit_discard_untracked_do_delete=[01]
+
+                                             *vimagit-g:magit_refresh_gitgutter*
+When set to 1, and if vim-gitgutter plugin is installed, gitgutter signs will
+be updated each time magit update the git status of a file (i.e. when a file
+or a hunk is staged/unstaged).
+Default value is 1.
+let g:magit_refresh_gitgutter=[01]
+
+===============================================================================
+6. FAQ                                                             *vimagit-FAQ*
+

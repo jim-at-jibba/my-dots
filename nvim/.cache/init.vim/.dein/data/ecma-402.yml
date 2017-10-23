@@ -1,0 +1,20 @@
+javascriptGlobal:
+    - Intl
+
+javascriptIntlMethod:
+    - Collator
+    - DateTimeFormat
+    - NumberFormat
+    - PluralRules
+    # - CanonicalizeLocaleList
+    # - BestAvailableLocale
+    # - LookupMatcher
+    # - BestFitMatcher
+    # - ResolveLocale
+    # - LookupSupportedLocales
+    # - BestFitSupportedLocales
+    # - SupportedLocales
+    # - GetOption
+    # - GetNumberOption
+
+

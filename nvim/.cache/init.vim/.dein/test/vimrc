@@ -1,0 +1,11 @@
+filetype off
+set runtimepath+=$HOME/.vim/plugged/vader.vim
+set runtimepath+=../
+filetype plugin indent on
+syntax enable
+autocmd! filetype css set shiftwidth=2
+autocmd! filetype python set shiftwidth=4
+autocmd! filetype javascript set shiftwidth=4
+autocmd! BufRead *.ts set filetype=typescript
+set nocompatible
+set noswapfile
