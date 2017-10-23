@@ -47,6 +47,7 @@
   call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
   call dein#add('carlitux/deoplete-ternjs')
   call dein#add('ntpeters/vim-better-whitespace')
+  call dein#add('junegunn/fzf.vim')
 
   if dein#check_install()
     call dein#install()
@@ -310,7 +311,40 @@
   let g:neoformat_enabled_javascript = ['prettier']
   let g:neomake_javascript_enabled_makers = ['eslint']
 
+  let g:tern#command = ['tern']
+  let g:tern#arguments = ['--persistent']
 " }}}
+
+" Emmet customization -------------------------------------------------------{{{
+
+" Remapping <C-y>, just doesn't cut it.
+  function! s:expand_html_tab()
+" try to determine if we're within quotes or tags.
+" if so, assume we're in an emmet fill area.
+   let line = getline('.')
+   if col('.') < len(line)
+     let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+     if len(line) >= 2
+        return "\<C-n>"
+     endif
+   endif
+" expand anything emmet thinks is expandable.
+  if emmet#isExpandable()
+    return emmet#expandAbbrIntelligent("\<tab>")
+    " return "\<C-y>,"
+  endif
+" return a regular tab character
+  return "\<tab>"
+  endfunction
+  " let g:user_emmet_expandabbr_key='<Tab>'
+  " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+  autocmd FileType html,css,scss imap <silent><buffer><expr><tab> <sid>expand_html_tab()
+  let g:user_emmet_mode='a'
+  let g:user_emmet_complete_tag = 0
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css,scss EmmetInstall
+"}}}
 
 " Trim whitespace on save
 let blacklist = ['md', 'markdown', 'mdown']
@@ -320,3 +354,7 @@ let blacklist = ['md', 'markdown', 'mdown']
     autocmd!
     autocmd BufWritePre * undojoin | Neoformat
   augroup END
+
+" Fuzzy-find with fzf
+map <C-p> :Files<cr>
+nmap <C-p> :Files<cr>
