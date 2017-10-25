@@ -3,7 +3,7 @@ windows:
     root: ~/
     layout: 599e,210x50,0,0[210x35,0,0,0,210x14,0,36{105x14,0,36,12,104x14,106,36,25}]
     panes:
-      commands:
+      - commands:
         - name tiny-care
         - tiny-care-terminal
       - clear

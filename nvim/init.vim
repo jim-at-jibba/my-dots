@@ -15,8 +15,10 @@
   call dein#add('Shougo/dein.vim')
 " syntax
   call dein#add('othree/html5.vim')
-  call dein#add('othree/yajs.vim')
+  "call dein#add('othree/yajs.vim')
   call dein#add('othree/jsdoc-syntax.vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('mxw/vim-jsx')
   call dein#add('heavenshell/vim-jsdoc')
   call dein#add('elzr/vim-json')
   call dein#add('arcticicestudio/nord-vim')
@@ -81,6 +83,7 @@
   set wrap linebreak nolist
   set wildmode=full
   set autoread
+  set relativenumber
 " leader is ,
   let mapleader = ' '
   set undofile
@@ -154,6 +157,15 @@
   let g:multi_cursor_skip_key='<C-x>'
   " let g:multi_cursor_quit_key='<Esc>'
 
+  set splitbelow
+  set splitright
+
+  " Simplier mappings for switching
+  nnoremap <C-J> <C-W><C-J>
+  nnoremap <C-K> <C-W><C-K>
+  nnoremap <C-H> <C-W><C-H>
+  nnoremap <C-L> <C-W><C-L>
+
 " Align blocks of text and keep them selected
   vmap < <gv
   vmap > >gv
@@ -175,6 +187,9 @@
     execute "normal a<img src=\"".url."\" width=\"".width."\" height=\"".height."\" />"
     endfunction
   command! -nargs=1 PlaceholderImgTag call s:PlaceholderImgTag(<f-args>)
+
+  " deletes buffer but not split
+  nmap ,d :b#<bar>bd#<CR>
 
 "}}}"
 
@@ -249,11 +264,34 @@
   let g:airline_symbols.branch = ''
   let g:airline_theme='nord'
 
+  nmap <leader>, :bnext<CR>
+  tmap <leader>, <C-\><C-n>:bnext<cr>
+  nmap <leader>. :bprevious<CR>
+  tmap <leader>. <C-\><C-n>:bprevious<CR>
+  tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
+  tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
+  tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
+  tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
+  tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
+  tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
+  tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
+  tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
+  tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
+  nmap <leader>1 <Plug>AirlineSelectTab1
+  nmap <leader>2 <Plug>AirlineSelectTab2
+  nmap <leader>3 <Plug>AirlineSelectTab3
+  nmap <leader>4 <Plug>AirlineSelectTab4
+  nmap <leader>5 <Plug>AirlineSelectTab5
+  nmap <leader>6 <Plug>AirlineSelectTab6
+  nmap <leader>7 <Plug>AirlineSelectTab7
+  nmap <leader>8 <Plug>AirlineSelectTab8
+  nmap <leader>9 <Plug>AirlineSelectTab9
+
 "}}}
 
 " NERDTree ---------------------------------------------------------------{{{
 
-  map <leader>1 :NERDTreeToggle<CR>
+  map <leader><leader>1 :NERDTreeToggle<CR>
   let NERDTreeShowHidden=1
   let NERDTreeHijackNetrw=0
   let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -295,7 +333,7 @@
 "  }}}
 
 " Code Format -------------------------------------------------------------------{{{
-
+  let g:neoformat_only_msg_on_error = 1
   noremap <silent> <leader>f :Neoformat<CR>
 " }}}
 
@@ -308,6 +346,8 @@
 "}}}
 
 " Javascript -------------------------------------------------------------------{{{
+
+  let g:jsx_ext_required = 0
 
   let g:neoformat_enabled_javascript = ['prettier']
   let g:neomake_javascript_enabled_makers = ['eslint']
