@@ -101,7 +101,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias v='cd /Volumes'
+# alias v='cd /Volumes'
 
 # TaskWarrior
 ##############
@@ -127,6 +127,7 @@ alias gme='git config user.name "jim-at-jibba"'
 
 # General
 ##########
+alias v='nvim'
 alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
 alias svim='source ~/.vimrc'

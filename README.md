@@ -13,6 +13,8 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - vim --with-lua --with-override-system-vi
 - tmux
 - reattach-to-user-namespace
+- ripgrep
+- fzf
 
 
 
