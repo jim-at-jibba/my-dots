@@ -82,6 +82,7 @@
   set wrap linebreak nolist
   set wildmode=full
   set autoread
+  set relativenumber
 " leader is ,
   let mapleader = ' '
   set undofile
@@ -185,6 +186,9 @@
     execute "normal a<img src=\"".url."\" width=\"".width."\" height=\"".height."\" />"
     endfunction
   command! -nargs=1 PlaceholderImgTag call s:PlaceholderImgTag(<f-args>)
+
+  " deletes buffer but not split
+  nmap ,d :b#<bar>bd#<CR>
 
 "}}}"
 
@@ -328,7 +332,7 @@
 "  }}}
 
 " Code Format -------------------------------------------------------------------{{{
-
+  let g:neoformat_only_msg_on_error = 1
   noremap <silent> <leader>f :Neoformat<CR>
 " }}}
 
