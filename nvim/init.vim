@@ -51,6 +51,9 @@
   call dein#add('ntpeters/vim-better-whitespace')
   call dein#add('junegunn/fzf.vim')
   call dein#add('Shougo/denite.nvim')
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
 
   if dein#check_install()
     call dein#install()
@@ -191,7 +194,10 @@
   " deletes buffer but not split
   nmap ,d :b#<bar>bd#<CR>
 
-"}}}"
+  " opens nippets folder
+  nmap <Leader>es :e ~/dotfiles/snippets/
+
+"}}}
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
@@ -301,6 +307,11 @@
   let NERDTreeMinimalUI=1
   let NERDTreeCascadeSingleChildDir=1
   let g:NERDTreeHeader = 'hello'
+
+  if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+  endif
+
 " }}}
 
 " Deoplete -------------------------------------------------------------------{{{
@@ -330,7 +341,7 @@
   let g:deoplete#ignore_sources = {}
   let g:deoplete#ignore_sources._ = ['around']
 
-"  }}}
+" }}}
 
 " Code Format -------------------------------------------------------------------{{{
   let g:neoformat_only_msg_on_error = 1
@@ -448,3 +459,40 @@ let blacklist = ['md', 'markdown', 'mdown']
 
 "}}}
 
+" Vim-Devicons -------------------------------------------------------------0{{{
+
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+  let g:webdevicons_enable_airline_tabline = 1
+  let g:webdevicons_enable_airline_statusline = 1
+
+" }}}
+
+" Snipppets -----------------------------------------------------------------{{{
+
+" Enable snipMate compatibility feature.
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#expand_word_boundary = 1
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " SuperTab like snippets behavior.
+  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  "imap <expr><TAB>
+  " \ pumvisible() ? "\<C-n>" :
+  " \ neosnippet#expandable_or_jumpable() ?
+  " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+  " For conceal markers.
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+
+  let g:neosnippet#snippets_directory='~/dotfiles/snippets'
+"}}}
