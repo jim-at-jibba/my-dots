@@ -404,8 +404,8 @@
   let s:menus = {}
 
   call denite#custom#option('_', {
-        \ 'prompt': '❯',
-        \ 'winheight': 10,
+        \ 'prompt': 'λ:',
+        \ 'winheight': 16,
         \ 'reversed': 1,
         \ 'highlight_matched_char': 'Underlined',
         \ 'highlight_mode_normal': 'CursorLine',
