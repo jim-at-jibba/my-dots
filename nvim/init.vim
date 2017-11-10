@@ -54,6 +54,7 @@
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('vimwiki/vimwiki')
 
   if dein#check_install()
     call dein#install()
@@ -495,4 +496,13 @@ let blacklist = ['md', 'markdown', 'mdown']
   endif
 
   let g:neosnippet#snippets_directory='~/dotfiles/snippets'
+"}}}
+
+" VimWiki -----------------------------------------------------------------{{{
+" Run multiple wikis "
+let g:vimwiki_list = [
+                      \{'path': '~/Dropbox/VimWiki/personal.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
+                      \{'path': '~/Dropbox/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
+                \]
+let g:vimwiki_global_ext=0
 "}}}
