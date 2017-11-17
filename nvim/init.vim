@@ -132,6 +132,13 @@
   noremap  <silent> <End>  g<End>
   inoremap <silent> <Home> <C-o>g<Home>
   inoremap <silent> <End>  <C-o>g<End>
+
+  " disable Arrow keys
+  noremap <Up> <NOP>
+  noremap <Down> <NOP>
+  noremap <Left> <NOP>
+  noremap <Right> <NOP>
+
 " copy current files path to clipboard
   nmap cp :let @+= expand("%") <cr>
 " Neovim terminal mapping
