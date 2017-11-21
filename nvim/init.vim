@@ -100,7 +100,7 @@
              \ endif
              " center buffer around cursor when opening files
   autocmd BufRead * normal zz
-  " set updatetime=500
+  set updatetime=750
   set complete=.,w,b,u,t,k
   autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
   autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
@@ -113,6 +113,9 @@
 " }}}
 
 " System mappings  ----------------------------------------------------------{{{
+
+  "make jj do esc"
+  inoremap jj <Esc>
 
 " No need for ex mode
   nnoremap Q <nop>
@@ -130,6 +133,13 @@
   noremap  <silent> <End>  g<End>
   inoremap <silent> <Home> <C-o>g<Home>
   inoremap <silent> <End>  <C-o>g<End>
+
+  " disable Arrow keys
+  noremap <Up> <NOP>
+  noremap <Down> <NOP>
+  noremap <Left> <NOP>
+  noremap <Right> <NOP>
+
 " copy current files path to clipboard
   nmap cp :let @+= expand("%") <cr>
 " Neovim terminal mapping
@@ -205,6 +215,7 @@
   syntax on
   colorscheme nord
   let g:nord_italic_comments=1
+  set scrolloff=5
 "}}}
 
 " Fold, gets it's own section  ----------------------------------------------{{{

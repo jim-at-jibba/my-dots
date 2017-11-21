@@ -1,0 +1,7 @@
+windows:
+  - name: dev-env
+    layout: 8f4d,255x70,0,0[255x55,0,0,17,255x14,0,56{127x14,0,56,18,127x14,128,56,19}]
+    panes:
+      - clear
+      - clear
+      - clear
