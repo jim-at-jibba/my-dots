@@ -6,7 +6,7 @@ module.exports = {
     node: true,
     "jest/globals": true
   },
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "prettier"],
   parserOptions: {
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
@@ -14,7 +14,7 @@ module.exports = {
     },
     sourceType: "module"
   },
-  plugins: ["react", "jest"],
+  plugins: ["react", "jest", "prettier"],
   parser: "babel-eslint",
   globals: {
     $: true,
@@ -24,9 +24,11 @@ module.exports = {
     moment: true,
     Meteor: true,
     Template: true,
-    React: true
+    React: true,
+    SyntheticEvent: true
   },
   rules: {
+    "prettier/prettier": "error",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "no-console": 0,
