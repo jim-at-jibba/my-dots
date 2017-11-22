@@ -44,7 +44,7 @@
 
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-
+  call dein#add('wokalski/autocomplete-flow')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
   call dein#add('carlitux/deoplete-ternjs')
@@ -55,6 +55,7 @@
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('vimwiki/vimwiki')
+  call dein#add('flowtype/vim-flow')
 
   if dein#check_install()
     call dein#install()
@@ -362,9 +363,10 @@
 
 " Linting -------------------------------------------------------------------{{{
 
-  autocmd! BufWritePost * Neomake
-  let g:neomake_warning_sign = {'text': '•'}
-  let g:neomake_error_sign = {'text': '•'}
+  autocmd! BufWritePost,BufEnter * Neomake
+  let g:neomake_warning_sign = {'text': '⚠'}
+  let g:neomake_error_sign = {'text': '✖'}
+  let g:neomake_open_list = 2
 
 "}}}
 
@@ -377,6 +379,19 @@
 
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
+
+  let g:flow#omnifunc = 0
+  let g:flow#autoclose = 1
+
+  "Use locally installed flow
+  let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+  if matchstr(local_flow, "^\/\\w") == ''
+      let local_flow= getcwd() . "/" . local_flow
+  endif
+  if executable(local_flow)
+    let g:flow#flowpath = local_flow
+  endif
+
 " }}}
 
 " Emmet customization -------------------------------------------------------{{{
