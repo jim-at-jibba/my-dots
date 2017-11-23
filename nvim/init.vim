@@ -186,7 +186,7 @@
   vmap > >gv
   nnoremap <leader>d "_d
   vnoremap <leader>d "_d
-  vnoremap <c-/> :TComment<cr>
+  nnoremap <leader>/ :TComment<cr>
   nnoremap <silent> <esc> :noh<cr>
   nnoremap <leader>e :call <SID>SynStack()<CR>
   function! <SID>SynStack()
@@ -380,6 +380,7 @@
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
 
+  let g:flow#enable = 0
   let g:flow#omnifunc = 0
   let g:flow#autoclose = 1
 
