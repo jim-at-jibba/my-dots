@@ -56,6 +56,10 @@
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('vimwiki/vimwiki')
   call dein#add('flowtype/vim-flow')
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('craigemery/vim-autotag')
 
   if dein#check_install()
     call dein#install()
@@ -393,6 +397,15 @@
     let g:flow#flowpath = local_flow
   endif
 
+  " JsDoc Settings
+  map <silent> <leader>j :JsDoc <cr>
+  " let g:jsdoc_allow_input_prompt = 1
+  let g:jsdoc_input_description = 1
+  let g:jsdoc_enable_es6 = 1
+  let g:jsdoc_user_defined_tags = {
+        \'@memberof': ''
+        \}
+
 " }}}
 
 " Emmet customization -------------------------------------------------------{{{
@@ -532,4 +545,21 @@ let g:vimwiki_list = [
                       \{'path': '~/Dropbox/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
                 \]
 let g:vimwiki_global_ext=0
+"}}}
+
+" EasyMotion -----------------------------------------------------------------{{{
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key
+" binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
 "}}}
