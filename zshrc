@@ -130,14 +130,14 @@ alias gme='git config user.name "jim-at-jibba"'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
 alias l='ls -la'
-alias svim='source ~/.vimrc'
+alias c='clear'
+alias svim='source ~/.config/nvim/init.vim'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
 alias morning='node ~/dotfiles/morning-routine-cli/index.js'
 alias tree='tree -L 2 -I "node_module"'
-alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias ctags="`brew --prefix`/bin/ctags"
@@ -145,7 +145,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 # tmux
 
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
-
+alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
 # Python
 ##########
 #alias python='python3'
