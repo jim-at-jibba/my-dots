@@ -532,9 +532,9 @@ let blacklist = ['md', 'markdown', 'mdown']
   \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
   " For conceal markers.
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
+  " if has('conceal')
+  "   set conceallevel=2 concealcursor=niv
+  " endif
 
   let g:neosnippet#snippets_directory='~/dotfiles/snippets'
 "}}}
