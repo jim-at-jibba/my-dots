@@ -16,6 +16,7 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - ripgrep
 - fzf
 - ctags
+- watson
 
 
 
