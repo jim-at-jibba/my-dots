@@ -60,6 +60,7 @@
   call dein#add('easymotion/vim-easymotion')
   call dein#add('majutsushi/tagbar')
   call dein#add('craigemery/vim-autotag')
+  call dein#add('suan/vim-instant-markdown')
 
   if dein#check_install()
     call dein#install()

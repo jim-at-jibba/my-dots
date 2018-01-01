@@ -44,3 +44,4 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - tiny-care-terminal
 - tldr
 - yarn
+- instant-markdown-d
