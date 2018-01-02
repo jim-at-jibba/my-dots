@@ -60,7 +60,7 @@
   call dein#add('easymotion/vim-easymotion')
   call dein#add('majutsushi/tagbar')
   call dein#add('craigemery/vim-autotag')
-  call dein#add('suan/vim-instant-markdown')
+  call dein#add('shime/vim-livedown')
 
   if dein#check_install()
     call dein#install()
@@ -564,3 +564,18 @@ nmap s <Plug>(easymotion-s2)
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
 "}}}
+
+" Markdown -----------------------------------------------------------------{{{
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+
+" should the browser window pop-up upon previewing
+let g:livedown_open = 1
+
+" the port on which Livedown server will run
+let g:livedown_port = 1340
+
+" the browser to use
+let g:livedown_browser = "safari"
+"}}}
+
