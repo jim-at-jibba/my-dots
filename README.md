@@ -33,6 +33,8 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - eslint-plugin-jest
 - eslint-plugin-jsx
 - eslint-plugin-react
+- eslint-plugin-prettier
+- eslint-config-prettier
 - forever
 - nodemon
 - prettier
