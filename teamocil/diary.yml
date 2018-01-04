@@ -1,0 +1,12 @@
+windows:
+  - name: Diary
+    root: ~/Dropbox/VimWiki
+    layout: even-horizontal
+    panes:
+      - commands:
+        - name personal_diary
+        - nvim
+      - commands:
+        - name dev_diary
+        - nvim
+
