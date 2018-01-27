@@ -1,0 +1,10 @@
+windows:
+  - name: twitch
+    root: ~/
+    layout: f549,281x76,0,0{210x76,0,0[210x58,0,0,0,210x17,0,59,3],70x76,211,0[70x58,211,0,1,70x17,211,59,2]}
+    panes:
+      - commands:
+        - name CODE
+        - v
+      - clear
+      - clear
