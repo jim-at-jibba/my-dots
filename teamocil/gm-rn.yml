@@ -1,0 +1,17 @@
+windows:
+  - name: GMRN
+    root: ~/Code/Work/greenmotion_app
+    layout: 9cad,253x68,0,0[253x54,0,0,1,253x13,0,55{83x13,0,55,2,82x13,84,55,10,86x13,167,55,3}]
+    panes:
+      - commands:
+        - name vim
+        - v
+
+      - commands:
+        - name flow
+        - yarn flow:watch
+      - commands:
+        - name Jest
+      - commands:
+        - name Build
+        - react-native run-ios

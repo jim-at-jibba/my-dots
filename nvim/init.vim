@@ -58,7 +58,6 @@
   call dein#add('flowtype/vim-flow')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('easymotion/vim-easymotion')
-  call dein#add('majutsushi/tagbar')
   call dein#add('craigemery/vim-autotag')
   call dein#add('shime/vim-livedown')
 

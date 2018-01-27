@@ -27,3 +27,53 @@ snippet extend
 
   export default EStylesheet.create({});
 
+snippet ccs
+  export default class WhereContainer extends Component {
+
+    render(){
+      return() {}
+    }
+  }
+
+snippet sl
+  export default ${1:FUNC} = () => (
+    ${2:BODY}
+  )
+
+snippet cwm
+  componentWillMount() {
+    ${1:BODY}
+  }
+
+snippet cdm
+  componentDidMount() {
+    ${1:BODY}
+  }
+
+snippet cl
+  console.log('====================================');
+  console.log(${1:BODY});
+  console.log('====================================');
+
+snippet com
+  /**
+  |--------------------------------------------------
+  | ${1:BODY}
+  |--------------------------------------------------
+  */
+
+
+snippet smes
+  Sentry.captureMessage(${1:MESSAGE}, {
+    level: SentrySeverity.Warning,
+    extra: {
+      body: ${2:BODY}
+    }
+  });
+
+snippet sexc
+  Sentry.captureException(new Error(${1:MESSAGE}), {
+    logger: ${2:MODULE}
+  });
+
+
