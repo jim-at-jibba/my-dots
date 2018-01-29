@@ -1,16 +1,17 @@
 windows:
   - name: GMRN
     root: ~/Code/Work/greenmotion_app
-    layout: a1a8,283x74,0,0{231x74,0,0[231x57,0,0,20,231x16,0,58{115x16,0,58,22,115x16,116,58,23}],51x74,232,0,21}
+    layout: 9cad,253x68,0,0[253x54,0,0,1,253x13,0,55{83x13,0,55,2,82x13,84,55,10,86x13,167,55,3}]
     panes:
       - commands:
         - name vim
         - v
+
       - commands:
-        - name General
+        - name flow
+        - yarn flow:watch
+      - commands:
+        - name Jest
       - commands:
         - name Build
         - ENVFILE=.env.develop react-native run-ios
-      - commands:
-        - name Jest
-        - npm run test
