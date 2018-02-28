@@ -60,6 +60,7 @@
   call dein#add('easymotion/vim-easymotion')
   call dein#add('craigemery/vim-autotag')
   call dein#add('shime/vim-livedown')
+  call dein#add('Valloric/MatchTagAlways')
 
   if dein#check_install()
     call dein#install()
@@ -576,5 +577,18 @@ let g:livedown_port = 1340
 
 " the browser to use
 let g:livedown_browser = "safari"
+"}}}
+
+" TagMatcher -----------------------------------------------------------------{{{
+
+let g:mta_use_matchparen_group = 1
+
+let g:mta_filetypes = {
+\'javascript.jsx': 1,
+\ 'html' : 1,
+\ 'xhtml' : 1,
+\ 'xml' : 1,
+\ 'jinja' : 1,
+\}
 "}}}
 
