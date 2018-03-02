@@ -1,0 +1,18 @@
+windows:
+  - name: GMRN
+    root: ~/Code/Work/greenmotionapp
+    layout: 9cad,253x68,0,0[253x54,0,0,1,253x13,0,55{83x13,0,55,2,82x13,84,55,10,86x13,167,55,3}]
+    panes:
+      - commands:
+        - name vim
+        - v
+
+      - commands:
+        - name General
+        - c
+      - commands:
+        - name Jest
+        - npm run test
+      - commands:
+        - name Build
+        - ENVFILE=.env.develop react-native run-ios
