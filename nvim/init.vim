@@ -61,6 +61,8 @@
   call dein#add('craigemery/vim-autotag')
   call dein#add('shime/vim-livedown')
 
+  "call dein#add('sudar/vim-arduino-syntax')
+
   if dein#check_install()
     call dein#install()
     let pluginsExist=1
