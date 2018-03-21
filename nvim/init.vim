@@ -369,10 +369,15 @@
 " Linting -------------------------------------------------------------------{{{
 
   autocmd! BufWritePost,BufEnter * Neomake
-  let g:neomake_warning_sign = {'text': '⚠'}
-  let g:neomake_error_sign = {'text': '✖'}
+  let g:neomake_warning_sign = {'text': '😡'}
+  let g:neomake_error_sign = {'text': '💩'}
   let g:neomake_open_list = 2
 
+  nmap <Leader><Leader>o :lopen<CR>      " open location window
+  nmap <Leader><Leader>c :lclose<CR>     " close location window
+  nmap <Leader><Leader>, :ll<CR>         " go to current error/warning
+  nmap <Leader><Leader>n :lnext<CR>      " next error/warning
+  nmap <Leader><Leader>p :lprev<CR>      " previous error/warning
 "}}}
 
 " Javascript -------------------------------------------------------------------{{{
