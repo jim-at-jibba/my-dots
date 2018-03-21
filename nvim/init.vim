@@ -62,6 +62,8 @@
   call dein#add('shime/vim-livedown')
   call dein#add('Valloric/MatchTagAlways')
 
+  "call dein#add('sudar/vim-arduino-syntax')
+
   if dein#check_install()
     call dein#install()
     let pluginsExist=1

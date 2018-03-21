@@ -1,0 +1,82 @@
+# Vim Snippets for Arduino
+#
+#
+
+# --------------------------------------------------
+# Setup and Loop
+# --------------------------------------------------
+
+snippet setup
+        void setup() {
+          ${1:SERIAL} //Serial.begin();
+
+          ${2:BODY}
+        }
+
+snippet loop
+        void loop() {
+
+          ${1:BODY}
+
+        }
+
+
+# --------------------------------------------------
+# Read and Write
+# --------------------------------------------------
+
+snippet dwh
+        digitalWrite(${1:PIN}, HIGH);
+
+snippet dwl
+        digtialWrite(${1:PIN}, LOW);
+
+snippet dr
+        digitalRead(${1:PIN});
+
+snippet ar
+        analogRead(${1:PIN});
+
+
+# --------------------------------------------------
+# Serial
+# --------------------------------------------------
+
+snippet sr
+        Serial.read();
+
+snippet sp
+        Serial.print(${1:MESSAGE});
+
+snippet spl
+        Serial.println(${1:MESSAGE});
+
+
+# -------------------------------------------------
+# if, else, switch
+# -------------------------------------------------
+
+snippet if
+        if(${1:CONDITIONAL}) {
+          ${2:BODY}
+        }
+
+snippet elif
+        else if(${1:CONDITIONAL}) {
+          ${2:BODY}
+        }
+
+snippet else
+        else {
+          ${1:BODY}
+        }
+
+# -------------------------------------------------
+# Iteration
+# -------------------------------------------------
+
+snippet for
+        for(int i = 0; i < length; i++) {
+          ${1:BODY}
+        }
+
