@@ -173,18 +173,9 @@ alias vl='vagrant global-status'
 ###########
 alias bs='browser-sync start --server --files "**/*.*"'
 
-# Shpotify
+# Codepush
 ###########
-alias sp='spotify play'
-alias sn='spotify next'
-alias spr='spotify previous'
-alias ss='spotify status'
-alias sst='spotify pause'
-
-ssong() { spotify play song "$1" } # play song
-salbum() { spotify play album "$1" } # play album
-sartist() { spotify play artist "$1" } # play artist
-slist() { spotify play list "$1" } # play list
+cpDeets () { appcenter codepush deployment list -a "$1"; }           # Shows deploy keys for codepush
 
 # Tooling
 alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
