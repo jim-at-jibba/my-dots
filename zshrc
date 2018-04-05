@@ -62,6 +62,7 @@ plugins=(git teamocil zsh-completions osx httpie)
   export PATH="$HOME/.composer/vendor/bin:$PATH"
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export PATH="$HOME/.fastlane/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
