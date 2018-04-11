@@ -344,11 +344,11 @@
 
   let g:deoplete#file#enable_buffer_path=1
 
-  call deoplete#custom#set('buffer', 'mark', 'ℬ')
-  call deoplete#custom#set('ternjs', 'mark', '')
-  call deoplete#custom#set('omni', 'mark', '⌾')
-  call deoplete#custom#set('file', 'mark', 'file')
-  call deoplete#custom#set('neosnippet', 'mark', '')
+  call deoplete#custom#source('buffer', 'mark', 'ℬ')
+  call deoplete#custom#source('ternjs', 'mark', '')
+  call deoplete#custom#source('omni', 'mark', '⌾')
+  call deoplete#custom#source('file', 'mark', 'file')
+  call deoplete#custom#source('neosnippet', 'mark', '')
 
   " let g:deoplete#omni_patterns = {}
   " let g:deoplete#omni_patterns.html = ''

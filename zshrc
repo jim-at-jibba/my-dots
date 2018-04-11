@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded. pygmalion
 ZSH_THEME="spaceship"
 
-SPACESHIP_PROMPT_SYMBOL='🦄 '
+SPACESHIP_CHAR_SYMBOL='🦄 '
 SPACESHIP_BATTERY_SHOW='false'
 
 SPACESHIP_TIME_SHOW=true
@@ -81,11 +81,6 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# NVM
-####################
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Auto Jump initialisation
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
