@@ -58,12 +58,16 @@
   call dein#add('flowtype/vim-flow')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('easymotion/vim-easymotion')
-  call dein#add('craigemery/vim-autotag')
   call dein#add('shime/vim-livedown')
   call dein#add('Valloric/MatchTagAlways')
-
+  call dein#add('machakann/vim-highlightedyank')
   call dein#add('mtth/scratch.vim')
+  call dein#add('styled-components/vim-styled-components')
+  call dein#add('terryma/vim-multiple-cursors')
 
+  " Ctags
+  call dein#add('majutsushi/tagbar')
+  call dein#add('ludovicchabant/vim-gutentags')
   if dein#check_install()
     call dein#install()
     let pluginsExist=1
@@ -98,8 +102,8 @@
   set relativenumber
 " leader is ,
   let mapleader = ' '
-  set undofile
-  set undodir="$HOME/.VIM_UNDO_FILES"
+  " set undofile
+  " set undodir="$HOME/.VIM_UNDO_FILES"
 " Remember cursor position between vim sessions
  autocmd BufReadPost *
              \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -113,7 +117,7 @@
   autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
   set formatoptions+=t
   set inccommand=nosplit
-  set shortmess=atIc
+  set shortmess=a
   set isfname-==
   set spell
 
@@ -153,7 +157,7 @@
 " terminal 'normal mode'
   tmap <esc> <c-\><c-n><esc><cr>
 " exit insert, dd line, enter insert
-  inoremap <c-d> <esc>ddi
+"  inoremap <c-d> <esc>ddi
   noremap H ^
   noremap L g_
   noremap J 5j
@@ -174,10 +178,17 @@
   " nnoremap Y "*Y<CR>
   " vnoremap y myy`y
   " vnoremap Y myY`y
-  let g:multi_cursor_next_key='<C-n>'
-  let g:multi_cursor_prev_key='<C-p>'
-  let g:multi_cursor_skip_key='<C-x>'
-  " let g:multi_cursor_quit_key='<Esc>'
+  let g:multi_cursor_use_default_mapping=0
+
+  " Default mapping
+  let g:multi_cursor_start_word_key      = '<C-d>'
+  let g:multi_cursor_select_all_word_key = '<A-n>'
+  let g:multi_cursor_start_key           = 'g<C-n>'
+  let g:multi_cursor_select_all_key      = 'g<A-n>'
+  let g:multi_cursor_next_key            = '<C-n>'
+  let g:multi_cursor_prev_key            = '<C-p>'
+  let g:multi_cursor_skip_key            = '<C-x>'
+  let g:multi_cursor_quit_key            = '<Esc>'
 
   set splitbelow
   set splitright
@@ -344,11 +355,11 @@
 
   let g:deoplete#file#enable_buffer_path=1
 
-  call deoplete#custom#set('buffer', 'mark', 'ℬ')
-  call deoplete#custom#set('ternjs', 'mark', '')
-  call deoplete#custom#set('omni', 'mark', '⌾')
-  call deoplete#custom#set('file', 'mark', 'file')
-  call deoplete#custom#set('neosnippet', 'mark', '')
+  call deoplete#custom#source('buffer', 'mark', 'ℬ')
+  call deoplete#custom#source('ternjs', 'mark', '')
+  call deoplete#custom#source('omni', 'mark', '⌾')
+  call deoplete#custom#source('file', 'mark', 'file')
+  call deoplete#custom#source('neosnippet', 'mark', '')
 
   " let g:deoplete#omni_patterns = {}
   " let g:deoplete#omni_patterns.html = ''
@@ -505,6 +516,8 @@ let blacklist = ['md', 'markdown', 'mdown']
 " Fuzzy-find with fzf
 "map <C-p> :Files<cr>
 "nmap <C-p> :Files<cr>
+
+nmap <F8> :TagbarToggle<CR>
 
 "}}}
 

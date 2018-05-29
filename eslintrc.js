@@ -34,7 +34,7 @@ module.exports = {
     "no-console": 0,
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
-    quotes: ["error", "double"],
+    quotes: ["error", "single"],
     semi: ["error", "always"],
     "comma-dangle": ["error", "never"]
   }
