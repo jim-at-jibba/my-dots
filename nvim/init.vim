@@ -392,7 +392,7 @@
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
 
-  let g:flow#enable = 0
+  let g:flow#enable = 1
   let g:flow#omnifunc = 0
   let g:flow#autoclose = 1
 
