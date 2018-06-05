@@ -82,7 +82,7 @@
 " System Settings  ----------------------------------------------------------{{{
 
 " Neovim Settings
-  set termguicolors
+  " set termguicolors
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   set clipboard+=unnamedplus
   set pastetoggle=<f6>
@@ -233,6 +233,7 @@
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
+  set t_Co=256
   set background=light
   colorscheme flattened_light
   let g:nord_italic_comments=1
@@ -302,7 +303,7 @@
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  let g:airline_theme='nord'
+  let g:airline_theme='solarized'
 
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
