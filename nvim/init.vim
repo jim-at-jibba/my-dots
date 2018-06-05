@@ -22,6 +22,8 @@
   call dein#add('heavenshell/vim-jsdoc')
   call dein#add('elzr/vim-json')
   call dein#add('arcticicestudio/nord-vim')
+  call dein#add('kristijanhusak/vim-hybrid-material')
+  call dein#add('romainl/flattened')
   call dein#add('hail2u/vim-css3-syntax')
   call dein#add('ap/vim-css-color')
   call dein#add('tpope/vim-markdown', {'on_ft': 'markdown'})
@@ -231,7 +233,8 @@
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
-  colorscheme nord
+  set background=light
+  colorscheme flattened_light
   let g:nord_italic_comments=1
   set scrolloff=5
 "}}}
