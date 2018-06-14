@@ -35,6 +35,11 @@
   call dein#add('mattn/emmet-vim')
   call dein#add('sbdchd/neoformat')
 
+  " Typesscript
+  call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
   " git
   call dein#add('tpope/vim-fugitive')
   call dein#add('jreybert/vimagit', {'on_cmd': ['Magit', 'MagitOnly']})
