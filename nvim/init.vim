@@ -38,6 +38,7 @@
   " Typesscript
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('leafgarland/typescript-vim')
+  call dein#add('ianks/vim-tsx')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
   " git
@@ -408,6 +409,7 @@
 
   let g:neoformat_enabled_javascript = ['prettier']
   let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
   let g:tern#command = ['tern']
   let g:tern#arguments = ['--persistent']
