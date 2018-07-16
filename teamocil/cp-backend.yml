@@ -1,0 +1,23 @@
+windows:
+  - name: CP-BE
+    root: ~/Code/Work/customer-portal
+    layout: 1826,189x41,0,0{94x41,0,0[94x20,0,0,1,94x20,0,21,4],94x41,95,0[94x20,95,0,2,94x20,95,21,3]}
+    panes:
+      - commands:
+        - name CORE
+        - cd customer-portal-api-core/src
+        - npm run start
+
+      - commands:
+        - name ERP
+        - cd customer-portal-api-erp-unity/src
+        - npm run start
+
+      - commands:
+        - name GATEWAY
+        - cd customer-portal-api-gateway/src
+        - npm run start
+
+      - commands:
+        - name
+        - clear
