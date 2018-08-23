@@ -72,11 +72,12 @@
   call dein#add('mtth/scratch.vim')
   call dein#add('styled-components/vim-styled-components')
   call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('matze/vim-move')
 
   " Elixir
   call dein#add('elixir-editors/vim-elixir')
   call dein#add('slashmili/alchemist.vim')
-  call dein#add('smmorearty/elixir-ctag')
+  call dein#add('mmorearty/elixir-ctags')
 
   " Ctags
   call dein#add('majutsushi/tagbar')
@@ -609,4 +610,11 @@ let g:mta_filetypes = {
 " Alchemist -----------------------------------------------------------------{{{
   let g:alchemist_keyword_map = '<leader>K'
 "}}}
+
+" VIM Move -----------------------------------------------------------------{{{
+  let g:move_map_keys = 0
+  vmap <C-k> <Plug>MoveBlockUp
+  vmap <C-j> <Plug>MoveBlockDown
+"}}}
+
 
