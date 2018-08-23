@@ -73,6 +73,11 @@
   call dein#add('styled-components/vim-styled-components')
   call dein#add('terryma/vim-multiple-cursors')
 
+  " Elixir
+  call dein#add('elixir-editors/vim-elixir')
+  call dein#add('slashmili/alchemist.vim')
+  call dein#add('smmorearty/elixir-ctag')
+
   " Ctags
   call dein#add('majutsushi/tagbar')
   call dein#add('ludovicchabant/vim-gutentags')
@@ -599,5 +604,9 @@ let g:mta_filetypes = {
 \ 'xml' : 1,
 \ 'jinja' : 1,
 \}
+"}}}
+
+" Alchemist -----------------------------------------------------------------{{{
+  let g:alchemist_keyword_map = '<leader>K'
 "}}}
 
