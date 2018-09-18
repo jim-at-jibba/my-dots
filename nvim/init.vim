@@ -73,6 +73,7 @@
   call dein#add('styled-components/vim-styled-components')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('matze/vim-move')
+  call dein#add('zchee/deoplete-jedi')
 
   " Elixir
   call dein#add('elixir-editors/vim-elixir')
@@ -615,6 +616,8 @@ let g:mta_filetypes = {
   let g:move_map_keys = 0
   vmap <C-k> <Plug>MoveBlockUp
   vmap <C-j> <Plug>MoveBlockDown
+  vmap <C-h> <Plug>MoveBlockLeft
+  vmap <C-l> <Plug>MoveBlockRight
 "}}}
 
 
