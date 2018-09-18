@@ -13,7 +13,8 @@
   set rtp+=/usr/local/opt/fzf
   call dein#begin(expand('~/.config/nvim'))
   call dein#add('Shougo/dein.vim')
-" syntax
+
+  " javascript and react
   call dein#add('othree/html5.vim')
   "call dein#add('othree/yajs.vim')
   call dein#add('othree/jsdoc-syntax.vim')
@@ -21,12 +22,43 @@
   call dein#add('mxw/vim-jsx')
   call dein#add('heavenshell/vim-jsdoc')
   call dein#add('elzr/vim-json')
+  call dein#add('wokalski/autocomplete-flow')
+  call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
+  call dein#add('carlitux/deoplete-ternjs')
+  call dein#add('flowtype/vim-flow')
+  call dein#add('styled-components/vim-styled-components')
+
+  " Typesscript
+  call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('ianks/vim-tsx')
+  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
+  " css
+  call dein#add('hail2u/vim-css3-syntax')
+  call dein#add('ap/vim-css-color')
+
+  " markdown
+  call dein#add('tpope/vim-markdown', {'on_ft': 'markdown'})
+  call dein#add('shime/vim-livedown')
+
+  " Look and feel
   call dein#add('arcticicestudio/nord-vim')
   call dein#add('kristijanhusak/vim-hybrid-material')
   call dein#add('romainl/flattened')
-  call dein#add('hail2u/vim-css3-syntax')
-  call dein#add('ap/vim-css-color')
-  call dein#add('tpope/vim-markdown', {'on_ft': 'markdown'})
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('ryanoasis/vim-devicons')
+
+  " python
+  call dein#add('zchee/deoplete-jedi')
+
+  " Elixir
+  call dein#add('elixir-editors/vim-elixir')
+  call dein#add('slashmili/alchemist.vim')
+  call dein#add('mmorearty/elixir-ctags')
+
+  " utilities
   call dein#add('rhysd/vim-grammarous')
   call dein#add('itmammoth/doorboy.vim')
   call dein#add('neomake/neomake', {'on_cmd': 'Neomake'})
@@ -34,12 +66,20 @@
   call dein#add('tomtom/tcomment_vim')
   call dein#add('mattn/emmet-vim')
   call dein#add('sbdchd/neoformat')
-
-  " Typesscript
-  call dein#add('HerringtonDarkholme/yats.vim')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('ianks/vim-tsx')
-  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('ntpeters/vim-better-whitespace')
+  call dein#add('junegunn/fzf.vim')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('vimwiki/vimwiki')
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('Valloric/MatchTagAlways')
+  call dein#add('machakann/vim-highlightedyank')
+  call dein#add('mtth/scratch.vim')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('matze/vim-move')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -50,35 +90,6 @@
   call dein#add('scrooloose/nerdtree')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
 
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('wokalski/autocomplete-flow')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('ternjs/tern_for_vim', {'build': 'npm install'})
-  call dein#add('carlitux/deoplete-ternjs')
-  call dein#add('ntpeters/vim-better-whitespace')
-  call dein#add('junegunn/fzf.vim')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('ryanoasis/vim-devicons')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('vimwiki/vimwiki')
-  call dein#add('flowtype/vim-flow')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('easymotion/vim-easymotion')
-  call dein#add('shime/vim-livedown')
-  call dein#add('Valloric/MatchTagAlways')
-  call dein#add('machakann/vim-highlightedyank')
-  call dein#add('mtth/scratch.vim')
-  call dein#add('styled-components/vim-styled-components')
-  call dein#add('terryma/vim-multiple-cursors')
-  call dein#add('matze/vim-move')
-  call dein#add('zchee/deoplete-jedi')
-
-  " Elixir
-  call dein#add('elixir-editors/vim-elixir')
-  call dein#add('slashmili/alchemist.vim')
-  call dein#add('mmorearty/elixir-ctags')
 
   " Ctags
   call dein#add('majutsushi/tagbar')
