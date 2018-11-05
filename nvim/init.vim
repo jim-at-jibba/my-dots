@@ -16,7 +16,6 @@
 
   " javascript and react
   call dein#add('othree/html5.vim')
-  "call dein#add('othree/yajs.vim')
   call dein#add('othree/jsdoc-syntax.vim')
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
@@ -106,7 +105,9 @@
 " System Settings  ----------------------------------------------------------{{{
 
 " Neovim Settings
-  " set termguicolors
+  set ignorecase
+  set smartcase
+  set termguicolors
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   set clipboard+=unnamedplus
   set pastetoggle=<f6>
@@ -204,10 +205,11 @@
   " nnoremap Y "*Y<CR>
   " vnoremap y myy`y
   " vnoremap Y myY`y
+
   let g:multi_cursor_use_default_mapping=0
 
   " Default mapping
-  let g:multi_cursor_start_word_key      = '<C-d>'
+  let g:multi_cursor_start_word_key      = '<C-n>'
   let g:multi_cursor_select_all_word_key = '<A-n>'
   let g:multi_cursor_start_key           = 'g<C-n>'
   let g:multi_cursor_select_all_key      = 'g<A-n>'
@@ -258,8 +260,9 @@
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
   set t_Co=256
-  set background=light
-  colorscheme flattened_light
+  set background=dark
+  " colorscheme flattened_light
+  colorscheme nord
   let g:nord_italic_comments=1
   set scrolloff=5
 "}}}
@@ -327,7 +330,8 @@
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  let g:airline_theme='solarized'
+  "let g:airline_theme='solarized'
+  let g:airline_theme='nord'
 
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
@@ -629,6 +633,12 @@ let g:mta_filetypes = {
   vmap <C-j> <Plug>MoveBlockDown
   vmap <C-h> <Plug>MoveBlockLeft
   vmap <C-l> <Plug>MoveBlockRight
+"}}}
+
+" Notes -----------------------------------------------------------------{{{
+
+"	- z= spell checker
+" - fg will resume a paused (ctrl+z) sesson
 "}}}
 
 

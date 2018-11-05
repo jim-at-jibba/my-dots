@@ -124,7 +124,8 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 alias ga='git add .'
 alias gpush='git push'
 alias gpull='git pull'
-alias gme='git config user.name "jim-at-jibba"'
+alias gme='git config user.name "jim-at-gravitywell"'
+gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
 
 # General
 ##########
@@ -172,13 +173,14 @@ alias vl='vagrant global-status'
 # Dev Shit
 ###########
 alias bs='browser-sync start --server --files "**/*.*"'
+alias cat='bat'
 
 # Codepush
 ###########
 cpDeets () { appcenter codepush deployment list -a "$1"; }           # Shows deploy keys for codepush
 
 # Tooling
-alias localeslint='npm install --save-dev eslint eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y'
+alias localeslint='npm install --save-dev eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node eslint-plugin-prettier babel-eslint eslint-plugin-react'
 
 # Gravitywell Specific
 alias sshAdelie='ssh -i ~/.ssh/AdelieWebOrdering.pem  ec2-user@52.214.85.193'

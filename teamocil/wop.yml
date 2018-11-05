@@ -1,12 +1,8 @@
 windows:
   - name: wop-dev
-    root: ~/Code/Work/adelie-refactor
+    root: ~/code/work/adelie-v2
     layout: tiled
     panes:
-      - commands:
-        - name mock-endpoints
-        - cd ~/Code/Work/adelie-mock-endpoints
-        - nodemon index.js
       - clear
       - clear
       - commands:
