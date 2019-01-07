@@ -31,6 +31,7 @@
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('ianks/vim-tsx')
+  call dein#add('Quramy/tsuquyomi')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
   " css
@@ -330,7 +331,7 @@
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  "let g:airline_theme='solarized'
+  " let g:airline_theme='solarized'
   let g:airline_theme='nord'
 
   nmap <leader>, :bnext<CR>
