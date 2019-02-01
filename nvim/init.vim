@@ -608,7 +608,7 @@ let g:livedown_open = 1
 let g:livedown_port = 1340
 
 " the browser to use
-let g:livedown_browser = "safari"
+" let g:livedown_browser = "google-chrome"
 "}}}
 
 " TagMatcher -----------------------------------------------------------------{{{
