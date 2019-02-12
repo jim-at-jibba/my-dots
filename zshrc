@@ -52,7 +52,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git teamocil zsh-completions osx httpie)
+plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # User configuration
 
@@ -60,6 +60,7 @@ plugins=(git teamocil zsh-completions osx httpie)
   export PATH="/usr/local/mysql/bin:$PATH"
   export PATH="$HOME/.composer/vendor/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
+  export BAT_THEME="TwoDark"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
@@ -128,6 +129,8 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gme='git config user.name "jim-at-gravitywell"'
 gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
+alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
+alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
 
 # General
 ##########
@@ -182,7 +185,10 @@ alias cat='bat'
 cpDeets () { appcenter codepush deployment list -a "$1"; }           # Shows deploy keys for codepush
 
 # Tooling
-alias localeslint='npm install --save-dev eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node eslint-plugin-prettier babel-eslint eslint-plugin-react'
+# alias localeslint='npm install --save-dev eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node eslint-plugin-prettier babel-eslint eslint-plugin-react eslint-plugin-jest eslint-config-prettier prettier && wget -O .eslintrc.json https://gist.githubusercontent.com/jim-at-jibba/9a88ea40aa2890dae669926c170f9100/raw/76318d61808a16d3bcd5fc7330b859ed0d630143/eslintrc.json'
+
+alias localeslint='npm install --save-dev eslint prettier eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react && wget -O .eslintrc https://gist.githubusercontent.com/jim-at-jibba/c24c9ae16526e4e3fc028d23cce53a87/raw/f3edb188aa02f9e19195628cec9c72a529235318/.eslintrc'
+alias localeslintFile='wget https://gist.github.com/jim-at-jibba/9a88ea40aa2890dae669926c170f9100'
 
 # Gravitywell Specific
 alias sshAdelie='ssh -i ~/.ssh/AdelieWebOrdering.pem  ec2-user@52.214.85.193'
@@ -205,3 +211,5 @@ source ~/dotfiles/tiny.env
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
