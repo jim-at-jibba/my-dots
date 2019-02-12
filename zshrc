@@ -127,6 +127,8 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gme='git config user.name "jim-at-gravitywell"'
 gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
+alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
+alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
 
 # General
 ##########
