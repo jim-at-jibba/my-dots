@@ -62,6 +62,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   export PATH="$HOME/.composer/vendor/bin:$PATH"
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
   export BAT_THEME="TwoDark"
 
@@ -168,6 +169,9 @@ alias vh='vagrant halt'
 alias vp='vagrant provision'
 alias vd='vagrant destroy'
 
+# Ngrok
+alias ngrok='~/code/ngrok'
+
 # Raspberry pi
 alias vncAlexa='open vnc://pi@192.168.1.147:5901'
 
@@ -211,3 +215,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/jamesbest/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/jamesbest/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh

@@ -13,6 +13,7 @@
   set rtp+=/usr/local/opt/fzf
   call dein#begin(expand('~/.config/nvim'))
   call dein#add('Shougo/dein.vim')
+  call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
 
   " javascript and react
   call dein#add('othree/html5.vim')
@@ -32,7 +33,7 @@
   call dein#add('leafgarland/typescript-vim')
   call dein#add('ianks/vim-tsx')
   call dein#add('Quramy/tsuquyomi')
-  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+  " call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
   " css
   call dein#add('hail2u/vim-css3-syntax')
@@ -634,6 +635,12 @@ let g:mta_filetypes = {
   vmap <C-j> <Plug>MoveBlockDown
   vmap <C-h> <Plug>MoveBlockLeft
   vmap <C-l> <Plug>MoveBlockRight
+"}}}
+
+" VIM Move -----------------------------------------------------------------{{{
+nmap <silent> <leader>dd <Plug>(coc-definition)
+nmap <silent> <leader>dr <Plug>(coc-references)
+nmap <silent> <leader>dj <Plug>(coc-implementation)
 "}}}
 
 " Notes -----------------------------------------------------------------{{{
