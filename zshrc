@@ -56,7 +56,6 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # User configuration
 
-  export ANDROID_HOME=${HOME}/Library/Android/sdk
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
   export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -66,7 +65,12 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   export PATH="$HOME/.fastlane/bin:$PATH"
   export BAT_THEME="TwoDark"
 
-source $ZSH/oh-my-zsh.sh
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+  source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
