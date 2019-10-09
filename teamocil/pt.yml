@@ -1,0 +1,18 @@
+windows:
+  - name: AA
+    root: ~/Code/work/spelling-and-grammar-game
+    layout: dbdc,253x66,0,0[253x53,0,0,18,253x12,0,54{83x12,0,54,19,82x12,84,54,21,86x12,167,54,20}]
+    panes:
+      - commands:
+        - name vim
+        - cd app && v
+
+      - commands:
+        - name TS
+        - yarn start
+      - commands:
+        - name App
+        - cd app && yarn start
+      - commands:
+        - name Mock
+        - amplify mock

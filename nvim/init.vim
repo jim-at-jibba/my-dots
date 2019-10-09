@@ -12,12 +12,17 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf'
 Plug 'shougo/denite.nvim'
 
+" CSS
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+
 " Look and feel
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/flattened'
 
 " git
 Plug 'airblade/vim-gitgutter'
@@ -26,6 +31,19 @@ Plug 'jreybert/vimagit'
 "nerdtree
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
+
+" Utilities
+Plug 'Valloric/MatchTagAlways'
+Plug 'alvan/vim-closetag'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'easymotion/vim-easymotion'
+Plug 'Raimondi/delimitMate'
+
+" Javascript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mxw/vim-jsx'
+Plug 'heavenshell/vim-jsdoc'
 
 call plug#end()
 
@@ -45,7 +63,7 @@ call plug#end()
 " System mappings  ----------------------------------------------------------{{{
 
   "make jj do esc"
-  inoremap jj <Esc
+  inoremap jj <Esc>
   " recording macros is not my thing
   map q <Nop>
 
@@ -54,7 +72,8 @@ call plug#end()
   noremap J 5j
   noremap K 5k
 
-  " nnoremap ; :
+  nnoremap ; :
+  nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
   set splitbelow
   set splitright
@@ -65,16 +84,16 @@ call plug#end()
   nnoremap <C-H> <C-W><C-H>
   nnoremap <C-L> <C-W><C-L>
 
+  " === Denite shorcuts === "
+  "   <leader>t - Browse list of files in current directory
+  "   <leader>g - Search current directory for occurences of given term and close window if no results
+  "   <leader>j - Search current directory for occurences of word under cursor
+  " nmap ; :Denite buffer<CR>
   nnoremap <silent> <c-p> :Denite file/rec<CR>
-  nnoremap <silent> <leader>h :Denite  help<CR>
-  nnoremap <silent> <leader>c :Denite colorscheme<CR>
-  nnoremap <silent> <leader>b :Denite buffer<CR>
-  nnoremap <silent> <leader>a :Denite grep:::!<CR
+  nmap <leader>t :DeniteProjectDir file/rec<CR>
+  nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+  nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
-  " Define mappings while in 'filter' mode
-  "   <C-o>         - Switch to normal mode inside of search results
-  "   <Esc>         - Exit denite window in any mode
-  "   <CR>          - Open currently selected file in any mode
   autocmd FileType denite-filter call s:denite_filter_my_settings()
   function! s:denite_filter_my_settings() abort
     imap <silent><buffer> <C-o>
@@ -87,12 +106,6 @@ call plug#end()
     \ denite#do_map('do_action')
   endfunction
 
-  " Define mappings while in denite window
-  "   <CR>        - Opens currently selected file
-  "   q or <Esc>  - Quit Denite window
-  "   d           - Delete currenly selected file
-  "   p           - Preview currently selected file
-  "   <C-o> or i  - Switch to insert mode inside of filter prompt
   autocmd FileType denite call s:denite_my_settings()
   function! s:denite_my_settings() abort
     nnoremap <silent><buffer><expr> <CR>
@@ -132,7 +145,7 @@ call plug#end()
   nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
 
   " List errors
-  nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<cr>
+  nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>
 
   " list commands available in tsserver (and others)
   nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
@@ -140,8 +153,13 @@ call plug#end()
   " restart when tsserver gets wonky
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
-  " view all errors
-  nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
+
+  nmap <silent> <leader>/ :nohlsearch<CR>
+
+  map <leader>w <Plug>(easymotion-bd-w)
+  nmap s <Plug>(easymotion-s)
+  nmap s <Plug>(easymotion-s2)
+
 "}}}
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
@@ -204,7 +222,6 @@ call plug#end()
 " }}}
 
 " Denite --------------------------------------------------------------------{{{
-
   try
   " === Denite setup ==="
   " Use ripgrep for searching current directory for files
@@ -295,7 +312,7 @@ call plug#end()
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  " let g:airline_theme='solarized'
+   "let g:airline_theme='solarized'
   let g:airline_theme='nord'
 
   nmap <leader>, :bnext<CR>
@@ -393,3 +410,22 @@ let blacklist = ['md', 'markdown', 'mdown']
 
 
 "}}}
+
+" NeoSnippet --------------------------------------------------------------------{{{
+" Map <C-k> as shortcut to activate snippet if available
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
+" Load custom snippets from snippets folder
+let g:neosnippet#snippets_directory='~/dotfiles/nvim/snippets'
+
+" Hide conceal markers
+let g:neosnippet#enable_conceal_markers = 0
+
+" }}}
+
+" Close Tag --------------------------------------------------------------------{{{
+  let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
+"}}}
+
