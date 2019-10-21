@@ -64,6 +64,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
   export BAT_THEME="TwoDark"
+  export PATH=$PATH:/opt/apache-maven/bin
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
