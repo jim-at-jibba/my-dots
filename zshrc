@@ -159,6 +159,7 @@ alias gitname="git config user.name 'James Best' && git config user.email 'jim@j
 
 # General
 ##########
+alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
 alias l='ls -la'

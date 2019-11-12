@@ -35,11 +35,12 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Utilities
 Plug 'Valloric/MatchTagAlways'
-Plug 'alvan/vim-closetag'
+" Plug 'alvan/vim-closetag'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdcommenter'
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -76,6 +77,12 @@ call plug#end()
   nnoremap ; :
   nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
+  " disable Arrow keys
+  noremap <Up> <NOP>
+  noremap <Down> <NOP>
+  noremap <Left> <NOP>
+  noremap <Right> <NOP>
+
   set splitbelow
   set splitright
 
@@ -85,12 +92,21 @@ call plug#end()
   nnoremap <C-H> <C-W><C-H>
   nnoremap <C-L> <C-W><C-L>
 
+  " Align blocks of text and keep them selected
+  vmap < <gv
+  vmap > >gv
+
+  " NERDCommenter
+  vmap ++ <plug>NERDCommenterToggle
+  nmap ++ <plug>NERDCommenterToggle
+
   " === Denite shorcuts === "
   "   <leader>t - Browse list of files in current directory
   "   <leader>g - Search current directory for occurences of given term and close window if no results
   "   <leader>j - Search current directory for occurences of word under cursor
   " nmap ; :Denite buffer<CR>
-  nnoremap <silent> <c-p> :Denite file/rec<CR>
+
+  "nnoremap <silent> <c-p> :Denite file/rec<CR>
   nmap <leader>t :DeniteProjectDir file/rec<CR>
   nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
   nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
@@ -127,6 +143,7 @@ call plug#end()
 
   " === coc.nvim === "
   nmap <silent> <leader>dd <Plug>(coc-definition)
+  nmap <silent> <leader>dy <Plug>(coc-type-definition)
   nmap <silent> <leader>dr <Plug>(coc-references)
   nmap <silent> <leader>dj <Plug>(coc-implementation)
   nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
@@ -365,7 +382,6 @@ call plug#end()
   if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
   endif
-
 " }}}
 
 " Vim-Devicons -------------------------------------------------------------0{{{
@@ -380,6 +396,14 @@ call plug#end()
 
 " Coc -------------------------------------------------------------0{{{
 
+  let g:coc_global_extensions = [
+    \ 'coc-snippets',
+    \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-eslint',
+    \ 'coc-prettier',
+    \ 'coc-json',
+    \ ]
   " always show signcolumns
   set signcolumn=yes
 
@@ -416,6 +440,8 @@ call plug#end()
 " Trim whitespace on save
 let blacklist = ['md', 'markdown', 'mdown']
  :autocmd BufWritePost * if index(blacklist, &ft) < 0 | :StripWhitespace
+
+let g:NERDCreateDefaultMappings = 0
 
 
 "}}}
