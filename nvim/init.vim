@@ -168,6 +168,7 @@ call plug#end()
   set background=dark
   " colorscheme flattened_light
   colorscheme nord
+  syntax enable
   let g:nord_italic_comments=1
   set scrolloff=5
 "}}}
