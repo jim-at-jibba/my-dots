@@ -7,43 +7,30 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 
 ## Brew
 
-- Ack
 - youtube-dl
-- shpotify
-- vim --with-lua --with-override-system-vi
+- ffmpeg
+- neovim
 - tmux
 - reattach-to-user-namespace
 - ripgrep
 - fzf
-- ctags
-- watson
+- bat
+- htop
+- nmap
+- netcat
+- postgresql
+- redis
+- zsh
+- zsh-completions
 
 
 
 ## NPM
 
-- js-beautify
-- babel-eslint
-- code-push-cli
-- create-react-app
-- create-react-native-app
-- elm
-- eslint
-- eslint-plugin-import
-- eslint-plugin-jest
-- eslint-plugin-jsx
-- eslint-plugin-react
-- eslint-plugin-prettier
-- eslint-config-prettier
 - forever
 - nodemon
-- prettier
 - react-native-cli
-- sails
 - serverless
-- stylelint
-- tern
 - tiny-care-terminal
 - tldr
 - yarn
-- instant-markdown-d

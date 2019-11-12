@@ -64,6 +64,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
   export BAT_THEME="TwoDark"
+  export PATH=$PATH:/opt/apache-maven/bin
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
@@ -90,6 +91,27 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # Auto Jump initialisation
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# intergrates autojump with fzf
+j() {
+    if [[ "$#" -ne 0 ]]; then
+        cd $(autojump $@)
+        return
+    fi
+    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)"
+}
+
+# tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
+# `tm` will allow you to select your tmux session via fzf.
+# `tm irc` will attach to the irc session (if it exists), else it will create it.
+
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
 
 # Drupal Console initialisation
 source "$HOME/.console/console.rc" 2>/dev/null

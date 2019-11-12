@@ -1,4 +1,0 @@
-linters:
-  SelectorFormat:
-    enabled: true
-    convention: camel_case

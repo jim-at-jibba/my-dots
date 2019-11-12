@@ -86,3 +86,9 @@ snippet esd
   /* eslint-disable ${1:RULE} */
 
 
+snippet stc
+  const ${1:NAME} = styled.${2:ATTRIBUTE}`
+    ${({theme}) => css `
+      ${3}
+    `}
+  `
