@@ -23,6 +23,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened'
+Plug 'mhartington/oceanic-next'
 
 " git
 Plug 'airblade/vim-gitgutter'
@@ -51,7 +52,7 @@ call plug#end()
 
 
 " System Settings  ----------------------------------------------------------{{{
-  set termguicolors
+  "set termguicolors
   set nopaste
   set  number
   set tabstop=2 shiftwidth=2 expandtab
@@ -163,12 +164,20 @@ call plug#end()
 "}}}
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
+  if (has("termguicolors"))
+    set termguicolors
+  endif
   syntax on
   set t_Co=256
   set background=dark
-  " colorscheme flattened_light
-  colorscheme nord
-  let g:nord_italic_comments=1
+  " colorscheme flattened_dark
+  "colorscheme nord
+  "let g:nord_italic_comments=1
+
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+  colorscheme OceanicNext
+
   set scrolloff=5
 "}}}
 
@@ -312,9 +321,9 @@ call plug#end()
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-   "let g:airline_theme='solarized'
-  let g:airline_theme='nord'
-
+  " let g:airline_theme='solarized'
+  let g:airline_theme='oceanicnext'
+  " let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
   nmap <leader>. :bprevious<CR>
