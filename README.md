@@ -34,3 +34,33 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - tiny-care-terminal
 - tldr
 - yarn
+
+
+## Programs
+
+- Adobe
+- alfred
+- android studio
+- anki
+- aText
+- etcher
+- color picker
+- docker
+- gitkraken
+- helium
+- iterm
+- Microsoft todo
+- moom
+- MQTT.fx
+- Notion
+- pgAdmin
+- Postman
+- RN debugger
+- Robo
+- Rocket
+- sequelPro
+- Source note
+- spotify
+- vscode
+- VLC
+- Vysor
