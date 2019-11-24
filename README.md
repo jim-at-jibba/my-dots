@@ -64,3 +64,4 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 - vscode
 - VLC
 - Vysor
+- pock
