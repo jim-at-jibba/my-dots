@@ -13,7 +13,7 @@ git clone https://github.com/gpakosz/.tmux.git
 
 ln -s -f .tmux/.tmux.conf
 
-ln -s ˜/dotfiles/tmux.conf ˜/.tmux.conf.local
+ln -s ~/dotfiles/tmux.conf  ~/.tmux.conf.local
 ```
 
 ## Brew
