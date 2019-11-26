@@ -5,6 +5,17 @@ When setting up a new computer dont forget to install the following:
 To symlink snippets `ln -s ~/dotfiles/snippets/* ~/.vim/snippets`
 To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 
+## TMUX
+Most of the set up is done with this guys setup
+
+```
+git clone https://github.com/gpakosz/.tmux.git
+
+ln -s -f .tmux/.tmux.conf
+
+ln -s ˜/dotfiles/tmux.conf ˜/.tmux.conf.local
+```
+
 ## Brew
 
 - youtube-dl
