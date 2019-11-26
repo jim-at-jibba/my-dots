@@ -106,7 +106,7 @@ call plug#end()
   "   <leader>j - Search current directory for occurences of word under cursor
   " nmap ; :Denite buffer<CR>
 
-  "nnoremap <silent> <c-p> :Denite file/rec<CR>
+  nnoremap <silent> <c-p> :Denite file/rec<CR>
   nmap <leader>t :DeniteProjectDir file/rec<CR>
   nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
   nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
@@ -188,12 +188,12 @@ call plug#end()
   set t_Co=256
   set background=dark
   " colorscheme flattened_dark
-  "colorscheme nord
-  "let g:nord_italic_comments=1
+  colorscheme nord
+  let g:nord_italic_comments=1
 
-  let g:oceanic_next_terminal_bold = 1
-  let g:oceanic_next_terminal_italic = 1
-  colorscheme OceanicNext
+  "let g:oceanic_next_terminal_bold = 1
+  "let g:oceanic_next_terminal_italic = 1
+  "colorscheme OceanicNext
 
   set scrolloff=5
 "}}}
@@ -339,8 +339,8 @@ call plug#end()
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
   " let g:airline_theme='solarized'
-  let g:airline_theme='oceanicnext'
-  " let g:airline_theme='nord'
+  "let g:airline_theme='oceanicnext'
+  let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
   nmap <leader>. :bprevious<CR>
