@@ -110,6 +110,7 @@ call plug#end()
   nmap <leader>t :DeniteProjectDir file/rec<CR>
   nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
   nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+  nnoremap <silent> <leader>a :Denite grep:::!<CR>
 
   autocmd FileType denite-filter call s:denite_filter_my_settings()
   function! s:denite_filter_my_settings() abort
@@ -161,6 +162,9 @@ call plug#end()
 
   nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
   nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
+
+  " remap do action of current line
+  nmap <leader>ac  <Plug>(coc-codeaction)
 
   " List errors
   nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>

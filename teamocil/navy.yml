@@ -1,0 +1,20 @@
+windows:
+  - name: Navy
+    root: ~/code/work
+    layout: 09f7,210x50,0,0[210x35,0,0{65x35,0,0,15,72x35,66,0,19,71x35,139,0,20},210x14,0,36,18]
+    panes:
+      - commands:
+        - name Heartwood
+        - cd heartwood
+        - ./develop.sh
+
+      - commands:
+        - name public-api
+        - cd public-api
+
+      - commands:
+        - name
+
+      - commands:
+        - name Navy
+        - navy ps
