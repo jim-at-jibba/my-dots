@@ -1,0 +1,16 @@
+windows:
+  - name: CMS-API
+    root: ~/code/work
+    layout: ea20,210x50,0,0{145x50,0,0,30,64x50,146,0,31}
+    panes:
+      - commands:
+        - name CMS-API
+        - cd cms-api
+        - v
+
+
+      - commands:
+        - name cms-api-navy
+        - cd cms-api
+        - ./develop.sh
+

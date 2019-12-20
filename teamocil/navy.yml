@@ -6,7 +6,6 @@ windows:
       - commands:
         - name Heartwood
         - cd heartwood
-        - ./develop.sh
 
       - commands:
         - name public-api

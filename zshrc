@@ -55,6 +55,7 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # User configuration
+  TERM=xterm-256color
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"

@@ -1,0 +1,16 @@
+windows:
+  - name: HEARTWOOD
+    root: ~/code/work
+    layout: ea20,210x50,0,0{145x50,0,0,30,64x50,146,0,31}
+    panes:
+      - commands:
+        - name heartwood
+        - cd heartwood
+        - v
+
+
+      - commands:
+        - name heartwood-navy
+        - cd heartwood
+        - ./develop.sh
+
