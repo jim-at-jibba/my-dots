@@ -48,41 +48,41 @@ echo "Cleaning up..."
 brew cleanup
 
 
-echo "Installing cask..."
-brew install caskroom/cask/brew-cask
+# echo "Installing cask..."
+# brew install caskroom/cask/brew-cask
 
-CASKS=(
-  firefox
-  google-chrome
-  google-drive
-  iterm2
-  postman
-  alfred
-  franz
-  the-unarchiver
-  1password
-  android-studio
-  gitkraken
-  react-native-debugger
-  spotify
-  balenaetcher
-  visual-studio-code
-  inkdrop
-  atext
-)
+# CASKS=(
+#   firefox
+#   google-chrome
+#   google-drive
+#   iterm2
+#   postman
+#   alfred
+#   franz
+#   the-unarchiver
+#   1password
+#   android-studio
+#   gitkraken
+#   react-native-debugger
+#   spotify
+#   balenaetcher
+#   visual-studio-code
+#   inkdrop
+#   atext
+# )
 
-echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+# echo "Installing cask apps..."
+# brew cask install ${CASKS[@]}
 
-echo "Cleaning up casks..."
-brew cask cleanup
+# echo "Cleaning up casks..."
+# brew cask cleanup
 
-echo "Linking alfred to apps..."
-brew cask alfred link
+# echo "Linking alfred to apps..."
+# brew cask alfred link
 
-echo "Configuring OSX..."
+# echo "Configuring OSX..."
 
-# Set fast key repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+# # Set fast key repeat rate
+# defaults write NSGlobalDomain KeyRepeat -int 0
 
 echo "Bootstrapping complete"
