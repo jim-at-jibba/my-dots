@@ -41,6 +41,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
+Plug 'vimwiki/vimwiki'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -53,7 +55,7 @@ call plug#end()
 
 
 " System Settings  ----------------------------------------------------------{{{
-  "set termguicolors
+  set termguicolors
   set nopaste
   set  number
   set tabstop=2 shiftwidth=2 expandtab
@@ -110,6 +112,7 @@ call plug#end()
   nmap <leader>t :DeniteProjectDir file/rec<CR>
   nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
   nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+  nnoremap <silent> <leader>a :Denite grep:::!<CR>
 
   autocmd FileType denite-filter call s:denite_filter_my_settings()
   function! s:denite_filter_my_settings() abort
@@ -162,6 +165,9 @@ call plug#end()
   nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
   nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
 
+  " remap do action of current line
+  nmap <leader>ac  <Plug>(coc-codeaction)
+
   " List errors
   nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>
 
@@ -186,10 +192,10 @@ call plug#end()
   endif
   syntax on
   set t_Co=256
-  set background=dark
-  " colorscheme flattened_dark
-  colorscheme nord
-  let g:nord_italic_comments=1
+  set background=light
+  colorscheme flattened_light
+  "colorscheme nord
+  "let g:nord_italic_comments=1
 
   "let g:oceanic_next_terminal_bold = 1
   "let g:oceanic_next_terminal_italic = 1
@@ -292,7 +298,6 @@ call plug#end()
   "   highlight_matched_char  - Matched characters highlight
   "   highlight_matched_range - matched range highlight
   let s:denite_options = {'default' : {
-  \ 'split': 'floating',
   \ 'start_filter': 1,
   \ 'auto_resize': 1,
   \ 'source_names': 'short',
@@ -338,9 +343,9 @@ call plug#end()
   let g:airline#extensions#neomake#error_symbol='• '
   let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  " let g:airline_theme='solarized'
+  let g:airline_theme='solarized'
   "let g:airline_theme='oceanicnext'
-  let g:airline_theme='nord'
+  "let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
   nmap <leader>. :bprevious<CR>
@@ -464,3 +469,26 @@ let g:neosnippet#enable_conceal_markers = 0
   let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
 "}}}
 
+" VimWiki -----------------------------------------------------------------{{{
+" Run multiple wikis "
+let g:vimwiki_list = [
+                      \{'path': '~/Google Drive/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
+                \]
+let g:vimwiki_global_ext=0
+"}}}
+
+" === coc.nvim === "
+" nmap <silent> <leader>dd <Plug>(coc-definition)
+" nmap <silent> <leader>dy <Plug>(coc-type-definition)
+" nmap <silent> <leader>dr <Plug>(coc-references)
+" nmap <silent> <leader>dj <Plug>(coc-implementation)
+" nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
+"
+"
+" nnoremap <silent> <c-p> :Denite file/rec<CR>
+" nmap <leader>t :DeniteProjectDir file/rec<CR>
+" nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+" nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+" nnoremap <silent> <leader>a :Denite grep:::!<CR>
+"
+" ctrl+y - select contents of popup

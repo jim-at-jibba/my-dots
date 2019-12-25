@@ -33,6 +33,7 @@ ln -s ~/dotfiles/tmux.conf  ~/.tmux.conf.local
 - redis
 - zsh
 - zsh-completions
+- iproute2mac
 
 
 

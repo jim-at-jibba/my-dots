@@ -55,6 +55,7 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # User configuration
+  TERM=xterm-256color
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/share"
   export PATH="/usr/local/mysql/bin:$PATH"
@@ -159,6 +160,7 @@ alias gitname="git config user.name 'James Best' && git config user.email 'jim@j
 
 # General
 ##########
+alias myip='ip addr show en0'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
@@ -174,6 +176,7 @@ alias tree='tree -L 2 -I "node_module"'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias ctags="`brew --prefix`/bin/ctags"
+alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 export EDITOR='/usr/local/bin/nvim'
 
 # Watson
