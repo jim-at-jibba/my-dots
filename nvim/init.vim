@@ -26,18 +26,16 @@ Plug 'romainl/flattened'
 Plug 'mhartington/oceanic-next'
 
 " git
-Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 "nerdtree
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Utilities
-Plug 'Valloric/MatchTagAlways'
-" Plug 'alvan/vim-closetag'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
@@ -103,79 +101,6 @@ call plug#end()
   nmap ++ <plug>NERDCommenterToggle
 
   " === Denite shorcuts === "
-  "   <leader>t - Browse list of files in current directory
-  "   <leader>g - Search current directory for occurences of given term and close window if no results
-  "   <leader>j - Search current directory for occurences of word under cursor
-  " nmap ; :Denite buffer<CR>
-
-  nnoremap <silent> <c-p> :Denite file/rec<CR>
-  nmap <leader>t :DeniteProjectDir file/rec<CR>
-  nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
-  nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
-  nnoremap <silent> <leader>a :Denite grep:::!<CR>
-
-  autocmd FileType denite-filter call s:denite_filter_my_settings()
-  function! s:denite_filter_my_settings() abort
-    imap <silent><buffer> <C-o>
-    \ <Plug>(denite_filter_quit)
-    inoremap <silent><buffer><expr> <Esc>
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> <Esc>
-    \ denite#do_map('quit')
-    inoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-  endfunction
-
-  autocmd FileType denite call s:denite_my_settings()
-  function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> q
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> <Esc>
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> d
-    \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-    \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> i
-    \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <C-o>
-    \ denite#do_map('open_filter_buffer')
-  endfunction
-
-  " === coc.nvim === "
-  nmap <silent> <leader>dd <Plug>(coc-definition)
-  nmap <silent> <leader>dy <Plug>(coc-type-definition)
-  nmap <silent> <leader>dr <Plug>(coc-references)
-  nmap <silent> <leader>dj <Plug>(coc-implementation)
-  nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
-  nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
-
-  " remap do action of current line
-  nmap <leader>ac  <Plug>(coc-codeaction)
-
-  " List errors
-  nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>
-
-  " list commands available in tsserver (and others)
-  nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
-
-  " restart when tsserver gets wonky
-  nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
 
   nmap <silent> <leader>/ :nohlsearch<CR>
@@ -186,20 +111,27 @@ call plug#end()
 
 "}}}
 
+" Commands ------------------------------------------------------------------{{{
+
+command! -nargs=0 Todos         :CocList -A --normal grep -e TODO|FIXME
+command! -nargs=0 Status        :CocList -A --normal gstatus
+
+"}}}
+
 " Themes, Commands, etc  ----------------------------------------------------{{{
   if (has("termguicolors"))
     set termguicolors
   endif
   syntax on
   set t_Co=256
-  set background=light
-  colorscheme flattened_light
+  set background=dark
+  "colorscheme flattened_dark
   "colorscheme nord
   "let g:nord_italic_comments=1
 
-  "let g:oceanic_next_terminal_bold = 1
-  "let g:oceanic_next_terminal_italic = 1
-  "colorscheme OceanicNext
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+  colorscheme OceanicNext
 
   set scrolloff=5
 "}}}
@@ -326,7 +258,47 @@ call plug#end()
     echo 'Denite not installed. It should work after running :PlugInstall'
   endtry
 
+  "   <leader>t - Browse list of files in current directory
+  "   <leader>g - Search current directory for occurences of given term and close window if no results
+  "   <leader>j - Search current directory for occurences of word under cursor
+  " nmap ; :Denite buffer<CR>
 
+  nnoremap <silent> <c-p> :Denite file/rec<CR>
+  nmap <leader>t :DeniteProjectDir file/rec<CR>
+  nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+  nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+  nnoremap <silent> <leader>a :Denite grep:::!<CR>
+  "nnoremap <silent> <leader>a :exe 'CocList -A -I grep --smart-case '<CR>
+
+  autocmd FileType denite-filter call s:denite_filter_my_settings()
+  function! s:denite_filter_my_settings() abort
+    imap <silent><buffer> <C-o>
+    \ <Plug>(denite_filter_quit)
+    inoremap <silent><buffer><expr> <Esc>
+    \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Esc>
+    \ denite#do_map('quit')
+    inoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+  endfunction
+
+  autocmd FileType denite call s:denite_my_settings()
+  function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> q
+    \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Esc>
+    \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> d
+    \ denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p
+    \ denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> i
+    \ denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <C-o>
+    \ denite#do_map('open_filter_buffer')
+  endfunction
 "}}}
 
 " vim-airline ---------------------------------------------------------------{{{
@@ -335,16 +307,18 @@ call plug#end()
     let g:airline_symbols = {}
   endif
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#coc#enabled = 1
+  let airline#extensions#coc#error_symbol = '💩:'
+  let airline#extensions#coc#warning_symbol = '❗️:'
   let g:airline#extensions#mike#enabled = 0
   set hidden
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#buffer_idx_mode = 1
+  let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
-  let g:airline#extensions#neomake#error_symbol='• '
-  let g:airline#extensions#neomake#warning_symbol='•  '
   let g:airline_symbols.branch = ''
-  let g:airline_theme='solarized'
-  "let g:airline_theme='oceanicnext'
+  "let g:airline_theme='solarized'
+  let g:airline_theme='oceanicnext'
   "let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
@@ -368,7 +342,6 @@ call plug#end()
   nmap <leader>7 <Plug>AirlineSelectTab7
   nmap <leader>8 <Plug>AirlineSelectTab8
   nmap <leader>9 <Plug>AirlineSelectTab9
-
 "}}}
 
 " NERDTree ---------------------------------------------------------------{{{
@@ -408,22 +381,42 @@ call plug#end()
     \ 'coc-eslint',
     \ 'coc-prettier',
     \ 'coc-json',
+    \ 'coc-emmet',
+    \ 'coc-lists',
+    \ 'coc-json',
+    \ 'coc-html',
+    \ 'coc-dictionary',
+    \ 'coc-git',
+    \ 'coc-python'
     \ ]
   " always show signcolumns
   set signcolumn=yes
 
   " Use tab for trigger completion with characters ahead and navigate.
   " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+  "inoremap <silent><expr> <TAB>
+  "      \ pumvisible() ? "\<C-n>" :
+  "      \ <SID>check_back_space() ? "\<TAB>" :
+  "      \ coc#refresh()
+  "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  "function! s:check_back_space() abort
+  "  let col = col('.') - 1
+  "  return !col || getline('.')[col - 1]  =~# '\s'
+  "endfunction
+
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
   function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
+
+  let g:coc_snippet_next = '<tab>'
 
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -437,6 +430,38 @@ call plug#end()
   " Use `[g` and `]g` to navigate diagnostics
   nmap <silent> [g <Plug>(coc-diagnostic-prev)
   nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  nmap <silent> <leader>dd <Plug>(coc-definition)
+  nmap <silent> <leader>dy <Plug>(coc-type-definition)
+  nmap <silent> <leader>dr <Plug>(coc-references)
+  nmap <silent> <leader>dj <Plug>(coc-implementation)
+  nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
+  nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
+
+  " remap do action of current line
+  nmap <leader>ac  <Plug>(coc-codeaction)
+
+  " List errors
+  nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>
+
+  " list commands available in tsserver (and others)
+  nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+
+  " restart when tsserver gets wonky
+  nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
 " }}}
 
