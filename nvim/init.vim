@@ -393,11 +393,4 @@ let g:vimwiki_global_ext=0
 " nmap <silent> <leader>dj <Plug>(coc-implementation)
 " nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 "
-"
-" nnoremap <silent> <c-p> :Denite file/rec<CR>
-" nmap <leader>t :DeniteProjectDir file/rec<CR>
-" nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
-" nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
-" nnoremap <silent> <leader>a :Denite grep:::!<CR>
-"
 " ctrl+y - select contents of popup
