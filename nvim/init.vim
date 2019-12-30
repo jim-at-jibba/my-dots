@@ -9,7 +9,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'shougo/denite.nvim'
 
 " CSS

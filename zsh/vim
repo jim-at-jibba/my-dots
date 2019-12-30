@@ -1,0 +1,15 @@
+### Vim keybinds
+# show a list of commands and keybinds
+
+local helptxt="
+ctrl+y - select contents of popup
+<leader>dd <Plug>(coc-definition)
+<leader>dy <Plug>(coc-type-definition)bcp    [brew:clean]
+<leader>dr <Plug>(coc-references)     bip    [brew:install]
+<leader>dj <Plug>(coc-implementation) bup    [brew:update]"
+
+local cmd=$(echo $helptxt | eval "fzf ${FZF_DEFAULT_OPTS} --header='[vim:show]'" | awk '{print $1}')
+
+if [[ -n $cmd ]]; then
+ eval ${cmd}
+fi
