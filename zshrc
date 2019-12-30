@@ -41,7 +41,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify
 
   typeset -U PATH fpath
 
@@ -71,24 +71,15 @@ tm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
-# Drupal Console initialisation
-source "$HOME/.console/console.rc" 2>/dev/null
-
 # Teamocil Autocomplete
 alias tee='teamocil'
 compctl -g '~/.teamocil/*(:t:r)' teamocil
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-# alias v='cd /Volumes'
 
 # Git
 ##########
@@ -116,19 +107,10 @@ alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
 # alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
-alias morning='node ~/dotfiles/morning-routine-cli/index.js'
-alias tree='tree -L 2 -I "node_module"'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-alias ctags="`brew --prefix`/bin/ctags"
 alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 export EDITOR='/usr/local/bin/nvim'
-
-# Watson
-##########
-alias w='watson'
-alias wp='watson projects'
-alias wr='watson restart'
 
 # tmux
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
@@ -147,11 +129,6 @@ alias vd='vagrant destroy'
 # Ngrok
 alias ngrok='~/code/ngrok'
 
-# Raspberry pi
-alias vncAlexa='open vnc://pi@192.168.1.147:5901'
-
-alias vl='vagrant global-status'
-
 # Dev Shit
 ###########
 alias bs='browser-sync start --server --files "**/*.*"'
@@ -161,22 +138,7 @@ alias cat='bat'
 ###########
 cpDeets () { appcenter codepush deployment list -a "$1"; }           # Shows deploy keys for codepush
 
-# Tooling
-# alias localeslint='npm install --save-dev eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node eslint-plugin-prettier babel-eslint eslint-plugin-react eslint-plugin-jest eslint-config-prettier prettier && wget -O .eslintrc.json https://gist.githubusercontent.com/jim-at-jibba/9a88ea40aa2890dae669926c170f9100/raw/76318d61808a16d3bcd5fc7330b859ed0d630143/eslintrc.json'
-
-alias localeslint='npm install --save-dev eslint prettier eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react && wget -O .eslintrc https://gist.githubusercontent.com/jim-at-jibba/c24c9ae16526e4e3fc028d23cce53a87/raw/f3edb188aa02f9e19195628cec9c72a529235318/.eslintrc'
-alias localeslintFile='wget https://gist.github.com/jim-at-jibba/9a88ea40aa2890dae669926c170f9100'
-
-# Gravitywell Specific
-alias sshAdelie='ssh -i ~/.ssh/AdelieWebOrdering.pem  ec2-user@52.214.85.193'
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-
-
-source ~/dotfiles/tiny.env
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -198,3 +160,5 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+tmuxify
