@@ -102,9 +102,6 @@ call plug#end()
   vmap ++ <plug>NERDCommenterToggle
   nmap ++ <plug>NERDCommenterToggle
 
-  " === Denite shorcuts === "
-
-
   nmap <silent> <leader>/ :nohlsearch<CR>
 
   map <leader>w <Plug>(easymotion-bd-w)
@@ -265,7 +262,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   "   <leader>j - Search current directory for occurences of word under cursor
   " nmap ; :Denite buffer<CR>
 
-  nnoremap <silent> <c-p> :Denite file/rec<CR>
+"  nnoremap <silent> <c-p> :Denite file/rec<CR>
   nmap <leader>t :DeniteProjectDir file/rec<CR>
   nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
   nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
@@ -466,6 +463,22 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
 " }}}
+
+" FZF --------------------------------------------------------------------{{{
+
+  command! -bang -nargs=* Rg
+   \ call fzf#vim#grep(
+   \   'rg --column --line-number --ignore-case --no-heading --color=always '.shellescape(<q-args>), 3,
+   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '§'),
+   \   <bang>0)
+
+  if !&diff
+    nnoremap <silent> <C-p> :Files<Cr>
+    nnoremap <leader>a :Rg<Cr>
+  endif
+
+"}}}
 
 " Random --------------------------------------------------------------------{{{
 

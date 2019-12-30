@@ -20,7 +20,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # Exports and (auto)loading {{{
   export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+  export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export BAT_THEME="TwoDark"
 
