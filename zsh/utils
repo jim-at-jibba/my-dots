@@ -1,0 +1,15 @@
+### Utils
+# show a list of commands and alias
+
+local helptxt="bcp    [brew:clean]
+bip    [brew:install]
+bup    [brew:update]
+ll     [tree view]
+kp     [kill:path]
+ks     [kill:tcp]"
+
+local cmd=$(echo $helptxt | eval "fzf ${FZF_DEFAULT_OPTS} --header='[utils:show]'" | awk '{print $1}')
+
+if [[ -n $cmd ]]; then
+ eval ${cmd}
+fi
