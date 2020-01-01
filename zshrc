@@ -41,7 +41,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob
 
   typeset -U PATH fpath
 
