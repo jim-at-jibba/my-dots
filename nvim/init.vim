@@ -394,3 +394,5 @@ let g:vimwiki_global_ext=0
 " nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 "
 " ctrl+y - select contents of popup
+" ctr+r " - paste visual selection
+" * - search for word under cursor in file
