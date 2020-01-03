@@ -107,6 +107,10 @@ call plug#end()
   nmap s <Plug>(easymotion-s)
   nmap s <Plug>(easymotion-s2)
 
+  " Search for word under cursor
+  " nnoremap <silent> <Leader>f yiw :Rg <C-R>
+  xnoremap <leader>f :Rg <space> yiw <C-r> "
+
 "}}}
 
 " Commands ------------------------------------------------------------------{{{
@@ -351,7 +355,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
   command! -bang -nargs=* Rg
    \ call fzf#vim#grep(
-   \   'rg --column --line-number --ignore-case --no-heading --color=always '.shellescape(<q-args>), 3,
+   \   'rg --column --line-number --ignore-case --no-heading --color=always'.shellescape(<q-args>), 3,
    \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '§'),
    \   <bang>0)
@@ -359,7 +363,40 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   if !&diff
     nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <leader>a :Rg<Cr>
+    nnoremap <silent> <leader>e :call Fzf_dev()<CR>
   endif
+
+  function! Fzf_dev()
+  let l:fzf_files_options = '--preview "bat --theme="zenburn" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'down':    '40%' })
+endfunction
 
 "}}}
 
