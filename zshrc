@@ -83,7 +83,11 @@ alias .....="cd ../../../.."
 
 # Git
 ##########
-alias gs='git status'
+alias gs="git status -s \
+ | fzf --no-sort --reverse \
+ --preview 'git diff --color=always {+2} | diff-so-fancy' \
+ --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up \
+ --preview-window=right:60%:wrap"
 alias gr='git remote -v'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias ga='git add .'
