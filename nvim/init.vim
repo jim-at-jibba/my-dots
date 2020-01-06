@@ -396,3 +396,4 @@ let g:vimwiki_global_ext=0
 " ctrl+y - select contents of popup
 " ctr+r " - paste visual selection
 " * - search for word under cursor in file
+" D - deletes to the endd of the line

@@ -110,6 +110,7 @@ alias f='fuck'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
+alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 export EDITOR='/usr/local/bin/nvim'
 
 # tmux
