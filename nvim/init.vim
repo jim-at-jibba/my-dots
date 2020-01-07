@@ -60,7 +60,10 @@ call plug#end()
   set tabstop=2 shiftwidth=2 expandtab
   let mapleader = ' '
   set spell
+  set splitbelow
+  set splitright
   set relativenumber
+  set scrolloff=5
 "}}}
 
 " System mappings  ----------------------------------------------------------{{{
@@ -83,9 +86,6 @@ call plug#end()
   noremap <Down> <NOP>
   noremap <Left> <NOP>
   noremap <Right> <NOP>
-
-  set splitbelow
-  set splitright
 
   " Simplier mappings for switching
   nnoremap <C-J> <C-W><C-J>
@@ -134,8 +134,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
   colorscheme OceanicNext
-
-  set scrolloff=5
 "}}}
 
 " Fold, gets it's own section  ----------------------------------------------{{{
