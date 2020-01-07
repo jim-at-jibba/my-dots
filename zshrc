@@ -20,6 +20,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # Exports and (auto)loading {{{
   export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
+  # export FZF_DEFAULT_COMMAND='fd --type file --color=always'
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export BAT_THEME="TwoDark"
@@ -104,7 +105,9 @@ alias myip='ip addr show en0'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
-alias l='ls -la'
+alias l='exa --long --header --git --all'
+alias ls='exa --header'
+alias tree='exa --tree --level=2'
 alias c='clear'
 alias svim='source ~/.config/nvim/init.vim'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"

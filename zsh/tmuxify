@@ -5,7 +5,7 @@
 
 if hash tmux &> /dev/null; then
   case $- in *i*)
-    [ -z "$TMUX" ] && tmux new -A -s λ
+    [ -z "$TMUX" ] && tmux new -A
   esac
 else
 fi

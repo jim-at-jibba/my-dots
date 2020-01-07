@@ -355,7 +355,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
   command! -bang -nargs=* Rg
    \ call fzf#vim#grep(
-   \   'rg --column --line-number --ignore-case --no-heading --color=always'.shellescape(<q-args>), 3,
+   \   'rg --column --line-number --ignore-case --no-heading --color=always '.shellescape(<q-args>), 3,
    \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '§'),
    \   <bang>0)
@@ -433,4 +433,4 @@ let g:vimwiki_global_ext=0
 " ctrl+y - select contents of popup
 " ctr+r " - paste visual selection
 " * - search for word under cursor in file
-" D - deletes to the endd of the line
+" <leader>y copy text to system keyboard
