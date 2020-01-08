@@ -351,6 +351,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
 " FZF --------------------------------------------------------------------{{{
 
+  " Extended Rg function using FZF
   command! -bang -nargs=* Rg
    \ call fzf#vim#grep(
    \   'rg --column --line-number --ignore-case --no-heading --color=always '.shellescape(<q-args>), 3,
@@ -358,12 +359,21 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '§'),
    \   <bang>0)
 
+  let g:fzf_commits_log_options = '--graph --color=always
+    \ --format="%C(yellow)%h%C(red)%d%C(reset)
+    \ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"'
+
+  " !&diff unhighlights changed code - https://vi.stackexchange.com/questions/625/how-do-i-use-vim-as-a-diff-tool
   if !&diff
     nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <leader>a :Rg<Cr>
     nnoremap <silent> <leader>e :call Fzf_dev()<CR>
+    nnoremap <silent> <Leader>g :GFiles?
+    nnoremap <silent> <Leader>c  :Commits<CR>
+    nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
 
+  " View files with preview
   function! Fzf_dev()
   let l:fzf_files_options = '--preview "bat --theme="zenburn" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
 
@@ -394,7 +404,26 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
         \ 'sink':   function('s:edit_file'),
         \ 'options': '-m ' . l:fzf_files_options,
         \ 'down':    '40%' })
-endfunction
+  endfunction
+
+  " OPen FZF with all open buffers
+  function! s:buflist()
+    redir => ls
+    silent ls
+    redir END
+    return split(ls, '\n')
+  endfunction
+
+  function! s:bufopen(e)
+    execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+  endfunction
+
+  nnoremap <silent> <Leader><Enter> :call fzf#run({
+  \   'source':  reverse(<sid>buflist()),
+  \   'sink':    function('<sid>bufopen'),
+  \   'options': '+m',
+  \   'down':    len(<sid>buflist()) + 2
+  \ })<CR>
 
 "}}}
 
@@ -432,3 +461,9 @@ let g:vimwiki_global_ext=0
 " ctr+r " - paste visual selection
 " * - search for word under cursor in file
 " <leader>y copy text to system keyboard
+
+" === FZF === "
+" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
+" nnoremap <silent> <Leader>g :GFiles?
+" nnoremap <silent> <Leader>c  :Commits<CR>
+" nnoremap <silent> <Leader>bc :BCommits<CR>
