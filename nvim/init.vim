@@ -109,7 +109,7 @@ call plug#end()
 
   " Search for word under cursor
   " nnoremap <silent> <Leader>f yiw :Rg <C-R>
-  xnoremap <leader>f :Rg <space> yiw <C-r> "
+  " xnoremap <leader>f :Rg <space> yiw <C-r> "
 
 "}}}
 
@@ -165,8 +165,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   set foldlevel=99
 
   " Space to toggle folds.
-  nnoremap <Space> za
-  vnoremap <Space> za
+  nnoremap <leader> za
+  vnoremap <leader> za
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldlevel=0
 
@@ -321,13 +321,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   nmap <silent> <leader>dj <Plug>(coc-implementation)
   nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
 
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -368,7 +361,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <leader>a :Rg<Cr>
     nnoremap <silent> <leader>e :call Fzf_dev()<CR>
-    nnoremap <silent> <Leader>g :GFiles?
+    nnoremap <silent> <Leader>g :GFiles?<CR>
     nnoremap <silent> <Leader>c  :Commits<CR>
     nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
@@ -450,6 +443,18 @@ let g:vimwiki_list = [
 let g:vimwiki_global_ext=0
 "}}}
 
+" Functions -----------------------------------------------------------------{{{
+
+function! s:show_documentation()
+  if coc#util#has_float()
+    call coc#util#float_hide()
+  elseif (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+"}}}
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
 " nmap <silent> <leader>dy <Plug>(coc-type-definition)
@@ -467,3 +472,5 @@ let g:vimwiki_global_ext=0
 " nnoremap <silent> <Leader>g :GFiles?
 " nnoremap <silent> <Leader>c  :Commits<CR>
 " nnoremap <silent> <Leader>bc :BCommits<CR>
+" <leader>enter - list open buffers
+" C-w-w to jump into the pop up
