@@ -42,7 +42,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms
 
   typeset -U PATH fpath
 
@@ -118,6 +118,7 @@ alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall 
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
+alias lip="ip addr show en0"
 export EDITOR='/usr/local/bin/nvim'
 
 # tmux

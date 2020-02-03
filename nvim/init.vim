@@ -64,6 +64,9 @@ call plug#end()
   set splitright
   set relativenumber
   set scrolloff=5
+
+  set backupdir=~/.vim/.backup//
+  set directory=~/.vim/.swp//
 "}}}
 
 " System mappings  ----------------------------------------------------------{{{
@@ -165,8 +168,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   set foldlevel=99
 
   " Space to toggle folds.
-  nnoremap <leader> za
-  vnoremap <leader> za
+  "nnoremap <leader> za
+  "vnoremap <leader> za
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldlevel=0
 
@@ -271,7 +274,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-html',
     \ 'coc-dictionary',
     \ 'coc-git',
-    \ 'coc-python'
+    \ 'coc-python',
+    \ 'coc-elixir'
     \ ]
   " always show signcolumns
   set signcolumn=yes
@@ -359,7 +363,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   " !&diff unhighlights changed code - https://vi.stackexchange.com/questions/625/how-do-i-use-vim-as-a-diff-tool
   if !&diff
     nnoremap <silent> <C-p> :Files<Cr>
-    nnoremap <leader>a :Rg<Cr>
+    nnoremap <leader>f :Rg<Cr>
     nnoremap <silent> <leader>e :call Fzf_dev()<CR>
     nnoremap <silent> <Leader>g :GFiles?<CR>
     nnoremap <silent> <Leader>c  :Commits<CR>

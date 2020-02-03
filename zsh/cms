@@ -1,0 +1,5 @@
+### CMS
+
+if hash navy &> /dev/null; then
+  navy start heartwood queue postgres email mysql knowledge-base laravel-api public-api cms-api auth permissions business
+fi
