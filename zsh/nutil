@@ -2,7 +2,8 @@
 # show a list of commands and keybinds
 
 local navy="mob    [mobile app]
-cms    [CMS]"
+cms    [CMS]
+scheduled [CMS Scheduled Posts]"
 
 local cmd=$(echo $navy | eval "fzf ${FZF_DEFAULT_OPTS} --header='[navy:show]'" | awk '{print $1}')
 

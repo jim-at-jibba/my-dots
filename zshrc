@@ -16,7 +16,8 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git teamocil zsh-completions osx httpie vi-mode)
 
 # User configuration
-  TERM=xterm-256color
+TERM=xterm-256color
+# TERM=screen-256color
 
 # Exports and (auto)loading {{{
   export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
@@ -42,7 +43,7 @@ plugins=(git teamocil zsh-completions osx httpie vi-mode)
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled
 
   typeset -U PATH fpath
 
@@ -171,3 +172,12 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 tmuxify
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/completion.zsh.inc'; fi
+if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br

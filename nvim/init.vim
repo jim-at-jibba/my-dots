@@ -25,6 +25,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened'
 Plug 'mhartington/oceanic-next'
+Plug 'saltdotac/citylights.vim'
 
 " git
 Plug 'jreybert/vimagit'
@@ -130,13 +131,14 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   syntax on
   set t_Co=256
   set background=dark
+  colorscheme citylights
   "colorscheme flattened_dark
   "colorscheme nord
   "let g:nord_italic_comments=1
 
-  let g:oceanic_next_terminal_bold = 1
-  let g:oceanic_next_terminal_italic = 1
-  colorscheme OceanicNext
+  "let g:oceanic_next_terminal_bold = 1
+  "let g:oceanic_next_terminal_italic = 1
+  "colorscheme OceanicNext
 "}}}
 
 " Fold, gets it's own section  ----------------------------------------------{{{
@@ -204,8 +206,9 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
+  let g:airline_theme='papercolor'
   "let g:airline_theme='solarized'
-  let g:airline_theme='oceanicnext'
+  "let g:airline_theme='oceanicnext'
   "let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
@@ -318,6 +321,10 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   " Use `[g` and `]g` to navigate diagnostics
   nmap <silent> [g <Plug>(coc-diagnostic-prev)
   nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  " navigate git hunks
+  nmap <silent> <cr> <Plug>(coc-git-nextchunk)
+  nmap <silent> <backspace> <Plug>(coc-git-prevchunk)
 
   nmap <silent> <leader>dd <Plug>(coc-definition)
   nmap <silent> <leader>dy <Plug>(coc-type-definition)
