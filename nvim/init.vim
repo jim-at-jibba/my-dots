@@ -26,6 +26,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened'
 Plug 'mhartington/oceanic-next'
 Plug 'saltdotac/citylights.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'davidcelis/vim-ariake-dark'
 
 " git
 Plug 'jreybert/vimagit'
@@ -111,9 +113,8 @@ call plug#end()
   nmap s <Plug>(easymotion-s)
   nmap s <Plug>(easymotion-s2)
 
-  " Search for word under cursor
-  " nnoremap <silent> <Leader>f yiw :Rg <C-R>
-  " xnoremap <leader>f :Rg <space> yiw <C-r> "
+  vnoremap  <leader>y  "+y
+  nnoremap  <leader>y  "+y
 
 "}}}
 
@@ -131,7 +132,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   syntax on
   set t_Co=256
   set background=dark
-  colorscheme citylights
+  colorscheme ariake
   "colorscheme flattened_dark
   "colorscheme nord
   "let g:nord_italic_comments=1
@@ -207,7 +208,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
   let g:airline_theme='papercolor'
-  "let g:airline_theme='solarized'
+  " let g:airline_theme='solarized'
   "let g:airline_theme='oceanicnext'
   "let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
@@ -278,7 +279,9 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-dictionary',
     \ 'coc-git',
     \ 'coc-python',
-    \ 'coc-elixir'
+    \ 'coc-elixir',
+    \ 'coc-highlight',
+    \ 'coc-smartf'
     \ ]
   " always show signcolumns
   set signcolumn=yes
@@ -350,6 +353,18 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
   " restart when tsserver gets wonky
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
+
+  " Smart motiion
+  " press <esc> to cancel.
+  nmap f <Plug>(coc-smartf-forward)
+  nmap F <Plug>(coc-smartf-backward)
+  " nmap ; <Plug>(coc-smartf-repeat)
+  " nmap , <Plug>(coc-smartf-repeat-opposite)
+
+  augroup Smartf
+    autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
+    autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+  augroup end
 
 " }}}
 
@@ -466,6 +481,31 @@ function! s:show_documentation()
   endif
 endfunction
 "}}}
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
 " nmap <silent> <leader>dy <Plug>(coc-type-definition)

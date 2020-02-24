@@ -18,35 +18,28 @@ ln -s ~/dotfiles/tmux.conf  ~/.tmux.conf.local
 
 ## Brew
 
-- youtube-dl
-- ffmpeg
-- neovim
-- tmux
-- reattach-to-user-namespace
-- ripgrep
-- fzf
+- autojump
 - bat
+- broot
+- diff-so-fancy
+- elixir
+- exa
+- fzf
 - htop
-- nmap
-- netcat
-- postgresql
-- redis
-- zsh
-- zsh-completions
+- httpie
 - iproute2mac
-
+- jq
+- kubernetes-cli
+- lazydocker
+- lazygit
+- neovim
+- magic-worm
 
 
 ## NPM
 
-- forever
-- nodemon
-- react-native-cli
-- serverless
-- tiny-care-terminal
-- tldr
-- yarn
-
+- navy
+- n
 
 ## Programs
 

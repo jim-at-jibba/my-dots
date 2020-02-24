@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+# Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -99,6 +99,7 @@ alias gme='git config user.name "jim-at-gravitywell"'
 gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
 alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
 alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
+alias lg="lazygit"
 
 # General
 ##########
@@ -112,6 +113,7 @@ alias tree='exa --tree --level=2'
 alias c='clear'
 alias svim='source ~/.config/nvim/init.vim'
 alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
+alias npmLocal="npm list -g --depth 0"
 # alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
@@ -121,6 +123,9 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 export EDITOR='/usr/local/bin/nvim'
+
+# Dicker
+alias ld="lazydocker"
 
 # tmux
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
@@ -181,3 +186,4 @@ if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
+export PATH="/usr/local/opt/helm@2/bin:$PATH"
