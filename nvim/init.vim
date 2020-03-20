@@ -45,6 +45,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'mtth/scratch.vim'
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -281,7 +282,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-python',
     \ 'coc-elixir',
     \ 'coc-highlight',
-    \ 'coc-smartf'
     \ ]
   " always show signcolumns
   set signcolumn=yes
@@ -353,18 +353,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
   " restart when tsserver gets wonky
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
-
-  " Smart motiion
-  " press <esc> to cancel.
-  nmap f <Plug>(coc-smartf-forward)
-  nmap F <Plug>(coc-smartf-backward)
-  " nmap ; <Plug>(coc-smartf-repeat)
-  " nmap , <Plug>(coc-smartf-repeat-opposite)
-
-  augroup Smartf
-    autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#6638F0
-    autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
-  augroup end
 
 " }}}
 
@@ -525,3 +513,13 @@ au Syntax * RainbowParenthesesLoadBraces
 " nnoremap <silent> <Leader>bc :BCommits<CR>
 " <leader>enter - list open buffers
 " C-w-w to jump into the pop up
+"
+" SPLITS
+" "Max out the height of the current split
+" ctrl + w _
+" Max out the width of the current split
+" ctrl + w |
+"
+" Normalize all split sizes, which is very handy when resizing terminal
+" ctrl + w =
+
