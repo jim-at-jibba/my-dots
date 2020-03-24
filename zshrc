@@ -43,7 +43,7 @@ TERM=xterm-256color
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled interests
 
   typeset -U PATH fpath
 
