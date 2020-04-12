@@ -35,7 +35,7 @@ curl  https://raw.githubusercontent.com/jim-at-jibba/my-dots/master/tmux.conf --
 
 echo "Symlinking config"
 ln -s ~/$(USER)/dotfiles/init.vim ~/.config/nvim
-ln -s ~/$(USER)/dotfiles/tmux.config ~/.tmux.conf.local
+ln -s ~/dotfiles/tmux.conf ~/.tmux.conf.local
 
 echo "Installing Node"
 sudo apt-get install curl software-properties-common
