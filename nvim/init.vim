@@ -27,7 +27,7 @@ Plug 'romainl/flattened'
 Plug 'mhartington/oceanic-next'
 Plug 'saltdotac/citylights.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'davidcelis/vim-ariake-dark'
+Plug 'jim-at-jibba/ariake-vim-colors'
 
 " git
 Plug 'jreybert/vimagit'

@@ -148,6 +148,7 @@ alias ngrok='~/code/ngrok'
 ###########
 alias bs='browser-sync start --server --files "**/*.*"'
 alias cat='bat'
+alias genyshell='/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell'
 
 # Codepush
 ###########

@@ -23,6 +23,10 @@ sudo apt-get install neovim python3-neovim
 echo "Install others fzf etc......."
 sudo apt-get install fzf ripgrep fonts-powerline exa bat tmux
 
+echo "Setting up sane defaults for tmux......"
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+
 echo "Getting vim config"
 mkdir ~/$(USER)/dotfiles && cd $_
 
@@ -31,9 +35,7 @@ curl  https://raw.githubusercontent.com/jim-at-jibba/my-dots/master/tmux.conf --
 
 echo "Symlinking config"
 ln -s ~/$(USER)/dotfiles/init.vim ~/.config/nvim
-ln -s ~/$(USER)/dotfiles/tmux.config ~/.tmux.conf
-
-
+ln -s ~/$(USER)/dotfiles/tmux.config ~/.tmux.conf.local
 
 echo "Installing Node"
 sudo apt-get install curl software-properties-common
