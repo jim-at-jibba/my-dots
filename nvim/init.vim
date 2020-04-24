@@ -282,6 +282,13 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-python',
     \ 'coc-elixir',
     \ 'coc-highlight',
+    \ 'coc-import-cost',
+    \ 'coc-styled-components',
+    \ 'coc-css',
+    \ 'coc-go',
+    \ 'coc-html',
+    \ 'coc-markdownlint',
+    \ 'coc-actions'
     \ ]
   " always show signcolumns
   set signcolumn=yes
@@ -354,6 +361,12 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   " restart when tsserver gets wonky
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
+  " Remap for do codeAction of selected region
+  function! s:cocActionsOpenFromSelected(type) abort
+    execute 'CocCommand actions.open ' . a:type
+  endfunction
+  xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+  nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 " }}}
 
 " FZF --------------------------------------------------------------------{{{
