@@ -132,9 +132,9 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   endif
   syntax on
   set t_Co=256
-  set background=dark
-  colorscheme ariake
-  "colorscheme flattened_dark
+  set background=light
+  "colorscheme ariake
+  colorscheme flattened_light
   "colorscheme nord
   "let g:nord_italic_comments=1
 
@@ -208,8 +208,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
-  let g:airline_theme='papercolor'
-  " let g:airline_theme='solarized'
+  "let g:airline_theme='papercolor'
+   let g:airline_theme='solarized'
   "let g:airline_theme='oceanicnext'
   "let g:airline_theme='nord'
   nmap <leader>, :bnext<CR>
