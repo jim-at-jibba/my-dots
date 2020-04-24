@@ -34,6 +34,7 @@ TERM=xterm-256color
   export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
   export PATH=$PATH:/opt/apache-maven/bin
+  export PATH="/usr/local/opt/helm@2/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
@@ -60,22 +61,6 @@ j() {
     fi
     cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)"
 }
-
-# tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
-# `tm` will allow you to select your tmux session via fzf.
-# `tm irc` will attach to the irc session (if it exists), else it will create it.
-
-tm() {
-  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
-  if [ $1 ]; then
-    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
-  fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
-}
-
-# Teamocil Autocomplete
-alias tee='teamocil'
-compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
@@ -124,12 +109,28 @@ alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quo
 alias lip="ip addr show en0"
 export EDITOR='/usr/local/bin/nvim'
 
-# Dicker
+# Docker
 alias ld="lazydocker"
 
 # tmux
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
 alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
+
+# tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
+# `tm` will allow you to select your tmux session via fzf.
+# `tm irc` will attach to the irc session (if it exists), else it will create it.
+
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+# Teamocil Autocomplete
+alias tee='teamocil'
+compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # Python
 ##########
@@ -177,7 +178,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-tmuxify
+# tmuxify
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
@@ -187,4 +188,3 @@ if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
-export PATH="/usr/local/opt/helm@2/bin:$PATH"
