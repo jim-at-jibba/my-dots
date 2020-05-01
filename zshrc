@@ -20,6 +20,8 @@ TERM=xterm-256color
 # TERM=screen-256color
 
 # Exports and (auto)loading {{{
+  export GOPATH=$HOME/go
+  export GOBIN=$GOPATH/bin
   export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
   # export FZF_DEFAULT_COMMAND='fd --type file --color=always'
   export FZF_DEFAULT_COMMAND='rg --files'
@@ -28,6 +30,8 @@ TERM=xterm-256color
 
   export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
   export PATH="/usr/local/mysql/bin:$PATH"
+  export PATH="/usr/local/go/bin:$PATH"
+  export PATH=$PATH:$GOBIN
   export PATH="$HOME/.composer/vendor/bin:$PATH"
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/platform-tools
