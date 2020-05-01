@@ -24,10 +24,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened'
-Plug 'mhartington/oceanic-next'
-Plug 'saltdotac/citylights.vim'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'jim-at-jibba/ariake-vim-colors'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'luochen1990/rainbow'
 
 " git
 Plug 'jreybert/vimagit'
@@ -45,7 +44,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'mtth/scratch.vim'
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -130,17 +128,34 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   if (has("termguicolors"))
     set termguicolors
   endif
-  syntax on
-  set t_Co=256
-  set background=light
-  "colorscheme ariake
-  colorscheme flattened_light
-  "colorscheme nord
-  "let g:nord_italic_comments=1
 
-  "let g:oceanic_next_terminal_bold = 1
-  "let g:oceanic_next_terminal_italic = 1
-  "colorscheme OceanicNext
+  if !exists('g:syntax_on')
+    syntax enable
+  endif
+
+  set t_Co=256
+  set background=dark
+  colorscheme ariake
+  " colorscheme flattened_light
+
+  " colorscheme PaperColor
+  let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1,
+  \       'allow_italic': 1,
+  \       'allow_bold': 1
+  \     },
+  \     'default.light': {
+  \       'transparent_background': 1,
+  \       'allow_italic': 1,
+  \       'allow_bold': 1,
+  \       'override': {
+  \         'spellbad': ["none"]
+  \       }
+  \     }
+  \   }
+  \ }
 "}}}
 
 " Fold, gets it's own section  ----------------------------------------------{{{
@@ -208,10 +223,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
-  "let g:airline_theme='papercolor'
-   let g:airline_theme='solarized'
-  "let g:airline_theme='oceanicnext'
-  "let g:airline_theme='nord'
+   let g:airline_theme='papercolor'
+  "let g:airline_theme='solarized'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
   nmap <leader>. :bprevious<CR>
@@ -241,7 +254,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   map <leader><leader>1 :NERDTreeToggle<CR>
   let NERDTreeShowHidden=1
   let NERDTreeHijackNetrw=0
-  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
   let g:NERDTreeWinSize=45
   let g:NERDTreeAutoDeleteBuffer=1
   let g:WebDevIconsOS = 'Darwin'
@@ -261,6 +273,10 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
   let g:webdevicons_enable_airline_tabline = 1
   let g:webdevicons_enable_airline_statusline = 1
+  let g:webdevicons_conceal_nerdtree_brackets = 1
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+  set conceallevel=2
 
 " }}}
 
@@ -483,29 +499,12 @@ function! s:show_documentation()
 endfunction
 "}}}
 
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+  \    'separately': {
+  \       'nerdtree': 0
+  \    }
+  \}
 
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
