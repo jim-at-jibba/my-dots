@@ -13,7 +13,7 @@ SPACESHIP_TIME_SHOW=true
 
 DISABLE_AUTO_TITLE="true"
 
-plugins=(git teamocil zsh-completions osx httpie vi-mode)
+plugins=(git teamocil zsh-completions osx httpie)
 
 # User configuration
 TERM=xterm-256color
@@ -33,6 +33,7 @@ TERM=xterm-256color
   export PATH="/usr/local/go/bin:$PATH"
   export PATH=$PATH:$GOBIN
   export PATH="$HOME/.composer/vendor/bin:$PATH"
+  export PATH="$HOME/Library/Python/3.7/bin:$PATH"
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/platform-tools
   export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
@@ -48,7 +49,7 @@ TERM=xterm-256color
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled interests
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled interests mobKnowledge
 
   typeset -U PATH fpath
 
@@ -192,3 +193,4 @@ if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"

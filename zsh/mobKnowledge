@@ -1,0 +1,5 @@
+### Mob
+
+if hash navy &> /dev/null; then
+  navy start discover collections 
+fi

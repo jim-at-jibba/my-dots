@@ -24,7 +24,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened'
-Plug 'jim-at-jibba/ariake-vim-colors'
+" Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'luochen1990/rainbow'
 
@@ -44,6 +44,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -109,9 +110,11 @@ call plug#end()
   nmap <silent> <leader>/ :nohlsearch<CR>
 
   map <leader>w <Plug>(easymotion-bd-w)
-  nmap s <Plug>(easymotion-s)
+  nmap <Leader>w <Plug>(easymotion-overwin-w)
+  "nmap s <Plug>(easymotion-s)
   nmap s <Plug>(easymotion-s2)
 
+  " Copy to system posteboard
   vnoremap  <leader>y  "+y
   nnoremap  <leader>y  "+y
 
@@ -134,7 +137,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   endif
 
   set t_Co=256
-  set background=dark
+  set background=light
   colorscheme ariake
   " colorscheme flattened_light
 
@@ -250,7 +253,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 "}}}
 
 " NERDTree ---------------------------------------------------------------{{{
-
+  let NERDTreeIgnore = ['\.DS_Store']
+  let NERDTreeRespectWildIgnore=1
   map <leader><leader>1 :NERDTreeToggle<CR>
   let NERDTreeShowHidden=1
   let NERDTreeHijackNetrw=0
@@ -381,8 +385,10 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   function! s:cocActionsOpenFromSelected(type) abort
     execute 'CocCommand actions.open ' . a:type
   endfunction
+
   xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
   nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
 " }}}
 
 " FZF --------------------------------------------------------------------{{{
@@ -505,6 +511,20 @@ let g:rainbow_conf = {
   \       'nerdtree': 0
   \    }
   \}
+
+
+
+" Bookmarks -----------------------------------------------------------------{{{
+  let g:bookmark_save_per_working_dir = 1
+  let g:bookmark_auto_save = 1
+
+  nmap <Leader>bj <Plug>BookmarkNext
+  nmap <Leader>bk <Plug>BookmarkPrev
+  nmap <Leader>bt <Plug>BookmarkToggle
+  nmap <Leader>ba <Plug>BookmarkAnnotate
+  nmap <Leader>bl <Plug>BookmarkShowAll
+
+"}}}
 
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
