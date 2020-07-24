@@ -13,7 +13,7 @@ SPACESHIP_TIME_SHOW=true
 
 DISABLE_AUTO_TITLE="true"
 
-plugins=(git teamocil zsh-completions osx httpie)
+plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 TERM=xterm-256color
@@ -46,10 +46,12 @@ TERM=xterm-256color
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/tools/bin
   export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+  export PATH="/usr/local/opt/python@3.8/bin:$PATH"
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mob cms scheduled interests mobKnowledge
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mobile cms scheduled interests mobKnowledge mobFeed
 
   typeset -U PATH fpath
 
@@ -85,7 +87,7 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 alias ga='git add .'
 alias gpush='git push'
 alias gpull='git pull'
-alias gme='git config user.name "jim-at-gravitywell"'
+alias gme='git config user.name "jim-at-jibba"'
 gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
 alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
 alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
@@ -155,6 +157,20 @@ alias ngrok='~/code/ngrok'
 alias bs='browser-sync start --server --files "**/*.*"'
 alias cat='bat'
 alias genyshell='/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell'
+alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
+alias nmdelete='find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;'
+
+# twf
+
+twf-widget() {
+  local selected=$(twf --height=0.5)
+  BUFFER="$BUFFER$selected"
+  zle reset-prompt
+  zle end-of-line
+  return $ret
+}
+zle -N twf-widget
+bindkey '^w' twf-widget
 
 # Codepush
 ###########
@@ -183,7 +199,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-# tmuxify
+tmuxify
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
@@ -193,4 +209,6 @@ if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
-export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

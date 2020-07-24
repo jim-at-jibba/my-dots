@@ -1,0 +1,5 @@
+### Interests
+
+if hash navy &> /dev/null; then
+  navy start discover feed collections 
+fi

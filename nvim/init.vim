@@ -42,9 +42,7 @@ Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'MattesGroeger/vim-bookmarks'
 
 " Javascript
 Plug 'HerringtonDarkholme/yats.vim'
@@ -137,7 +135,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   endif
 
   set t_Co=256
-  set background=light
+  set background=dark
   colorscheme ariake
   " colorscheme flattened_light
 
@@ -308,7 +306,8 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-go',
     \ 'coc-html',
     \ 'coc-markdownlint',
-    \ 'coc-actions'
+    \ 'coc-actions',
+    \ 'coc-deno'
     \ ]
   " always show signcolumns
   set signcolumn=yes
@@ -477,6 +476,14 @@ let blacklist = ['md', 'markdown', 'mdown']
 
 let g:NERDCreateDefaultMappings = 0
 
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 0
+
+" if strftime("%H") < 17
+"   set background=light
+" else
+"   set background=dark
+" endif
 
 "}}}
 
@@ -503,6 +510,29 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+function! TwfExit(path)
+  function! TwfExitClosure(job_id, data, event) closure
+    bd!
+    try
+      let out = filereadable(a:path) ? readfile(a:path) : []
+    finally
+      silent! call delete(a:path)
+    endtry
+    if !empty(out)
+      execute 'edit! ' . out[0]
+    endif
+  endfunction
+  return funcref('TwfExitClosure')
+endfunction
+
+function! Twf()
+  let temp = tempname()
+  call termopen('twf ' . @% . ' > ' . temp, { 'on_exit': TwfExit(temp) })
+  startinsert
+endfunction
+
+nnoremap <silent> <Space>t :call Twf()<CR>
 "}}}
 
 let g:rainbow_active = 1
@@ -511,20 +541,6 @@ let g:rainbow_conf = {
   \       'nerdtree': 0
   \    }
   \}
-
-
-
-" Bookmarks -----------------------------------------------------------------{{{
-  let g:bookmark_save_per_working_dir = 1
-  let g:bookmark_auto_save = 1
-
-  nmap <Leader>bj <Plug>BookmarkNext
-  nmap <Leader>bk <Plug>BookmarkPrev
-  nmap <Leader>bt <Plug>BookmarkToggle
-  nmap <Leader>ba <Plug>BookmarkAnnotate
-  nmap <Leader>bl <Plug>BookmarkShowAll
-
-"}}}
 
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
@@ -554,4 +570,16 @@ let g:rainbow_conf = {
 "
 " Normalize all split sizes, which is very handy when resizing terminal
 " ctrl + w =
+"
+" Next occurance of what ever is under your cursor
+" *
+" # to do the reverse
+"
+" Move to start and into insert
+" shift + i
+"
+" f (char) to jump to a characters
+" t to jump to the char before
+" ; to jump to the next on_exit
+" , to jump to the previous
 

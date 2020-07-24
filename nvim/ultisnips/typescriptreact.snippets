@@ -28,9 +28,26 @@ ${px2vw(${1}, ${2})}
 endsnippet
 
 snippet sc
-const ${1:NAME} = styled.${2:ATTRIBUTE}`
-  ${({theme}) => css `
-    ${3}
-  `}
-`
+const ${1} = styled.${2}\`
+${({theme}) => css \`
+${3}
+\`}
+\`
+endsnippet
+
+snippet rh "React functional component" b
+import React from 'react'
+
+interface ${1}Props {
+
+}
+
+export const ${1}: React.FC<${1}Props> = ({}) => {
+	return ($0)
+}
+
+endsnippet
+
+snippet imr "Import React" b
+import React from 'react';
 endsnippet

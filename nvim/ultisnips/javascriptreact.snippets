@@ -1,0 +1,70 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet loadImage "Phaser 3 - Load Image" b
+this.load.image(${1}, ${2});
+endsnippet
+
+snippet addImage "Phaser 3 - Add image to scene" b
+this.face = this.add.image(${1}, ${2}, ${3});
+endsnippet
+
+snippet phaserConfig "Phaser 3 - Game config" b
+var config = {
+type: graphics_mode,
+width: game_width,
+height: game_height,
+parent: 'div-tag-name',
+scene: [nameOfScene]
+};
+endsnippet
+
+snippet addSprite "Phaser 3 -  Load Sprite sheet" b
+this.load.spritesheet(${1}, ${2}, {
+	frameWidth: 128,
+	frameHeight: 128,
+});
+endsnippet
+
+snippet createAnimation "Phaser 3 - Create animation" b
+this.anims.create({
+key: "walk",
+frames: [
+{ key: "char", frame: 1 },
+{ key: "char", frame: 2 },
+],
+frameRate: 8,
+repeat: -1,
+});
+endsnippet
+
+snippet generateAnimationFramename "Phaser 3 - Generate Framenames for sprites" b
+var frameNames= this.anims.generateFrameNumbers(${1});
+endsnippet
+
+snippet addTween "Phaser 3 - Add Tween" b
+this.tweens.add({targets: child,duration: time,y:targetY});
+endsnippet
