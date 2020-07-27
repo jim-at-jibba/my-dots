@@ -23,9 +23,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'romainl/flattened'
 " Plug 'jim-at-jibba/ariake-vim-colors'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'luochen1990/rainbow'
 
 " git
@@ -120,8 +118,8 @@ call plug#end()
 
 " Commands ------------------------------------------------------------------{{{
 
-command! -nargs=0 Todos         :CocList -A --normal grep -e TODO|FIXME
-command! -nargs=0 Status        :CocList -A --normal gstatus
+" command! -nargs=0 Todos         :CocList -A --normal grep -e TODO|FIXME
+" command! -nargs=0 Status        :CocList -A --normal gstatus
 
 "}}}
 
@@ -139,24 +137,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
   colorscheme ariake
   " colorscheme flattened_light
 
-  " colorscheme PaperColor
-  let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1,
-  \       'allow_italic': 1,
-  \       'allow_bold': 1
-  \     },
-  \     'default.light': {
-  \       'transparent_background': 1,
-  \       'allow_italic': 1,
-  \       'allow_bold': 1,
-  \       'override': {
-  \         'spellbad': ["none"]
-  \       }
-  \     }
-  \   }
-  \ }
 "}}}
 
 " Fold, gets it's own section  ----------------------------------------------{{{
@@ -300,30 +280,13 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     \ 'coc-python',
     \ 'coc-elixir',
     \ 'coc-highlight',
-    \ 'coc-import-cost',
     \ 'coc-styled-components',
     \ 'coc-css',
-    \ 'coc-go',
     \ 'coc-html',
     \ 'coc-markdownlint',
-    \ 'coc-actions',
-    \ 'coc-deno'
     \ ]
   " always show signcolumns
   set signcolumn=yes
-
-  " Use tab for trigger completion with characters ahead and navigate.
-  " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-  "inoremap <silent><expr> <TAB>
-  "      \ pumvisible() ? "\<C-n>" :
-  "      \ <SID>check_back_space() ? "\<TAB>" :
-  "      \ coc#refresh()
-  "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-  "function! s:check_back_space() abort
-  "  let col = col('.') - 1
-  "  return !col || getline('.')[col - 1]  =~# '\s'
-  "endfunction
 
   inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -392,19 +355,7 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
 
 " FZF --------------------------------------------------------------------{{{
 
-  " Extended Rg function using FZF
-  command! -bang -nargs=* Rg
-   \ call fzf#vim#grep(
-   \   'rg --column --line-number --ignore-case --no-heading --color=always '.shellescape(<q-args>), 3,
-   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '§'),
-   \   <bang>0)
-
-  let g:fzf_commits_log_options = '--graph --color=always
-    \ --format="%C(yellow)%h%C(red)%d%C(reset)
-    \ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"'
-
-  " !&diff unhighlights changed code - https://vi.stackexchange.com/questions/625/how-do-i-use-vim-as-a-diff-tool
+  let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
     nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <leader>f :Rg<Cr>
@@ -413,58 +364,6 @@ command! -nargs=0 Status        :CocList -A --normal gstatus
     nnoremap <silent> <Leader>c  :Commits<CR>
     nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
-
-  " View files with preview
-  function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --theme="zenburn" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
-
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-  function! s:edit_file(item)
-    let l:pos = stridx(a:item, ' ')
-    let l:file_path = a:item[pos+1:-1]
-    execute 'silent e' l:file_path
-  endfunction
-
-  call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
-        \ 'down':    '40%' })
-  endfunction
-
-  " OPen FZF with all open buffers
-  function! s:buflist()
-    redir => ls
-    silent ls
-    redir END
-    return split(ls, '\n')
-  endfunction
-
-  function! s:bufopen(e)
-    execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-  endfunction
-
-  nnoremap <silent> <Leader><Enter> :call fzf#run({
-  \   'source':  reverse(<sid>buflist()),
-  \   'sink':    function('<sid>bufopen'),
-  \   'options': '+m',
-  \   'down':    len(<sid>buflist()) + 2
-  \ })<CR>
 
 "}}}
 
@@ -479,24 +378,16 @@ let g:NERDCreateDefaultMappings = 0
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_conceal_code_blocks = 0
 
-" if strftime("%H") < 17
-"   set background=light
-" else
-"   set background=dark
-" endif
+if strftime("%H") < 17
+  set background=light
+else
+  set background=dark
+endif
 
 "}}}
 
 " Close Tag --------------------------------------------------------------------{{{
   let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
-"}}}
-
-" VimWiki -----------------------------------------------------------------{{{
-" Run multiple wikis "
-let g:vimwiki_list = [
-                      \{'path': '~/Google Drive/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
-                \]
-let g:vimwiki_global_ext=0
 "}}}
 
 " Functions -----------------------------------------------------------------{{{
