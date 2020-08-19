@@ -199,7 +199,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-tmuxify
+#tmuxify
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
@@ -212,3 +212,6 @@ source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

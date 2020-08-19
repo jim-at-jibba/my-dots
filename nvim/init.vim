@@ -25,6 +25,8 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 " Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'luochen1990/rainbow'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'mhartington/oceanic-next'
 
 " git
 Plug 'jreybert/vimagit'
@@ -43,9 +45,15 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Javascript
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mxw/vim-jsx'
-Plug 'heavenshell/vim-jsdoc'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'mxw/vim-jsx'
+" Plug 'heavenshell/vim-jsdoc'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
 
 call plug#end()
 
@@ -114,6 +122,10 @@ call plug#end()
   vnoremap  <leader>y  "+y
   nnoremap  <leader>y  "+y
 
+  " Search for word under cursor
+  nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR> " prw - project replace word
+  nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR> " pw - project word search
+
 "}}}
 
 " Commands ------------------------------------------------------------------{{{
@@ -134,7 +146,9 @@ call plug#end()
 
   set t_Co=256
   set background=dark
-  colorscheme ariake
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+  colorscheme OceanicNext
   " colorscheme flattened_light
 
 "}}}
@@ -204,7 +218,7 @@ call plug#end()
   let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
-   let g:airline_theme='papercolor'
+   let g:airline_theme='oceanicnext'
   "let g:airline_theme='solarized'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
@@ -326,7 +340,7 @@ call plug#end()
 
 
   " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  "autocmd CursorHold * silent call CocActionAsync('highlight')
 
   nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
   nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
@@ -350,6 +364,20 @@ call plug#end()
 
   xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
   nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+  nnoremap <silent> K :call CocAction('doHover')<CR>
+  function! ShowDocIfNoDiagnostic(timer_id)
+    if (coc#util#has_float() == 0)
+      silent call CocActionAsync('doHover')
+    endif
+  endfunction
+
+  function! s:show_hover_doc()
+    call timer_start(100, 'ShowDocIfNoDiagnostic')
+  endfunction
+
+  autocmd CursorHoldI * :call <SID>show_hover_doc()
+  autocmd CursorHold * :call <SID>show_hover_doc()
 
 " }}}
 
@@ -378,11 +406,11 @@ let g:NERDCreateDefaultMappings = 0
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_conceal_code_blocks = 0
 
-if strftime("%H") < 17
-  set background=light
-else
-  set background=dark
-endif
+" if strftime("%H") < 17
+"   set background=light
+" else
+"   set background=dark
+" endif
 
 "}}}
 
@@ -402,28 +430,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-function! TwfExit(path)
-  function! TwfExitClosure(job_id, data, event) closure
-    bd!
-    try
-      let out = filereadable(a:path) ? readfile(a:path) : []
-    finally
-      silent! call delete(a:path)
-    endtry
-    if !empty(out)
-      execute 'edit! ' . out[0]
-    endif
-  endfunction
-  return funcref('TwfExitClosure')
-endfunction
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
 
-function! Twf()
-  let temp = tempname()
-  call termopen('twf ' . @% . ' > ' . temp, { 'on_exit': TwfExit(temp) })
-  startinsert
-endfunction
-
-nnoremap <silent> <Space>t :call Twf()<CR>
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 "}}}
 
 let g:rainbow_active = 1
@@ -473,4 +486,6 @@ let g:rainbow_conf = {
 " t to jump to the char before
 " ; to jump to the next on_exit
 " , to jump to the previous
+"
+" ctrl+w + o close other buffers except on you are in
 
