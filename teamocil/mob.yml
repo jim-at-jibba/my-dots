@@ -1,13 +1,12 @@
 windows:
-  - name: PUBLIC-API
-    root: ~/code/work/public-api
+  - name: mob
+    root: ~/Code/work/mobile-app
     layout: ebd2,255x65,0,0{187x65,0,0,10,67x65,188,0[67x32,188,0,26,67x32,188,33,27]}
     panes:
       - commands:
-        - name PUBLIC-API
+        - name mob
         - v
       - commands:
-        - name public-api-navy
-        - ./develop.sh
-      -
-
+        - name app
+        - npx react-native start
+      - clear

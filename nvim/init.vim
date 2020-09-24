@@ -25,7 +25,6 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'ntpeters/vim-better-whitespace'
 " Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'luochen1990/rainbow'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'mhartington/oceanic-next'
 
 " git
@@ -43,11 +42,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'junegunn/goyo.vim'
 
 " Javascript
-" Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'mxw/vim-jsx'
-" Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
@@ -126,6 +123,7 @@ call plug#end()
   nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR> " prw - project replace word
   nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR> " pw - project word search
 
+
 "}}}
 
 " Commands ------------------------------------------------------------------{{{
@@ -148,8 +146,7 @@ call plug#end()
   set background=dark
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
-  colorscheme OceanicNext
-  " colorscheme flattened_light
+  colorscheme Ariake
 
 "}}}
 
@@ -218,7 +215,7 @@ call plug#end()
   let g:airline#extensions#wordcount#enabled = 0
   let g:airline_powerline_fonts = 1
   let g:airline_symbols.branch = ''
-   let g:airline_theme='oceanicnext'
+  let g:airline_theme='oceanicnext'
   "let g:airline_theme='solarized'
   nmap <leader>, :bnext<CR>
   tmap <leader>, <C-\><C-n>:bnext<cr>
@@ -331,6 +328,7 @@ call plug#end()
   " navigate git hunks
   nmap <silent> <cr> <Plug>(coc-git-nextchunk)
   nmap <silent> <backspace> <Plug>(coc-git-prevchunk)
+  nmap <silent> <leader>hi <Plug>(coc-git-chunkinfo)
 
   nmap <silent> <leader>dd <Plug>(coc-definition)
   nmap <silent> <leader>dy <Plug>(coc-type-definition)
@@ -357,6 +355,13 @@ call plug#end()
   " restart when tsserver gets wonky
   nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
+  " Apply AutoFix to problem on the current line.
+  nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+  " Symbol renaming.
+  nmap <leader>rn <Plug>(coc-rename)
+
   " Remap for do codeAction of selected region
   function! s:cocActionsOpenFromSelected(type) abort
     execute 'CocCommand actions.open ' . a:type
@@ -365,7 +370,7 @@ call plug#end()
   xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
   nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
-  nnoremap <silent> K :call CocAction('doHover')<CR>
+  nnoremap <silent> L :call CocAction('doHover')<CR>
   function! ShowDocIfNoDiagnostic(timer_id)
     if (coc#util#has_float() == 0)
       silent call CocActionAsync('doHover')
@@ -411,6 +416,11 @@ let g:vim_markdown_conceal_code_blocks = 0
 " else
 "   set background=dark
 " endif
+
+  " Sweet Sweet FuGITive
+  " nmap <leader>gh :diffget //3<CR>
+  " nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
 
 "}}}
 

@@ -1,13 +1,13 @@
 windows:
-  - name: PUBLIC-API
-    root: ~/code/work/public-api
+  - name: CLASS
+    root: ~/code/work/classifieds-service
     layout: ebd2,255x65,0,0{187x65,0,0,10,67x65,188,0[67x32,188,0,26,67x32,188,33,27]}
     panes:
       - commands:
-        - name PUBLIC-API
+        - name classifieds
         - v
       - commands:
-        - name public-api-navy
+        - name classifieds-navy
         - ./develop.sh
-      -
+      - clear
 
