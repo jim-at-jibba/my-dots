@@ -46,6 +46,7 @@ TERM=xterm-256color
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/tools/bin
   export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.2
   export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
   export PATH="/usr/local/opt/python@3.8/bin:$PATH"
   source $ZSH/oh-my-zsh.sh
@@ -114,6 +115,7 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall F
 alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
+alias server="python3 -m http.server"
 export EDITOR='/usr/local/bin/nvim'
 
 # Docker
@@ -142,6 +144,11 @@ compctl -g '~/.teamocil/*(:t:r)' teamocil
 # Python
 ##########
 #alias python='python3'
+
+# HAcking
+##########
+alias papk="~/hacking/scripts/pull-apk.sh"
+alias patch="~/hacking/scripts/patch.sh"
 
 # Vagrant
 alias vu='vagrant up'

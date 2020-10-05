@@ -43,6 +43,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'junegunn/goyo.vim'
+Plug 'alcesleo/vim-uppercase-sql'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -85,8 +86,10 @@ call plug#end()
   noremap J 5j
   noremap K 5k
 
-  nnoremap ; :
+  noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
   nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+
+  nnoremap ; :
 
   " disable Arrow keys
   noremap <Up> <NOP>
