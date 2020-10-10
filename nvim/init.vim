@@ -44,6 +44,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'junegunn/goyo.vim'
 Plug 'alcesleo/vim-uppercase-sql'
+Plug 'vimwiki/vimwiki'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -123,8 +124,10 @@ call plug#end()
   nnoremap  <leader>y  "+y
 
   " Search for word under cursor
-  nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR> " prw - project replace word
-  nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR> " pw - project word search
+  "" prw - project replace word
+  nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+ " pw - project word search
+  nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 
 
 "}}}
@@ -393,13 +396,56 @@ call plug#end()
 
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
-    nnoremap <silent> <C-p> :Files<Cr>
+    " nnoremap <silent> <C-p> :Files<Cr>
+    nnoremap <silent> <C-p> :call Fzf_dev()<Cr>
     nnoremap <leader>f :Rg<Cr>
-    nnoremap <silent> <leader>e :call Fzf_dev()<CR>
+    " nnoremap <silent> <leader>e :call Fzf_dev()<CR>
     nnoremap <silent> <Leader>g :GFiles?<CR>
+    nnoremap <silent> <Leader>b :Buffers<CR>
     nnoremap <silent> <Leader>c  :Commits<CR>
     nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
+
+
+  " Not sure if this is useful
+  if executable('rg')
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+    set grepprg=rg\ --vimgrep
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+  endif
+
+  " Files + devicons
+  function! Fzf_dev()
+    let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
+
+    function! s:files()
+      let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+      return s:prepend_icon(l:files)
+    endfunction
+
+    function! s:prepend_icon(candidates)
+      let l:result = []
+      for l:candidate in a:candidates
+        let l:filename = fnamemodify(l:candidate, ':p:t')
+        let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+        call add(l:result, printf('%s %s', l:icon, l:candidate))
+      endfor
+
+      return l:result
+    endfunction
+
+    function! s:edit_file(item)
+      let l:pos = stridx(a:item, ' ')
+      let l:file_path = a:item[pos+1:-1]
+      execute 'silent e' l:file_path
+    endfunction
+
+    call fzf#run({
+          \ 'source': <sid>files(),
+          \ 'sink':   function('s:edit_file'),
+          \ 'options': '-m ' . l:fzf_files_options,
+          \ 'window':  { 'width': 0.8, 'height': 0.8 }   })
+  endfunction
 
 "}}}
 
@@ -429,6 +475,14 @@ nmap <leader>gs :G<CR>
 
 " Close Tag --------------------------------------------------------------------{{{
   let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
+"}}}
+
+" VimWiki -----------------------------------------------------------------{{{
+" Run multiple wikis "
+let g:vimwiki_list = [
+                      \{'path': '~/Google Drive/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
+                \]
+let g:vimwiki_global_ext=0
 "}}}
 
 " Functions -----------------------------------------------------------------{{{
