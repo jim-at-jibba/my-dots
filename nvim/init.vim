@@ -7,22 +7,13 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" CSS
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ap/vim-css-color'
-
 " Look and feel
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
-Plug 'ntpeters/vim-better-whitespace'
 " Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'luochen1990/rainbow'
 Plug 'mhartington/oceanic-next'
@@ -32,27 +23,28 @@ Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
+Plug 'tweekmonster/gofmt.vim'
+
 "nerdtree
 Plug 'scrooloose/nerdtree'
-Plug 'xuyuanp/nerdtree-git-plugin'
 
-" Utilities
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+
+Plug 'vuciv/vim-bujo'
+Plug 'mbbill/undotree'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'easymotion/vim-easymotion'
+Plug 'dense-analysis/ale'
 Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdcommenter'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'junegunn/goyo.vim'
-Plug 'alcesleo/vim-uppercase-sql'
-Plug 'vimwiki/vimwiki'
 
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -70,9 +62,17 @@ call plug#end()
   set splitright
   set relativenumber
   set scrolloff=5
+  set completeopt=menuone,noinsert,noselect
+  set signcolumn=yes
 
   set backupdir=~/.vim/.backup//
   set directory=~/.vim/.swp//
+
+
+  if has("persistent_undo")
+      set undodir="~/.vim/.undodir"
+      set undofile
+  endif
 "}}}
 
 " System mappings  ----------------------------------------------------------{{{
@@ -109,34 +109,25 @@ call plug#end()
   vmap > >gv
 
   " NERDCommenter
-  vmap ++ <plug>NERDCommenterToggle
-  nmap ++ <plug>NERDCommenterToggle
+  " vmap <C-/> <plug>NERDCommenterToggle
+  " nmap <C-/> <plug>NERDCommenterToggle
 
   nmap <silent> <leader>/ :nohlsearch<CR>
-
-  map <leader>w <Plug>(easymotion-bd-w)
-  nmap <Leader>w <Plug>(easymotion-overwin-w)
-  "nmap s <Plug>(easymotion-s)
-  nmap s <Plug>(easymotion-s2)
 
   " Copy to system posteboard
   vnoremap  <leader>y  "+y
   nnoremap  <leader>y  "+y
 
-  " Search for word under cursor
-  "" prw - project replace word
-  nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
- " pw - project word search
-  nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+  nnoremap <leader>u :UndotreeToggle<CR>
 
+  vnoremap <leader>p "_dP
 
-"}}}
+  nnoremap <Leader>+ :vertical resize +5<CR>
+  nnoremap <Leader>- :vertical resize -5<CR>
 
-" Commands ------------------------------------------------------------------{{{
-
-" command! -nargs=0 Todos         :CocList -A --normal grep -e TODO|FIXME
-" command! -nargs=0 Status        :CocList -A --normal gstatus
-
+  " Use <Tab> and <S-Tab> to navigate through popup menu
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "}}}
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
@@ -152,100 +143,10 @@ call plug#end()
   set background=dark
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
-  colorscheme Ariake
+  colorscheme oceanicnext
 
 "}}}
 
-" Fold, gets it's own section  ----------------------------------------------{{{
-
-  function! MyFoldText() " {{{
-      let line = getline(v:foldstart)
-      let nucolwidth = &fdc + &number * &numberwidth
-      let windowwidth = winwidth(0) - nucolwidth - 3
-      let foldedlinecount = v:foldend - v:foldstart
-
-      " expand tabs into spaces
-      let onetab = strpart('          ', 0, &tabstop)
-      let line = substitute(line, '\t', onetab, 'g')
-
-      let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-      " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
-      let fillcharcount = windowwidth - len(line)
-      " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
-      return line . '…' . repeat(" ",fillcharcount)
-  endfunction " }}}
-
-  set foldtext=MyFoldText()
-
-  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-  autocmd FileType vim setlocal fdc=1
-  set foldlevel=99
-
-  " Space to toggle folds.
-  "nnoremap <leader> za
-  "vnoremap <leader> za
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim setlocal foldlevel=0
-
-  autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
-
-  autocmd FileType css,scss,json setlocal foldmethod=marker
-  autocmd FileType css,scss,json setlocal foldmarker={,}
-
-  let g:xml_syntax_folding = 1
-  autocmd FileType xml setl foldmethod=syntax
-
-  autocmd FileType html setl foldmethod=expr
-  autocmd FileType html setl foldexpr=HTMLFolds()
-
-  autocmd FileType javascript,typescript,json setl foldmethod=syntax
-
-" }}}
-
-" vim-airline ---------------------------------------------------------------{{{
-
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#coc#enabled = 1
-  let airline#extensions#coc#error_symbol = '💩:'
-  let airline#extensions#coc#warning_symbol = '❗️:'
-  let g:airline#extensions#mike#enabled = 0
-  set hidden
-  let g:airline#extensions#tabline#fnamemod = ':t'
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-  let g:airline#extensions#wordcount#enabled = 0
-  let g:airline_powerline_fonts = 1
-  let g:airline_symbols.branch = ''
-  let g:airline_theme='oceanicnext'
-  "let g:airline_theme='solarized'
-  nmap <leader>, :bnext<CR>
-  tmap <leader>, <C-\><C-n>:bnext<cr>
-  nmap <leader>. :bprevious<CR>
-  tmap <leader>. <C-\><C-n>:bprevious<CR>
-  tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
-  tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
-  tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
-  tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
-  tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
-  tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
-  tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
-  tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
-  tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
-  nmap <leader>1 <Plug>AirlineSelectTab1
-  nmap <leader>2 <Plug>AirlineSelectTab2
-  nmap <leader>3 <Plug>AirlineSelectTab3
-  nmap <leader>4 <Plug>AirlineSelectTab4
-  nmap <leader>5 <Plug>AirlineSelectTab5
-  nmap <leader>6 <Plug>AirlineSelectTab6
-  nmap <leader>7 <Plug>AirlineSelectTab7
-  nmap <leader>8 <Plug>AirlineSelectTab8
-  nmap <leader>9 <Plug>AirlineSelectTab9
-"}}}
 
 " NERDTree ---------------------------------------------------------------{{{
   let NERDTreeIgnore = ['\.DS_Store']
@@ -255,140 +156,33 @@ call plug#end()
   let NERDTreeHijackNetrw=0
   let g:NERDTreeWinSize=45
   let g:NERDTreeAutoDeleteBuffer=1
-  let g:WebDevIconsOS = 'Darwin'
   let NERDTreeMinimalUI=1
   let NERDTreeCascadeSingleChildDir=1
   let g:NERDTreeHeader = 'hello'
-
-  if exists('g:loaded_webdevicons')
-    call webdevicons#refresh()
-  endif
 " }}}
 
-" Vim-Devicons -------------------------------------------------------------0{{{
+" LSP ------------------------------------------------------------- {{{
+" Show diagnostic on hover
+autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 
-  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
-  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
-  let g:webdevicons_enable_airline_tabline = 1
-  let g:webdevicons_enable_airline_statusline = 1
-  let g:webdevicons_conceal_nerdtree_brackets = 1
-  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-  let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-  set conceallevel=2
+nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
 
-" }}}
-
-" Coc -------------------------------------------------------------0{{{
-
-  let g:coc_global_extensions = [
-    \ 'coc-snippets',
-    \ 'coc-pairs',
-    \ 'coc-tsserver',
-    \ 'coc-eslint',
-    \ 'coc-prettier',
-    \ 'coc-json',
-    \ 'coc-emmet',
-    \ 'coc-lists',
-    \ 'coc-json',
-    \ 'coc-html',
-    \ 'coc-dictionary',
-    \ 'coc-git',
-    \ 'coc-python',
-    \ 'coc-elixir',
-    \ 'coc-highlight',
-    \ 'coc-styled-components',
-    \ 'coc-css',
-    \ 'coc-html',
-    \ 'coc-markdownlint',
-    \ ]
-  " always show signcolumns
-  set signcolumn=yes
-
-  inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  let g:coc_snippet_next = '<tab>'
-
-  " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-
-  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-  " Coc only does snippet and additional edit on confirm.
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-  " Or use `complete_info` if your vim support it, like:
-  " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-  " Use `[g` and `]g` to navigate diagnostics
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-  " navigate git hunks
-  nmap <silent> <cr> <Plug>(coc-git-nextchunk)
-  nmap <silent> <backspace> <Plug>(coc-git-prevchunk)
-  nmap <silent> <leader>hi <Plug>(coc-git-chunkinfo)
-
-  nmap <silent> <leader>dd <Plug>(coc-definition)
-  nmap <silent> <leader>dy <Plug>(coc-type-definition)
-  nmap <silent> <leader>dr <Plug>(coc-references)
-  nmap <silent> <leader>dj <Plug>(coc-implementation)
-  nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
+" nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>gh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>sd :lua vim.lsp.util.show_line_diagnostics()<CR>
 
 
-  " Highlight symbol under cursor on CursorHold
-  "autocmd CursorHold * silent call CocActionAsync('highlight')
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_enable_auto_signature = 1
+let g:completion_enable_auto_paren = 1
 
-  nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
-  nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
-
-  " remap do action of current line
-  nmap <leader>ac  <Plug>(coc-codeaction)
-
-  " List errors
-  nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<cr>
-
-  " list commands available in tsserver (and others)
-  nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
-
-  " restart when tsserver gets wonky
-  nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
-
-  " Apply AutoFix to problem on the current line.
-  nmap <leader>qf  <Plug>(coc-fix-current)
-
-
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
-
-  " Remap for do codeAction of selected region
-  function! s:cocActionsOpenFromSelected(type) abort
-    execute 'CocCommand actions.open ' . a:type
-  endfunction
-
-  xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-  nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-  nnoremap <silent> L :call CocAction('doHover')<CR>
-  function! ShowDocIfNoDiagnostic(timer_id)
-    if (coc#util#has_float() == 0)
-      silent call CocActionAsync('doHover')
-    endif
-  endfunction
-
-  function! s:show_hover_doc()
-    call timer_start(100, 'ShowDocIfNoDiagnostic')
-  endfunction
-
-  autocmd CursorHoldI * :call <SID>show_hover_doc()
-  autocmd CursorHold * :call <SID>show_hover_doc()
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+ lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
 
 " }}}
 
@@ -396,69 +190,16 @@ call plug#end()
 
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
-    " nnoremap <silent> <C-p> :Files<Cr>
-    nnoremap <silent> <C-p> :call Fzf_dev()<Cr>
-    nnoremap <leader>f :Rg<Cr>
-    " nnoremap <silent> <leader>e :call Fzf_dev()<CR>
+    nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <silent> <Leader>g :GFiles?<CR>
-    nnoremap <silent> <Leader>b :Buffers<CR>
     nnoremap <silent> <Leader>c  :Commits<CR>
     nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
-
-
-  " Not sure if this is useful
-  if executable('rg')
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-    set grepprg=rg\ --vimgrep
-    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-  endif
-
-  " Files + devicons
-  function! Fzf_dev()
-    let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
-
-    function! s:files()
-      let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-      return s:prepend_icon(l:files)
-    endfunction
-
-    function! s:prepend_icon(candidates)
-      let l:result = []
-      for l:candidate in a:candidates
-        let l:filename = fnamemodify(l:candidate, ':p:t')
-        let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-        call add(l:result, printf('%s %s', l:icon, l:candidate))
-      endfor
-
-      return l:result
-    endfunction
-
-    function! s:edit_file(item)
-      let l:pos = stridx(a:item, ' ')
-      let l:file_path = a:item[pos+1:-1]
-      execute 'silent e' l:file_path
-    endfunction
-
-    call fzf#run({
-          \ 'source': <sid>files(),
-          \ 'sink':   function('s:edit_file'),
-          \ 'options': '-m ' . l:fzf_files_options,
-          \ 'window':  { 'width': 0.8, 'height': 0.8 }   })
-  endfunction
-
 "}}}
 
 " Random --------------------------------------------------------------------{{{
 
-" Trim whitespace on save
-let blacklist = ['md', 'markdown', 'mdown']
- :autocmd BufWritePost * if index(blacklist, &ft) < 0 | :StripWhitespace
-
 let g:NERDCreateDefaultMappings = 0
-
-let g:vim_markdown_conceal = 1
-let g:vim_markdown_conceal_code_blocks = 0
 
 " if strftime("%H") < 17
 "   set background=light
@@ -473,39 +214,115 @@ nmap <leader>gs :G<CR>
 
 "}}}
 
-" Close Tag --------------------------------------------------------------------{{{
-  let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
+" Golang -----------------------------------------------------------------{{{
+" --- vim go (polyglot) settings.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
 "}}}
 
-" VimWiki -----------------------------------------------------------------{{{
-" Run multiple wikis "
-let g:vimwiki_list = [
-                      \{'path': '~/Google Drive/VimWiki/tech.wiki', 'syntax': 'markdown', 'ext': '.mkd'},
-                \]
-let g:vimwiki_global_ext=0
+" Telescope -----------------------------------------------------------------{{{
+let g:telescope_cache_results = 1
+let g:telescope_prime_fuzzy_find  = 1
+
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>b :lua require('telescope.builtin').buffers({show_all_buffers = true})<CR>
+" nnoremap <leader>f :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For >")})<CR>
+nnoremap <leader>f :lua require('telescope.builtin').live_grep()<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+nnoremap <Leader>dr :lua require('telescope.builtin').lsp_references()<CR>
+
 "}}}
 
-" Functions -----------------------------------------------------------------{{{
-
-function! s:show_documentation()
-  if coc#util#has_float()
-    call coc#util#float_hide()
-  elseif (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
-augroup END
-
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+" Todo -----------------------------------------------------------------{{{
+nmap <Leader>tu <Plug>BujoChecknormal
+nmap <Leader>th <Plug>BujoAddnormal
+let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 "}}}
 
+" Go -----------------------------------------------------------------{{{
+
+let g:gofmt_exe = 'goimports'
+
+"}}}
+
+" Ale -----------------------------------------------------------------{{{
+nmap <silent> <leader> [g <Plug>(ale_previous_wrap)
+nmap <silent> <leader>]g <Plug>(ale_next_wrap)
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'javascriptreact': ['eslint'],
+\   'typescript': ['eslint', 'tslint'],
+\   'typescriptreact': ['eslint', 'tslint'],
+\   'go': ['golint'],
+\}
+
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\   'javascriptreact': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint'],
+\   'go': ['gofmt'],
+\   'css': ['prettier'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '💩'
+let g:ale_sign_warning = '⚠️'
+let g:ale_disable_lsp = 1
+let g:ale_open_list = 0
+
+"}}}
+
+" Airline -----------------------------------------------------------------{{{
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline_powerline_fonts = 1
+let g:airline_symbols.branch = ''
+let g:airline_theme='oceanicnext'
+tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
+tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
+tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
+tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
+tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
+tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
+tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
+tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
+tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab
+
+"}}}
 let g:rainbow_active = 1
 let g:rainbow_conf = {
   \    'separately': {
@@ -555,4 +372,3 @@ let g:rainbow_conf = {
 " , to jump to the previous
 "
 " ctrl+w + o close other buffers except on you are in
-

@@ -16,7 +16,7 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
-TERM=xterm-256color
+# TERM=xterm-256color
 # TERM=screen-256color
 
 # Exports and (auto)loading {{{
