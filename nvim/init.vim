@@ -22,6 +22,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'mhinz/vim-signify'
 
 Plug 'tweekmonster/gofmt.vim'
 
@@ -43,8 +44,8 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'romgrk/barbar.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
@@ -64,6 +65,7 @@ call plug#end()
   set scrolloff=5
   set completeopt=menuone,noinsert,noselect
   set signcolumn=yes
+  set updatetime=100
 
   set backupdir=~/.vim/.backup//
   set directory=~/.vim/.swp//
@@ -88,7 +90,7 @@ call plug#end()
   noremap K 5k
 
   noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
-  nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+  " nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
   nnoremap ; :
 
@@ -181,9 +183,13 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_enable_auto_signature = 1
 let g:completion_enable_auto_paren = 1
 
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
- lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
 
+lua require'nvim_lsp'.tsserver.setup{}
+lua require'nvim_lsp'.gopls.setup{}
+
+autocmd BufEnter * lua require'completion'.on_attach()
+autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
+inoremap <c-space> <c-x><c-o>
 " }}}
 
 " FZF --------------------------------------------------------------------{{{
@@ -289,38 +295,37 @@ let g:ale_open_list = 0
 
 "}}}
 
-" Airline -----------------------------------------------------------------{{{
+" BarBar -----------------------------------------------------------------{{{
+nnoremap <silent> <C-a> :BufferPick<CR>
+nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
+nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
+nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
+nnoremap <silent>    <leader>4 :BufferGoto 4<CR>
+nnoremap <silent>    <leader>5 :BufferGoto 5<CR>
+nnoremap <silent>    <leader>6 :BufferGoto 6<CR>
+nnoremap <silent>    <leader>7 :BufferGoto 7<CR>
+nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
+nnoremap <silent>    <leader>9 :BufferLast<CR>
+nnoremap <silent>    <leader>q :BufferClose<CR>
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+let bufferline = {}
+let bufferline.animation = v:true
+let bufferline.icons = v:true
+let bufferline.closable = v:false
+let bufferline.clickable = v:false
+let bufferline.semantic_letters = v:true
+let bufferline.letters =
+  \ 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP'
+let bufferline.maximum_padding = 4
 
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_symbols.branch = ''
-let g:airline_theme='oceanicnext'
-tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
-tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
-tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
-tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
-tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
-tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
-tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
-tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
-tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab
+
+"}}}
+
+" Git Gutter -----------------------------------------------------------------{{{
+nmap <silent> <cr> <Plug>(signify-next-hunk)
+nmap <silent> <backspace> <Plug>(signify-prev-hunk)
+nmap <silent> <leader>hi <Plug>(coc-git-chunkinfo)
+nmap <leader>gd :SignifyDiff<CR>
 
 "}}}
 let g:rainbow_active = 1
