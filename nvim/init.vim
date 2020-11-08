@@ -23,11 +23,12 @@ Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'mhinz/vim-signify'
+Plug 'APZelos/blamer.nvim'
 
 Plug 'tweekmonster/gofmt.vim'
 
 "nerdtree
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -46,6 +47,7 @@ Plug 'nvim-lua/telescope.nvim'
 
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
 
@@ -147,30 +149,70 @@ call plug#end()
   if filereadable(color_path)
     exec 'source' color_path
   else
-    " Default color scheme
-    colorscheme pink-moon
+    set background=dark
+    colorscheme ariake
   endif
 
   set t_Co=256
-  "set background=dark
-  "let g:oceanic_next_terminal_bold = 1
-  "let g:oceanic_next_terminal_italic = 1
- " colorscheme oceanicnext
-
 "}}}
 
 
-" NERDTree ---------------------------------------------------------------{{{
-  let NERDTreeIgnore = ['\.DS_Store']
-  let NERDTreeRespectWildIgnore=1
-  map <leader><leader>1 :NERDTreeToggle<CR>
-  let NERDTreeShowHidden=1
-  let NERDTreeHijackNetrw=0
-  let g:NERDTreeWinSize=45
-  let g:NERDTreeAutoDeleteBuffer=1
-  let NERDTreeMinimalUI=1
-  let NERDTreeCascadeSingleChildDir=1
-  let g:NERDTreeHeader = 'hello'
+" Nvim-tree ---------------------------------------------------------------{{{
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:lua_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+let g:lua_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ }
+" NOTE: the 'edit' key will wrap/unwrap a folder and open a file
+let g:lua_tree_bindings = {
+    \ 'edit':            ['<CR>', 'o'],
+    \ 'edit_vsplit':     '<C-v>',
+    \ 'edit_split':      '<C-x>',
+    \ 'edit_tab':        '<C-t>',
+    \ 'toggle_ignored':  'I',
+    \ 'toggle_dotfiles': 'H',
+    \ 'refresh':         'R',
+    \ 'preview':         '<Tab>',
+    \ 'cd':              '<C-]>',
+    \ 'create':          'a',
+    \ 'remove':          'd',
+    \ 'rename':          'r',
+    \ 'cut':             'x',
+    \ 'copy':            'c',
+    \ 'paste':           'p',
+    \ 'prev_git_item':   '[c',
+    \ 'next_git_item':   ']c',
+    \ }
+
+" Disable default mappings by plugin
+" Bindings are enable by default, disabled on any non-zero value
+" let lua_tree_disable_keybindings=1
+
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+let g:lua_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★"
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': ""
+    \   }
+    \ }
+
+nnoremap <leader><leader>1 :LuaTreeToggle<CR>
+nnoremap <leader>r :LuaTreeRefresh<CR>
+nnoremap <leader>n :LuaTreeFindFile<CR>
+
+
 " }}}
 
 " LSP ------------------------------------------------------------- {{{
@@ -206,7 +248,7 @@ inoremap <c-space> <c-x><c-o>
 
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
-    nnoremap <silent> <C-p> :Files<Cr>
+    " nnoremap <silent> <C-p> :Files<Cr>
     nnoremap <silent> <Leader>g :GFiles?<CR>
     nnoremap <silent> <Leader>c  :Commits<CR>
     nnoremap <silent> <Leader>bc :BCommits<CR>
@@ -259,6 +301,7 @@ nnoremap <leader>f :lua require('telescope.builtin').live_grep()<CR>
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader>dr :lua require('telescope.builtin').lsp_references()<CR>
+nnoremap <Leader>ol :lua require('telescope.builtin').loclist()<CR>
 
 "}}}
 
@@ -337,6 +380,7 @@ nmap <silent> <backspace> <Plug>(signify-prev-hunk)
 nmap <silent> <leader>hi <Plug>(coc-git-chunkinfo)
 nmap <leader>gd :SignifyDiff<CR>
 
+nmap <leader>gb :BlamerToggle<CR>
 "}}}
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -345,8 +389,6 @@ let g:rainbow_conf = {
   \    }
   \}
 
-hi StatusLineTerm ctermbg=24 ctermfg=254 guibg=#004f87 guifg=#e4e4e4
-hi StatusLineTermNC ctermbg=252 ctermfg=238 guibg=#d0d0d0 guifg=#444444
 
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
