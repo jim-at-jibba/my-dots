@@ -141,11 +141,21 @@ call plug#end()
     syntax enable
   endif
 
+  " Should this be in ~/.config
+  let color_path = expand('~/dotfiles/nvim/color.vim')
+
+  if filereadable(color_path)
+    exec 'source' color_path
+  else
+    " Default color scheme
+    colorscheme pink-moon
+  endif
+
   set t_Co=256
-  set background=dark
-  let g:oceanic_next_terminal_bold = 1
-  let g:oceanic_next_terminal_italic = 1
-  colorscheme oceanicnext
+  "set background=dark
+  "let g:oceanic_next_terminal_bold = 1
+  "let g:oceanic_next_terminal_italic = 1
+ " colorscheme oceanicnext
 
 "}}}
 
@@ -334,6 +344,9 @@ let g:rainbow_conf = {
   \       'nerdtree': 0
   \    }
   \}
+
+hi StatusLineTerm ctermbg=24 ctermfg=254 guibg=#004f87 guifg=#e4e4e4
+hi StatusLineTermNC ctermbg=252 ctermfg=238 guibg=#d0d0d0 guifg=#444444
 
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)

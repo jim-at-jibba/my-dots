@@ -4,6 +4,7 @@ When setting up a new computer dont forget to install the following:
 
 To symlink snippets `ln -s ~/dotfiles/snippets/* ~/.vim/snippets`
 To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
+Symlink alacritty `ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty`
 
 ## TMUX
 Most of the set up is done with this guys setup
