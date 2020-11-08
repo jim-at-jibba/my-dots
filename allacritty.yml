@@ -32,7 +32,7 @@ window:
   dynamic_padding: false
 
   # Window decorations
-  # Setting this to false will result in window without borders and title bar.
+  # Setting this to false will esult in window without borders and title bar.
   decorations: full
 
 # When true, bold text is drawn using the bright variant of colors.
@@ -51,22 +51,24 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   normal:
-    family: FuraCode Nerd Font
+    #family: Dank Mono
+    family: Hack Nerd Font Mono
     style: Regular
 
   # The bold font face
   bold:
-    family: FuraCode Nerd Font
-    style: Regular
+    #family: Dank Mono
+    family: Hack Nerd Font Mono
+    style: Bold
 
   # The italic font face
   italic:
     # family: Dank Mono
-    family: FuraCode Nerd Font
-    style: Regular Italic
+    family: Hack Nerd Font Mono
+    style: Italic
 
   # Point size of the font
-  size: 17.0
+  size: 17
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -91,72 +93,106 @@ debug:
   render_timer: false
 
 # Colors (Oceanic Next)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '#1b2b34'
-#     foreground: '#d8dee9'
-# 
-#   # Colors the cursor will use if `custom_cursor_colors` is true
-#   cursor:
-#     text: '#1b2b34'
-#     cursor: '#ffffff'
-# 
-#   # Normal colors
-#   normal:
-#     black:   '#343d46'
-#     red:     '#EC5f67'
-#     green:   '#99C794'
-#     yellow:  '#FAC863'
-#     blue:    '#6699cc'
-#     magenta: '#c594c5'
-#     cyan:    '#5fb3b3'
-#     white:   '#d8dee9'
-# 
-#   # Bright colors
-#   bright:
-#     black:   '#343d46'
-#     red:     '#EC5f67'
-#     green:   '#99C794'
-#     yellow:  '#FAC863'
-#     blue:    '#6699cc'
-#     magenta: '#c594c5'
-#     cyan:    '#5fb3b3'
-#     white:   '#d8dee9'
-
-# Colors (Ariake)
 colors:
   # Default colors
   primary:
-    background: '#292d36'
-    foreground: '#eceef0'
+    background: '#1b2b34'
+    foreground: '#d8dee9'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: '#1b2b34'
-    cursor: '#edeeed'
+    cursor: '#ffffff'
 
   # Normal colors
   normal:
-    black:   '#546d79'
-    red:     '#7d7edc'
-    green:   '#69f0ad'
-    yellow:  '#85b1df'
-    blue:    '#4d89ca'
-    magenta: '#dda2f6'
-    cyan:    '#93ddfb'
-    white:   '#fefefe'
+    black:   '#343d46'
+    red:     '#EC5f67'
+    green:   '#99C794'
+    yellow:  '#FAC863'
+    blue:    '#6699cc'
+    magenta: '#c594c5'
+    cyan:    '#5fb3b3'
+    white:   '#d8dee9'
 
   # Bright colors
   bright:
-    black:   '#546d79'
-    red:     '#7d7edc'
-    green:   '#69f0ad'
-    yellow:  '#85b1df'
-    blue:    '#4d89ca'
-    magenta: '#dda2f6'
-    cyan:    '#93ddfb'
-    white:   '#fefefe'
+    black:   '#343d46'
+    red:     '#EC5f67'
+    green:   '#99C794'
+    yellow:  '#FAC863'
+    blue:    '#6699cc'
+    magenta: '#c594c5'
+    cyan:    '#5fb3b3'
+    white:   '#d8dee9'
+
+# Colors (Ariake)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#292d36'
+#     foreground: '#eceef0'
+#
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '#1b2b34'
+#     cursor: '#edeeed'
+#
+#   # Normal colors
+#   normal:
+#     black:   '#546d79'
+#     red:     '#7d7edc'
+#     green:   '#69f0ad'
+#     yellow:  '#85b1df'
+#     blue:    '#4d89ca'
+#     magenta: '#dda2f6'
+#     cyan:    '#93ddfb'
+#     white:   '#fefefe'
+#
+#   # Bright colors
+#   bright:
+#     black:   '#546d79'
+#     red:     '#7d7edc'
+#     green:   '#69f0ad'
+#     yellow:  '#85b1df'
+#     blue:    '#4d89ca'
+#     magenta: '#dda2f6'
+#     cyan:    '#93ddfb'
+#     white:   '#fefefe'
+
+# Colors (Ariake Light)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#fafafa'
+#     foreground: '#7d7edc'
+#
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '#1b2b34'
+#     cursor: '#dda2f6'
+#
+#   # Normal colors
+#   normal:
+#     black:   '#546d79'
+#     red:     '#7d7edc'
+#     green:   '#69f0ad'
+#     yellow:  '#85b1df'
+#     blue:    '#4d89ca'
+#     magenta: '#dda2f6'
+#     cyan:    '#93ddfb'
+#     white:   '#fefefe'
+#
+#   # Bright colors
+#   bright:
+#     black:   '#b0bec4'
+#     red:     '#7d7edc'
+#     green:   '#69f0ad'
+#     yellow:  '#85b1df'
+#     blue:    '#4d89ca'
+#     magenta: '#dda2f6'
+#     cyan:    '#93ddfb'
+#     white:   '#fefefe'
 
 # Visual Bell
 #
@@ -425,4 +461,3 @@ key_bindings:
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
   - { key: Right,    mods: Command,       chars: "\x06\x4c" }
-
