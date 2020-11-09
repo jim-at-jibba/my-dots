@@ -1,0 +1,14 @@
+### Switch themes
+# show a list of commands and keybinds
+
+local themes="nord [Nord theme]
+ariakedark [Ariake Dark]
+ariakelight [Ariake Light]
+oceanicnext [Ocean Next]
+"
+
+local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
+
+if [[ -n $cmd ]]; then
+ ~/dotfiles/alacritty/at.sh ${cmd}
+fi
