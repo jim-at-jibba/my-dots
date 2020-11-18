@@ -461,18 +461,17 @@ key_bindings:
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
   - { key: Right,    mods: Command,       chars: "\x06\x4c" }
-# Ariake Dark
+# Colors (Ariake Light)
 colors:
   # Default colors
   primary:
-    background: '#292d36'
-    foreground: '#eceef0'
+    background: '#fafafa'
+    foreground: '#7d7edc'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: '#1b2b34'
     cursor: '#dda2f6'
-    # cursor: '#edeeed'
 
   # Normal colors
   normal:
@@ -487,7 +486,7 @@ colors:
 
   # Bright colors
   bright:
-    black:   '#546d79'
+    black:   '#b0bec4'
     red:     '#7d7edc'
     green:   '#69f0ad'
     yellow:  '#85b1df'

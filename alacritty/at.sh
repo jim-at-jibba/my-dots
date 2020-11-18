@@ -34,8 +34,20 @@ case $color in
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme nord'
     ;;
+  nightfly)
+    configure_alacritty
+    configure_vim 'set background=dark\ncolorscheme nightfly'
+    ;;
+  onehalfdark)
+    configure_alacritty
+    configure_vim 'set background=dark\ncolorscheme onehalfdark'
+    ;;
+  onehalflight)
+    configure_alacritty
+    configure_vim 'set background=light\ncolorscheme onehalflight'
+    ;;
   *)
-    echo "Supported colorschemes: Oceanic Next, Nord, Ariake"
+    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, Nightfly"
     exit 1
     ;;
 esac

@@ -1,2 +1,2 @@
-set background=dark
+set background=light
 colorscheme ariake

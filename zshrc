@@ -34,12 +34,14 @@ plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syn
   export PATH=$PATH:$GOBIN
   export PATH="$HOME/.composer/vendor/bin:$PATH"
   export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+  export PATH="$HOME/dotfiles/alacritty:$PATH"
   export PATH=$PATH:$ANDROID_HOME/tools
   export PATH=$PATH:$ANDROID_HOME/platform-tools
   export PATH="/Users/jamesbest/code/flutter/bin:$PATH"
   export PATH="$HOME/.fastlane/bin:$PATH"
   export PATH=$PATH:/opt/apache-maven/bin
   export PATH="/usr/local/opt/helm@2/bin:$PATH"
+  export PATH="$HOME/neovim/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
@@ -52,7 +54,7 @@ plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syn
   source $ZSH/oh-my-zsh.sh
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mobile cms scheduled interests mobKnowledge mobFeed
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mobile cms scheduled interests mobKnowledge mobFeed theme
 
   typeset -U PATH fpath
 

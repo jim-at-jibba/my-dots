@@ -35,15 +35,12 @@ ${3}
 \`
 endsnippet
 
-snippet rh "React functional component" b
+snippet rnh "React functional component" b
 import React from 'react'
+import { View, Text} from 'react-native'
 
-interface ${1}Props {
-
-}
-
-export const ${1}: React.FC<${1}Props> = ({}) => {
-	return ($0)
+export default function ${1}() {
+	return (<View><Text>Hello</Text></View>)
 }
 
 endsnippet

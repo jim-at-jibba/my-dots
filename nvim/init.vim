@@ -15,8 +15,10 @@ Plug 'junegunn/fzf.vim'
 " Look and feel
 Plug 'arcticicestudio/nord-vim'
 " Plug 'jim-at-jibba/ariake-vim-colors'
-Plug 'luochen1990/rainbow'
 Plug 'mhartington/oceanic-next'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'norcalli/nvim-colorizer.lua'
 
 " git
 Plug 'jreybert/vimagit'
@@ -27,18 +29,14 @@ Plug 'APZelos/blamer.nvim'
 
 Plug 'tweekmonster/gofmt.vim'
 
-"nerdtree
-" Plug 'scrooloose/nerdtree'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-
-Plug 'vuciv/vim-bujo'
 Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dense-analysis/ale'
 Plug 'Raimondi/delimitMate'
+
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " telescope requirements...
 Plug 'nvim-lua/popup.nvim'
@@ -48,6 +46,11 @@ Plug 'nvim-lua/telescope.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+
+Plug 'nvim-treesitter/nvim-treesitter'
 
 call plug#end()
 
@@ -69,8 +72,15 @@ call plug#end()
   set signcolumn=yes
   set updatetime=100
 
-  set backupdir=~/.vim/.backup//
-  set directory=~/.vim/.swp//
+  " Fold stuff
+  set nofoldenable
+  set foldlevel=99
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+
+  set nobackup
+  set nowritebackup
+  set noswapfile
 
 
   if has("persistent_undo")
@@ -139,6 +149,8 @@ call plug#end()
     set termguicolors
   endif
 
+  lua require'colorizer'.setup()
+
   if !exists('g:syntax_on')
     syntax enable
   endif
@@ -152,6 +164,7 @@ call plug#end()
     set background=dark
     colorscheme ariake
   endif
+
 
   set t_Co=256
 "}}}
@@ -216,32 +229,54 @@ nnoremap <leader>n :LuaTreeFindFile<CR>
 " }}}
 
 " LSP ------------------------------------------------------------- {{{
-" Show diagnostic on hover
-autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
+" lua require('my_lspconfig')
 
 nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
 
-" nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>gh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>sd :lua vim.lsp.util.show_line_diagnostics()<CR>
 
-
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+lua require'lspconfig'.tsserver.setup{}
+lua require'lspconfig'.gopls.setup{}
+
+autocmd BufEnter * lua require'completion'.on_attach()
+autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
+
+
+" Diagnostics
+
+lua << EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+  }
+)
+EOF
+
+nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
+
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_enable_auto_signature = 1
 let g:completion_enable_auto_paren = 1
 
-
-lua require'nvim_lsp'.tsserver.setup{}
-lua require'nvim_lsp'.gopls.setup{}
-
-autocmd BufEnter * lua require'completion'.on_attach()
-autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
+" trigger autocomplete in insert mode
 inoremap <c-space> <c-x><c-o>
+
+
+let g:UltiSnipsSnippetDirectories=["Ultisnips", "mysnippets"]
+
+
 " }}}
 
 " FZF --------------------------------------------------------------------{{{
@@ -249,9 +284,9 @@ inoremap <c-space> <c-x><c-o>
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
     " nnoremap <silent> <C-p> :Files<Cr>
-    nnoremap <silent> <Leader>g :GFiles?<CR>
-    nnoremap <silent> <Leader>c  :Commits<CR>
-    nnoremap <silent> <Leader>bc :BCommits<CR>
+   " nnoremap <silent> <Leader>g :GFiles?<CR>
+   " nnoremap <silent> <Leader>c  :Commits<CR>
+   " nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
 "}}}
 
@@ -302,13 +337,22 @@ nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader>dr :lua require('telescope.builtin').lsp_references()<CR>
 nnoremap <Leader>ol :lua require('telescope.builtin').loclist()<CR>
+nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
+nnoremap <Leader>c :lua require('telescope.builtin').git_commits()<CR>
+nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
+nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
 
-"}}}
+nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
 
-" Todo -----------------------------------------------------------------{{{
-nmap <Leader>tu <Plug>BujoChecknormal
-nmap <Leader>th <Plug>BujoAddnormal
-let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    prompt_prefix = "🦄 ",
+  }
+}
+
+EOF
+
 "}}}
 
 " Go -----------------------------------------------------------------{{{
@@ -349,7 +393,7 @@ let g:ale_open_list = 0
 "}}}
 
 " BarBar -----------------------------------------------------------------{{{
-nnoremap <silent> <C-a> :BufferPick<CR>
+nnoremap <silent> <C-s> :BufferPick<CR>
 nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
 nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
 nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
@@ -371,25 +415,29 @@ let bufferline.letters =
   \ 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP'
 let bufferline.maximum_padding = 4
 
-
 "}}}
 
 " Git Gutter -----------------------------------------------------------------{{{
 nmap <silent> <cr> <Plug>(signify-next-hunk)
 nmap <silent> <backspace> <Plug>(signify-prev-hunk)
-nmap <silent> <leader>hi <Plug>(coc-git-chunkinfo)
 nmap <leader>gd :SignifyDiff<CR>
 
 nmap <leader>gb :BlamerToggle<CR>
 "}}}
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-  \    'separately': {
-  \       'nerdtree': 0
-  \    }
-  \}
 
+"{{{ Treesitter -----------------------------------------------------------------{{{
+lua << EOF
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+
+EOF
+"}}}
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
 " nmap <silent> <leader>dy <Plug>(coc-type-definition)

@@ -1,0 +1,52 @@
+snippet imr
+import React from 'react';
+endsnippet
+
+snippet imrc
+import React, { Component } from 'react';
+endsnippet
+
+snippet imrf
+import * as React from 'react';
+endsnippet
+
+snippet view
+<View>{ ${1:CONTENT} }</View>
+endsnippet
+
+snippet text
+<Text>{ ${1:CONTENT} }</Text>
+endsnippet
+
+snippet imrn
+import { ${1:MODULES} } from 'react-native';
+endsnippet
+
+snippet log
+console.log(${1:MESSAGE});
+endsnippet
+
+snippet test
+test('${1:NAME}', () => {${2:FUNCTION}})
+endsnippet
+
+snippet extend
+import EStylesheet from "react-native-extended-stylesheet";
+export default EStylesheet.create({});
+endsnippet
+
+snippet com
+/**
+|--------------------------------------------------
+| ${1:BODY}
+|--------------------------------------------------
+*/
+endsnippet
+
+snippet stc
+const ${1:NAME} = styled.${2:ATTRIBUTE}`
+  ${({theme}) => css `
+    ${3}
+  `}
+`
+endsnippet
