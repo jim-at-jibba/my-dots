@@ -2,16 +2,12 @@ local nvim_lsp = require('lspconfig')
 local completion = require('completion')
 
 
-local mapper = function(mode, key, result)
-  vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
-end
-
-end
+ local mapper = function(mode, key, result)
+   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
+ end
 
 local custom_attach = function(client)
-  completion.on_attach({
-    matcher = {'exact', 'substring', 'fuzzy'}
-  })
+  completion.on_attach(client)
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
@@ -35,3 +31,20 @@ nvim_lsp.tsserver.setup({
   },
   on_attach = custom_attach,
 })
+
+nvim_lsp.gopls.setup({
+  on_attach = custom_attach
+})
+
+require('nlua.lsp.nvim').setup(nvim_lsp, {
+  on_attach = custom_attach,
+})
+
+-- Diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+  }
+)

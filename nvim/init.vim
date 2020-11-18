@@ -52,6 +52,10 @@ Plug 'nvim-lua/completion-nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
 
+" Lua
+Plug 'tjdevries/nlua.nvim'
+Plug 'euclidianAce/BetterLua.vim'
+
 call plug#end()
 
 " }}}
@@ -229,39 +233,39 @@ nnoremap <leader>n :LuaTreeFindFile<CR>
 " }}}
 
 " LSP ------------------------------------------------------------- {{{
-" lua require('my_lspconfig')
+lua require("my_lspconfig")
 
-nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-
-nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>gh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>sd :lua vim.lsp.util.show_line_diagnostics()<CR>
-
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-
-lua require'lspconfig'.tsserver.setup{}
-lua require'lspconfig'.gopls.setup{}
-
-autocmd BufEnter * lua require'completion'.on_attach()
-autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
+" nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
+" nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
+" nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+"
+" nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
+" nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
+" nnoremap <silent> <leader>gh :lua vim.lsp.buf.hover()<CR>
+" nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
+" nnoremap <silent> <leader>sd :lua vim.lsp.util.show_line_diagnostics()<CR>
+"
+"
+" lua require'lspconfig'.tsserver.setup{}
+" lua require'lspconfig'.gopls.setup{}
+"
+" autocmd BufEnter * lua require'completion'.on_attach()
+" autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
 
 
 " Diagnostics
 
-lua << EOF
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-  }
-)
-EOF
+" lua << EOF
+" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+"   vim.lsp.diagnostic.on_publish_diagnostics, {
+"     virtual_text = true,
+"     signs = true,
+"     update_in_insert = false,
+"   }
+" )
+" EOF
 
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
