@@ -461,36 +461,36 @@ key_bindings:
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
   - { key: Right,    mods: Command,       chars: "\x06\x4c" }
-# Colors (Ariake Light)
+# Colors (Oceanic Next)
 colors:
   # Default colors
   primary:
-    background: '#fafafa'
-    foreground: '#7d7edc'
+    background: '#1b2b34'
+    foreground: '#d8dee9'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: '#1b2b34'
-    cursor: '#dda2f6'
+    cursor: '#ffffff'
 
   # Normal colors
   normal:
-    black:   '#546d79'
-    red:     '#7d7edc'
-    green:   '#69f0ad'
-    yellow:  '#85b1df'
-    blue:    '#4d89ca'
-    magenta: '#dda2f6'
-    cyan:    '#93ddfb'
-    white:   '#fefefe'
+    black:   '#343d46'
+    red:     '#EC5f67'
+    green:   '#99C794'
+    yellow:  '#FAC863'
+    blue:    '#6699cc'
+    magenta: '#c594c5'
+    cyan:    '#5fb3b3'
+    white:   '#d8dee9'
 
   # Bright colors
   bright:
-    black:   '#b0bec4'
-    red:     '#7d7edc'
-    green:   '#69f0ad'
-    yellow:  '#85b1df'
-    blue:    '#4d89ca'
-    magenta: '#dda2f6'
-    cyan:    '#93ddfb'
-    white:   '#fefefe'
+    black:   '#343d46'
+    red:     '#EC5f67'
+    green:   '#99C794'
+    yellow:  '#FAC863'
+    blue:    '#6699cc'
+    magenta: '#c594c5'
+    cyan:    '#5fb3b3'
+    white:   '#d8dee9'
