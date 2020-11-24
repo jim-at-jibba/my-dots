@@ -16,7 +16,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'mhartington/oceanic-next'
-Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -28,6 +27,7 @@ Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
 
 Plug 'tweekmonster/gofmt.vim'
+Plug 'fatih/vim-go'
 
 
 Plug 'mbbill/undotree'
@@ -51,6 +51,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
+
+Plug 'nathunsmitty/nvim-ale-diagnostic'
+
+Plug 'TaDaa/vimade'
 
 " Lua
 Plug 'tjdevries/nlua.nvim'
@@ -102,8 +106,8 @@ call plug#end()
 
   noremap H ^
   noremap L g_
-  noremap J 5j
-  noremap K 5k
+  " nnoremap J 5j
+  " nnoremap K 5k
 
   noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
   " nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
@@ -251,10 +255,10 @@ lua require("my_lspconfig")
 "
 " autocmd BufEnter * lua require'completion'.on_attach()
 " autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
-
-
-" Diagnostics
-
+"
+"
+" " Diagnostics
+"
 " lua << EOF
 " vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 "   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -265,14 +269,14 @@ lua require("my_lspconfig")
 " )
 " EOF
 
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
 
-let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_enable_auto_signature = 1
-let g:completion_enable_auto_paren = 1
+"let g:completion_enable_snippet = 'UltiSnips'
+"let g:completion_enable_auto_signature = 1
+"let g:completion_enable_auto_paren = 1
 
 " trigger autocomplete in insert mode
 inoremap <c-space> <c-x><c-o>
@@ -288,7 +292,7 @@ let g:UltiSnipsSnippetDirectories=["Ultisnips", "mysnippets"]
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
   if !&diff
     " nnoremap <silent> <C-p> :Files<Cr>
-   " nnoremap <silent> <Leader>g :GFiles?<CR>
+   nnoremap <silent> <Leader>g :GFiles?<CR>
    " nnoremap <silent> <Leader>c  :Commits<CR>
    " nnoremap <silent> <Leader>bc :BCommits<CR>
   endif
@@ -341,7 +345,7 @@ nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader>dr :lua require('telescope.builtin').lsp_references()<CR>
 nnoremap <Leader>ol :lua require('telescope.builtin').loclist()<CR>
-nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
+" nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>c :lua require('telescope.builtin').git_commits()<CR>
 nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
@@ -362,7 +366,7 @@ EOF
 " Go -----------------------------------------------------------------{{{
 
 let g:gofmt_exe = 'goimports'
-
+let g:go_doc_keywordprg_enabled = 0
 "}}}
 
 " Ale -----------------------------------------------------------------{{{
@@ -375,6 +379,7 @@ let g:ale_linters = {
 \   'typescript': ['eslint', 'tslint'],
 \   'typescriptreact': ['eslint', 'tslint'],
 \   'go': ['golint'],
+\   'html': ['htmlhint'],
 \}
 
 let g:ale_fixers = {
@@ -384,15 +389,17 @@ let g:ale_fixers = {
 \   'typescriptreact': ['prettier', 'eslint'],
 \   'go': ['gofmt'],
 \   'css': ['prettier'],
+\   'html': ['prettier'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '💩'
-let g:ale_sign_warning = '⚠️'
+let g:ale_sign_warning = '📣 '
 let g:ale_disable_lsp = 1
 let g:ale_open_list = 0
+let g:ale_virtualtext_cursor = 1
 
 "}}}
 
