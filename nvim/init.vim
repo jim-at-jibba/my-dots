@@ -449,6 +449,8 @@ require'nvim-treesitter.configs'.setup {
 
 EOF
 "}}}
+"
+nnoremap <buffer><leader>gd :lua require'lsp-ext'.peek_definition()<cr>
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
 " nmap <silent> <leader>dy <Plug>(coc-type-definition)

@@ -24,7 +24,6 @@ local custom_attach = function(client)
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>vsh', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
