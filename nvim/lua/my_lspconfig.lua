@@ -2,9 +2,9 @@ local nvim_lsp = require('lspconfig')
 local completion = require('completion')
 
 
- local mapper = function(mode, key, result)
-   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
- end
+local mapper = function(mode, key, result)
+  vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
+end
 
 
 vim.g.completion_enable_snippet = 'UltiSnips'
@@ -12,12 +12,32 @@ vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 
+--[[
+local format_options_prettier = {
+    tabWidth = 4,
+    singleQuote = true,
+    trailingComma = "all",
+    configPrecedence = "prefer-file"
+}
+
+vim.g.format_options_typescript = format_options_prettier
+vim.g.format_options_javascript = format_options_prettier
+vim.g.format_options_typescriptreact = format_options_prettier
+vim.g.format_options_javascriptreact = format_options_prettier
+
+_G.formatting = function()
+    if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
+        vim.lsp.buf.formatting(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {})
+    end
+end
+
+--]]
 local custom_attach = function(client)
   --if client.resolved_capabilities.document_formatting then
-  --    vim.api.nvim_command [[augroup Format]]
-  --    vim.api.nvim_command [[autocmd! * <buffer>]]
-  --    vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
-  --    vim.api.nvim_command [[augroup END]]
+  --    vim.cmd [[augroup Format]]
+  --    vim.cmd [[autocmd! * <buffer>]]
+  --    vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
+  --    vim.cmd [[augroup END]]
   --end
 
   completion.on_attach(client)
@@ -62,11 +82,49 @@ nvim_lsp.sqlls.setup({
   on_attach = custom_attach
 })
 
--- nvim_lsp.efm.setup {on_attach = on_attach}
-
-require('nlua.lsp.nvim').setup(nvim_lsp, {
+nvim_lsp.sumneko_lua.setup({
   on_attach = custom_attach,
+  settings = {
+        Lua = {
+            diagnostics = {
+                enable = true,
+                globals = {"vim", "love"},
+            }
+        }
+    }
+
 })
+
+--[[
+-- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
+--local golint = require "efm/golint"
+--local goimports = require "efm/goimports"
+local prettier = require "efm/prettier"
+local eslint = require "efm/eslint"
+
+nvim_lsp.efm.setup {
+  on_attach = custom_attach,
+  init_options = {documentFormatting = true},
+  settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            typescript = {prettier, eslint},
+            javascript = {prettier, eslint},
+            typescriptreact = {prettier, eslint},
+            javascriptreact = {prettier, eslint},
+            json = {prettier},
+            html = {prettier},
+            scss = {prettier},
+            css = {prettier},
+            markdown = {prettier},
+        }
+    }
+}
+]]--
+
+--require('nlua.lsp.nvim').setup(nvim_lsp, {
+--  on_attach = custom_attach,
+--})
 
 -- async formatting
 -- https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/

@@ -18,6 +18,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'lukas-reineke/onedark.nvim'
 
 " git
 Plug 'jreybert/vimagit'
@@ -59,6 +60,8 @@ Plug 'TaDaa/vimade'
 " Lua
 Plug 'tjdevries/nlua.nvim'
 Plug 'euclidianAce/BetterLua.vim'
+
+Plug 'glepnir/galaxyline.nvim'
 
 call plug#end()
 
@@ -237,8 +240,8 @@ nnoremap <leader>n :LuaTreeFindFile<CR>
 " }}}
 
 " LSP ------------------------------------------------------------- {{{
-lua require("my_lspconfig")
-
+" lua require("my_lspconfig")
+lua require('init')
 " nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
 " nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
 " nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
@@ -273,6 +276,7 @@ lua require("my_lspconfig")
 nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <buffer><leader>pp :lua require'lsp-ext'.peek_definition()<cr>
 
 "let g:completion_enable_snippet = 'UltiSnips'
 "let g:completion_enable_auto_signature = 1
@@ -450,7 +454,6 @@ require'nvim-treesitter.configs'.setup {
 EOF
 "}}}
 "
-nnoremap <buffer><leader>gd :lua require'lsp-ext'.peek_definition()<cr>
 " === coc.nvim === "
 " nmap <silent> <leader>dd <Plug>(coc-definition)
 " nmap <silent> <leader>dy <Plug>(coc-type-definition)

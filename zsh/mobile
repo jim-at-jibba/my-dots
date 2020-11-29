@@ -1,5 +1,5 @@
 ### Mob
 
 if hash navy &> /dev/null; then
-  navy start public-api heartwood knowledge-base auth laravel-api queue mysql postgres image minio permissions badge
+  navy start public-api heartwood knowledge-base auth laravel-api queue mysql postgres image minio permissions badge classifieds payments
 fi
