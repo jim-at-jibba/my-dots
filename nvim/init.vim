@@ -7,7 +7,7 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -52,6 +52,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
 
 Plug 'nathunsmitty/nvim-ale-diagnostic'
 
@@ -390,16 +391,16 @@ let g:ale_linters = {
 \   'html': ['htmlhint'],
 \}
 
-" let g:ale_fixers = {
-" \   'javascript': ['prettier', 'eslint'],
-" \   'javascriptreact': ['prettier', 'eslint'],
-" \   'typescript': ['prettier', 'eslint'],
-" \   'typescriptreact': ['prettier', 'eslint'],
-" \   'go': ['gofmt'],
-" \   'css': ['prettier'],
-" \   'html': ['prettier'],
-" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \}
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\   'javascriptreact': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint'],
+\   'go': ['gofmt'],
+\   'css': ['prettier'],
+\   'html': ['prettier'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
 " let g:ale_fix_on_save = 1
@@ -449,13 +450,29 @@ lua << EOF
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  indent = {
+    enable = true
+  },
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { "c", "rust" },  -- list of language that will be disabled
   },
+  rainbow = {
+    enable = true,
+    disable = {'bash'} -- please disable bash until I figure #1 out
+  }
 }
 
 EOF
+
+" rainbow brackets
+hi rainbowcol1 guifg=#7ef1ea
+hi rainbowcol2 guifg=#4f71ff
+hi rainbowcol3 guifg=#7f7ce3
+hi rainbowcol4 guifg=#e89dfc
+hi rainbowcol5 guifg=#85b1df
+hi rainbowcol6 guifg=#fbdf00
+hi rainbowcol7 guifg=#48afa7
 "}}}
 "
 " === coc.nvim === "
