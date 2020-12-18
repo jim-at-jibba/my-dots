@@ -51,7 +51,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'nathunsmitty/nvim-ale-diagnostic'
 
@@ -62,6 +62,10 @@ Plug 'tjdevries/nlua.nvim'
 Plug 'euclidianAce/BetterLua.vim'
 
 Plug 'glepnir/galaxyline.nvim'
+
+" Me
+Plug '~/dotfiles/nvim/lua/whid'
+Plug 'jim-at-jibba/navy-vim'
 
 call plug#end()
 
@@ -276,7 +280,7 @@ lua require('init')
 nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <buffer><leader>pp :lua require'lsp-ext'.peek_definition()<cr>
+nnoremap <leader>df :lua require'lsp-ext'.peek_definition()<cr>
 
 "let g:completion_enable_snippet = 'UltiSnips'
 "let g:completion_enable_auto_signature = 1
@@ -386,19 +390,19 @@ let g:ale_linters = {
 \   'html': ['htmlhint'],
 \}
 
-let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint'],
-\   'javascriptreact': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
-\   'typescriptreact': ['prettier', 'eslint'],
-\   'go': ['gofmt'],
-\   'css': ['prettier'],
-\   'html': ['prettier'],
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
+" let g:ale_fixers = {
+" \   'javascript': ['prettier', 'eslint'],
+" \   'javascriptreact': ['prettier', 'eslint'],
+" \   'typescript': ['prettier', 'eslint'],
+" \   'typescriptreact': ['prettier', 'eslint'],
+" \   'go': ['gofmt'],
+" \   'css': ['prettier'],
+" \   'html': ['prettier'],
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \}
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 let g:ale_sign_error = '💩'
 let g:ale_sign_warning = '📣 '
 let g:ale_disable_lsp = 1
@@ -420,7 +424,7 @@ nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
 nnoremap <silent>    <leader>9 :BufferLast<CR>
 nnoremap <silent>    <leader>q :BufferClose<CR>
 
-let bufferline = {}
+let bufferline = get(g:, 'bufferline', {})
 let bufferline.animation = v:true
 let bufferline.icons = v:true
 let bufferline.closable = v:false

@@ -12,11 +12,11 @@ vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 
---[[
 local format_options_prettier = {
-    tabWidth = 4,
-    singleQuote = true,
+    semi = false,
+    singleQuote = false,
     trailingComma = "all",
+    bracketSpacing = false,
     configPrecedence = "prefer-file"
 }
 
@@ -31,14 +31,13 @@ _G.formatting = function()
     end
 end
 
---]]
 local custom_attach = function(client)
-  --if client.resolved_capabilities.document_formatting then
-  --    vim.cmd [[augroup Format]]
-  --    vim.cmd [[autocmd! * <buffer>]]
-  --    vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
-  --    vim.cmd [[augroup END]]
-  --end
+  if client.resolved_capabilities.document_formatting then
+      vim.cmd [[augroup Format]]
+      vim.cmd [[autocmd! * <buffer>]]
+      vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
+      vim.cmd [[augroup END]]
+  end
 
   completion.on_attach(client)
 
@@ -62,7 +61,10 @@ nvim_lsp.tsserver.setup({
     "typescriptreact",
     "typescript.tsx"
   },
-  on_attach = custom_attach,
+  on_attach = function(client)
+    -- client.resolved_capabilities.document_formatting = false
+    custom_attach(client)
+  end
 })
 
 nvim_lsp.gopls.setup({
@@ -82,6 +84,12 @@ nvim_lsp.sqlls.setup({
   on_attach = custom_attach
 })
 
+require('nlua.lsp.nvim').setup(nvim_lsp, {
+  on_attach = custom_attach,
+})
+
+--[[
+
 nvim_lsp.sumneko_lua.setup({
   on_attach = custom_attach,
   settings = {
@@ -94,8 +102,7 @@ nvim_lsp.sumneko_lua.setup({
     }
 
 })
-
---[[
+--]]
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
 --local golint = require "efm/golint"
 --local goimports = require "efm/goimports"
@@ -112,33 +119,28 @@ nvim_lsp.efm.setup {
             javascript = {prettier, eslint},
             typescriptreact = {prettier, eslint},
             javascriptreact = {prettier, eslint},
-            json = {prettier},
-            html = {prettier},
-            scss = {prettier},
-            css = {prettier},
-            markdown = {prettier},
+            -- json = {prettier},
+            -- html = {prettier},
+            -- scss = {prettier},
+            -- css = {prettier},
+            -- markdown = {prettier},
         }
     }
 }
-]]--
-
---require('nlua.lsp.nvim').setup(nvim_lsp, {
---  on_attach = custom_attach,
---})
 
 -- async formatting
 -- https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
---vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
---    if err ~= nil or result == nil then
---        return
---    end
---    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
---        local view = vim.fn.winsaveview()
---        vim.lsp.util.apply_text_edits(result, bufnr)
---        vim.fn.winrestview(view)
---        vim.api.nvim_command("noautocmd :update")
---    end
---end
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then
+        return
+    end
+    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+        local view = vim.fn.winsaveview()
+        vim.lsp.util.apply_text_edits(result, bufnr)
+        vim.fn.winrestview(view)
+        vim.api.nvim_command("noautocmd :update")
+    end
+end
 
 -- Diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
