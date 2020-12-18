@@ -57,12 +57,15 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'nathunsmitty/nvim-ale-diagnostic'
 
 Plug 'TaDaa/vimade'
+Plug 'mbbill/undotree'
 
 " Lua
 Plug 'tjdevries/nlua.nvim'
 Plug 'euclidianAce/BetterLua.vim'
 
 Plug 'glepnir/galaxyline.nvim'
+
+Plug 'justinmk/vim-sneak'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
@@ -474,27 +477,15 @@ hi rainbowcol5 guifg=#85b1df
 hi rainbowcol6 guifg=#fbdf00
 hi rainbowcol7 guifg=#48afa7
 "}}}
-"
-" === coc.nvim === "
-" nmap <silent> <leader>dd <Plug>(coc-definition)
-" nmap <silent> <leader>dy <Plug>(coc-type-definition)
-" nmap <silent> <leader>dr <Plug>(coc-references)
-" nmap <silent> <leader>dj <Plug>(coc-implementation)
-" nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
-"
-" ctrl+y - select contents of popup
-" ctr+r " - paste visual selection
-" * - search for word under cursor in file
-" <leader>y copy text to system keyboard
 
-" === FZF === "
-" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
-" nnoremap <silent> <Leader>g :GFiles?
-" nnoremap <silent> <Leader>c  :Commits<CR>
-" nnoremap <silent> <Leader>bc :BCommits<CR>
-" <leader>enter - list open buffers
-" C-w-w to jump into the pop up
-"
+"{{{ Sneak -----------------------------------------------------------------{{{
+let g:sneak#s_next = 1
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+"}}}
+
 " SPLITS
 " "Max out the height of the current split
 " ctrl + w _
