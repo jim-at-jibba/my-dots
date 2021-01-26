@@ -12,6 +12,7 @@ vim.g.completion_enable_auto_signature = 1
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 
+--[[
 local format_options_prettier = {
     semi = false,
     singleQuote = false,
@@ -30,14 +31,15 @@ _G.formatting = function()
         vim.lsp.buf.formatting(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {})
     end
 end
+]]--
 
 local custom_attach = function(client)
-  if client.resolved_capabilities.document_formatting then
-      vim.cmd [[augroup Format]]
-      vim.cmd [[autocmd! * <buffer>]]
-      vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
-      vim.cmd [[augroup END]]
-  end
+  -- if client.resolved_capabilities.document_formatting then
+  --     vim.cmd [[augroup Format]]
+  --     vim.cmd [[autocmd! * <buffer>]]
+  --     vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
+  --     vim.cmd [[augroup END]]
+  -- end
 
   completion.on_attach(client)
 
@@ -103,6 +105,8 @@ nvim_lsp.sumneko_lua.setup({
 
 })
 --]]
+
+--[[
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
 --local golint = require "efm/golint"
 --local goimports = require "efm/goimports"
@@ -128,6 +132,7 @@ nvim_lsp.efm.setup {
     }
 }
 
+
 -- async formatting
 -- https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
 vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
@@ -141,6 +146,7 @@ vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
         vim.api.nvim_command("noautocmd :update")
     end
 end
+]]--
 
 -- Diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

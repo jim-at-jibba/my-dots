@@ -57,7 +57,8 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'nathunsmitty/nvim-ale-diagnostic'
 
 Plug 'TaDaa/vimade'
-Plug 'mbbill/undotree'
+
+Plug 'puremourning/vimspector'
 
 " Lua
 Plug 'tjdevries/nlua.nvim'
@@ -77,19 +78,28 @@ call plug#end()
 
 
 " System Settings  ----------------------------------------------------------{{{
-  set termguicolors
+
+  set exrc " allows for local vimrc in projects
+  set tabstop=2 softtabstop=2
+  set shiftwidth=2
+  set expandtab
+  set smartindent
+  set nohlsearch
   set nopaste
   set number
-  set tabstop=2 shiftwidth=2 expandtab
-  let mapleader = ' '
+  set hidden
+  set noerrorbells
   set spell
   set splitbelow
   set splitright
   set relativenumber
-  set scrolloff=5
+  set nu
+  set scrolloff=8
   set completeopt=menuone,noinsert,noselect
   set signcolumn=yes
   set updatetime=100
+  set incsearch
+  set noshowmode
 
   " Fold stuff
   set nofoldenable
@@ -106,6 +116,9 @@ call plug#end()
       set undodir="~/.vim/.undodir"
       set undofile
   endif
+
+
+  let mapleader = ' '
 "}}}
 
 " System mappings  ----------------------------------------------------------{{{
@@ -123,7 +136,7 @@ call plug#end()
   noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
   " nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
-  nnoremap ; :
+  " nnoremap ; :
 
   " disable Arrow keys
   noremap <Up> <NOP>
@@ -142,8 +155,8 @@ call plug#end()
   vmap > >gv
 
   " NERDCommenter
-  " vmap <C-/> <plug>NERDCommenterToggle
-  " nmap <C-/> <plug>NERDCommenterToggle
+    "vmap <C-/> <plug>NERDCommenterToggle
+    "nmap <C-/> <plug>NERDCommenterToggle
 
   nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -153,10 +166,13 @@ call plug#end()
 
   nnoremap <leader>u :UndotreeToggle<CR>
 
+  " Move selected line
+  vnoremap J :m '>+1<CR>gv=gv
+  vnoremap K :m '<-2<CR>gv=gv
   vnoremap <leader>p "_dP
 
-  nnoremap <Leader>+ :vertical resize +5<CR>
-  nnoremap <Leader>- :vertical resize -5<CR>
+  nnoremap <leader>+ :vertical resize +5<CR>
+  nnoremap <leader>- :vertical resize -5<CR>
 
   " Use <Tab> and <S-Tab> to navigate through popup menu
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -218,12 +234,6 @@ let g:lua_tree_bindings = {
     \ 'next_git_item':   ']c',
     \ }
 
-" Disable default mappings by plugin
-" Bindings are enable by default, disabled on any non-zero value
-" let lua_tree_disable_keybindings=1
-
-" default will show icon by default if no icon is provided
-" default shows no icon by default
 let g:lua_tree_icons = {
     \ 'default': '',
     \ 'symlink': '',
@@ -242,83 +252,30 @@ let g:lua_tree_icons = {
 
 nnoremap <leader><leader>1 :LuaTreeToggle<CR>
 nnoremap <leader>r :LuaTreeRefresh<CR>
-nnoremap <leader>n :LuaTreeFindFile<CR>
-
-
 " }}}
 
 " LSP ------------------------------------------------------------- {{{
-" lua require("my_lspconfig")
 lua require('init')
-" nnoremap <leader>dd :lua vim.lsp.buf.definition()<CR>
-" nnoremap <leader>d :lua vim.lsp.buf.implementation()<CR>
-" nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-"
-" nnoremap <leader>dr :lua vim.lsp.buf.references()<CR>
-" nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
-" nnoremap <silent> <leader>gh :lua vim.lsp.buf.hover()<CR>
-" nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
-" nnoremap <silent> <leader>sd :lua vim.lsp.util.show_line_diagnostics()<CR>
-"
-"
-" lua require'lspconfig'.tsserver.setup{}
-" lua require'lspconfig'.gopls.setup{}
-"
-" autocmd BufEnter * lua require'completion'.on_attach()
-" autocmd BufEnter * set omnifunc=v:lua.vim.lsp.omnifunc
-"
-"
-" " Diagnostics
-"
-" lua << EOF
-" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-"   vim.lsp.diagnostic.on_publish_diagnostics, {
-"     virtual_text = true,
-"     signs = true,
-"     update_in_insert = false,
-"   }
-" )
-" EOF
 
-" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 nnoremap <leader>dn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>dp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>dl :lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <leader>df :lua require'lsp-ext'.peek_definition()<cr>
-
-"let g:completion_enable_snippet = 'UltiSnips'
-"let g:completion_enable_auto_signature = 1
-"let g:completion_enable_auto_paren = 1
 
 " trigger autocomplete in insert mode
 inoremap <c-space> <c-x><c-o>
 
 
 let g:UltiSnipsSnippetDirectories=["Ultisnips", "mysnippets"]
-
-
 " }}}
 
 " FZF --------------------------------------------------------------------{{{
-
   let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8}}
-  if !&diff
-    " nnoremap <silent> <C-p> :Files<Cr>
-   nnoremap <silent> <Leader>g :GFiles?<CR>
-   " nnoremap <silent> <Leader>c  :Commits<CR>
-   " nnoremap <silent> <Leader>bc :BCommits<CR>
-  endif
 "}}}
 
 " Random --------------------------------------------------------------------{{{
 
-let g:NERDCreateDefaultMappings = 0
-
-" if strftime("%H") < 17
-"   set background=light
-" else
-"   set background=dark
-" endif
+" let g:NERDCreateDefaultMappings = 0
 
   " Sweet Sweet FuGITive
   " nmap <leader>gh :diffget //3<CR>
@@ -357,9 +314,9 @@ nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <Leader>dr :lua require('telescope.builtin').lsp_references()<CR>
 nnoremap <Leader>ol :lua require('telescope.builtin').loclist()<CR>
-" nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>c :lua require('telescope.builtin').git_commits()<CR>
 nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
+nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
 
 nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
@@ -406,7 +363,7 @@ let g:ale_fixers = {
 \}
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
-" let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_sign_error = '💩'
 let g:ale_sign_warning = '📣 '
 let g:ale_disable_lsp = 1
@@ -485,6 +442,16 @@ map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 "}}}
+
+nnoremap <leader>ld :call vimspector#Launch()<CR>
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 
 " SPLITS
 " "Max out the height of the current split
