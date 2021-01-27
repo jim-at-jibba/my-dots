@@ -6,19 +6,23 @@
 " Setup plug  ---------------------------------------------------------------{{{
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Plug 'sheerun/vim-polyglot'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
 " Look and feel
 Plug 'arcticicestudio/nord-vim'
-" Plug 'jim-at-jibba/ariake-vim-colors'
 Plug 'mhartington/oceanic-next'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lukas-reineke/onedark.nvim'
 Plug 'sainnhe/edge'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " git
 Plug 'jreybert/vimagit'
@@ -27,46 +31,29 @@ Plug 'junegunn/gv.vim'
 Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
 
+" langs
 Plug 'tweekmonster/gofmt.vim'
 Plug 'fatih/vim-go'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'tjdevries/nlua.nvim'
+Plug 'euclidianAce/BetterLua.vim'
 
-
+" utils
 Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dense-analysis/ale'
 Plug 'Raimondi/delimitMate'
-
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
-" telescope requirements...
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
-
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-
+Plug 'nathunsmitty/nvim-ale-diagnostic'
+Plug 'TaDaa/vimade'
+Plug 'puremourning/vimspector'
+Plug 'glepnir/galaxyline.nvim'
+Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'p00f/nvim-ts-rainbow'
-
-Plug 'nathunsmitty/nvim-ale-diagnostic'
-
-Plug 'TaDaa/vimade'
-
-Plug 'puremourning/vimspector'
-
-" Lua
-Plug 'tjdevries/nlua.nvim'
-Plug 'euclidianAce/BetterLua.vim'
-
-Plug 'glepnir/galaxyline.nvim'
-
-Plug 'justinmk/vim-sneak'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
@@ -81,18 +68,13 @@ lua require('init')
 " Mappings ---------------------------------------------------------------{{{
 let mapleader = ' '
 
-"make jj do esc"
 inoremap jj <Esc>
-" recording macros is not my thing
 map q <Nop>
 
 noremap H ^
 noremap L g_
 
 noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
-" nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
-
-" nnoremap ; :
 
 " disable Arrow keys
 noremap <Up> <NOP>
@@ -109,10 +91,6 @@ nnoremap <C-L> <C-W><C-L>
 " Align blocks of text and keep them selected
 vmap < <gv
 vmap > >gv
-
-" NERDCommenter
-  "vmap <C-/> <plug>NERDCommenterToggle
-  "nmap <C-/> <plug>NERDCommenterToggle
 
 nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -155,24 +133,3 @@ let g:go_auto_sameids = 1
 let g:gofmt_exe = 'goimports'
 let g:go_doc_keywordprg_enabled = 0
 "}}}
-
-" SPLITS
-" "Max out the height of the current split
-" ctrl + w _
-" Max out the width of the current split
-" ctrl + w |
-"
-" Normalize all split sizes, which is very handy when resizing terminal
-" ctrl + w =
-"
-" Next occurance of what ever is under your cursor
-" *
-" # to do the reverse
-"
-" Move to start and into insert
-" shift + i
-"
-" ; to jump to the next on_exit
-" , to jump to the previous
-"
-" ctrl+w + o close other buffers except on you are in
