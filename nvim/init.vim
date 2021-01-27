@@ -18,6 +18,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lukas-reineke/onedark.nvim'
+Plug 'sainnhe/edge'
 
 " git
 Plug 'jreybert/vimagit'
