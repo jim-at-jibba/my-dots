@@ -42,6 +42,7 @@ plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syn
   export PATH=$PATH:/opt/apache-maven/bin
   export PATH="/usr/local/opt/helm@2/bin:$PATH"
   export PATH="$HOME/neovim/bin:$PATH"
+  export PATH="$HOME/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator

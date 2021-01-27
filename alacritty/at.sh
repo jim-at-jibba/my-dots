@@ -34,6 +34,14 @@ case $color in
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme nord'
     ;;
+  edgelight)
+    configure_alacritty
+    configure_vim 'set background=light\ncolorscheme edge\nlet g:edge_style="light"\nlet g:edge_enable_italic = 1'
+    ;;
+  edgeneon)
+    configure_alacritty
+    configure_vim 'set background=dark\ncolorscheme edge\nlet g:edge_style="neon"\nlet g:edge_enable_italic = 1'
+    ;;
   onehalfdark)
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme onehalfdark'
@@ -43,7 +51,7 @@ case $color in
     configure_vim 'set background=light\ncolorscheme onehalflight'
     ;;
   *)
-    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, OneHalf/Light"
+    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, OneHalf/Light, edge"
     exit 1
     ;;
 esac
