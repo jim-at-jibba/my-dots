@@ -1,56 +1,36 @@
-snippet imr
-import React from 'react';
-endsnippet
-
-snippet imrc
-import React, { Component } from 'react';
-endsnippet
-
-snippet imrf
-import * as React from 'react';
-endsnippet
-
-snippet imp "Import {} from ''" A
-import {$2} from '$1';
-endsnippet
-
-snippet view
-<View>{ ${1:CONTENT} }</View>
-endsnippet
-
-snippet text
-<Text>{ ${1:CONTENT} }</Text>
-endsnippet
-
-snippet imrn
-import { ${1:MODULES} } from 'react-native';
-endsnippet
-
-snippet log
-console.log(${1:MESSAGE});
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet cl "Console log" A
+console.log({'$1', $1});
 endsnippet
 
 snippet test
 test('${1:NAME}', () => {${2:FUNCTION}})
 endsnippet
 
-snippet extend
-import EStylesheet from "react-native-extended-stylesheet";
-export default EStylesheet.create({});
-endsnippet
-
-snippet com
-/**
-|--------------------------------------------------
-| ${1:BODY}
-|--------------------------------------------------
-*/
-endsnippet
-
-snippet stc
-const ${1:NAME} = styled.${2:ATTRIBUTE}`
-  ${({theme}) => css `
-    ${3}
-  `}
-`
+snippet imp "Import {} from ''" A
+import {$2} from '$1';
 endsnippet

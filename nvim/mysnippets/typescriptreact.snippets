@@ -23,6 +23,8 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+extends typescript
+
 snippet px2 "Convert px to vm" b
 ${px2vw(${1}, ${2})}
 endsnippet
@@ -49,20 +51,12 @@ snippet imr "Import React" b
 import React from 'react';
 endsnippet
 
-snippet imp "Import {} from ''" b
-import {${0}} from '${1}';
-endsnippet
-
 snippet imrc
 import React, { Component } from 'react';
 endsnippet
 
 snippet imrf
 import * as React from 'react';
-endsnippet
-
-snippet imp "Import {} from ''" b
-import {${1}} from '$0';
 endsnippet
 
 snippet view
@@ -77,13 +71,6 @@ snippet imrn
 import { ${1:MODULES} } from 'react-native';
 endsnippet
 
-snippet log
-console.log(${1:MESSAGE});
-endsnippet
-
-snippet test
-test('${1:NAME}', () => {${2:FUNCTION}})
-endsnippet
 
 snippet extend
 import EStylesheet from "react-native-extended-stylesheet";
