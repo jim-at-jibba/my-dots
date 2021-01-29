@@ -1,5 +1,5 @@
-nmap <silent> <leader> [g <Plug>(ale_previous_wrap)
-nmap <silent> <leader>]g <Plug>(ale_next_wrap)
+nmap <silent> <leader> [d <Plug>(ale_previous_wrap)
+nmap <silent> <leader>]d <Plug>(ale_next_wrap)
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],

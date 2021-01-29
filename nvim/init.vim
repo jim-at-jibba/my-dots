@@ -54,10 +54,13 @@ Plug 'glepnir/galaxyline.nvim'
 Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-
+Plug 'hrsh7th/nvim-compe'
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
 Plug 'jim-at-jibba/navy-vim'
+
+" Coc
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 

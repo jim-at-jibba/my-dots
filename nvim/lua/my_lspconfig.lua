@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local completion = require('completion')
+-- local completion = require('completion')
 
 
 local mapper = function(mode, key, result)
@@ -7,10 +7,10 @@ local mapper = function(mode, key, result)
 end
 
 
-vim.g.completion_enable_snippet = 'UltiSnips'
-vim.g.completion_enable_auto_signature = 1
-vim.g.completion_enable_auto_paren = 1
-vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
+-- vim.g.completion_enable_snippet = 'UltiSnips'
+-- vim.g.completion_enable_auto_signature = 1
+-- vim.g.completion_enable_auto_paren = 1
+-- vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 
 --[[
 local format_options_prettier = {
@@ -33,6 +33,17 @@ _G.formatting = function()
 end
 ]]--
 
+require'compe'.setup {
+  enabled = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    ultisnips = true;
+    nvim_lsp = true;
+  }
+}
+
 local custom_attach = function(client)
   -- if client.resolved_capabilities.document_formatting then
   --     vim.cmd [[augroup Format]]
@@ -41,7 +52,7 @@ local custom_attach = function(client)
   --     vim.cmd [[augroup END]]
   -- end
 
-  completion.on_attach(client)
+  -- completion.on_attach(client)
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
@@ -54,15 +65,6 @@ local custom_attach = function(client)
 end
 
 nvim_lsp.tsserver.setup({
-  cmd = {"typescript-language-server", "--stdio"},
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx"
-  },
   on_attach = function(client)
     -- client.resolved_capabilities.document_formatting = false
     custom_attach(client)
@@ -73,8 +75,12 @@ nvim_lsp.gopls.setup({
   on_attach = custom_attach
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 nvim_lsp.html.setup({
-  on_attach = custom_attach
+  on_attach = custom_attach,
+  capabilities = capabilities
 })
 
 
@@ -82,13 +88,18 @@ nvim_lsp.jsonls.setup({
   on_attach = custom_attach
 })
 
-nvim_lsp.sqlls.setup({
+nvim_lsp.cssls.setup({
   on_attach = custom_attach
 })
 
-require('nlua.lsp.nvim').setup(nvim_lsp, {
-  on_attach = custom_attach,
+nvim_lsp.sqlls.setup({
+  cmd = {"/usr/local/bin/sql-language-server", "up", "--method", "stdio"},
+  on_attach = custom_attach
 })
+
+-- require('nlua.lsp.nvim').setup(nvim_lsp, {
+--   on_attach = custom_attach,
+-- })
 
 --[[
 
