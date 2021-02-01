@@ -23,14 +23,31 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-snippet cl "Console log" A
-console.log({'$1', $1});
+snippet cl "Console log" b
+console.log({"$1": $1});
 endsnippet
 
 snippet test
-test('${1:NAME}', () => {${2:FUNCTION}})
+it('${1:NAME}', () => {${2:FUNCTION}})
 endsnippet
 
-snippet imp "Import {} from ''" A
+snippet desc
+describe('${1:NAME}', () => {${2:FUNCTION}})
+endsnippet
+
+snippet test
+import {render, cleanup} from "@testing-library/react"
+
+afterEach(cleanup)
+
+describe('${1:NAME}', () => {
+  it("${2:TESTNAME}", () => {
+		$0
+  })
+})
+
+endsnippet
+
+snippet imp "Import {} from ''" b
 import {$2} from '$1';
 endsnippet

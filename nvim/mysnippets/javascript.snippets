@@ -26,8 +26,25 @@ snippet log
 console.log(${1:MESSAGE});
 endsnippet
 
+snippet it
+it('${1:NAME}', () => {${2:FUNCTION}})
+endsnippet
+
+snippet desc
+describe('${1:NAME}', () => {${2:FUNCTION}})
+endsnippet
+
 snippet test
-test('${1:NAME}', () => {${2:FUNCTION}})
+import {render, cleanup} from "@testing-library/react"
+
+afterEach(cleanup)
+
+describe('${1:NAME}', () => {
+  it("${2:TESTNAME}", () => {
+		$0
+  })
+})
+
 endsnippet
 
 snippet extend
