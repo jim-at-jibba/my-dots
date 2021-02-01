@@ -55,6 +55,11 @@ Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
+Plug 'vim-test/vim-test'
+Plug 'szw/vim-maximizer'
+Plug 'tpope/vim-commentary'
+Plug 'mattn/emmet-vim'
+
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
 Plug 'jim-at-jibba/navy-vim'
