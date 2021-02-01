@@ -19,6 +19,8 @@ nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
 lua << EOF
 require('telescope').setup{
   defaults = {
+    -- TEMP FIX: https://github.com/nvim-telescope/telescope.nvim/issues/484
+    set_env = { ['COLORTERM'] = 'truecolor' },
     prompt_prefix = "🦄 ",
   }
 }

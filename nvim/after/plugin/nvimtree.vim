@@ -42,5 +42,5 @@ let g:lua_tree_icons = {
     \   }
     \ }
 
-nnoremap <leader><leader>1 :LuaTreeToggle<CR>
-nnoremap <leader>r :LuaTreeRefresh<CR>
+nnoremap <leader><leader>1 :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
