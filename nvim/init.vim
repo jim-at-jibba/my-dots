@@ -59,6 +59,7 @@ Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
+Plug 'kosayoda/nvim-lightbulb'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'

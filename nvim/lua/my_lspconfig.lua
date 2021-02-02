@@ -2,6 +2,8 @@ local nvim_lsp = require('lspconfig')
 -- local completion = require('completion')
 
 
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
 end
