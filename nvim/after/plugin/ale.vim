@@ -8,7 +8,7 @@ let g:ale_linters = {
 \   'typescriptreact': ['eslint', 'tslint'],
 \   'go': ['golint'],
 \   'html': ['htmlhint'],
-\   'yaml': ['yamllint']
+\   'yaml': ['yamllint'],
 \   'json': ['jsonlint']
 \}
 
