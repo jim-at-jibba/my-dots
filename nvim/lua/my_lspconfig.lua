@@ -99,6 +99,12 @@ nvim_lsp.sqlls.setup({
   on_attach = custom_attach
 })
 
+nvim_lsp.yamlls.setup({
+  cmd = { "yaml-language-server", "--stdio" },
+  filetypes = { "yaml", "yml" },
+  root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
+  on_attach = custom_attach
+})
 -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 --   on_attach = custom_attach,
 -- })
