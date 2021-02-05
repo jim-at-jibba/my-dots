@@ -8,6 +8,8 @@ let g:ale_linters = {
 \   'typescriptreact': ['eslint', 'tslint'],
 \   'go': ['golint'],
 \   'html': ['htmlhint'],
+\   'yaml': ['yamllint']
+\   'json': ['jsonlint']
 \}
 
 let g:ale_fixers = {
@@ -18,6 +20,8 @@ let g:ale_fixers = {
 \   'go': ['gofmt'],
 \   'css': ['prettier'],
 \   'html': ['prettier'],
+\   'yaml': ['yamlfix'],
+\   'json': ['prettier'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_linters_explicit = 1
