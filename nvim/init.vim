@@ -43,7 +43,7 @@ Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dense-analysis/ale'
-Plug 'Raimondi/delimitMate'
+Plug 'cohama/lexima.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -53,7 +53,7 @@ Plug 'puremourning/vimspector'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+" Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'onsails/lspkind-nvim'
 Plug 'vim-test/vim-test'
@@ -119,8 +119,8 @@ nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "}}}
 
 " Golang -----------------------------------------------------------------{{{

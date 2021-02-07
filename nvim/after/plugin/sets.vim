@@ -14,7 +14,7 @@
   set relativenumber
   set nu
   set scrolloff=8
-  set completeopt=menuone,noinsert,noselect
+  set completeopt=menu,menuone,noinsert,noselect
   set signcolumn=yes
   set updatetime=100
   set incsearch

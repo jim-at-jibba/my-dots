@@ -1,5 +1,6 @@
 local nvim_lsp = require('lspconfig')
 -- local completion = require('completion')
+
 require('lspkind').init({
     with_text = false,
 })
@@ -46,6 +47,7 @@ require'compe'.setup {
     buffer = true;
     ultisnips = true;
     nvim_lsp = true;
+    spell = true;
   }
 }
 
