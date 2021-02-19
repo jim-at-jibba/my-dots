@@ -15,18 +15,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
 " Look and feel
-Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'lukas-reineke/onedark.nvim'
-Plug 'sainnhe/edge'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " git
 Plug 'jreybert/vimagit'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
@@ -55,12 +50,10 @@ Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 " Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
-Plug 'onsails/lspkind-nvim'
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
-Plug 'kosayoda/nvim-lightbulb'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
