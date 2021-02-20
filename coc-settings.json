@@ -45,7 +45,7 @@
     "css",
     "python"
   ],
-  "git.addGBlameToVirtualText": true,
+  "git.addGBlameToVirtualText": false,
   "eslint.filetypes": [
     "javascript",
     "javascriptreact",
@@ -70,10 +70,13 @@
   "python.linting.pylintEnabled": true,
   "python.analysis.diagnosticEnabled": true,
   "python.linting.enabled": true,
-  "snippets.userSnippetsDirectory": "/Users/james.best/dotfiles/nvim/ultisnips",
+  "snippets.userSnippetsDirectory": "/Users/james.best/dotfiles/nvim/mysnippets",
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
   },
-  "codeLens.enable": false
+  "codeLens.enable": false,
+  "go.goplsOptions": {
+    "completeUnimported": true
+  }
 }

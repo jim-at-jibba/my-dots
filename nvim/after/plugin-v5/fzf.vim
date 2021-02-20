@@ -8,8 +8,6 @@ endif
 
 if !&diff
   nnoremap <silent> <C-p> :Files<Cr>
-  nnoremap <leader>f :Rg<Cr>
-  nnoremap <silent> <Leader>b :Buffers<CR>
   nnoremap <silent> <Leader>g :GFiles?<CR>
   nnoremap <silent> <Leader>c  :Commits<CR>
   nnoremap <silent> <Leader>bc :BCommits<CR>
