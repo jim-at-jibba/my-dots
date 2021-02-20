@@ -29,6 +29,7 @@ Plug 'TaDaa/vimade'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
+Plug 'ap/vim-buftabline'
 
 " Javascript
 Plug 'pangloss/vim-javascript'

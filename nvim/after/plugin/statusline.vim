@@ -36,12 +36,12 @@ fun! StatusDiagnostic() abort
 endfun
 
 fun! <SID>StatusLineHighlights()
-  hi StatusLine         ctermbg=8  guibg=#313131 ctermfg=15 guifg=#cccccc
-  hi StatusLineNC       ctermbg=0  guibg=#313131 ctermfg=8  guifg=#999999
-  hi StatusLineSection  ctermbg=8  guibg=#55b5db ctermfg=0  guifg=#333333
-  hi StatusLineSectionV ctermbg=11 guibg=#a074c4 ctermfg=0  guifg=#000000
-  hi StatusLineSectionI ctermbg=10 guibg=#9fca56 ctermfg=0  guifg=#000000
-  hi StatusLineSectionC ctermbg=12 guibg=#db7b55 ctermfg=0  guifg=#000000
+  hi StatusLine         ctermbg=8  guibg=#85b1df ctermfg=15 guifg=#cccccc
+  hi StatusLineNC       ctermbg=0  guibg=#85b1df ctermfg=8  guifg=#999999
+  hi StatusLineSection  ctermbg=8  guibg=#7ef1ea ctermfg=0  guifg=#333333
+  hi StatusLineSectionV ctermbg=11 guibg=#e89dfc ctermfg=0  guifg=#000000
+  hi StatusLineSectionI ctermbg=10 guibg=#48afa7 ctermfg=0  guifg=#000000
+  hi StatusLineSectionC ctermbg=12 guibg=#7f7ce3 ctermfg=0  guifg=#000000
   hi StatusLineSectionR ctermbg=12 guibg=#ed3f45 ctermfg=0  guifg=#000000
 endfun
 
