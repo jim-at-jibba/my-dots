@@ -12,6 +12,7 @@ Plug 'junegunn/fzf.vim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
+Plug 'romainl/flattened'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sheerun/vim-polyglot'
 " Plug 'vim-airline/vim-airline'

@@ -18,6 +18,7 @@
     \ 'coc-css',
     \ 'coc-html',
     \ 'coc-markdownlint',
+    \ 'coc-go'
     \ ]
 
   inoremap <silent><expr> <TAB>
@@ -99,5 +100,6 @@
   xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
   nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
+  autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " }}}

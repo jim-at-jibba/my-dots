@@ -9,14 +9,18 @@ if !exists('g:syntax_on')
 endif
 
 " Should this be in ~/.config
-let color_path = expand('~/dotfiles/nvim/color.vim')
+" let color_path = expand('~/dotfiles/nvim/color.vim')
 
-if filereadable(color_path)
-  exec 'source' color_path
-else
-  set background=dark
-  colorscheme ariake
-endif
 
+" if filereadable(color_path)
+"   exec 'source' color_path
+" else
+"   set background=dark
+"   colorscheme ariake
+" endif
+
+set background=dark
+colorscheme ariake
+" colorscheme flattened_light
 
 set t_Co=256
