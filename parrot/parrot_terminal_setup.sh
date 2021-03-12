@@ -42,7 +42,7 @@ ln -s -f .tmux/.tmux.conf
 echo "Getting vim config"
 mkdir ~/$(USER)/dotfiles && cd $_
 
-curl  https://raw.githubusercontent.com/jim-at-jibba/my-dots/master/nvim/init.vim --output init.vim
+curl  https://raw.githubusercontent.com/jim-at-jibba/my-dots/master/parrot/init.vim --output init.vim
 curl  https://raw.githubusercontent.com/jim-at-jibba/my-dots/master/tmux.conf --output tmux.conf
 
 echo "Symlinking config"
@@ -52,7 +52,7 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf.local
 echo "Installing Node"
 sudo apt-get install curl software-properties-common
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
-sudo apt-get install nodejs
+sudo apt-get install nodejs npm
 node -v
 
 echo "Your all done, enjoy"
