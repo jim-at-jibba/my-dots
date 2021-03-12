@@ -21,7 +21,7 @@ echo "Install neovim........"
 sudo apt-get install neovim python3-neovim
 
 echo "Install others fzf etc......."
-sudo apt-get install fzf fonts-powerline tmux terminator
+sudo apt-get install fzf tmux terminator
 
 echo "Installing ripgrep"
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
@@ -51,7 +51,7 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf.local
 
 echo "Installing Node"
 sudo apt-get install curl software-properties-common
-curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt-get install nodejs
 node -v
 
