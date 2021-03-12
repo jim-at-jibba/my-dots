@@ -12,37 +12,35 @@ Plug 'junegunn/fzf.vim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
-Plug 'romainl/flattened'
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sheerun/vim-polyglot'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'ryanoasis/vim-devicons'
 
 " git
 Plug 'jreybert/vimagit'
-Plug 'junegunn/gv.vim'
+
+" langs
+Plug 'tweekmonster/gofmt.vim'
+Plug 'fatih/vim-go'
 
 " utils
-Plug 'mbbill/undotree'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'dense-analysis/ale'
+Plug 'nathunsmitty/nvim-ale-diagnostic'
 Plug 'cohama/lexima.vim'
-Plug 'TaDaa/vimade'
 Plug 'justinmk/vim-sneak'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-buftabline'
+Plug 'nvim-lua/lsp-status.nvim'
 
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
-
-" Coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
 " }}}
+
+lua require('init')
 
 " Mappings ---------------------------------------------------------------{{{
 let mapleader = ' '
@@ -54,6 +52,7 @@ noremap H ^
 noremap L g_
 
 noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
+nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
 
 " disable Arrow keys
 noremap <Up> <NOP>
@@ -90,4 +89,25 @@ nnoremap <leader>- :vertical resize -5<CR>
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"}}}
+
+" Golang -----------------------------------------------------------------{{{
+" --- vim go (polyglot) settings.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
+
+let g:gofmt_exe = 'goimports'
+let g:go_doc_keywordprg_enabled = 0
 "}}}

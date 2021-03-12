@@ -12,7 +12,7 @@
     \ 'coc-html',
     \ 'coc-dictionary',
     \ 'coc-git',
-    \ 'coc-python',
+    \ 'coc-pyright',
     \ 'coc-highlight',
     \ 'coc-styled-components',
     \ 'coc-css',

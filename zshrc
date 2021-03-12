@@ -141,14 +141,14 @@ tm() {
 }
 
 # Teamocil Autocomplete
-alias tee='teamocil'
+# alias tee='teamocil'
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
 # Python
 ##########
 #alias python='python3'
 
-# HAcking
+# Hacking
 ##########
 alias papk="~/hacking/scripts/pull-apk.sh"
 alias patch="~/hacking/scripts/patch.sh"
@@ -225,3 +225,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
+
+export PATH="$HOME/.poetry/bin:$PATH"

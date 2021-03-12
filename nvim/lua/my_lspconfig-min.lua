@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local lsp_status = require("lsp-status")
 -- local completion = require('completion')
 
 local mapper = function(mode, key, result)
@@ -54,17 +53,6 @@ local custom_attach = function(client)
   -- end
 
   -- completion.on_attach(client)
-  lsp_status.register_progress()
-    lsp_status.config(
-        {
-            status_symbol = "LSP ",
-            indicator_errors = "E",
-            indicator_warnings = "W",
-            indicator_info = "I",
-            indicator_hint = "H",
-            indicator_ok = "ok"
-        }
-    )
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
@@ -85,10 +73,6 @@ nvim_lsp.tsserver.setup({
 })
 
 nvim_lsp.gopls.setup({
-  on_attach = custom_attach
-})
-
-nvim_lsp.pyright.setup({
   on_attach = custom_attach
 })
 

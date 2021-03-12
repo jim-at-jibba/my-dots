@@ -14,7 +14,7 @@ fun! StatusLineRenderer()
         \ . (&modified ? ' + │' : '')
         \ . ' %{StatusLineFilename()}  %#StatusLine#%='
         \ . hl
-        \ . '  %{LspStatus()} '
+        \ . '  %{StatusDiagnostic()} '
 endfun
 
 fun! StatusLineFilename()
@@ -22,23 +22,18 @@ fun! StatusLineFilename()
   return substitute(expand('%'), '^' . getcwd() . '/\?', '', 'i')
 endfun
 
-function! LspStatus() abort
-  " https://dev.to/casonadams/neovim-and-its-built-in-language-server-protocol-3j8g
-  "if luaeval('#vim.lsp.buf_get_clients() > 0')
-  "  return luaeval("require('lsp-status').status()")
-  "endif
-
-  "return ''
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-
-  return l:counts.total == 0 ? 'OK' : printf(
-        \   '%dW %dE ',
-        \   all_non_errors,
-        \   all_errors
-        \)
-endfunction
+fun! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfun
 
 fun! <SID>StatusLineHighlights()
   hi StatusLine         ctermbg=8  guibg=#85b1df ctermfg=15 guifg=#cccccc
@@ -55,7 +50,7 @@ call <SID>StatusLineHighlights()
 " ignored on subsequent 'so $MYVIMRC' calls to prevent
 " active buffer statusline from being 'blurred'.
 if has('vim_starting')
-  let &statusline = ' %{StatusLineFilename()}%=  %{LspStatus()} '
+  let &statusline = ' %{StatusLineFilename()}%=  %{StatusDiagnostic()} '
 endif
 augroup vimrc
   au!

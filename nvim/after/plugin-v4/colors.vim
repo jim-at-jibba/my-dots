@@ -2,7 +2,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" lua require'colorizer'.setup()
+lua require'colorizer'.setup()
 
 if !exists('g:syntax_on')
   syntax enable
@@ -11,6 +11,7 @@ endif
 " Should this be in ~/.config
 let color_path = expand('~/dotfiles/nvim/color.vim')
 
+
 if filereadable(color_path)
   exec 'source' color_path
 else
@@ -18,5 +19,8 @@ else
   colorscheme ariake
 endif
 
+" set background=dark
+" colorscheme Ariake
+" colorscheme flattened_light
 
 set t_Co=256

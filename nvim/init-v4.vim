@@ -9,61 +9,42 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-" telescope requirements...
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
+Plug 'romainl/flattened'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'sheerun/vim-polyglot'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'ryanoasis/vim-devicons'
 
 " git
 Plug 'jreybert/vimagit'
 Plug 'junegunn/gv.vim'
-Plug 'mhinz/vim-signify'
-Plug 'APZelos/blamer.nvim'
-
-" langs
-Plug 'tweekmonster/gofmt.vim'
-Plug 'fatih/vim-go'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'tjdevries/nlua.nvim'
-Plug 'euclidianAce/BetterLua.vim'
 
 " utils
 Plug 'mbbill/undotree'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'dense-analysis/ale'
 Plug 'cohama/lexima.vim'
-Plug 'romgrk/barbar.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nathunsmitty/nvim-ale-diagnostic'
 Plug 'TaDaa/vimade'
-Plug 'puremourning/vimspector'
-" Plug 'glepnir/galaxyline.nvim'
 Plug 'justinmk/vim-sneak'
-Plug 'neovim/nvim-lspconfig'
-" Plug 'nvim-lua/completion-nvim'
-Plug 'hrsh7th/nvim-compe'
-Plug 'vim-test/vim-test'
-Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-commentary'
-Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+Plug 'ap/vim-buftabline'
 
-" Me
-Plug '~/dotfiles/nvim/lua/whid'
-Plug 'jim-at-jibba/navy-vim'
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
+" Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
 
 " }}}
-
-lua require('init')
 
 " Mappings ---------------------------------------------------------------{{{
 let mapleader = ' '
@@ -112,25 +93,4 @@ nnoremap <leader>- :vertical resize -5<CR>
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"}}}
-
-" Golang -----------------------------------------------------------------{{{
-" --- vim go (polyglot) settings.
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_auto_sameids = 1
-
-let g:gofmt_exe = 'goimports'
-let g:go_doc_keywordprg_enabled = 0
 "}}}
