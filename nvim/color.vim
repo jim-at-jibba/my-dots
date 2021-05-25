@@ -1,2 +1,2 @@
-set background=light
-colorscheme flattened_light
+set background=dark
+colorscheme embark

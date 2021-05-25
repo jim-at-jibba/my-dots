@@ -30,28 +30,12 @@ case $color in
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme ariake'
     ;;
-  nord)
+  embark)
     configure_alacritty
-    configure_vim 'set background=dark\ncolorscheme nord'
-    ;;
-  edgelight)
-    configure_alacritty
-    configure_vim 'set background=light\ncolorscheme edge\nlet g:edge_style="light"\nlet g:edge_enable_italic = 1'
-    ;;
-  edgeneon)
-    configure_alacritty
-    configure_vim 'set background=dark\ncolorscheme edge\nlet g:edge_style="neon"\nlet g:edge_enable_italic = 1'
-    ;;
-  onehalfdark)
-    configure_alacritty
-    configure_vim 'set background=dark\ncolorscheme onehalfdark'
-    ;;
-  onehalflight)
-    configure_alacritty
-    configure_vim 'set background=light\ncolorscheme onehalflight'
+    configure_vim 'set background=dark\ncolorscheme embark'
     ;;
   *)
-    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, OneHalf/Light, edge"
+    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark"
     exit 1
     ;;
 esac

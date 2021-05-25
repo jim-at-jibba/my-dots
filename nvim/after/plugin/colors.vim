@@ -2,7 +2,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" lua require'colorizer'.setup()
+lua require'colorizer'.setup()
 
 if !exists('g:syntax_on')
   syntax enable
