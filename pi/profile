@@ -1,0 +1,14 @@
+PATH=$PATH:/usr/local/go/bin
+GOPATH=$HOME/go
+
+alias l="ls -la"
+
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias c='clear'
+
+source /usr/share/doc/fzf/examples/key-bindings.bash

@@ -1,5 +1,6 @@
+require "lsp.handlers"
+local utils = require "utils"
 local nvim_lsp = require('lspconfig')
-local lsp_status = require("lsp-status")
 -- local completion = require('completion')
 
 local mapper = function(mode, key, result)
@@ -12,7 +13,6 @@ end
 -- vim.g.completion_enable_auto_paren = 1
 -- vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy'}
 
---[[
 local format_options_prettier = {
     semi = false,
     singleQuote = false,
@@ -31,7 +31,6 @@ _G.formatting = function()
         vim.lsp.buf.formatting(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {})
     end
 end
-]]--
 
 require'compe'.setup {
   enabled = true;
@@ -46,32 +45,22 @@ require'compe'.setup {
 }
 
 local custom_attach = function(client)
-  -- if client.resolved_capabilities.document_formatting then
-  --     vim.cmd [[augroup Format]]
-  --     vim.cmd [[autocmd! * <buffer>]]
-  --     vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
-  --     vim.cmd [[augroup END]]
-  -- end
+  if client.resolved_capabilities.document_formatting then
+      vim.cmd [[augroup Format]]
+      vim.cmd [[autocmd! * <buffer>]]
+      vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
+      vim.cmd [[augroup END]]
+  end
 
   -- completion.on_attach(client)
-  lsp_status.register_progress()
-    lsp_status.config(
-        {
-            status_symbol = "LSP ",
-            indicator_errors = "E",
-            indicator_warnings = "W",
-            indicator_info = "I",
-            indicator_hint = "H",
-            indicator_ok = "ok"
-        }
-    )
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   mapper('n', '<leader>vsh', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  mapper('n', '<leader>dr', ":lua require('lists').change_active('Quickfix')<CR>:lua vim.lsp.buf.references()<CR>") 
+  -- mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
@@ -79,16 +68,13 @@ end
 
 nvim_lsp.tsserver.setup({
   on_attach = function(client)
-    -- client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_formatting = false
+    require "nvim-lsp-ts-utils".setup {}
     custom_attach(client)
   end
 })
 
 nvim_lsp.gopls.setup({
-  on_attach = custom_attach
-})
-
-nvim_lsp.pyright.setup({
   on_attach = custom_attach
 })
 
@@ -140,7 +126,6 @@ nvim_lsp.sumneko_lua.setup({
 })
 --]]
 
---[[
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
 --local golint = require "efm/golint"
 --local goimports = require "efm/goimports"
@@ -180,13 +165,23 @@ vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
         vim.api.nvim_command("noautocmd :update")
     end
 end
-]]--
 
 -- Diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-  }
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--     virtual_text = true,
+--     signs = true,
+--     update_in_insert = false,
+--   }
+-- )
+
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
+--     vim.lsp.with(
+--         vim.lsp.diagnostic.on_publish_diagnostics,
+--         {
+--             underline = true,
+--             update_in_insert = false
+--         }
+--     )(...)
+--     pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
+--   end

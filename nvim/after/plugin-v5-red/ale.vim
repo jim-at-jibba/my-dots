@@ -9,7 +9,8 @@ let g:ale_linters = {
 \   'go': ['golint'],
 \   'html': ['htmlhint'],
 \   'yaml': ['yamllint'],
-\   'json': ['jsonlint']
+\   'json': ['jsonlint'],
+\   'python': ['pylint']
 \}
 
 let g:ale_fixers = {
@@ -22,6 +23,7 @@ let g:ale_fixers = {
 \   'html': ['prettier'],
 \   'yaml': ['yamlfix'],
 \   'json': ['prettier'],
+\   'python': ['add_blank_lines_for_python_control_statements', 'autoimport', 'black'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_linters_explicit = 1

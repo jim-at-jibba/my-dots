@@ -6,9 +6,9 @@ if has('nvim')
   au! FileType fzf tunmap <buffer> <Esc>
 endif
 
-if !&diff
-  nnoremap <silent> <C-p> :Files<Cr>
-  nnoremap <silent> <Leader>g :GFiles?<CR>
-  nnoremap <silent> <Leader>c  :Commits<CR>
-  nnoremap <silent> <Leader>bc :BCommits<CR>
-endif
+"if !&diff
+"  nnoremap <silent> <C-p> :Files<Cr>
+"  nnoremap <silent> <Leader>g :GFiles?<CR>
+"  nnoremap <silent> <Leader>c  :Commits<CR>
+"  nnoremap <silent> <Leader>bc :BCommits<CR>
+"endif

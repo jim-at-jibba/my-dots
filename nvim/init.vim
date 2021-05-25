@@ -9,32 +9,62 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
-Plug 'sheerun/vim-polyglot'
+Plug 'arcticicestudio/nord-vim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'p00f/nvim-ts-rainbow'
+"Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'windwp/nvim-ts-autotag'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 " git
 Plug 'jreybert/vimagit'
+Plug 'junegunn/gv.vim'
+Plug 'mhinz/vim-signify'
+Plug 'APZelos/blamer.nvim'
 
 " langs
 Plug 'tweekmonster/gofmt.vim'
 Plug 'fatih/vim-go'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'tjdevries/nlua.nvim'
+Plug 'jparise/vim-graphql'
+Plug 'euclidianAce/BetterLua.vim'
 
 " utils
+Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'dense-analysis/ale'
-Plug 'nathunsmitty/nvim-ale-diagnostic'
+" Plug 'dense-analysis/ale'
+" Plug 'nathunsmitty/nvim-ale-diagnostic'
 Plug 'cohama/lexima.vim'
+Plug 'romgrk/barbar.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'TaDaa/vimade'
+Plug 'puremourning/vimspector'
+" Plug 'glepnir/galaxyline.nvim'
 Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+" Plug 'nvim-lua/completion-nvim'
 Plug 'hrsh7th/nvim-compe'
+Plug 'vim-test/vim-test'
+Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-commentary'
-Plug 'preservim/nerdtree'
-Plug 'ap/vim-buftabline'
-Plug 'nvim-lua/lsp-status.nvim'
+Plug 'mattn/emmet-vim'
 
+" Me
+Plug '~/dotfiles/nvim/lua/whid'
+Plug 'jim-at-jibba/navy-vim'
 
 call plug#end()
 

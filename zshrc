@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded. pygmalion
 ZSH_THEME="spaceship"
 
-SPACESHIP_CHAR_SYMBOL='🦄 '
+SPACESHIP_CHAR_SYMBOL='🦄🐙 '
 SPACESHIP_BATTERY_SHOW='false'
 
 SPACESHIP_TIME_SHOW=true
@@ -53,6 +53,9 @@ plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syn
   export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
   export PATH="/usr/local/opt/python@3.8/bin:$PATH"
   source $ZSH/oh-my-zsh.sh
+
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+  export PATH=$PATH:$JAVA_HOME/bin
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
   autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mobile cms scheduled interests mobKnowledge mobFeed theme
@@ -103,7 +106,7 @@ alias myip='ip addr show en0'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
-alias l='exa --long --header --git --all'
+alias l='exa --long --header --all --icons'
 alias ls='exa --header'
 alias tree='exa --tree --level=2'
 alias c='clear'
@@ -227,3 +230,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export PATH="$HOME/.serverless/bin:$PATH"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+eval $(thefuck --alias)

@@ -19,6 +19,7 @@
   set updatetime=100
   set incsearch
   set noshowmode
+  set conceallevel=0
 
   " Fold stuff
   set nofoldenable

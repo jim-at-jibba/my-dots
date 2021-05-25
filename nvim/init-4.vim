@@ -4,46 +4,49 @@
 "  /_____/\___/____/\__/\__, / |___/___/_/  /_/_/ |_|\____/
 "                      /____/
 " Setup plug  ---------------------------------------------------------------{{{
-call plug#begin('~/.local/share/nvim/plugged')
+if exists('g:vscode')
+    " VSCode extension
+else
+  call plug#begin('~/.local/share/nvim/plugged')
 
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 
-" Look and feel
-Plug 'mhartington/oceanic-next'
-Plug 'romainl/flattened'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'sheerun/vim-polyglot'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'ryanoasis/vim-devicons'
+  " Look and feel
+  Plug 'mhartington/oceanic-next'
+  Plug 'romainl/flattened'
+  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'sheerun/vim-polyglot'
+  " Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline-themes'
+  " Plug 'ryanoasis/vim-devicons'
 
-" git
-Plug 'jreybert/vimagit'
-Plug 'junegunn/gv.vim'
+  " git
+  Plug 'jreybert/vimagit'
+  Plug 'junegunn/gv.vim'
 
-" utils
-Plug 'mbbill/undotree'
-Plug 'cohama/lexima.vim'
-Plug 'TaDaa/vimade'
-Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
-Plug 'ap/vim-buftabline'
+  " utils
+  Plug 'mbbill/undotree'
+  Plug 'cohama/lexima.vim'
+  Plug 'TaDaa/vimade'
+  Plug 'justinmk/vim-sneak'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround'
+  Plug 'preservim/nerdtree'
+  Plug 'ap/vim-buftabline'
 
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
+  " Javascript
+  Plug 'pangloss/vim-javascript'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug 'jparise/vim-graphql'
 
-" Coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
+  " Coc
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'antoinemadec/coc-fzf'
 
-call plug#end()
-
+  call plug#end()
+endif
 " }}}
 
 " Mappings ---------------------------------------------------------------{{{
