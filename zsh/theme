@@ -5,11 +5,7 @@ local themes="nord [Nord theme]
 ariakedark [Ariake Dark]
 ariakelight [Ariake Light]
 oceanicnext [Ocean Next]
-edgelight [Edge light]
-edgeneon [Edge Neon]
-onehalfdark [One Half Dark]
-onehalflight [One Half Light]
-nightfly [Nightfly]
+embark [Embark]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
