@@ -52,19 +52,19 @@ font:
   # The normal (roman) font face to use.
   normal:
     #family: Dank Mono
-    family: Hack Nerd Font Mono
+    family: FiraMono Nerd Font
     style: Regular
 
   # The bold font face
   bold:
     #family: Dank Mono
-    family: Hack Nerd Font Mono
+    family: FiraMono Nerd Font
     style: Bold
 
   # The italic font face
   italic:
     # family: Dank Mono
-    family: Hack Nerd Font Mono
+    family: FiraMono Nerd Font
     style: Italic
 
   # Point size of the font
@@ -253,12 +253,12 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
 
-  url:
+  # url:
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a URL.
     # The URL is always added to the command as the last parameter.
-    launcher: open
+    # launcher: open
 
     # URL modifiers
     #
@@ -294,7 +294,7 @@ live_config_reload: true
 # Entries in shell.args are passed unmodified as arguments to the shell.
 #
 shell:
-  program: /usr/local/bin/zsh
+  program: /bin/zsh
   args:
     - --login
 

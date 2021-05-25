@@ -13,7 +13,7 @@ SPACESHIP_TIME_SHOW=true
 
 DISABLE_AUTO_TITLE="true"
 
-plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 # TERM=xterm-256color
@@ -58,7 +58,7 @@ plugins=(git teamocil zsh-completions httpie vi-mode zsh-autosuggestions zsh-syn
   export PATH=$PATH:$JAVA_HOME/bin
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify nutil mobile cms scheduled interests mobKnowledge mobFeed theme
+  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify theme
 
   typeset -U PATH fpath
 
@@ -214,21 +214,21 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 #tmuxify
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/completion.zsh.inc'; fi
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# # The next line enables shell command completion for gcloud.
+# if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
-source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
+# source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
 # Added by serverless binary installer
-export PATH="$HOME/.serverless/bin:$PATH"
+# export PATH="$HOME/.serverless/bin:$PATH"
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# export PATH="$HOME/.poetry/bin:$PATH"
 
 eval $(thefuck --alias)
