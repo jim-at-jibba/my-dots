@@ -1,3 +1,4 @@
+# export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
@@ -232,3 +233,4 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="$HOME/.poetry/bin:$PATH"
 
 eval $(thefuck --alias)
+
