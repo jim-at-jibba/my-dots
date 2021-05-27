@@ -1,7 +1,7 @@
-nnoremap <C-k> :cnext<CR>zz
-nnoremap <C-j> :cprev<CR>zz
-nnoremap <leader>k :lnext<CR>zz
-nnoremap <leader>j :lprev<CR>zz
+nnoremap <C-]> :cnext<CR>zz
+nnoremap <C-[> :cprev<CR>zz
+nnoremap <leader>] :lnext<CR>zz
+nnoremap <leader>[ :lprev<CR>zz
 nnoremap <C-q> :call ToggleQFList(1)<CR>
 nnoremap <leader>q :call ToggleQFList(0)<CR>
 
