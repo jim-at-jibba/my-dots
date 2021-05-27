@@ -65,8 +65,7 @@ local custom_attach = function(client)
   mapper('n', '<leader>vsh', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  mapper('n', '<leader>dr', ":lua require('lists').change_active('Quickfix')<CR>:lua vim.lsp.buf.references()<CR>") 
-  -- mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
