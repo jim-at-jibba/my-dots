@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
@@ -29,8 +30,8 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " git
 Plug 'jreybert/vimagit'
 Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
-Plug 'APZelos/blamer.nvim'
 
 " langs
 Plug 'tweekmonster/gofmt.vim'
@@ -83,7 +84,7 @@ noremap H ^
 noremap L g_
 
 noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
-nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+nnoremap <leader>c :lclose<bar>b#<bar>bd #<CR>
 
 " disable Arrow keys
 noremap <Up> <NOP>

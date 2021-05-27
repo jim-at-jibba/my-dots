@@ -123,7 +123,7 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
-export EDITOR='/usr/local/bin/nvim'
+# export EDITOR='~/neovim/bin/nvim'
 
 # Docker
 alias ld="lazydocker"

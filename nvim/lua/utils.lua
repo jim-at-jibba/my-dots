@@ -1,5 +1,6 @@
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/utils.lua
 local M = {}
+local cmd = vim.cmds   
 
 M.merge = function(t1, t2)
     for k, v in pairs(t2) do
