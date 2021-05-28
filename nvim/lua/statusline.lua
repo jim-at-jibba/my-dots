@@ -4,14 +4,14 @@ local gls = gl.section
 gl.short_line_list = {" "} -- keeping this table { } as empty will show inactive statuslines
 
 local colors = {
-    bg = "#22262e",
-    fg = "#abb2bf",
-    green = "#82ad63",
-    red = "#d47d85",
-    lightbg = "#2e323a",
-    blue = "#7797b7",
-    yellow = "#e0c080",
-    grey = "#6f737b"
+    bg = "#100E23",
+    fg = "#8A889D",
+    green = "#A1EFD3",
+    red = "#F48FB1",
+    lightbg = "#2D2B40",
+    blue = "#91DDFF",
+    yellow = "#FFE6B3",
+    grey = "#CBE3E7"
 }
 
 gls.left[2] = {
