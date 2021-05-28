@@ -10,8 +10,11 @@ ZSH_THEME="spaceship"
 SPACESHIP_CHAR_SYMBOL='🦄🐙 '
 SPACESHIP_BATTERY_SHOW='false'
 
-SPACESHIP_TIME_SHOW=true
-
+SPACESHIP_TIME_SHOW=false
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_EXEC_TIME_SHOW=false
+SPACESHIP_NODE_SHOW=false
+SPACESHIP_DOCKER_SHOW=false
 DISABLE_AUTO_TITLE="true"
 
 plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
