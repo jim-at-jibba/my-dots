@@ -6,6 +6,8 @@ ariakedark [Ariake Dark]
 ariakelight [Ariake Light]
 oceanicnext [Ocean Next]
 embark [Embark]
+tokyolight [Tokyo Day]
+tokyonight [Tokyo Storm]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

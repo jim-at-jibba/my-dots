@@ -465,27 +465,33 @@ key_bindings:
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
   - { key: Right,    mods: Command,       chars: "\x06\x4c" }
 colors:
+  # Default colors
   primary:
-    background: '0x1e1c31'
-    foreground: '0xcbe3e7'
-  cursor:
-    text: '0x1e1c31'
-    cursor: '0xa1efd3'
+    background: '0x24283b'
+    foreground: '0xc0caf5'
+
+  # Normal colors
   normal:
-    black: '0x1e1c31'
-    red: '0xf48fb1'
-    green: '0xa1efd3'
-    yellow: '0xffe6b3'
-    blue: '0x91ddff'
-    magenta: '0xd4bfff'
-    cyan: '0x87dfeb'
-    white: '0xcbe3e7'
+    black:   '0x1D202F'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
+
+  # Bright colors
   bright:
-    black: '0x585273'
-    red: '0xf02e6e'
-    green: '0x62d196'
-    yellow: '0xf2b482'
-    blue: '0x65b2ff'
-    magenta: '0xa37acc'
-    cyan: '0x63f2f1'
-    white: '0x8a889d'
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }

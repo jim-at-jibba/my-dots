@@ -1,2 +1,3 @@
 set background=dark
-colorscheme embark
+let g:tokyonight_style = "storm"
+colorscheme tokyonight

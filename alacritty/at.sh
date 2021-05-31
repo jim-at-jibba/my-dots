@@ -34,8 +34,16 @@ case $color in
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme embark'
     ;;
+  tokyolight)
+    configure_alacritty
+    configure_vim 'set background=light\nlet g:tokyonight_style = "day"\ncolorscheme tokyonight'
+    ;;
+  tokyonight)
+    configure_alacritty
+    configure_vim 'set background=dark\nlet g:tokyonight_style = "storm"\ncolorscheme tokyonight'
+    ;;
   *)
-    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark"
+    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark, tokyolightm tokyonight"
     exit 1
     ;;
 esac

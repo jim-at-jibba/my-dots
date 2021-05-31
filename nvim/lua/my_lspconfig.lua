@@ -51,6 +51,12 @@ require'compe'.setup {
 }
 
 local custom_attach = function(client)
+  -- define prettier signs
+  vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnosticsError"})
+  vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", texthl="LspDiagnosticsWarning"})
+  vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", texthl="LspDiagnosticsInformation"})
+  vim.fn.sign_define("LspDiagnosticsSignHint", {text="", texthl="LspDiagnosticsHint"})
+
   if client.resolved_capabilities.document_formatting then
       vim.cmd [[augroup Format]]
       vim.cmd [[autocmd! * <buffer>]]
