@@ -62,10 +62,25 @@ local custom_attach = function(client)
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  mapper('n', '<leader>vsh', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  mapper('n', '<leader>sh', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
+  mapper('n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>')
+  mapper('n', '<leader>gh', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
+  mapper('n', '<leader>gp', '<cmd>lua require("lspsaga.provider").preview_definition()<CR>')
+  -- mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
   mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  mapper('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
+  mapper('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
+  mapper('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
+
+  mapper('n', '<leader>dl', '<cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>')
+  mapper('n', '<leader>dn', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>')
+  mapper('n', '<leader>dp', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>')
+
+  mapper('n', '<leader>xx', '<cmd>TroubleToggle<CR>')
+  mapper('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<CR>')
+  mapper('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<CR>')
+  -- jmapper('n', '<leader>xl', '<cmd>Trouble loclist<CR>')
+  -- jmapper('n', '<leader>xq', '<cmd>Trouble quickfix<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
@@ -114,6 +129,13 @@ nvim_lsp.yamlls.setup({
   root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = custom_attach
 })
+
+require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+
 -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 --   on_attach = custom_attach,
 -- })

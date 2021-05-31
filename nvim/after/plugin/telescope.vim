@@ -14,7 +14,7 @@ nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
 nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
 
-nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
+" nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
 
 lua << EOF
 local actions = require('telescope.actions')

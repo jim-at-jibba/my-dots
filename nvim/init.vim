@@ -52,6 +52,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
 Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/nvim-compe'
 Plug 'vim-test/vim-test'
@@ -116,6 +118,15 @@ nnoremap <leader>- :vertical resize -5<CR>
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"}}}
+
+
+" NvimTree -----------------------------------------------------------------{{{
+let g:nvim_tree_side = 'right'
+let g:nvim_tree_width = 40 
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] 
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_lsp_diagnostics = 1
 "}}}
 
 " Golang -----------------------------------------------------------------{{{
