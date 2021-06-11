@@ -176,6 +176,7 @@ alias cat='bat'
 alias genyshell='/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell'
 alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 alias nmdelete='find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;'
+alias readme='npx readme-md-generate'
 
 # twf
 
