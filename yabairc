@@ -75,8 +75,9 @@ yabai -m rule --add app="^Slack$" space=comms
 yabai -m rule --add app="^Firefox\ Developer\ Edition$" space=web
 yabai -m rule --add app="^Code$" space=notes
 yabai -m rule --add app="^Simulator$" space=mob
-yabai -m rule --add app="^qemu_system-x86_64$" space=mob
-yabai -m rule --add app="^React\ Native\ Debugger$" space=mob
+yabai -m rule --add app="^qemu_system-x86_64$" space=mob manage=off
+yabai -m rule --add app="^React\ Native\ Debugger$" space=mob manage=off
+yabai -m rule --add app="^Flipper$" space=mob manage=off
 yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add label="App Store" app="^App Store$" manage=off
