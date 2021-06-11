@@ -61,6 +61,7 @@ Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
+Plug 'folke/which-key.nvim'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'
@@ -90,7 +91,7 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" Simplier mappings for switching
+" Simpler mappings for switching
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-H> <C-W><C-H>

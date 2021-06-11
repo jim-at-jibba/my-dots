@@ -17,6 +17,7 @@
   set completeopt=menu,menuone,noinsert,noselect
   set signcolumn=yes
   set updatetime=100
+  set timeoutlen=500
   set incsearch
   set noshowmode
 

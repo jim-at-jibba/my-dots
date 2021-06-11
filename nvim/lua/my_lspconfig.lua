@@ -73,7 +73,8 @@ local custom_attach = function(client)
   mapper('n', '<leader>gh', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
   mapper('n', '<leader>gp', '<cmd>lua require("lspsaga.provider").preview_definition()<CR>')
   -- mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  -- mapper('n', '<leader>dr', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>')
+  mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
   mapper('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
   mapper('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
   mapper('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
@@ -140,7 +141,26 @@ require("trouble").setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
-  }
+}
+
+require("which-key").setup {
+  plugins = {
+    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    spelling = {
+      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      suggestions = 20, -- how many suggestions should be shown in the list?
+    },
+    presets = {
+      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = true, -- adds help for motions
+      text_objects = true, -- help for text objects triggered after entering an operator
+      windows = true, -- default bindings on <c-w>
+      nav = true, -- misc bindings to work with windows
+      z = true, -- bindings for folds, spelling and others prefixed with z
+      g = true, -- bindings for prefixed with g
+    },
+  },
+}
 
 -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 --   on_attach = custom_attach,
@@ -163,10 +183,11 @@ nvim_lsp.sumneko_lua.setup({
 --]]
 
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
---local golint = require "efm/golint"
---local goimports = require "efm/goimports"
+local golint = require "efm/golint"
+local goimports = require "efm/goimports"
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
+local misspell = require "efm/misspell"
 
 nvim_lsp.efm.setup {
   on_attach = custom_attach,
@@ -174,6 +195,8 @@ nvim_lsp.efm.setup {
   settings = {
         rootMarkers = {".git/"},
         languages = {
+            ["="] = {misspell},
+            go = {golint, goimports},
             typescript = {prettier, eslint},
             javascript = {prettier, eslint},
             typescriptreact = {prettier, eslint},
