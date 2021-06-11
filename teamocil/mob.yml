@@ -1,12 +1,17 @@
 windows:
-  - name: mob
-    root: ~/Code/work/mobile-app
-    layout: ebd2,255x65,0,0{187x65,0,0,10,67x65,188,0[67x32,188,0,26,67x32,188,33,27]}
+  - name: MOB
+    root: ~/Code/work/breedr-mobile
+    layout: 9cad,253x68,0,0[253x54,0,0,1,253x13,0,55{83x13,0,55,2,82x13,84,55,10,86x13,167,55,3}]
     panes:
       - commands:
-        - name mob
+        - name vim
         - v
+
       - commands:
-        - name app
-        - npx react-native start
-      - clear
+        - name App
+        - npm run dev && npm run start
+      - commands:
+        - name Build
+        - npm run ios
+      - commands:
+        - name Other
