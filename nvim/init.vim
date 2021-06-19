@@ -14,6 +14,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'fhill2/telescope-ultisnips.nvim'
 
 " Look and feel
 Plug 'mhartington/oceanic-next'
@@ -32,15 +33,15 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'jreybert/vimagit'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
 
 " langs
-Plug 'tweekmonster/gofmt.vim'
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tjdevries/nlua.nvim'
 Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
+Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'branch': 'main'}
+
 
 " utils
 Plug 'mbbill/undotree'
@@ -59,9 +60,13 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/nvim-compe'
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
-Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'folke/which-key.nvim'
+Plug 'andymass/vim-matchup'
+
+" TPOPE
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'

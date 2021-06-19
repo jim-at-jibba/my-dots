@@ -9,6 +9,7 @@ nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
 nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
+nnoremap <Leader>sn :lua require'telescope'.extensions.ultisnips.ultisnips{}<CR>
 
 lua << EOF
 local actions = require('telescope.actions')
@@ -44,5 +45,6 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('ultisnips')
 
 EOF

@@ -7,9 +7,10 @@ To symlink neovim `ln -s ~/dotfiles/nvim/* ~/.config/nvim`
 Symlink alacritty `ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty`
 
 ## TMUX
+
 Most of the set up is done with this guys setup
 
-```
+```bash
 git clone https://github.com/gpakosz/.tmux.git
 
 ln -s -f .tmux/.tmux.conf

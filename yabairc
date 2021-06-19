@@ -67,6 +67,7 @@ yabai -m space 3 --label media
 yabai -m space 4 --label mob
 yabai -m space 5 --label web
 yabai -m space 6 --label comms
+yabai -m space 7 --label ide
 
 # ===== Rules ==================================
 
@@ -75,6 +76,8 @@ yabai -m rule --add app="^Slack$" space=comms
 yabai -m rule --add app="^Firefox\ Developer\ Edition$" space=web
 yabai -m rule --add app="^Code$" space=notes
 yabai -m rule --add app="^Simulator$" space=mob
+yabai -m rule --add app="^Xcode$" space=ide
+yabai -m rule --add app="^Android\ Studio$" space=ide
 yabai -m rule --add app="^qemu_system-x86_64$" space=mob manage=off
 yabai -m rule --add app="^React\ Native\ Debugger$" space=mob manage=off
 yabai -m rule --add app="^Flipper$" space=mob manage=off

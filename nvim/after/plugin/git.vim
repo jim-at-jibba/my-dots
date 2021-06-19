@@ -6,11 +6,12 @@ nnoremap <leader>gd :Gdiff master<cr>
 nnoremap <leader>gl :G log -100<cr>
 
 " Signify
-nmap <silent> <cr> <Plug>(signify-next-hunk)
-nmap <silent> <backspace> <Plug>(signify-prev-hunk)
-nmap <leader>gd :SignifyDiff<CR>
-
-nmap <leader>gb :BlamerToggle<CR>
+" nmap <silent> <cr> <Plug>(signify-next-hunk)
+" nmap <silent> <backspace> <Plug>(signify-prev-hunk)
+" nmap <leader>gd :SignifyDiff<CR>
+" 
+" nmap <leader>gb :BlamerToggle<CR>
+" let g:signify_disable_by_default = 1
 
 " Vimagit
 " let g:magit_default_fold_level = 0

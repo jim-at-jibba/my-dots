@@ -72,8 +72,6 @@ local custom_attach = function(client)
   mapper('n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
   mapper('n', '<leader>gp', '<cmd>lua require("lspsaga.provider").preview_definition()<CR>')
-  -- mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  -- mapper('n', '<leader>dr', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>')
   mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
   mapper('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
   mapper('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
@@ -86,8 +84,6 @@ local custom_attach = function(client)
   mapper('n', '<leader>xx', '<cmd>TroubleToggle<CR>')
   mapper('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<CR>')
   mapper('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<CR>')
-  -- jmapper('n', '<leader>xl', '<cmd>Trouble loclist<CR>')
-  -- jmapper('n', '<leader>xq', '<cmd>Trouble quickfix<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
@@ -100,6 +96,11 @@ nvim_lsp.tsserver.setup({
     custom_attach(client)
   end
 })
+
+nvim_lsp.svelte.setup({
+  on_attach = custom_attach,
+})
+
 
 nvim_lsp.gopls.setup({
   on_attach = function(client)
@@ -138,9 +139,10 @@ nvim_lsp.yamlls.setup({
 })
 
 require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+  auto_open = true,
+  auto_close = true, 
+  auto_preview = true,
+  use_lsp_diagnostic_signs = false
 }
 
 require("which-key").setup {

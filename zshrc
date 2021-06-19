@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded. pygmalion
 ZSH_THEME="spaceship"
 
-SPACESHIP_CHAR_SYMBOL='🦄🐙 '
+SPACESHIP_CHAR_SYMBOL='🦄 🐙 '
 SPACESHIP_BATTERY_SHOW='false'
 
 SPACESHIP_TIME_SHOW=false
