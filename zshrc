@@ -56,6 +56,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highl
   export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.2
   export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
   export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
   source $ZSH/oh-my-zsh.sh
 
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
@@ -126,6 +127,8 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
+alias python3='python'
+
 # export EDITOR='~/neovim/bin/nvim'
 
 # Docker
@@ -238,3 +241,12 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 eval $(thefuck --alias)
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
+
+
+export PATH="$HOME/.poetry/bin:$PATH"

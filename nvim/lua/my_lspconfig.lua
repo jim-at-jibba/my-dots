@@ -89,6 +89,8 @@ local custom_attach = function(client)
 
 end
 
+nvim_lsp.pyright.setup {on_attach = on_attach}
+
 nvim_lsp.tsserver.setup({
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
@@ -190,6 +192,10 @@ local goimports = require "efm/goimports"
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local misspell = require "efm/misspell"
+local black = require "efm/black"
+local isort = require "efm/isort"
+local flake8 = require "efm/flake8"
+local mypy = require "efm/mypy"
 
 nvim_lsp.efm.setup {
   on_attach = custom_attach,
@@ -199,6 +205,7 @@ nvim_lsp.efm.setup {
         languages = {
             ["="] = {misspell},
             go = {golint, goimports},
+            python = {black, isort, flake8, mypy},
             typescript = {prettier, eslint},
             javascript = {prettier, eslint},
             typescriptreact = {prettier, eslint},

@@ -63,6 +63,7 @@ Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'
 Plug 'folke/which-key.nvim'
 Plug 'andymass/vim-matchup'
+Plug 'windwp/nvim-ts-autotag'
 
 " TPOPE
 Plug 'tpope/vim-surround'
