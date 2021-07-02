@@ -33,6 +33,7 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'jreybert/vimagit'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 
 " langs
 " Plug 'fatih/vim-go'
