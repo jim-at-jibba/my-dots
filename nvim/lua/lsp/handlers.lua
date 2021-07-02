@@ -22,5 +22,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             update_in_insert = false
         }
     )(...)
+    pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
 end
 

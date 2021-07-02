@@ -68,11 +68,16 @@ local custom_attach = function(client)
 
   mapper('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', '<leader>d', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+  -- mapper('n', '<leader>vsh', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  -- mapper('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+  -- mapper('n', '<leader>gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  -- mapper('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>')
   mapper('n', '<leader>sh', '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>')
   mapper('n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
   mapper('n', '<leader>gp', '<cmd>lua require("lspsaga.provider").preview_definition()<CR>')
-  mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
+  -- mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
+  mapper('n', '<leader>dr', '<cmd>lua require("lspsaga.provider").lsp_finder()<CR>')
   mapper('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
   mapper('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
   mapper('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
@@ -81,9 +86,9 @@ local custom_attach = function(client)
   mapper('n', '<leader>dn', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>')
   mapper('n', '<leader>dp', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>')
 
-  mapper('n', '<leader>xx', '<cmd>TroubleToggle<CR>')
-  mapper('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<CR>')
-  mapper('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<CR>')
+  -- mapper('n', '<leader>xx', '<cmd>TroubleToggle<CR>')
+  -- mapper('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<CR>')
+  -- mapper('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
@@ -92,9 +97,9 @@ end
 nvim_lsp.pyright.setup {on_attach = on_attach}
 
 nvim_lsp.tsserver.setup({
+  cmd = { "typescript-language-server", "--stdio" },
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
-    require "nvim-lsp-ts-utils".setup {}
     custom_attach(client)
   end
 })
@@ -140,31 +145,31 @@ nvim_lsp.yamlls.setup({
   on_attach = custom_attach
 })
 
-require("trouble").setup {
-  auto_open = true,
-  auto_close = true, 
-  auto_preview = true,
-  use_lsp_diagnostic_signs = false
-}
+-- require("trouble").setup {
+--   auto_open = false,
+--   auto_close = true, 
+--   auto_preview = true,
+--   use_lsp_diagnostic_signs = false
+-- }
 
-require("which-key").setup {
-  plugins = {
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-    spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-      suggestions = 20, -- how many suggestions should be shown in the list?
-    },
-    presets = {
-      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = true, -- adds help for motions
-      text_objects = true, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
-    },
-  },
-}
+-- require("which-key").setup {
+--   plugins = {
+--     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+--     spelling = {
+--       enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+--       suggestions = 20, -- how many suggestions should be shown in the list?
+--     },
+--     presets = {
+--       operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+--       motions = true, -- adds help for motions
+--       text_objects = true, -- help for text objects triggered after entering an operator
+--       windows = true, -- default bindings on <c-w>
+--       nav = true, -- misc bindings to work with windows
+--       z = true, -- bindings for folds, spelling and others prefixed with z
+--       g = true, -- bindings for prefixed with g
+--     },
+--   },
+-- }
 
 -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 --   on_attach = custom_attach,

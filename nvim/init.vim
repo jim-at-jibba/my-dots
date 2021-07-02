@@ -14,19 +14,19 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'fhill2/telescope-ultisnips.nvim'
+" Plug 'fhill2/telescope-ultisnips.nvim'
 
 " Look and feel
-Plug 'mhartington/oceanic-next'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'mhartington/oceanic-next'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'norcalli/nvim-colorizer.lua'
 " Plug 'p00f/nvim-ts-rainbow'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
 "Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'windwp/nvim-ts-autotag'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
+" Plug 'windwp/nvim-ts-autotag'
+" Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 " git
@@ -40,12 +40,13 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tjdevries/nlua.nvim'
 Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
-Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'branch': 'main'}
+" Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'branch': 'main'}
 
 
 " utils
 Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
+" Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'cohama/lexima.vim'
 Plug 'romgrk/barbar.nvim'
@@ -55,15 +56,16 @@ Plug 'TaDaa/vimade'
 Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
-Plug 'folke/trouble.nvim'
+" Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/nvim-compe'
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'
-Plug 'folke/which-key.nvim'
-Plug 'andymass/vim-matchup'
-Plug 'windwp/nvim-ts-autotag'
+" Plug 'folke/which-key.nvim'
+" Plug 'andymass/vim-matchup'
+" Plug 'windwp/nvim-ts-autotag'
+" Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 
 " TPOPE
 Plug 'tpope/vim-surround'

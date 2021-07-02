@@ -10,10 +10,11 @@ nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
 nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
 nnoremap <Leader>sn :lua require'telescope'.extensions.ultisnips.ultisnips{}<CR>
+nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
 
 lua << EOF
 local actions = require('telescope.actions')
-local trouble = require("trouble.providers.telescope")
+-- local trouble = require("trouble.providers.telescope")
 
 require('telescope').setup{
   defaults = {
@@ -31,9 +32,7 @@ require('telescope').setup{
             i = {
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
-                ["<c-t>"] = trouble.open_with_trouble,
             },
-            n = { ["<c-t>"] = trouble.open_with_trouble },
         }
   },
   extensions = {
@@ -45,6 +44,6 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('ultisnips')
+-- require('telescope').load_extension('ultisnips')
 
 EOF
