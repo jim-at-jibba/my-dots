@@ -1,14 +1,15 @@
 wtf:
   colors:
-    background: black
     border:
-      focusable: darkslateblue
-      focused: orange
-      normal: gray
-    checked: bluesteel
-    highlight: 
-      fore: black
-      back: gray
+      focusable: "darkslateblue"
+      focused: "orange"
+      normal: "gray"
+    checked: "gray"
+    highlight:
+      fore: "black"
+      back: "green"
+    text: "white"
+    title: "white"
     rows:
       even: bluestell
       odd: white  
@@ -89,21 +90,21 @@ wtf:
       repositories:
         - "/Users/jamesbest/code/work/breedr-mobile"
         - "/Users/jamesbest/dotfiles"
-    feedreader:
-      border: true
+    todoist_work:
+      type: todoist
+      apiKey: "1c2733b28d98aca6470d4aeff7681ee18b8c2802"
       enabled: true
-      feeds:
-      - https://news.ycombinator.com/rss
-      feedLimit: 10
-      focusable: true
+      title: "Todo"
       position:
         top: 1
         left: 1
-        width: 1
         height: 1
-      title: "Hacker News"
-      refreshInterval: 14400
+        width: 1
+      projects:
+        - 2267902667
+      refreshInterval: 3600
     todoist:
+      type: todoist
       apiKey: "1c2733b28d98aca6470d4aeff7681ee18b8c2802"
       enabled: true
       title: "Todo"
@@ -113,7 +114,7 @@ wtf:
         height: 1
         width: 1
       projects:
-        - 2267902667
+        - 2227119415
       refreshInterval: 3600
     ipinfo:
       colors:

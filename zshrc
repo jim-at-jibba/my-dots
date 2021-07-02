@@ -134,6 +134,9 @@ alias python3='python'
 # Docker
 alias ld="lazydocker"
 
+# go
+alias coverage="go test -coverprofile=coverage.out && go tool cover -html=coverage.out"
+
 # tmux
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
 alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'

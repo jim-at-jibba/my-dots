@@ -7,11 +7,17 @@ set -x
 declare -A gaps
 declare -A color
 
-gaps["top"]="4"
-gaps["bottom"]="24"
-gaps["left"]="4"
-gaps["right"]="4"
-gaps["inner"]="4"
+# gaps["top"]="4"
+# gaps["bottom"]="24"
+# gaps["left"]="4"
+# gaps["right"]="4"
+# gaps["inner"]="4"
+
+gaps["top"]="0"
+gaps["bottom"]="0"
+gaps["left"]="0"
+gaps["right"]="0"
+gaps["inner"]="0"
 
 color["focused"]="0xff775759"
 color["normal"]="0x00010101"
@@ -45,7 +51,7 @@ yabai -m config window_opacity              off
 yabai -m config window_shadow               float
 
 yabai -m config window_border               on
-yabai -m config window_border_width         4
+yabai -m config window_border_width         2
 yabai -m config active_window_border_color  "${color["focused"]}"
 yabai -m config normal_window_border_color  "${color["normal"]}"
 yabai -m config insert_feedback_color       "${color["preselect"]}"
@@ -59,10 +65,11 @@ yabai -m config auto_balance                off
 yabai -m config mouse_modifier              fn
 yabai -m config mouse_action1               move
 yabai -m config mouse_action2               resize
+yabai -m config external_bar all:26:0
 
 # mission-control desktop labels
 yabai -m space 1 --label code
-yabai -m space 2 --label notes
+yabai -m space 2 --label terminal
 yabai -m space 3 --label media
 yabai -m space 4 --label mob
 yabai -m space 5 --label web
@@ -71,10 +78,10 @@ yabai -m space 7 --label ide
 
 # ===== Rules ==================================
 
-yabai -m rule --add app="^Alacritty$" space=code
+yabai -m rule --add app="^Alacritty$" space=terminal
 yabai -m rule --add app="^Slack$" space=comms
 yabai -m rule --add app="^Firefox\ Developer\ Edition$" space=web
-yabai -m rule --add app="^Code$" space=notes
+yabai -m rule --add app="^Code$" space=code
 yabai -m rule --add app="^Simulator$" space=mob
 yabai -m rule --add app="^Xcode$" space=ide
 yabai -m rule --add app="^Android\ Studio$" space=ide
