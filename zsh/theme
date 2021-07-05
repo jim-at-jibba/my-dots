@@ -13,5 +13,5 @@ tokyonight [Tokyo Storm]
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
 
 if [[ -n $cmd ]]; then
- ~/dotfiles/alacritty/at.sh ${cmd}
+ ~/dotfiles/at.sh ${cmd}
 fi

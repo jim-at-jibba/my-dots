@@ -52,22 +52,23 @@ font:
   # The normal (roman) font face to use.
   normal:
     #family: Dank Mono
-    # family: FiraMono Nerd Font
-    family: Hack Nerd Font Mono
+    family: MonoLisa
+    # family: Hack Nerd Font Mono
     style: Regular
 
   # The bold font face
   bold:
     #family: Dank Mono
-    # family: FiraMono Nerd Font
-    family: Hack Nerd Font Mono
+    family: MonoLisa
+    # family: Hack Nerd Font Mono
     style: Bold
 
   # The italic font face
   italic:
     # family: Dank Mono
     # family: FiraMono Nerd Font
-    family: Hack Nerd Font Mono
+    family: MonoLisa
+    # family: Hack Nerd Font Mono
     style: Italic
 
   # Point size of the font

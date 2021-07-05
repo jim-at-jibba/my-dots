@@ -177,7 +177,7 @@ alias ngrok='~/code/ngrok'
 
 # Dev Shit
 ###########
-alias bs='browser-sync start --server --files "**/*.*"'
+alias bs='npx browser-sync start --server --files "**/*.*"'
 alias cat='bat'
 alias genyshell='/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell'
 alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'

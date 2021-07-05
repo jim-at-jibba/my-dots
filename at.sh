@@ -4,9 +4,14 @@
 color=$1
 dotfiles=~/dotfiles
 alacritty=${dotfiles}/alacritty
+kitty=${dotfiles}/kitty
 
 configure_alacritty() {
   cat ${alacritty}/base.yml ${alacritty}/${color}.yml > ${dotfiles}/alacritty.yml
+}
+
+configure_kitty() {
+  cat ${kitty}/base.conf ${kitty}/${color}.conf > ${dotfiles}/kitty.conf
 }
 
 configure_vim() {
@@ -32,14 +37,17 @@ case $color in
     ;;
   embark)
     configure_alacritty
+    configure_kitty
     configure_vim 'set background=dark\ncolorscheme embark'
     ;;
   tokyolight)
     configure_alacritty
+    configure_kitty
     configure_vim 'set background=light\nlet g:tokyonight_style = "day"\ncolorscheme tokyonight'
     ;;
   tokyonight)
     configure_alacritty
+    configure_kitty
     configure_vim 'set background=dark\nlet g:tokyonight_style = "storm"\ncolorscheme tokyonight'
     ;;
   *)
