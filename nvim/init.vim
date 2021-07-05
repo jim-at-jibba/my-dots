@@ -34,6 +34,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
+Plug 'f-person/git-blame.nvim'
 
 " langs
 " Plug 'fatih/vim-go'
