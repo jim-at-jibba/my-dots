@@ -1,0 +1,12 @@
+windows:
+  - name: WIKI
+    root: ~/code/other
+    layout: even-horizontal
+    panes:
+      - commands:
+        - name wiki
+        - cd wiki && v
+      - commands:
+        - name til
+        - cd til && v
+

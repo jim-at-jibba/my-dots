@@ -19,11 +19,10 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " Look and feel
 " Plug 'mhartington/oceanic-next'
 " Plug 'arcticicestudio/nord-vim'
+Plug 'shaunsingh/nord.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'p00f/nvim-ts-rainbow'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
-"Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'windwp/nvim-ts-autotag'
 " Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -37,12 +36,16 @@ Plug 'mhinz/vim-signify'
 Plug 'f-person/git-blame.nvim'
 
 " langs
-" Plug 'fatih/vim-go'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tjdevries/nlua.nvim'
 Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
-" Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'branch': 'main'}
+" Plug 'TovarishFin/vim-solidity'
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 
 " utils
