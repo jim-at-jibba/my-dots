@@ -141,6 +141,9 @@ require("trouble").setup {
   use_lsp_diagnostic_signs = false
 }
 
+
+require("twilight").setup {}
+
 -- require("which-key").setup {
 --   plugins = {
 --     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode

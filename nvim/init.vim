@@ -27,6 +27,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'windwp/nvim-ts-autotag'
 " Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'folke/twilight.nvim'
 
 " git
 Plug 'jreybert/vimagit'
@@ -126,6 +127,8 @@ nnoremap <leader>u :UndotreeToggle<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap <leader>p "_dP
+
+nmap <leader><leader> <c-^>
 
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
