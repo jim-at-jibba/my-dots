@@ -8,7 +8,7 @@
   set number
   set hidden
   set noerrorbells
-  set spell
+  set nospell
   set splitbelow
   set splitright
   set relativenumber

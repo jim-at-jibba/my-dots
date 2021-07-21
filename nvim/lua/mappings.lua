@@ -2,6 +2,7 @@ local map = require "utils".map
 local leader = "<space>"
 
 map("n", leader .. "w", ":update<CR>")
+map("n", "<F5>", ":setlocal spell!")
 
 map("n", leader .. "k", ":lua require('lists').move('up')<CR>", {silent = false})
 map("n", leader .. "j", ":lua require('lists').move('down')<CR>", {silent = false})
