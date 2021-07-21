@@ -465,28 +465,36 @@ key_bindings:
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
   - { key: Right,    mods: Command,       chars: "\x06\x4c" }
+# TokyoNight Alacritty Colors
 colors:
+  # Default colors
   primary:
-    background: '0x1e1c31'
-    foreground: '0xcbe3e7'
-  cursor:
-    text: '0x1e1c31'
-    cursor: '0xa1efd3'
+    background: '0xe1e2e7'
+    foreground: '0x3760bf'
+
+  # Normal colors
   normal:
-    black: '0x1e1c31'
-    red: '0xf48fb1'
-    green: '0xa1efd3'
-    yellow: '0xffe6b3'
-    blue: '0x91ddff'
-    magenta: '0xd4bfff'
-    cyan: '0x87dfeb'
-    white: '0xcbe3e7'
+    black:   '0xe9e9ed'
+    red:     '0xf52a65'
+    green:   '0x587539'
+    yellow:  '0x8c6c3e'
+    blue:    '0x2e7de9'
+    magenta: '0x9854f1'
+    cyan:    '0x007197'
+    white:   '0x6172b0'
+
+  # Bright colors
   bright:
-    black: '0x585273'
-    red: '0xf02e6e'
-    green: '0x62d196'
-    yellow: '0xf2b482'
-    blue: '0x65b2ff'
-    magenta: '0xa37acc'
-    cyan: '0x63f2f1'
-    white: '0x8a889d'
+    black:   '0xa1a6c5'
+    red:     '0xf52a65'
+    green:   '0x587539'
+    yellow:  '0x8c6c3e'
+    blue:    '0x2e7de9'
+    magenta: '0x9854f1'
+    cyan:    '0x007197'
+    white:   '0x3760bf'
+
+  indexed_colors:
+    - { index: 16, color: '0xb15c00' }
+    - { index: 17, color: '0xc64343' }
+
