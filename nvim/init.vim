@@ -70,8 +70,8 @@ Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'
 " Plug 'folke/which-key.nvim'
 " Plug 'andymass/vim-matchup'
-" Plug 'windwp/nvim-ts-autotag'
-" Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
+Plug 'windwp/nvim-ts-autotag'
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 
 " TPOPE
 Plug 'tpope/vim-surround'
@@ -129,6 +129,8 @@ vnoremap K :m '<-2<CR>gv=gv
 vnoremap <leader>p "_dP
 
 nmap <leader><leader> <c-^>
+
+nmap <F5> :setlocal spell!<CR>
 
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>

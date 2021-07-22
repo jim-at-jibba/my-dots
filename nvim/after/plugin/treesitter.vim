@@ -9,18 +9,14 @@ require'nvim-treesitter.configs'.setup {
     enable = true,              -- false will disable the whole extension
     disable = { "c", "rust" },  -- list of language that will be disabled
   },
- -- rainbow = {
- --   enable = true,
- --   disable = {'bash'} -- please disable bash until I figure #1 out
- -- },
  -- refactor = {
  --   highlight_definitions = {
  --       enable = true
  --   }
  -- },
- -- autotag = {
- --     enable = true
- -- },
+    autotag = {
+      enable = true
+    },
  -- matchup = {
  --   enable = true,              -- mandatory, false will disable the whole extension
  -- },
