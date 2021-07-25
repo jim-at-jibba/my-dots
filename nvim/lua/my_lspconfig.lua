@@ -142,7 +142,12 @@ require("trouble").setup {
 }
 
 
-require("twilight").setup {}
+-- require("twilight").setup {}
+
+nvim_lsp.tailwindcss.setup({
+  cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},
+  on_attach = custom_attach
+})
 
 -- require("which-key").setup {
 --   plugins = {
