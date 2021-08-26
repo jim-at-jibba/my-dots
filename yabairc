@@ -87,6 +87,7 @@ yabai -m rule --add app="^Simulator$" space=mob
 yabai -m rule --add app="^Android\ Studio$" space=ide
 yabai -m rule --add app="^qemu_system-x86_64$" space=mob manage=off
 yabai -m rule --add app="^React\ Native\ Debugger$" space=mob manage=off
+yabai -m rule --add app="^Electron$" manage=off
 yabai -m rule --add app="^Flipper$" space=mob manage=off
 yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^System Preferences$" manage=off

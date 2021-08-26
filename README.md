@@ -17,6 +17,16 @@ ln -s -f .tmux/.tmux.conf
 
 ln -s ~/dotfiles/tmux.conf  ~/.tmux.conf.local
 ```
+Test terminal italic support
+
+```bash
+echo -e "\e[1mbold\e[0m"
+echo -e "\e[3mitalic\e[0m"
+echo -e "\e[4munderline\e[0m"
+echo -e "\e[9mstrikethrough\e[0m"
+echo -e "\e[31mHello World\e[0m"
+```
+Show current fonts in kitty `kitty --debug-font-fallback`
 
 ## Brew
 

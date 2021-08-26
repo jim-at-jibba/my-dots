@@ -10,6 +10,8 @@ nnoremap <Leader>bc :lua require('telescope.builtin').git_bcommits()<CR>
 nnoremap <Leader>g :lua require('telescope.builtin').git_status()<CR>
 nnoremap <Leader>cR :lua require('telescope.builtin').reloader()<CR>
 nnoremap <Leader>sn :lua require'telescope'.extensions.ultisnips.ultisnips{}<CR>
+nnoremap <Leader>ns :Telescope neoclip<CR>
+
 " nnoremap <Leader>ca :lua require('telescope.builtin').lsp_code_actions()<CR>
 
 lua << EOF
@@ -46,6 +48,7 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('neoclip')
 -- require('telescope').load_extension('ultisnips')
 
 EOF

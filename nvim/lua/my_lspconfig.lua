@@ -43,6 +43,8 @@ require'compe'.setup {
   }
 }
 
+require'neoclip'.setup()
+
 local custom_attach = function(client)
   -- define prettier signs
   vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnosticsError"})
@@ -66,6 +68,7 @@ local custom_attach = function(client)
   mapper('n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>')
   mapper('n', '<leader>gh', '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
   mapper('n', '<leader>gp', '<cmd>lua require("lspsaga.provider").preview_definition()<CR>')
+  mapper('n', '<leader>dr', '<cmd>lua require("lspsaga.provider").lsp_finder()<CR>')
   mapper('n', '<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
   mapper('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
   mapper('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
@@ -77,7 +80,7 @@ local custom_attach = function(client)
   mapper('n', '<leader>xx', '<cmd>TroubleToggle<CR>')
   mapper('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<CR>')
   mapper('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<CR>')
-  mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
+  -- mapper('n', '<leader>dr', '<cmd>TroubleToggle lsp_references<CR>')
 
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
@@ -143,6 +146,7 @@ require("trouble").setup {
 
 
 -- require("twilight").setup {}
+require("todo-comments").setup{}
 
 nvim_lsp.tailwindcss.setup({
   cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},

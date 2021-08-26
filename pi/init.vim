@@ -275,7 +275,7 @@ endif
 let color_path = expand('~/dotfiles/nvim/color.vim')
 
 " set background=dark
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " colorscheme flattened_light
 
 set t_Co=256
