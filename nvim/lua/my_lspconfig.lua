@@ -147,6 +147,7 @@ require("trouble").setup {
 
 -- require("twilight").setup {}
 require("todo-comments").setup{}
+require("neoscroll").setup{}
 
 nvim_lsp.tailwindcss.setup({
   cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},

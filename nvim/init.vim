@@ -77,6 +77,7 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'AckslD/nvim-neoclip.lua'
 Plug 'folke/todo-comments.nvim'
+Plug 'karb94/neoscroll.nvim'
 
 " TPOPE
 Plug 'tpope/vim-surround'
