@@ -36,6 +36,18 @@ case $color in
     configure_alacritty
     configure_vim 'set background=dark\ncolorscheme ariake'
     ;;
+  rosepine)
+    configure_kitty
+    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+    ;;
+  rosepinemoon)
+    configure_kitty
+    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "moon"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+    ;;
+  rosepinedawn)
+    configure_kitty
+    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "dawn"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+    ;;
   embark)
     configure_alacritty
     configure_kitty
