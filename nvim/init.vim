@@ -35,6 +35,7 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'f-person/git-blame.nvim'
+Plug 'kdheepak/lazygit.nvim'
 
 " langs
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
