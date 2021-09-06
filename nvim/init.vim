@@ -42,6 +42,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tjdevries/nlua.nvim'
 Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
+Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'TovarishFin/vim-solidity'
 
 " Markdown
@@ -109,10 +110,10 @@ noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
 nnoremap <leader>c :lclose<bar>b#<bar>bd #<CR> 
 
 " disable Arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 " Simpler mappings for switching
 nnoremap <C-J> <C-W><C-J>

@@ -12,7 +12,8 @@ nnoremap <silent>    <leader>q :BufferClose<CR>
 
 let bufferline = get(g:, 'bufferline', {})
 let bufferline.animation = v:true
-let bufferline.icons = v:true
+let bufferline.icons = "both"
+let bufferline.numbers = v:true
 let bufferline.closable = v:false
 let bufferline.clickable = v:false
 let bufferline.semantic_letters = v:true
