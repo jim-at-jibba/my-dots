@@ -25,19 +25,35 @@ require('telescope').setup{
     file_sorter = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix = "🦄 ",
     color_devicons = true,
+    selection_caret = " ",
+      entry_prefix = "  ",
+      initial_mode = "insert",
+      selection_strategy = "reset",
+      sorting_strategy = "descending",
+      layout_strategy = "horizontal",
+      layout_config = {
+        width = 0.75,
+        prompt_position = "bottom",
+        preview_cutoff = 120,
+        horizontal = { mirror = false },
+        vertical = { mirror = false },
+      },
+      path_display = { shorten = 5 },
+      winblend = 0,
+      border = {},
+      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
-        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
-        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
-        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-
-        mappings = {
-            i = {
-                ["<C-x>"] = false,
-                ["<C-q>"] = actions.send_to_qflist,
-                ["<c-t>"] = trouble.open_with_trouble,
-            },
-            n = { ["<c-t>"] = trouble.open_with_trouble },
-        }
+      mappings = {
+          i = {
+              ["<C-x>"] = false,
+              ["<C-q>"] = actions.send_to_qflist,
+              ["<c-t>"] = trouble.open_with_trouble,
+          },
+          n = { ["<c-t>"] = trouble.open_with_trouble },
+      }
   },
   extensions = {
       fzy_native = {

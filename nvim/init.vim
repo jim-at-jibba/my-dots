@@ -69,17 +69,24 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'hrsh7th/nvim-compe'
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'
-" Plug 'folke/which-key.nvim'
+Plug 'folke/which-key.nvim'
 " Plug 'andymass/vim-matchup'
 Plug 'windwp/nvim-ts-autotag'
-Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'AckslD/nvim-neoclip.lua'
 Plug 'folke/todo-comments.nvim'
 Plug 'karb94/neoscroll.nvim'
+
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'onsails/lspkind-nvim'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+Plug 'f3fora/cmp-spell'
 
 " TPOPE
 Plug 'tpope/vim-surround'
@@ -195,6 +202,9 @@ nmap <F5> :setlocal spell!<CR>
 
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
+
+" trigger completion in insert mode
+inoremap <c-n> <c-x><c-o>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
