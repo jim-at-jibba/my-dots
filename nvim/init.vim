@@ -28,6 +28,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'folke/twilight.nvim'
 Plug 'rose-pine/neovim'
+Plug '~/code/other/ariake-vim'
 
 " git
 Plug 'jreybert/vimagit'
@@ -63,8 +64,8 @@ Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
-Plug 'phaazon/hop.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'justinmk/vim-sneak'
 " Plug 'glepnir/lspsaga.nvim'
 Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'folke/trouble.nvim'
@@ -87,6 +88,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'f3fora/cmp-spell'
+Plug 'rcarriga/nvim-notify'
 
 " TPOPE
 Plug 'tpope/vim-surround'
@@ -193,8 +195,8 @@ inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
 " jumplist 
-nnoremap <expr>> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-nnoremap <expr>> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+" nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 nmap <leader><leader> <c-^>
 

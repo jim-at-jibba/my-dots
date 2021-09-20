@@ -3,6 +3,7 @@ local utils = require "utils"
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 local nvim_lsp = require('lspconfig')
+local notify = require("notify")
 
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
@@ -37,6 +38,7 @@ local function t(c)
   return vim.api.nvim_replace_termcodes(c, true, true, true)
 end
 
+-- https://github.com/figsoda/dotfiles/blob/main/lib/nvim/init.lua
 cmp.setup({
   confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
   formatting = {
@@ -71,7 +73,7 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      vim.fn['UltiSnips#Anon'](args.body)
     end,
   },
   sources = {
@@ -190,6 +192,9 @@ require("trouble").setup {
 -- require("twilight").setup {}
 require("todo-comments").setup{}
 require("neoscroll").setup{}
+
+notify.setup({ stages = "static" })
+vim.notify = notify
 
 nvim_lsp.tailwindcss.setup({
   cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},

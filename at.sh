@@ -34,6 +34,7 @@ case $color in
     ;;
   ariakedark)
     configure_alacritty
+    configure_kitty
     configure_vim 'set background=dark\ncolorscheme ariake'
     ;;
   rosepine)
