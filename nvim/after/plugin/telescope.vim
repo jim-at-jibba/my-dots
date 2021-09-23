@@ -38,7 +38,6 @@ require('telescope').setup{
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
-      path_display = { shorten = 5 },
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
