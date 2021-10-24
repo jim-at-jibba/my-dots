@@ -88,6 +88,22 @@ cmp.setup({
 
 lspkind.init({ with_text = false })
 require'neoclip'.setup()
+
+require'nvim-tree'.setup({
+  diagnostics = {
+    enable = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  view = {
+    side = 'right',
+    width = 40
+  }
+}) 
 stabilize.setup()
 
 local custom_attach = function(client)

@@ -204,11 +204,8 @@ inoremap <c-n> <c-x><c-o>
 
 
 " NvimTree -----------------------------------------------------------------{{{
-let g:nvim_tree_side = 'right'
-let g:nvim_tree_width = 40 
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] 
 let g:nvim_tree_gitignore = 1
-let g:nvim_tree_lsp_diagnostics = 1
 "}}}
 
 " Golang -----------------------------------------------------------------{{{
