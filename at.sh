@@ -37,6 +37,14 @@ case $color in
     configure_kitty
     configure_vim 'set background=dark\ncolorscheme ariake'
     ;;
+  everforestdarkmedium)
+    configure_kitty
+    configure_vim 'set background=dark\ncolorscheme everforest'
+    ;;
+  everforestlightmedium)
+    configure_kitty
+    configure_vim 'set background=light\ncolorscheme everforest'
+    ;;
   rosepine)
     configure_kitty
     configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'

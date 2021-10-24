@@ -1,6 +1,7 @@
 require "lsp.handlers"
 local utils = require "utils"
 local cmp = require("cmp")
+local stabilize = require("stabilize")
 local lspkind = require("lspkind")
 local nvim_lsp = require('lspconfig')
 local notify = require("notify")
@@ -77,17 +78,17 @@ cmp.setup({
     end,
   },
   sources = {
-    { name = "buffer" },
-    { name = "ultisnips" },
-    { name = "nvim_lsp" },
-    { name = "path" },
-    { name = "spell" },
     { name = "cmp_tabnine" },
+    { name = "nvim_lsp" },
+    { name = "ultisnips" },
+    { name = "path" },
+    { name = "buffer" },
   },
 })
 
 lspkind.init({ with_text = false })
 require'neoclip'.setup()
+stabilize.setup()
 
 local custom_attach = function(client)
   -- define prettier signs
@@ -132,6 +133,8 @@ end
 
 nvim_lsp.pyright.setup {on_attach = on_attach}
 
+nvim_lsp.prismals.setup{}
+
 nvim_lsp.tsserver.setup({
   cmd = { "typescript-language-server", "--stdio" },
   on_attach = function(client)
@@ -161,9 +164,9 @@ nvim_lsp.html.setup({
 })
 
 
-nvim_lsp.jsonls.setup({
-  on_attach = custom_attach
-})
+-- nvim_lsp.jsonls.setup({
+--   on_attach = custom_attach
+-- })
 
 nvim_lsp.cssls.setup({
   on_attach = custom_attach
@@ -192,51 +195,53 @@ require("trouble").setup {
 -- require("twilight").setup {}
 require("todo-comments").setup{}
 require("neoscroll").setup{}
+require('Comment').setup()
 
 notify.setup({ stages = "static" })
 vim.notify = notify
 
-nvim_lsp.tailwindcss.setup({
-  cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},
-  on_attach = custom_attach
-})
+-- nvim_lsp.tailwindcss.setup({
+--   cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},
+--   on_attach = custom_attach
+-- })
 
-require("which-key").setup {
-  plugins = {
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-    spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-      suggestions = 20, -- how many suggestions should be shown in the list?
-    },
-    presets = {
-      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = true, -- adds help for motions
-      text_objects = true, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
-    },
-  },
-icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
-    group = "+", -- symbol prepended to a group
-  },
-  window = {
-    border = "single", -- none, single, double, shadow
-    position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-  },
-  layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 3, -- spacing between columns
-  },
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true, -- show help message on the command line when the popup is visible
-}
+-- require("which-key").setup {
+--   plugins = {
+--     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+--     spelling = {
+--       enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+--       suggestions = 20, -- how many suggestions should be shown in the list?
+--     },
+--     presets = {
+--       operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+--       motions = true, -- adds help for motions
+--       text_objects = true, -- help for text objects triggered after entering an operator
+--       windows = true, -- default bindings on <c-w>
+--       nav = true, -- misc bindings to work with windows
+--       z = true, -- bindings for folds, spelling and others prefixed with z
+--       g = true, -- bindings for prefixed with g
+--     },
+--   },
+-- icons = {
+--     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+--     separator = "➜", -- symbol used between a key and it's label
+--     group = "+", -- symbol prepended to a group
+--   },
+--   window = {
+--     border = "single", -- none, single, double, shadow
+--     position = "bottom", -- bottom, top
+--     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+--     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+--   },
+--   layout = {
+--     height = { min = 4, max = 25 }, -- min and max height of the columns
+--     width = { min = 20, max = 50 }, -- min and max width of the columns
+--     spacing = 3, -- spacing between columns
+--   },
+--   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+--   show_help = true, -- show help message on the command line when the popup is visible
+-- }
+
 
 -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 --   on_attach = custom_attach,

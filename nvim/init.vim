@@ -14,7 +14,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-" Plug 'fhill2/telescope-ultisnips.nvim'
 
 " Look and feel
 " Plug 'mhartington/oceanic-next'
@@ -23,11 +22,9 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'windwp/nvim-ts-autotag'
-" Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-Plug 'folke/twilight.nvim'
 Plug 'rose-pine/neovim'
+Plug 'sainnhe/everforest'
 Plug '~/code/other/ariake-vim'
 
 " git
@@ -51,9 +48,6 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-" Debugging
-Plug 'puremourning/vimspector'
-
 " utils
 Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
@@ -66,19 +60,18 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
 Plug 'neovim/nvim-lspconfig'
 Plug 'justinmk/vim-sneak'
-" Plug 'glepnir/lspsaga.nvim'
 Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'
-Plug 'folke/which-key.nvim'
-" Plug 'andymass/vim-matchup'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'AckslD/nvim-neoclip.lua'
 Plug 'folke/todo-comments.nvim'
 Plug 'karb94/neoscroll.nvim'
+Plug 'luukvbaal/stabilize.nvim'
+Plug 'numToStr/Comment.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -87,12 +80,8 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
-Plug 'f3fora/cmp-spell'
 Plug 'rcarriga/nvim-notify'
 
-" TPOPE
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 
 " Me
 Plug '~/dotfiles/nvim/lua/whid'

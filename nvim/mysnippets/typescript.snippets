@@ -32,4 +32,46 @@ interface ${1} {
 }
 endsnippet
 
+snippet navProps "Navigation Props v6" b
+type NavProps = StackScreenProps<${1}, Screens.${2}>;
 
+export interface OuterProps {
+  navigation: NavProps["navigation"];
+  route: NavProps["route"];
+}
+
+endsnippet
+
+snippet withFocusEffect "useFocusEffect in a hoc" b
+  withHook((props: Props) => {
+    useFocusEffect(
+      useCallback(() => {
+			${1}
+      }, []),
+    );
+    return {};
+  }),
+endsnippet
+
+snippet withFocusEffectInteraction "useFocusEffect with interaction" b
+  withHook((props: Props) => {
+    useFocusEffect(
+      useCallback(() => {
+        const task = InteractionManager.runAfterInteractions(async () => {
+				${1}
+        });
+
+        return () => {
+					${2}
+          task.cancel();
+        };
+      }, []),
+    );
+    return {};
+  }),
+
+endsnippet
+
+snippet useNav "useNavigation with types" b
+const { navigate, pop } = useNavigation<StackNavigationProp<${1}>>();
+endsnippet

@@ -11,6 +11,8 @@ rosepinedawn [Rose Pine Dawn]
 embark [Embark]
 tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
+everforestdarkmedium [Everforest dark medium]
+everforestlightmedium [Everforest light medium]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
