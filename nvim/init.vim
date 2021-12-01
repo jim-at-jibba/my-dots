@@ -22,6 +22,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'rose-pine/neovim'
 Plug 'sainnhe/everforest'
@@ -41,7 +42,9 @@ Plug 'tjdevries/nlua.nvim'
 Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
 Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'TovarishFin/vim-solidity'
+
+" Solidity
+Plug 'ChristianChiarulli/vim-solidity'
 
 " Markdown
 Plug 'godlygeek/tabular'
@@ -59,8 +62,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
 Plug 'neovim/nvim-lspconfig'
-Plug 'justinmk/vim-sneak'
-Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
+" Plug 'justinmk/vim-sneak'
+" Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
+Plug 'tami5/lspsaga.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'vim-test/vim-test'
@@ -82,10 +86,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'rcarriga/nvim-notify'
 
-
-" Me
-Plug '~/dotfiles/nvim/lua/whid'
-Plug 'jim-at-jibba/navy-vim'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -105,7 +106,7 @@ noremap L g_
 " close all but keep current buffer open
 noremap <leader>kc :%bd<bar>e#<bar>bd#<CR>
 " close all but keep vim open
-nnoremap <leader>c :lclose<bar>b#<bar>bd #<CR> 
+nnoremap <leader>c :lclose<bar>b#<bar>bd #<CR>
 
 " disable Arrow keys
 " noremap <Up> <NOP>
@@ -164,7 +165,7 @@ inoremap <C-k> <esc>:m .-2<CR>==
 nnoremap <leader>k :m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
 
-" deletes the currently selected line without putting it 
+" deletes the currently selected line without putting it
 " into the current register, the pastes in the recently
 " yanked line
 vnoremap <leader>p "_dP
@@ -172,7 +173,7 @@ vnoremap <leader>p "_dP
 nnoremap Y y$
 " keep your shit centered
 " n - next, zz - center, zv - open folds
-nnoremap n nzzzv 
+nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
@@ -183,13 +184,14 @@ inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
-" jumplist 
+" jumplist
 " nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 " nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 nmap <leader><leader> <c-^>
 
 nmap <F5> :setlocal spell!<CR>
+inoremap <leader>. :TSLspImportAll<CR>
 
 nnoremap <leader>+ :vertical resize +5<CR>
 nnoremap <leader>- :vertical resize -5<CR>
@@ -200,11 +202,8 @@ inoremap <c-n> <c-x><c-o>
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"}}}
-
-
 " NvimTree -----------------------------------------------------------------{{{
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] 
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 let g:nvim_tree_gitignore = 1
 "}}}
 

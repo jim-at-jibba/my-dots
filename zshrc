@@ -1,3 +1,8 @@
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the start of this file.
+[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
+#### END FIG ENV VARIABLES ####
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -129,7 +134,8 @@ alias lip="ip addr show en0"
 alias server="python3 -m http.server"
 alias python3='python'
 alias daily='teamocil mob; teamocil wiki; teamocil daily'
-# export EDITOR='~/neovim/bin/nvim'
+export REACT_EDITOR='code'
+export EDITOR='~/neovim/bin/nvim'
 
 # Docker
 alias ld="lazydocker"
@@ -256,3 +262,8 @@ fi
 
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the end of this file.
+[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
+#### END FIG ENV VARIABLES ####

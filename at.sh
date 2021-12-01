@@ -26,7 +26,7 @@ case $color in
   nord)
     configure_alacritty
     configure_kitty
-    configure_vim 'set background=dark\ncolorscheme nord'
+    configure_vim 'set background=dark\nlet g:nord_disable_background = v:true\nlet g:nord_italic = v:true\nlet g:nord_contrast = v:true\nlet g:nord_borders = v:true\ncolorscheme nord'
     ;;
   ariakelight)
     configure_alacritty
