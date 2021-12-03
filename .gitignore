@@ -8,3 +8,5 @@ tags
 .DS_Store
 
 wtf/client_secret.json
+
+zsh/priv-env

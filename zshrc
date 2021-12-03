@@ -3,6 +3,14 @@
 # Please make sure this block is at the start of this file.
 [ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
 #### END FIG ENV VARIABLES ####
+
+if [ -f ~/dotfiles/zsh/priv-env ]; then
+    source ~/dotfiles/zsh/priv-env
+else
+    print "404: ~/dotfiles/zsh/priv-env not found."
+fi
+
+
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
