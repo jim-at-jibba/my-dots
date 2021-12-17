@@ -6,13 +6,13 @@ nnoremap <leader>gd :Gdiff master<cr>
 nnoremap <leader>gl :G log -100<cr>
 
 " Signify
-nmap <silent> <cr> <Plug>(signify-next-hunk)
-nmap <silent> <backspace> <Plug>(signify-prev-hunk)
-nmap <leader>gd :SignifyDiff<CR>
-nmap <leader>gh :SignifyHunkDiff<CR>
-nmap <leader>uh :SignifyHunkUndo<CR>
- 
-nmap <leader>gb :GitBlameToggle<CR>
+" nmap <silent> <cr> <Plug>(signify-next-hunk)
+" nmap <silent> <backspace> <Plug>(signify-prev-hunk)
+" nmap <leader>gd :SignifyDiff<CR>
+" nmap <leader>gh :SignifyHunkDiff<CR>
+" nmap <leader>uh :SignifyHunkUndo<CR>
+"  
+" nmap <leader>gb :GitBlameToggle<CR>
 " let g:signify_disable_by_default = 1
 
 " Vimagit
