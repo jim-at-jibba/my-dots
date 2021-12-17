@@ -149,10 +149,15 @@ require'nvim-tree'.setup({
   view = {
     side = 'right',
     width = 40
+  },
+  git = {
+    ignore = true
   }
 })
+
 stabilize.setup()
 lspsaga.setup()
+require('spectre').setup()
 
 local custom_attach = function(client)
   -- define prettier signs

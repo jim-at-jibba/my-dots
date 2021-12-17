@@ -14,6 +14,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'windwp/nvim-spectre'
 
 " Look and feel
 " Plug 'mhartington/oceanic-next'
@@ -80,6 +81,7 @@ Plug 'karb94/neoscroll.nvim'
 Plug 'luukvbaal/stabilize.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/which-key.nvim'
+Plug 'stevearc/dressing.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -207,8 +209,8 @@ inoremap <c-n> <c-x><c-o>
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " NvimTree -----------------------------------------------------------------{{{
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
-let g:nvim_tree_gitignore = 1
+" let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+" let g:nvim_tree_gitignore = 1
 "}}}
 
 " Golang -----------------------------------------------------------------{{{
