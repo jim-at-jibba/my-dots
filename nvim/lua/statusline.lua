@@ -1,168 +1,97 @@
-local gl = require("galaxyline")
-local gls = gl.section
-
-gl.short_line_list = {" "} -- keeping this table { } as empty will show inactive statuslines
-
-local colors = {
-    bg = "#100E23",
-    fg = "#8A889D",
-    green = "#A1EFD3",
-    red = "#F48FB1",
-    lightbg = "#2D2B40",
-    blue = "#91DDFF",
-    yellow = "#FFE6B3",
-    grey = "#CBE3E7"
-}
-
-gls.left[2] = {
-    statusIcon = {
-        provider = function()
-            return "   "
-        end,
-        highlight = {colors.bg, colors.blue},
-        separator = "  ",
-        separator_highlight = {colors.blue, colors.lightbg}
-    }
-}
-
-gls.left[3] = {
-    FileIcon = {
-        provider = "FileIcon",
-        condition = buffer_not_empty,
-        highlight = {colors.fg, colors.lightbg}
-    }
-}
-
-gls.left[4] = {
-    FileName = {
-        provider = {"FileName"},
-        condition = buffer_not_empty,
-        highlight = {colors.fg, colors.lightbg},
-        separator = " ",
-        separator_highlight = {colors.lightbg, colors.bg}
-    }
-}
-
-local checkidth = function()
-    local squeeze_width = vim.fn.winwidth(0) / 2
-    if squeeze_width > 30 then
-        return true
-    end
-    return false
+local function clock()
+  return " " .. os.date("%H:%M")
 end
 
-gls.left[5] = {
-    DiffAdd = {
-        provider = "DiffAdd",
-        condition = checkwidth,
-        icon = "  ",
-        highlight = {colors.fg, colors.bg}
-    }
-}
+local function holidays()
+  return "🎅🎄🌟🎁"
+end
 
-gls.left[6] = {
-    DiffModified = {
-        provider = "DiffModified",
-        condition = checkwidth,
-        icon = "   ",
-        highlight = {colors.grey, colors.bg}
-    }
-}
+local function lsp_progress(_, is_active)
+  if not is_active then
+    return
+  end
+  local messages = vim.lsp.util.get_progress_messages()
+  if #messages == 0 then
+    return ""
+  end
+  -- dump(messages)
+  local status = {}
+  for _, msg in pairs(messages) do
+    local title = ""
+    if msg.title then
+      title = msg.title
+    end
+    -- if msg.message then
+    --   title = title .. " " .. msg.message
+    -- end
+    table.insert(status, (msg.percentage or 0) .. "%% " .. title)
+  end
+  local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+  local ms = vim.loop.hrtime() / 1000000
+  local frame = math.floor(ms / 120) % #spinners
+  return table.concat(status, "  ") .. " " .. spinners[frame + 1]
+end
 
-gls.left[7] = {
-    DiffRemove = {
-        provider = "DiffRemove",
-        condition = checkwidth,
-        icon = "  ",
-        highlight = {colors.grey, colors.bg}
-    }
-}
+vim.cmd("au User LspProgressUpdate let &ro = &ro")
 
-gls.left[8] = {
-    DiagnosticError = {
-        provider = "DiagnosticError",
-        icon = "  ",
-        highlight = {colors.grey, colors.bg}
-    }
-}
-
-gls.left[9] = {
-    DiagnosticWarn = {
-        provider = "DiagnosticWarn",
-        icon = "  ",
-        highlight = {colors.yellow, colors.bg}
-    }
-}
-
-gls.right[1] = {
-    GitIcon = {
-        provider = function()
-            return " "
+local config = {
+  options = {
+    theme = "tokyonight",
+    section_separators = { left = "", right = "" },
+    component_separators = { left = "", right = "" },
+    icons_enabled = true,
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch" },
+    lualine_c = {
+      { "diagnostics", sources = { "nvim_diagnostic" } },
+      { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+      { "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
+      {
+        function()
+          local gps = require("nvim-gps")
+          return gps.get_location()
         end,
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.grey, colors.lightbg},
-        separator = "",
-        separator_highlight = {colors.lightbg, colors.bg}
-    }
-}
-
-gls.right[2] = {
-    GitBranch = {
-        provider = "GitBranch",
-        condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {colors.grey, colors.lightbg}
-    }
-}
-
-gls.right[3] = {
-    viMode_icon = {
-        provider = function()
-            return " "
+        cond = function()
+          local gps = require("nvim-gps")
+          return pcall(require, "nvim-treesitter.parsers") and gps.is_available()
         end,
-        highlight = {colors.bg, colors.red},
-        separator = " ",
-        separator_highlight = {colors.red, colors.lightbg}
-    }
+        color = { fg = "#ff9e64" },
+      },
+    },
+    lualine_x = { lsp_progress, holidays },
+    lualine_y = { "location" },
+    lualine_z = { clock },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  extensions = { "nvim-tree" },
 }
 
-gls.right[4] = {
-    ViMode = {
-        provider = function()
-            local alias = {
-                n = "Normal",
-                i = "Insert",
-                c = "Command",
-                V = "Visual",
-                [""] = "Visual",
-                v = "Visual",
-                R = "Replace"
-            }
-            local current_Mode = alias[vim.fn.mode()]
+-- try to load matching lualine theme
 
-            if current_Mode ~= nil then
-                return "  " .. current_Mode .. " "
-            end
-        end,
-        highlight = {colors.red, colors.lightbg}
-    }
-}
+local M = {}
 
-gls.right[5] = {
-    time_icon = {
-        provider = function()
-            return " "
-        end,
-        separator = "",
-        separator_highlight = {colors.green, colors.bg},
-        highlight = {colors.lightbg, colors.green}
-    }
-}
+function M.load()
+  local name = vim.g.colors_name or ""
+  local ok, _ = pcall(require, "lualine.themes." .. name)
+  if ok then
+    config.options.theme = name
+  end
+  require("lualine").setup(config)
+end
 
-gls.right[6] = {
-    time = {
-        provider = function()
-            return "  " .. os.date("%H:%M") .. " "
-        end,
-        highlight = {colors.green, colors.lightbg}
-    }
-}
+M.load()
+
+-- vim.api.nvim_exec([[
+--   autocmd ColorScheme * lua require("config.lualine").load();
+-- ]], false)
+
+return M

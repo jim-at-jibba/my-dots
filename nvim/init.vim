@@ -23,7 +23,9 @@ Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'SmiteshP/nvim-gps'
 Plug 'rose-pine/neovim'
 Plug 'sainnhe/everforest'
 Plug '~/code/other/ariake-vim'
@@ -76,6 +78,7 @@ Plug 'folke/todo-comments.nvim'
 Plug 'karb94/neoscroll.nvim'
 Plug 'luukvbaal/stabilize.nvim'
 Plug 'numToStr/Comment.nvim'
+Plug 'folke/which-key.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
