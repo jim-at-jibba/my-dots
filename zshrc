@@ -190,7 +190,7 @@ alias vp='vagrant provision'
 alias vd='vagrant destroy'
 
 # Ngrok
-alias ngrok='~/code/ngrok'
+# alias ngrok='~/code/ngrok'
 
 # Dev Shit
 ###########
