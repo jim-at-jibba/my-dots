@@ -29,6 +29,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'SmiteshP/nvim-gps'
 Plug 'rose-pine/neovim'
 Plug 'sainnhe/everforest'
+Plug 'rebelot/kanagawa.nvim'
 Plug '~/code/other/ariake-vim'
 
 " git
@@ -57,9 +58,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " utils
 Plug 'mbbill/undotree'
-Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
-Plug 'honza/vim-snippets'
 Plug 'cohama/lexima.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -82,15 +80,20 @@ Plug 'luukvbaal/stabilize.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
+Plug 'ggandor/lightspeed.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'onsails/lspkind-nvim'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'rcarriga/nvim-notify'
+
+" snippets
+Plug 'L3MON4D3/LuaSnip'
+" Plug 'rafamadriz/friendly-snippets'
+Plug '~/code/oss/friendly-snippets'
 
 Plug 'github/copilot.vim'
 

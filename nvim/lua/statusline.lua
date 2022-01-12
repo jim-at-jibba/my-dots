@@ -6,6 +6,10 @@ local function holidays()
   return "🎅🎄🌟🎁"
 end
 
+local function my_favs()
+  return "🦄🐧"
+end
+
 local function lsp_progress(_, is_active)
   if not is_active then
     return
@@ -60,7 +64,7 @@ local config = {
         color = { fg = "#ff9e64" },
       },
     },
-    lualine_x = { lsp_progress, holidays },
+    lualine_x = { lsp_progress, my_favs },
     lualine_y = { "location" },
     lualine_z = { clock },
   },

@@ -72,6 +72,10 @@ case $color in
     configure_kitty
     configure_vim 'set background=dark\nlet g:tokyonight_style = "storm"\ncolorscheme tokyonight'
     ;;
+  kanagawa)
+    configure_kitty
+    configure_vim 'set background=dark\ncolorscheme kanagawa'
+    ;;
   *)
     echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark, tokyolightm tokyonight"
     exit 1
