@@ -13,24 +13,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'windwp/nvim-spectre'
 
 " Look and feel
-" Plug 'mhartington/oceanic-next'
 Plug 'shaunsingh/nord.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'p00f/nvim-ts-rainbow'
-" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'SmiteshP/nvim-gps'
 Plug 'rose-pine/neovim'
-Plug 'sainnhe/everforest'
-Plug 'rebelot/kanagawa.nvim'
-Plug '~/code/other/ariake-vim'
+Plug 'EdenEast/nightfox.nvim'
 
 " git
 Plug 'jreybert/vimagit'
@@ -80,7 +76,6 @@ Plug 'luukvbaal/stabilize.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
-Plug 'ggandor/lightspeed.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'

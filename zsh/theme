@@ -14,6 +14,9 @@ tokyonight [Tokyo Storm]
 kanagawa [Kanagawa]
 everforestdarkmedium [Everforest dark medium]
 everforestlightmedium [Everforest light medium]
+nightfoxnord [Nightfox Nord]
+nightfoxdawn [Nightfox Dawn]
+nightfoxday [Nightfox Day]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
