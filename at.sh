@@ -37,14 +37,6 @@ case $color in
     configure_kitty
     configure_vim 'set background=dark\ncolorscheme ariake'
     ;;
-  everforestdarkmedium)
-    configure_kitty
-    configure_vim 'set background=dark\ncolorscheme everforest'
-    ;;
-  everforestlightmedium)
-    configure_kitty
-    configure_vim 'set background=light\ncolorscheme everforest'
-    ;;
   rosepine)
     configure_kitty
     configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
@@ -56,11 +48,6 @@ case $color in
   rosepinedawn)
     configure_kitty
     configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "dawn"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
-    ;;
-  embark)
-    configure_alacritty
-    configure_kitty
-    configure_vim 'set background=dark\ncolorscheme embark'
     ;;
   tokyolight)
     configure_alacritty
@@ -76,9 +63,9 @@ case $color in
     configure_kitty
     configure_vim 'set background=dark\ncolorscheme nordfox'
     ;;
-  nightfoxdawn)
+  nightfoxdusk)
     configure_kitty
-    configure_vim 'set background=dark\ncolorscheme dawnfox'
+    configure_vim 'set background=dark\ncolorscheme duskfox'
     ;;
   nightfoxday)
     configure_kitty
