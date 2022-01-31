@@ -44,9 +44,6 @@ Plug 'jparise/vim-graphql'
 Plug 'euclidianAce/BetterLua.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
-" Solidity
-Plug 'ChristianChiarulli/vim-solidity'
-
 " Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
