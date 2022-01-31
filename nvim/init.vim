@@ -87,7 +87,7 @@ Plug 'L3MON4D3/LuaSnip'
 " Plug 'rafamadriz/friendly-snippets'
 Plug '~/code/oss/friendly-snippets'
 
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 call plug#end()
 
