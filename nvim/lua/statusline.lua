@@ -40,7 +40,7 @@ vim.cmd("au User LspProgressUpdate let &ro = &ro")
 
 local config = {
   options = {
-    theme = "nightfox", -- tokyonight
+    theme = "rose-pine", -- tokyonight nightfox
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     icons_enabled = true,
