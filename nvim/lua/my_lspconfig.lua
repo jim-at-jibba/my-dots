@@ -3,7 +3,6 @@ require "lsp.formatting"
 local utils = require "utils"
 local lspsaga = require 'lspsaga'
 local stabilize = require("stabilize")
-local lspkind = require("lspkind")
 local nvim_lsp = require('lspconfig')
 local notify = require("notify")
 local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -102,6 +101,7 @@ cmp.setup({
       vim_item.menu = ({
         luasnip = "[Snippet]",
         nvim_lsp = "[LSP]",
+        cmp_tabnine = "[TN]",
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
@@ -128,34 +128,34 @@ cmp.setup({
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
+    -- ["<Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expandable() then
+    --     luasnip.expand()
+    --   elseif luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   elseif check_backspace() then
+    --     fallback()
+    --   else
+    --     fallback()
+    --   end
+    -- end, {
+    --   "i",
+    --   "s",
+    -- }),
+    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, {
+    --   "i",
+    --   "s",
+    -- }),
   },
   snippet = {
     expand = function(args)
@@ -164,13 +164,13 @@ cmp.setup({
   },
   sources = {
     { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
     { name = "luasnip" },
     { name = "path" },
     { name = "buffer" },
   },
 })
 
-lspkind.init({ with_text = false })
 require'neoclip'.setup()
 require('gitsigns').setup({
   signs = {
@@ -212,6 +212,7 @@ require('gitsigns').setup({
     ["n <leader>ghR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
     ["n <leader>ghp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
     ["n <leader>gb"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    ["n <leader>gd"] = '<cmd>lua require"gitsigns".diff_this()<CR>',
     -- Text objects
     ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
     ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
@@ -279,7 +280,11 @@ local custom_attach = function(client)
 
 end
 
-nvim_lsp.pyright.setup {on_attach = on_attach}
+nvim_lsp.pyright.setup({
+  on_attach = function(client)
+    custom_attach(client)
+  end
+})
 
 nvim_lsp.prismals.setup{}
 
@@ -351,6 +356,20 @@ nvim_lsp.yamlls.setup({
   on_attach = custom_attach
 })
 
+
+-- nvim_lsp.sumneko_lua.setup({
+--   on_attach = custom_attach,
+--   settings = {
+--     Lua = {
+--       diagnostics = {
+--         enable = true,
+--         globals = {"vim", "love"},
+--       }
+--     }
+--   }
+--
+-- })
+
 require("trouble").setup {
   auto_open = false,
   auto_close = true,
@@ -407,63 +426,13 @@ icons = {
 -- --   cmd={'node','/Users/jamesbest/dotfiles/nvim/tailwind/tailwindcss-intellisense/extension/dist/server/tailwindServer.js','--stdio'},
 -- --   on_attach = custom_attach
 -- -- })
---
--- -- require("which-key").setup {
--- --   plugins = {
--- --     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
--- --     spelling = {
--- --       enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
--- --       suggestions = 20, -- how many suggestions should be shown in the list?
--- --     },
--- --     presets = {
--- --       operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
--- --       motions = true, -- adds help for motions
--- --       text_objects = true, -- help for text objects triggered after entering an operator
--- --       windows = true, -- default bindings on <c-w>
--- --       nav = true, -- misc bindings to work with windows
--- --       z = true, -- bindings for folds, spelling and others prefixed with z
--- --       g = true, -- bindings for prefixed with g
--- --     },
--- --   },
--- -- icons = {
--- --     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
--- --     separator = "➜", -- symbol used between a key and it's label
--- --     group = "+", -- symbol prepended to a group
--- --   },
--- --   window = {
--- --     border = "single", -- none, single, double, shadow
--- --     position = "bottom", -- bottom, top
--- --     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
--- --     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
--- --   },
--- --   layout = {
--- --     height = { min = 4, max = 25 }, -- min and max height of the columns
--- --     width = { min = 20, max = 50 }, -- min and max width of the columns
--- --     spacing = 3, -- spacing between columns
--- --   },
--- --   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
--- --   show_help = true, -- show help message on the command line when the popup is visible
--- -- }
---
---
+
 -- -- require('nlua.lsp.nvim').setup(nvim_lsp, {
 -- --   on_attach = custom_attach,
 -- -- })
 --
 -- --[[
 --
--- nvim_lsp.sumneko_lua.setup({
---   on_attach = custom_attach,
---   settings = {
---         Lua = {
---             diagnostics = {
---                 enable = true,
---                 globals = {"vim", "love"},
---             }
---         }
---     }
---
--- })
 -- --]]
 --
 -- https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua

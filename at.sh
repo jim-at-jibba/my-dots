@@ -5,6 +5,7 @@ color=$1
 dotfiles=~/dotfiles
 alacritty=${dotfiles}/alacritty
 kitty=${dotfiles}/kitty
+tmux=${dotfiles}/tmux
 
 configure_alacritty() {
   cat ${alacritty}/base.yml ${alacritty}/${color}.yml > ${dotfiles}/alacritty.yml
@@ -14,29 +15,16 @@ configure_kitty() {
   cat ${kitty}/base.conf ${kitty}/${color}.conf > ${dotfiles}/kitty.conf
 }
 
+configure_tmux() {
+  cat ${tmux}/base.conf ${tmux}/${color}.conf > ${dotfiles}/tmux.conf
+  tmux source-file ~/.tmux.conf.local
+}
+
 configure_vim() {
   echo $1 > ${dotfiles}/nvim/color.vim
 }
 
 case $color in
-  oceanicnext)
-    configure_alacritty
-    configure_vim 'colorscheme oceanicnext\nlet g:oceanic_next_terminal_bold = 1\nlet g:oceanic_next_terminal_italic = 1'
-    ;;
-  nord)
-    configure_alacritty
-    configure_kitty
-    configure_vim 'set background=dark\nlet g:nord_disable_background = v:true\nlet g:nord_italic = v:true\nlet g:nord_contrast = v:true\nlet g:nord_borders = v:true\ncolorscheme nord'
-    ;;
-  ariakelight)
-    configure_alacritty
-    configure_vim 'set background=light\ncolorscheme ariake'
-    ;;
-  ariakedark)
-    configure_alacritty
-    configure_kitty
-    configure_vim 'set background=dark\ncolorscheme ariake'
-    ;;
   rosepine)
     configure_kitty
     configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
@@ -52,24 +40,18 @@ case $color in
   tokyolight)
     configure_alacritty
     configure_kitty
+    configure_tmux
     configure_vim 'set background=light\nlet g:tokyonight_style = "day"\ncolorscheme tokyonight'
     ;;
   tokyonight)
     configure_alacritty
     configure_kitty
+    configure_tmux
     configure_vim 'set background=dark\nlet g:tokyonight_style = "storm"\ncolorscheme tokyonight'
     ;;
   nightfoxnord)
     configure_kitty
     configure_vim 'set background=dark\ncolorscheme nordfox'
-    ;;
-  nightfoxdusk)
-    configure_kitty
-    configure_vim 'set background=dark\ncolorscheme duskfox'
-    ;;
-  nightfoxday)
-    configure_kitty
-    configure_vim 'set background=dark\ncolorscheme dayfox'
     ;;
   *)
     echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark, tokyolightm tokyonight"

@@ -59,7 +59,7 @@ Plug 'TaDaa/vimade'
 Plug 'neovim/nvim-lspconfig'
 " Plug 'justinmk/vim-sneak'
 " Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
-Plug 'tami5/lspsaga.nvim'
+Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
 Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'vim-test/vim-test'
@@ -75,19 +75,20 @@ Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
 
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'onsails/lspkind-nvim'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'rcarriga/nvim-notify'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
 " snippets
 Plug 'L3MON4D3/LuaSnip'
 " Plug 'rafamadriz/friendly-snippets'
 Plug '~/code/oss/friendly-snippets'
 
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 
 call plug#end()
 

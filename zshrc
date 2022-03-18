@@ -141,7 +141,7 @@ alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quo
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
 alias python3='python'
-alias daily='teamocil mob; teamocil wiki; teamocil daily'
+alias daily='teamocil mob; teamocil spotify'
 export REACT_EDITOR='code'
 export EDITOR='~/neovim/bin/nvim'
 
@@ -266,14 +266,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
 fi
 
 
 export PATH="$HOME/.poetry/bin:$PATH"
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the end of this file.
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
-
 export PATH="$PATH:/Users/jamesbest/.kit/bin"
