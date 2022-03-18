@@ -454,7 +454,7 @@ nvim_lsp.efm.setup {
         languages = {
             ["="] = {misspell},
             go = {golint, goimports},
-            python = {black, isort, flake8, mypy},
+            python = {black, isort, flake8, mypy}, -- remove the global installs of these and install them per-project
             typescript = {prettier, eslint},
             javascript = {prettier, eslint},
             typescriptreact = {prettier, eslint},

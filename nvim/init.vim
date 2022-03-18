@@ -50,7 +50,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " utils
-Plug 'mbbill/undotree'
+" Plug 'mbbill/undotree'
+Plug 'simnalamburt/vim-mundo'
 Plug 'cohama/lexima.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -157,7 +158,7 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 vnoremap  <leader>y  "+y
 nnoremap  <leader>y  "+y
 
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>u :MundoToggle<CR>
 
 " Move selected line
 vnoremap K :m '<-2<CR>gv=gv

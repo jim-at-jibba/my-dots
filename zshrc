@@ -141,7 +141,7 @@ alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quo
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
 alias python3='python'
-alias daily='teamocil mob; teamocil spotify'
+alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
 export EDITOR='~/neovim/bin/nvim'
 
