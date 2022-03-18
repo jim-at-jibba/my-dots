@@ -1,5 +1,0 @@
-### Interests
-
-if hash navy &> /dev/null; then
-  navy start postgres heartwood public-api interests-feed queue
-fi

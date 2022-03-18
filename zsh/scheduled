@@ -1,5 +1,0 @@
-### Scheduled posts
-
-if hash navy &> /dev/null; then
-  navy start minio image scheduled-posts 
-fi
