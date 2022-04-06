@@ -36,6 +36,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 " Plug 'f-person/git-blame.nvim'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'sindrets/diffview.nvim'
 
 " langs
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
@@ -74,6 +75,7 @@ Plug 'luukvbaal/stabilize.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
+Plug 'andymass/vim-matchup'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -84,12 +86,18 @@ Plug 'hrsh7th/cmp-path'
 Plug 'rcarriga/nvim-notify'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
+" DAPP
+" Plug 'Pocco81/DAPInstall.nvim'
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'theHamsta/nvim-dap-virtual-text'
+" Plug 'rcarriga/nvim-dap-ui'
+
 " snippets
 Plug 'L3MON4D3/LuaSnip'
 " Plug 'rafamadriz/friendly-snippets'
 Plug '~/code/oss/friendly-snippets'
 
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 call plug#end()
 

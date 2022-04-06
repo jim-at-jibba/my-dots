@@ -10,7 +10,6 @@ local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
 end
-
 -- require("luasnip/loaders/from_vscode").load({paths = {'./mysnippets'}})
 -- local snippetspaths = vim.fn.stdpath "config" .. "/lua/mysnippets"
 -- print(snippetspaths)
@@ -128,34 +127,34 @@ cmp.setup({
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    -- ["<Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expandable() then
-    --     luasnip.expand()
-    --   elseif luasnip.expand_or_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   elseif check_backspace() then
-    --     fallback()
-    --   else
-    --     fallback()
-    --   end
-    -- end, {
-    --   "i",
-    --   "s",
-    -- }),
-    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, {
-    --   "i",
-    --   "s",
-    -- }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif check_backspace() then
+        fallback()
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
   },
   snippet = {
     expand = function(args)
@@ -168,10 +167,12 @@ cmp.setup({
     { name = "luasnip" },
     { name = "path" },
     { name = "buffer" },
+    { name = "cmp_tabnine" },
   },
 })
 
 require'neoclip'.setup()
+require("nvim-gps").setup()
 require('gitsigns').setup({
   signs = {
     add = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -242,6 +243,10 @@ stabilize.setup()
 lspsaga.setup()
 require('spectre').setup()
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 local custom_attach = function(client)
   -- define prettier signs
   vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnosticsError"})
@@ -281,6 +286,7 @@ local custom_attach = function(client)
 end
 
 nvim_lsp.pyright.setup({
+  capabilities = capabilities,
   on_attach = function(client)
     custom_attach(client)
   end
@@ -290,6 +296,7 @@ nvim_lsp.prismals.setup{}
 
 
 nvim_lsp.tsserver.setup({
+  capabilities = capabilities,
   cmd = { "typescript-language-server", "--stdio" },
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
@@ -299,6 +306,7 @@ nvim_lsp.tsserver.setup({
 })
 
 nvim_lsp.svelte.setup({
+  capabilities = capabilities,
   on_attach = custom_attach,
 })
 
@@ -323,8 +331,6 @@ nvim_lsp.gopls.setup({
   end
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.html.setup({
   on_attach = custom_attach,
@@ -337,19 +343,23 @@ nvim_lsp.html.setup({
 -- })
 
 nvim_lsp.solang.setup({
+  capabilities = capabilities,
   on_attach = custom_attach
 })
 
 nvim_lsp.cssls.setup({
+  capabilities = capabilities,
   on_attach = custom_attach
 })
 
 nvim_lsp.sqlls.setup({
+  capabilities = capabilities,
   cmd = {"/usr/local/bin/sql-language-server", "up", "--method", "stdio"},
   on_attach = custom_attach
 })
 
 nvim_lsp.yamlls.setup({
+  capabilities = capabilities,
   cmd = { "yaml-language-server", "--stdio" },
   filetypes = { "yaml", "yml" },
   root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),

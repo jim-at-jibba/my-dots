@@ -7,7 +7,7 @@ local function holidays()
 end
 
 local function my_favs()
-  return "🦄🐧"
+  return "🦄🐙"
 end
 
 local function lsp_progress(_, is_active)
