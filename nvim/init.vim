@@ -59,8 +59,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
 Plug 'neovim/nvim-lspconfig'
-" Plug 'justinmk/vim-sneak'
-" Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
 Plug 'folke/trouble.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
