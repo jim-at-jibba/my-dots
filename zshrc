@@ -272,3 +272,4 @@ fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$PATH:/Users/jamesbest/.kit/bin"
+eval "$(starship init zsh)"

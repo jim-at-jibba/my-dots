@@ -3,6 +3,7 @@ vim.g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python3"
 
 require "my_lspconfig"
 require "statusline"
+require "theme"
 -- require "minimal_init"
 -- require "autocmd"
 

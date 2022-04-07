@@ -29,13 +29,17 @@ case $color in
     configure_kitty
     configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
     ;;
+  # rosepinemoon)
+  #   configure_kitty
+  #   configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "moon"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+  #   ;;
   rosepinemoon)
     configure_kitty
-    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "moon"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+    configure_vim 'colorscheme rose-pine\nset background=dark'
     ;;
   rosepinedawn)
     configure_kitty
-    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "dawn"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
+    configure_vim 'colorscheme rose-pine\nset background=light'
     ;;
   tokyolight)
     configure_alacritty

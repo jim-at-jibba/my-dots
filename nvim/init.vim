@@ -74,6 +74,7 @@ Plug 'numToStr/Comment.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'andymass/vim-matchup'
+Plug 'arkav/lualine-lsp-progress'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
