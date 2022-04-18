@@ -1,4 +1,4 @@
-local status_ok, nvim_gps = pcall(require, "pomodoro")
+local status_ok, nvim_gps = pcall(require, "nvim-gps")
 
 if not status_ok then
     return

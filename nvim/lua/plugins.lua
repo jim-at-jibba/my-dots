@@ -96,4 +96,11 @@ packer.startup(function(use)
         "romgrk/barbar.nvim",
 		config = get_config("barbar"),
       })
+
+    use({"TaDaa/vimade"})
+
+    use({
+        "tami5/lspsaga.nvim",
+		config = get_config("lspsaga"),
+    })
 end)

@@ -31,3 +31,20 @@ map('n', '<leader>9', ':BufferGoto 9<CR>', opts)
 map('n', '<leader>0', ':BufferLast<CR>', opts)
 -- Close buffer
 map('n', '<leader>q', ':BufferClose<CR>', opts)
+
+--Trouble
+map('n', '<leader>xx', ':TroubleToggle<CR>', opts)
+map('n', '<leader>xw', ':Trouble lsp<CR>', opts)
+map('n', '<leader>xw', ':Trouble workspace_diagnostics<CR>', opts)
+map('n', '<leader>xd', ':Trouble document_diagnostics<CR>', opts)
+map('n', '<leader>dr', ':TroubleToggle lsp_references<CR>', opts)
+
+-- lsp saga
+map('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opts)
+map('n', '<leader>gh', '<cmd>Lspsaga hover_doc<cr>', opts)
+map('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opts)
+map('n', '<C-f>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
+map('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
+map('n', '<leader>dl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
+map('n', '<leader>dn', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
+map('n', '<leader>dp', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
