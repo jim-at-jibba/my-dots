@@ -36,7 +36,7 @@ local config = {
         color = { fg = "#ff9e64" },
       },
     },
-    lualine_x = { my_favs },
+    lualine_x = { my_favs, require('pomodoro').statusline },
     lualine_y = { "location" },
     lualine_z = { clock },
   },

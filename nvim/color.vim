@@ -1,3 +1,2 @@
+colorscheme rose-pine
 set background=dark
-let g:tokyonight_style = "storm"
-colorscheme tokyonight
