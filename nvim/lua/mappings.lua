@@ -15,3 +15,5 @@ map("n", "<leader>g", ":Telescope git_commits preview=true<CR>", opts)
 --Nvimtree
 map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+
+map("n", "<leader>gs", ":LazyGit<CR>", opts)

@@ -84,5 +84,9 @@ packer.startup(function(use)
 		config = get_config("gitsigns"),
     })
 
+    use({ 
+        "kdheepak/lazygit.nvim",
+    })
+
 
 end)
