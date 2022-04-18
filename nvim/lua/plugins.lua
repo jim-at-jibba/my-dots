@@ -60,4 +60,24 @@ packer.startup(function(use)
         run = ":TSUpdate",
         config = get_config("treesitter"),
     })
+
+    use({
+		"nvim-lualine/lualine.nvim",
+		config = get_config("lualine"),
+		event = "VimEnter",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+
+    use({ 
+        "wthollingsworth/pomodoro.nvim",
+        requires = "MunifTanjim/nui.nvim",
+		config = get_config("pomodoro"),
+    })
+
+    use({ 
+        "SmiteshP/nvim-gps",
+		config = get_config("pomodoro"),
+    })
+
+
 end)
