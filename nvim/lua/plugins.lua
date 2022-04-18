@@ -48,4 +48,20 @@ packer.startup(function(use)
 	})
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
+    use({
+        "kyazdani42/nvim-tree.lua",
+        cmd = "NvimTreeFindFileToggle",
+        config = get_config("nvim-tree")
+    })
+    use({
+        "kyazdani42/nvim-web-devicons",
+        ft = { "NvimTree", "TelescopePrompt" },
+    })
+
+    -- Treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+        config = get_config("treesitter"),
+    })
 end)
