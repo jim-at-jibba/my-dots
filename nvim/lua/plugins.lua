@@ -79,5 +79,10 @@ packer.startup(function(use)
 		config = get_config("pomodoro"),
     })
 
+    use({ 
+        "lewis6991/gitsigns.nvim",
+		config = get_config("gitsigns"),
+    })
+
 
 end)
