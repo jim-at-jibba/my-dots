@@ -75,6 +75,11 @@ packer.startup(function(use)
     })
 
     use({ 
+        "j-hui/fidget.nvim",
+		config = get_config("fidget"),
+    })
+
+    use({ 
         "SmiteshP/nvim-gps",
 		config = get_config("nvim-gps"),
     })
