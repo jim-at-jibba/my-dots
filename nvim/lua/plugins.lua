@@ -76,7 +76,7 @@ packer.startup(function(use)
 
     use({ 
         "SmiteshP/nvim-gps",
-		config = get_config("pomodoro"),
+		config = get_config("nvim-gps"),
     })
 
     use({ 
@@ -84,9 +84,7 @@ packer.startup(function(use)
 		config = get_config("gitsigns"),
     })
 
-    use({ 
-        "kdheepak/lazygit.nvim",
-    })
+    use({ "kdheepak/lazygit.nvim" })
 
     use ({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
     use ({ "nvim-pack/nvim-spectre", requires = "nvim-lua/plenary.nvim" })
@@ -159,13 +157,9 @@ packer.startup(function(use)
 		config = get_config("cmp"),
 	})
 
-    use({
-        "norcalli/nvim-colorizer.lua",
-    })
+    use({ "norcalli/nvim-colorizer.lua" })
 
-    use({
-        "p00f/nvim-ts-rainbow",
-    })
+    use({ "p00f/nvim-ts-rainbow" })
 
     use({
         "rose-pine/neovim",
@@ -183,4 +177,17 @@ packer.startup(function(use)
 
     use({ "folke/which-key.nvim", config = get_config("which") })
 
+    use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
+    use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+
+	use({
+		"ray-x/lsp_signature.nvim",
+		require = { "neovim/nvim-lspconfig" },
+		config = get_config("lsp-signature"),
+	})
+
+    use({
+		"jose-elias-alvarez/null-ls.nvim",
+		config = get_config("null-ls"),
+	})
 end)

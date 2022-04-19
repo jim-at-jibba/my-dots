@@ -16,6 +16,9 @@ Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'windwp/nvim-spectre'
 
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'neovim/nvim-lspconfig'
+
 " Look and feel
 Plug 'shaunsingh/nord.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -58,10 +61,10 @@ Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'TaDaa/vimade'
-Plug 'neovim/nvim-lspconfig'
+
 Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
 Plug 'folke/trouble.nvim'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
 Plug 'vim-test/vim-test'
 Plug 'szw/vim-maximizer'
 Plug 'mattn/emmet-vim'

@@ -6,4 +6,4 @@ require("mappings")
 -- All non plugin related (vim) options
 require("options")
 -- Vim autocommands/autogroups
--- require("autocmd")
+require("autocmd")
