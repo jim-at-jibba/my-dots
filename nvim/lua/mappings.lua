@@ -51,3 +51,8 @@ map('n', '<leader>dp', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
 
 --spectre
 map('n', '<leader>S', ":lua require('spectre').open()<cr>", opts)
+
+--vimtest
+map('n', 'tt', ":TestNearest<cr>", opts)
+map('n', 'tf', ":TestFile<cr>", opts)
+map('n', 'ts', ":TestSuite<cr>", opts)

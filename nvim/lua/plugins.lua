@@ -109,4 +109,9 @@ packer.startup(function(use)
         "kyazdani42/nvim-tree.lua",
 		config = get_config("nvim-tree"),
     })
+    
+    use({
+        "vim-test/vim-test",
+		config = get_config("vim-test"),
+    })
 end)
