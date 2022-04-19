@@ -19,7 +19,7 @@
   set updatetime=100
   set timeoutlen=500
   set incsearch
-  set noshowmode
+  set showmode
 
   " Fold stuff
   set nofoldenable

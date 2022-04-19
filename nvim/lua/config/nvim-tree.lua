@@ -49,6 +49,8 @@ nvim_tree.setup({
     hijack_cursor = true,
     view = {
         hide_root_folder = true,
+        side = 'right',
+        width = 40,
         mappings = {
             list = {
                 { key = "s", cb = tree_cb("vsplit") },

@@ -48,3 +48,6 @@ map('n', '<C-b>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)
 map('n', '<leader>dl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
 map('n', '<leader>dn', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
 map('n', '<leader>dp', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
+
+--spectre
+map('n', '<leader>S', ":lua require('spectre').open()<cr>", opts)

@@ -89,6 +89,7 @@ packer.startup(function(use)
     })
 
     use ({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+    use ({ "nvim-pack/nvim-spectre", requires = "nvim-lua/plenary.nvim" })
 
     use({"cohama/lexima.vim"})
 
@@ -102,5 +103,10 @@ packer.startup(function(use)
     use({
         "tami5/lspsaga.nvim",
 		config = get_config("lspsaga"),
+    })
+
+    use({
+        "kyazdani42/nvim-tree.lua",
+		config = get_config("nvim-tree"),
     })
 end)
