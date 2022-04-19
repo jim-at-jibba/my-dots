@@ -158,4 +158,26 @@ packer.startup(function(use)
 		},
 		config = get_config("cmp"),
 	})
+
+    use({
+        "norcalli/nvim-colorizer.lua",
+    })
+
+    use({
+        "p00f/nvim-ts-rainbow",
+    })
+
+    use({
+        "rose-pine/neovim",
+        config = get_config("rose-pine"),
+    }) 
+
+    use({ "rafamadriz/friendly-snippets" })
+	use({
+		"L3MON4D3/LuaSnip",
+		requires = "saadparwaiz1/cmp_luasnip",
+		config = get_config("luasnip"),
+	})
+
+    use({ "rcarriga/nvim-notify", config = get_config("notify") })
 end)
