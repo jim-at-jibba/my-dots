@@ -162,7 +162,11 @@ packer.startup(function(use)
 		config = get_config("cmp"),
 	})
 
-    use({ "norcalli/nvim-colorizer.lua" })
+    use({ 
+        "norcalli/nvim-colorizer.lua",
+        event = "BufReadPre",
+		config = get_config("colorizer"), 
+    })
 
     use({ "p00f/nvim-ts-rainbow" })
 

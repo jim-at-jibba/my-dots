@@ -7,7 +7,7 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 
 --General
-map({ "i", "n" }, "jj", "<Esc>", opts)
+map("i", "jj", "<Esc>", opts)
 map("n", "H", "^", opts)
 map("n", "L", "g_", opts)
 
