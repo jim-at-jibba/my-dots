@@ -25,9 +25,9 @@ local options = {
     foldlevel = 99,
     foldmethod = "expr",
     foldexpr = "nvim_treesitter#foldexpr()",
-    backup = true,
-    writebackup = true,
-    swapfile = true,
+    backup = false,
+    writebackup = false,
+    swapfile = false,
 }
 
 for k, v in pairs(options) do

@@ -27,9 +27,9 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 local servers = {
 	"gopls",
 	"pyright",
-    "prismals",
-    "html",
-    "cssls",
+  "prismals",
+  "html",
+  "cssls",
 	"sumneko_lua",
 	"tsserver",
 	"yamlls",
@@ -46,7 +46,7 @@ for _, lsp in ipairs(servers) do
             vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", texthl="LspDiagnosticsWarning"})
             vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", texthl="LspDiagnosticsInformation"})
             vim.fn.sign_define("LspDiagnosticsSignHint", {text="", texthl="LspDiagnosticsHint"})
-          
+
             if client.resolved_capabilities.document_formatting then
                 vim.cmd [[augroup Format]]
                 vim.cmd [[autocmd! * <buffer>]]

@@ -24,17 +24,17 @@ end
 local status_ok, packer = pcall(require, "packer")
 
 if not status_ok then
-    return
+	return
 end
 
 packer.init({
 	enable = true, -- enable profiling via :PackerCompile profile=true
 	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
-    display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "single" })
-        end,
-    },
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "single" })
+		end,
+	},
 })
 
 packer.startup(function(use)
@@ -46,148 +46,149 @@ packer.startup(function(use)
 		requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
 		config = get_config("telescope"),
 	})
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    
-    use({ 
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("trouble"),
-    })
+	})
 
-    -- Treesitter
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        config = get_config("treesitter"),
-    })
+	-- Treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = get_config("treesitter"),
+	})
 
-    use({
+	use({
 		"nvim-lualine/lualine.nvim",
 		config = get_config("lualine"),
 		event = "VimEnter",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
-    use({ 
-        "wthollingsworth/pomodoro.nvim",
-        requires = "MunifTanjim/nui.nvim",
+	use({
+		"wthollingsworth/pomodoro.nvim",
+		requires = "MunifTanjim/nui.nvim",
 		config = get_config("pomodoro"),
-    })
+	})
 
-    use({ 
-        "j-hui/fidget.nvim",
+	use({
+		"j-hui/fidget.nvim",
 		config = get_config("fidget"),
-    })
+	})
 
-    use({ 
-        "SmiteshP/nvim-gps",
+	use({
+		"SmiteshP/nvim-gps",
 		config = get_config("nvim-gps"),
-    })
+	})
 
-    use({ 
-        "lewis6991/gitsigns.nvim",
+	use({
+		"lewis6991/gitsigns.nvim",
 		config = get_config("gitsigns"),
-    })
+	})
 
-    use({ "kdheepak/lazygit.nvim" })
+	use({ "kdheepak/lazygit.nvim" })
 
-    use ({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-    use ({ "nvim-pack/nvim-spectre", requires = "nvim-lua/plenary.nvim" })
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
-    use({"cohama/lexima.vim"})
+	use({ "nvim-pack/nvim-spectre", requires = "nvim-lua/plenary.nvim" })
 
-    use ({
-        "romgrk/barbar.nvim",
+	use({ "cohama/lexima.vim" })
+
+	use({
+		"romgrk/barbar.nvim",
 		config = get_config("barbar"),
-      })
+	})
 
-    use({"TaDaa/vimade"})
+	use({ "TaDaa/vimade" })
 
-    use({
-        "tami5/lspsaga.nvim",
+	use({
+		"tami5/lspsaga.nvim",
 		config = get_config("lspsaga"),
-    })
+	})
 
-    use({
-        "kyazdani42/nvim-tree.lua",
+	use({
+		"kyazdani42/nvim-tree.lua",
 		config = get_config("nvim-tree"),
-    })
-    
-    use({
-        "vim-test/vim-test",
+	})
+
+	use({
+		"vim-test/vim-test",
 		config = get_config("vim-test"),
-    })
+	})
 
-    use({ 
-        "szw/vim-maximizer",
-    })
+	use({ "szw/vim-maximizer" })
 
-    use({
-        "windwp/nvim-ts-autotag",
+	use({
+		"windwp/nvim-ts-autotag",
 		config = get_config("vim-test"),
-    })
+	})
 
-    use({
-        "folke/todo-comments.nvim",
-        config = get_config("todo-comments")
-    })
+	use({
+		"folke/todo-comments.nvim",
+		config = get_config("todo-comments"),
+	})
 
-    use({
-        "karb94/neoscroll.nvim",
-        config = get_config("neoscroll")
-    })
+	use({
+		"karb94/neoscroll.nvim",
+		config = get_config("neoscroll"),
+	})
 
-    use({
-        "luukvbaal/stabilize.nvim",
-        config = get_config("stabilize")
-    })
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = get_config("stabilize"),
+	})
 
-    use({
-        "numToStr/Comment.nvim",
-        config = get_config("comment")
-    })
+	use({
+		"numToStr/Comment.nvim",
+		config = get_config("comment"),
+	})
 
-    use({
+	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-            { "hrsh7th/cmp-nvim-lsp-signature-help"},
+			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-path" },
-            {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
-			
+			{ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
 		},
 		config = get_config("cmp"),
 	})
 
-    use({ 
-        "norcalli/nvim-colorizer.lua",
-        event = "BufReadPre",
-		config = get_config("colorizer"), 
-    })
+	use({
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+		config = get_config("colorizer"),
+	})
 
-    use({ "p00f/nvim-ts-rainbow" })
+	use({ "p00f/nvim-ts-rainbow" })
 
-    use({
-        "rose-pine/neovim",
-        config = get_config("rose-pine"),
-    }) 
+	use({
+		"rose-pine/neovim",
+		config = get_config("rose-pine"),
+	})
 
-    use({ "rafamadriz/friendly-snippets" })
+	use({ "rafamadriz/friendly-snippets" })
+
 	use({
 		"L3MON4D3/LuaSnip",
 		requires = "saadparwaiz1/cmp_luasnip",
 		config = get_config("luasnip"),
 	})
 
-    use({ "rcarriga/nvim-notify", config = get_config("notify") })
+	use({ "rcarriga/nvim-notify", config = get_config("notify") })
 
-    use({ "folke/which-key.nvim", config = get_config("which") })
+	use({ "folke/which-key.nvim", config = get_config("which") })
 
-    use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
-    use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
+
+	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 
 	use({
 		"ray-x/lsp_signature.nvim",
@@ -195,7 +196,7 @@ packer.startup(function(use)
 		config = get_config("lsp-signature"),
 	})
 
-    use({
+	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),
 	})
