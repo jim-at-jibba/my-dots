@@ -138,4 +138,9 @@ packer.startup(function(use)
         "luukvbaal/stabilize.nvim",
         config = get_config("stabilize")
     })
+
+    use({
+        "numToStr/Comment.nvim",
+        config = get_config("comment")
+    })
 end)
