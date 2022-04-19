@@ -1,15 +1,15 @@
 local function clock()
     return " " .. os.date("%H:%M")
   end
-  
+
   local function holidays()
     return "🎅🎄🌟🎁"
   end
-  
+
   local function my_favs()
     return "🦄🐙"
   end
-  
+
   local config = {
     options = {
       theme = "rose-pine", -- tokyonight nightfox rose-pine
@@ -50,11 +50,11 @@ local function clock()
     },
     extensions = { "nvim-tree" },
   }
-  
+
   -- try to load matching lualine theme
-  
+
   local M = {}
-  
+
   function M.load()
     local name = vim.g.colors_name or ""
     local ok, _ = pcall(require, "lualine.themes." .. name)
@@ -63,12 +63,12 @@ local function clock()
     end
     require("lualine").setup(config)
   end
-  
+
   M.load()
-  
+
   -- vim.api.nvim_exec([[
   --   autocmd ColorScheme * lua require("config.lualine").load();
   -- ]], false)
-  
+
   return M
-  
+

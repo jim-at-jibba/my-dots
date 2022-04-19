@@ -27,14 +27,15 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 local servers = {
 	"gopls",
 	"pyright",
-  "prismals",
-  "html",
-  "cssls",
+	"prismals",
+	"html",
+	"cssls",
 	"sumneko_lua",
 	"tsserver",
 	"yamlls",
 	"jsonls",
 }
+
 -- Use a loop to conveniently call 'setup' on multiple servers
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
@@ -42,23 +43,23 @@ for _, lsp in ipairs(servers) do
 			-- disable formatting for LSP clients as this is handled by null-ls
 			client.resolved_capabilities.document_formatting = false
 			client.resolved_capabilities.document_range_formatting = false
-            vim.fn.sign_define("LspDiagnosticsSignError", {text="", texthl="LspDiagnosticsError"})
-            vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", texthl="LspDiagnosticsWarning"})
-            vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", texthl="LspDiagnosticsInformation"})
-            vim.fn.sign_define("LspDiagnosticsSignHint", {text="", texthl="LspDiagnosticsHint"})
+			vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsError" })
+			vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsWarning" })
+			vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", texthl = "LspDiagnosticsInformation" })
+			vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsHint" })
 
-            if client.resolved_capabilities.document_formatting then
-                vim.cmd [[augroup Format]]
-                vim.cmd [[autocmd! * <buffer>]]
-                vim.cmd [[autocmd BufWritePost <buffer> lua require'lsp.formatting'.format()]]
-                vim.cmd [[augroup END]]
-            end
-
-            if lsp == "tsserver" then
-				require("nvim-lsp-ts-utils").setup {}
+			if client.resolved_capabilities.document_formatting then
+				vim.cmd([[augroup Format]])
+				vim.cmd([[autocmd! * <buffer>]])
+				vim.cmd([[autocmd BufWritePost <buffer> lua require'lsp.formatting'.format()]])
+				vim.cmd([[augroup END]])
 			end
 
-            vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
+			if lsp == "tsserver" then
+				require("nvim-lsp-ts-utils").setup({})
+			end
+
+			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 		end,
 		before_init = function(_, config)
 			if lsp == "pyright" then
