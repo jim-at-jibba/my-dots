@@ -56,3 +56,5 @@ map('n', '<leader>S', ":lua require('spectre').open()<cr>", opts)
 map('n', 'tt', ":TestNearest<cr>", opts)
 map('n', 'tf', ":TestFile<cr>", opts)
 map('n', 'ts', ":TestSuite<cr>", opts)
+
+map('n', '<leader>m', ":MaximizerToggle!<cr>", opts)

@@ -114,4 +114,8 @@ packer.startup(function(use)
         "vim-test/vim-test",
 		config = get_config("vim-test"),
     })
+
+    use({ 
+        "szw/vim-maximizer",
+    })
 end)
