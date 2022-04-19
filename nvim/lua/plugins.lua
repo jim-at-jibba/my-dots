@@ -118,4 +118,24 @@ packer.startup(function(use)
     use({ 
         "szw/vim-maximizer",
     })
+
+    use({
+        "windwp/nvim-ts-autotag",
+		config = get_config("vim-test"),
+    })
+
+    use({
+        "folke/todo-comments.nvim",
+        config = get_config("todo-comments")
+    })
+
+    use({
+        "karb94/neoscroll.nvim",
+        config = get_config("neoscroll")
+    })
+
+    use({
+        "luukvbaal/stabilize.nvim",
+        config = get_config("stabilize")
+    })
 end)
