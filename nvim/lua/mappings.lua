@@ -6,6 +6,40 @@ expr_options = { expr = true, silent = true }
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 
+--General
+map({ "i", "n" }, "jj", "<Esc>", opts)
+map("n", "H", "^", opts)
+map("n", "L", "g_", opts)
+
+map("n", "<Up>", "<Nop>", opts)
+map("n", "<Down>", "<Nop>", opts)
+map("n", "<Left>", "<Nop>", opts)
+map("n", "<Down>", "<Nop>", opts)
+
+map("n", "<C-J>", "<C-W><C-J>", opts)
+map("n", "<C-K>", "<C-W><C-K>", opts)
+map("n", "<C-H>", "<C-W><C-H>", opts)
+map("n", "<C-L>", "<C-W><C-L>", opts)
+map("n", "<leader>+", ":vertical resize +5", opts)
+map("n", "<leader>-", ":vertical resize -5", opts)
+map("i", "<C-n>", "<C-x><C-o>", opts)
+
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
+
+map({ "n", "v"}, "<leader>y", '"+y', opts)
+
+map({"n", "v"}, "K", ":m '<-2<CR>gv=gv", opts)
+map({"n", "v"}, "J", ":m '>+1<CR>gv=gv", opts)
+
+map("v", "<leader>p", '"_dP', opts)
+
+map("n", "Y", 'y$', opts)
+map("n", "<leader><leader>", '<c-^>', opts)
+
+map("n", "<leader>.", ':TSLspImportAll<CR>', opts)
+
+
 --Telescope
 map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
 map("n", "<leader>f", ":Telescope live_grep preview=true<CR>", opts)

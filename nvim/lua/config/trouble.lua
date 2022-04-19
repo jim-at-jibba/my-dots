@@ -9,4 +9,4 @@ trouble.setup {
     auto_close = true,
     auto_preview = true,
     use_lsp_diagnostic_signs = false
-  }
+}
