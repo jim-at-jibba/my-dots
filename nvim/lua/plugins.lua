@@ -143,4 +143,19 @@ packer.startup(function(use)
         "numToStr/Comment.nvim",
         config = get_config("comment")
     })
+
+    use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+            { "hrsh7th/cmp-nvim-lsp-signature-help"},
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-path" },
+            {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+			
+		},
+		config = get_config("cmp"),
+	})
 end)
