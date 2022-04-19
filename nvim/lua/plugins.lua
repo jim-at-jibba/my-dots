@@ -180,4 +180,7 @@ packer.startup(function(use)
 	})
 
     use({ "rcarriga/nvim-notify", config = get_config("notify") })
+
+    use({ "folke/which-key.nvim", config = get_config("which") })
+
 end)
