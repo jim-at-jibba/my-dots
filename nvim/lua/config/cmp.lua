@@ -1,4 +1,5 @@
-local status_ok, cmp = pcall(require, "!cmp")
+local status_ok, cmp = pcall(require, "cmp")
+local luasnip = pcall(require, "luasnip")
 
 if not status_ok then
 	return
@@ -58,12 +59,6 @@ cmp.setup({
 			return vim_item
 		end,
 	},
-	-- formatting = {
-	--   format = function(_, item)
-	--     item.kind = lspkind.presets.default[item.kind]
-	--     return item
-	--   end,
-	-- },
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),

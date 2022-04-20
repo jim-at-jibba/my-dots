@@ -90,6 +90,3 @@ map("n", "tf", ":TestFile<cr>", opts)
 map("n", "ts", ":TestSuite<cr>", opts)
 
 map("n", "<leader>m", ":MaximizerToggle!<cr>", opts)
-
-map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>")
