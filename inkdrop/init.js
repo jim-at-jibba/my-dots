@@ -25,7 +25,7 @@ inkdrop.menu.add([
 
 inkdrop.commands.add(document.body, "custom:new-journal", async () => {
   const db = inkdrop.main.dataStore.getLocalDB()
-  const template = await db.notes.get("note:ve6wFbxGh")
+  const template = await db.notes.get("note:z2spZjxQ7")
   const note = {
     ...template,
     _id: db.notes.createId(),
@@ -48,12 +48,12 @@ inkdrop.commands.add(document.body, "custom:new-journal", async () => {
 
 inkdrop.commands.add(document.body, "custom:new-task", async () => {
   const db = inkdrop.main.dataStore.getLocalDB()
-  const template = await db.notes.get("note:PSS7Csy28") // [task template](inkdrop://note/PSS7Csy28)
+  const template = await db.notes.get("note:x_i8eFXeE") // [task template](inkdrop://note/PSS7Csy28)
   const note = {
     ...template,
     _id: db.notes.createId(),
     _rev: undefined,
-    title: "Task ::", 
+    title: "Task ::",
     createdAt: +new Date(),
     updatedAt: +new Date(),
     pinned: false,
@@ -71,7 +71,7 @@ inkdrop.commands.add(document.body, "custom:new-task", async () => {
 
 inkdrop.commands.add(document.body, "custom:new-article", async () => {
   const db = inkdrop.main.dataStore.getLocalDB()
-  const template = await db.notes.get("note:aZ6rlu7wD")
+  const template = await db.notes.get("note:XoXsCwqb5")
   const note = {
     ...template,
     _id: db.notes.createId(),
