@@ -1,22 +1,12 @@
 ### Switch themes
 # show a list of commands and keybinds
 
-local themes="nord [Nord theme]
-ariakedark [Ariake Dark]
-ariakelight [Ariake Light]
-oceanicnext [Ocean Next]
-rosepine [Rose Pine]
+local themes="
 rosepinemoon [Rose Pine Moon]
 rosepinedawn [Rose Pine Dawn]
-embark [Embark]
 tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
-kanagawa [Kanagawa]
-everforestdarkmedium [Everforest dark medium]
-everforestlightmedium [Everforest light medium]
 nightfoxnord [Nightfox Nord]
-nightfoxdusk [Nightfox Dusk]
-nightfoxday [Nightfox Day]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

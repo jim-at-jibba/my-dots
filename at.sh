@@ -21,44 +21,38 @@ configure_tmux() {
 }
 
 configure_vim() {
-  echo $1 > ${dotfiles}/nvim/color.vim
+  echo $1 > ${dotfiles}/nvim/color.lua
 }
 
 case $color in
-  rosepine)
-    configure_kitty
-    configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "base"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
-    ;;
-  # rosepinemoon)
-  #   configure_kitty
-  #   configure_vim 'let g:rose_pine_enable_italics = 1\nlet g:rose_pine_variant = "moon"\nlet g:rose_pine_disable_background = 1\ncolorscheme rose-pine'
-  #   ;;
   rosepinemoon)
     configure_kitty
-    configure_vim 'colorscheme rose-pine\nset background=dark'
+    configure_tmux
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
     ;;
   rosepinedawn)
     configure_kitty
-    configure_vim 'colorscheme rose-pine\nset background=light'
+    configure_tmux
+    configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
     ;;
   tokyolight)
     configure_alacritty
     configure_kitty
     configure_tmux
-    configure_vim 'set background=light\nlet g:tokyonight_style = "day"\ncolorscheme tokyonight'
+    configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme tokyonight")'
     ;;
   tokyonight)
     configure_alacritty
     configure_kitty
     configure_tmux
-    configure_vim 'set background=dark\nlet g:tokyonight_style = "storm"\ncolorscheme tokyonight'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme tokyonight")'
     ;;
   nightfoxnord)
     configure_kitty
     configure_vim 'set background=dark\ncolorscheme nordfox'
     ;;
   *)
-    echo "Supported colorschemes: Oceanic Next, Nord, Ariake, embark, tokyolightm tokyonight"
+    echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox nord"
     exit 1
     ;;
 esac
