@@ -1,4 +1,6 @@
 local nvim_lsp = require("lspconfig")
+local map = vim.keymap.set
+opts = { silent = true, noremap = true }
 
 -- detect python venv
 -- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-851247107
@@ -58,6 +60,9 @@ for _, lsp in ipairs(servers) do
 			if lsp == "tsserver" then
 				require("nvim-lsp-ts-utils").setup({})
 			end
+
+			map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+			map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 
 			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 		end,
@@ -160,4 +165,13 @@ for _, lsp in ipairs(servers) do
 		},
 		flags = { debounce_text_changes = 150 },
 	})
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
+	vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = false,
+		signs = true,
+		underline = true,
+		update_in_insert = false,
+	})(...)
 end

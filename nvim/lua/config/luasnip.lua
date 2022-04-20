@@ -2,6 +2,13 @@ local ls = require("luasnip")
 local vsc = require("luasnip.loaders.from_vscode")
 local lua = require("luasnip.loaders.from_lua")
 
+ls.filetype_extend("javascript", { "html" })
+ls.filetype_extend("javascriptreact", { "html" })
+ls.filetype_extend("typescript", { "html" })
+ls.filetype_extend("typescriptreact", { "html" })
+ls.filetype_extend("htmldjango", { "html" })
+ls.filetype_extend("django-html", { "html" })
+
 snip_env = {
 	s = require("luasnip.nodes.snippet").S,
 	sn = require("luasnip.nodes.snippet").SN,
