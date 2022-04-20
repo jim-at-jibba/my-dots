@@ -157,6 +157,7 @@ packer.startup(function(use)
 			{ "hrsh7th/cmp-path" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-emoji" },
 			{ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
 		},
 		config = get_config("cmp"),

@@ -55,6 +55,7 @@ cmp.setup({
 				cmp_tabnine = "[TN]",
 				buffer = "[Buffer]",
 				path = "[Path]",
+				emoji = "🙀",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -114,5 +115,6 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "buffer" },
 		{ name = "cmp_tabnine" },
+		{ name = "emoji" },
 	},
 })
