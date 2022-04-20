@@ -40,6 +40,7 @@ packer.init({
 packer.startup(function(use)
 	-- actual plugins list
 	use("wbthomason/packer.nvim")
+	use("lewis6991/impatient.nvim")
 
 	use({
 		"nvim-telescope/telescope.nvim",
