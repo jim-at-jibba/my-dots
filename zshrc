@@ -264,4 +264,5 @@ eval $(thefuck --alias)
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$PATH:/Users/jamesbest/.kit/bin"
 eval "$(starship init zsh)"
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"

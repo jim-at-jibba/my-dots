@@ -11,6 +11,7 @@ nls.setup({
 		}),
 		nls.builtins.formatting.autopep8,
 		nls.builtins.formatting.isort,
+		nls.builtins.diagnostics.flake8,
 	},
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
