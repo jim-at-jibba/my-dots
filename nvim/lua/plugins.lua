@@ -202,4 +202,9 @@ packer.startup(function(use)
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),
 	})
+
+	use({
+		"goolord/alpha-nvim",
+		config = get_config("alpha"),
+	})
 end)
