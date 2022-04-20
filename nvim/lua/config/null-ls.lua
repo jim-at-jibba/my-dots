@@ -1,13 +1,16 @@
 local nls = require("null-ls")
 nls.setup({
 	sources = {
-		nls.builtins.formatting.stylua,
+		nls.builtins.code_actions.gitsigns,
+		nls.builtins.code_actions.eslint,
 		nls.builtins.diagnostics.eslint,
 		nls.builtins.diagnostics.golangci_lint,
+		nls.builtins.formatting.stylua,
 		nls.builtins.formatting.prettier.with({
 			extra_args = { "--single-quote", "false" },
 		}),
-		nls.builtins.formatting.black,
+		nls.builtins.formatting.autopep8,
+		nls.builtins.formatting.isort,
 	},
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
