@@ -36,6 +36,7 @@ local servers = {
 	"tsserver",
 	"yamlls",
 	"jsonls",
+	"tailwindcss",
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers
@@ -49,6 +50,7 @@ for _, lsp in ipairs(servers) do
 			vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsWarning" })
 			vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", texthl = "LspDiagnosticsInformation" })
 			vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsHint" })
+			vim.diagnostic.config({ virtual_text = false })
 
 			if client.resolved_capabilities.document_formatting then
 				vim.cmd([[augroup Format]])
@@ -63,6 +65,7 @@ for _, lsp in ipairs(servers) do
 
 			map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 			map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+			-- map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 		end,
@@ -167,11 +170,14 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
-	vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = false,
-		signs = true,
-		underline = true,
-		update_in_insert = false,
+vim.lsp.handlers["textDocument/hover"] = function(...)
+	vim.lsp.with(vim.lsp.handlers.hover, {
+		border = "rounded",
+	})(...)
+end
+
+vim.lsp.handlers["textDocument/signatureHelp"] = function(...)
+	vim.lsp.with(vim.lsp.handlers.signature_help, {
+		border = "rounded",
 	})(...)
 end

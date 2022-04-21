@@ -149,13 +149,18 @@ packer.startup(function(use)
 	})
 
 	use({
+		"L3MON4D3/LuaSnip",
+		requires = "saadparwaiz1/cmp_luasnip",
+		config = get_config("luasnip"),
+	})
+
+	use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
+	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-emoji" },
 			{ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
@@ -177,12 +182,6 @@ packer.startup(function(use)
 	})
 
 	use({ "rafamadriz/friendly-snippets" })
-
-	use({
-		"L3MON4D3/LuaSnip",
-		requires = "saadparwaiz1/cmp_luasnip",
-		config = get_config("luasnip"),
-	})
 
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
 

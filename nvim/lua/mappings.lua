@@ -42,7 +42,8 @@ map("n", "<leader>.", ":TSLspImportAll<CR>", opts)
 map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
 map("n", "<leader>f", ":Telescope live_grep preview=true<CR>", opts)
 map("n", "<C-p>", ":Telescope git_files preview=true<CR>", opts)
-map("n", "<leader>g", ":Telescope git_commits preview=true<CR>", opts)
+map("n", "<leader>g", ":Telescope git_status preview=true<CR>", opts)
+map("n", "<leader>ca", ":Telescope lsp_code_actions<CR>", opts)
 
 --Nvimtree
 map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
@@ -74,7 +75,7 @@ map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
 -- lsp saga
 map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
-map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+-- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
 map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
 map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)

@@ -1,8 +1,8 @@
 local nls = require("null-ls")
 nls.setup({
 	sources = {
-		nls.builtins.code_actions.gitsigns,
-		nls.builtins.code_actions.eslint,
+		-- nls.builtins.code_actions.gitsigns,
+		-- nls.builtins.code_actions.eslint,
 		nls.builtins.diagnostics.eslint,
 		nls.builtins.diagnostics.golangci_lint,
 		nls.builtins.formatting.stylua,
