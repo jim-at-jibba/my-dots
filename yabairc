@@ -78,9 +78,9 @@ yabai -m space 7 --label ide
 
 # ===== Rules ==================================
 
-yabai -m rule --add app="^Alacritty$" space=terminal
+yabai -m rule --add app="^Kitty$" space=code
 yabai -m rule --add app="^Slack$" space=comms
-yabai -m rule --add app="^Inkdrop$" space=terminal
+yabai -m rule --add app="^Inkdrop$" space=notes
 yabai -m rule --add app="^Firefox\ Developer\ Edition$" space=web
 yabai -m rule --add app="^Chrome$" space=web
 yabai -m rule --add app="^Code$" space=code
