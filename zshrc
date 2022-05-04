@@ -72,8 +72,16 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highl
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
   source $ZSH/oh-my-zsh.sh
 
-  export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
-  export PATH=$PATH:$JAVA_HOME/bin
+  # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+  export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+  export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+  export PATH=$PATH:$JAVA_11_HOME/bin
+
+  alias java8='export JAVA_HOME=$JAVA_8_HOME'
+  alias java11='export JAVA_HOME=$JAVA_11_HOME'
+
+  # default to Java 11
+  java11
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
   autoload -Uz utils bip bup bcp tl kp ks vim tmuxify theme

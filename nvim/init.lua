@@ -10,3 +10,4 @@ require("mappings")
 require("options")
 -- Vim autocommands/autogroups
 require("autocmd")
+require("color")

@@ -21,7 +21,7 @@ configure_tmux() {
 }
 
 configure_vim() {
-  echo $1 > ${dotfiles}/nvim/color.lua
+  echo $1 > ${dotfiles}/nvim/lua/color.lua
 }
 
 case $color in
@@ -49,10 +49,18 @@ case $color in
     ;;
   nightfoxnord)
     configure_kitty
-    configure_vim 'set background=dark\ncolorscheme nordfox'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme nordfox")'
+    ;;
+  nightfoxday)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme dayfox")'
+    ;;
+  nightfoxdawn)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme dawnfox")'
     ;;
   *)
-    echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox nord"
+    echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox nord, nightfox day"
     exit 1
     ;;
 esac

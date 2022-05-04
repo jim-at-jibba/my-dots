@@ -6,8 +6,8 @@ ls.filetype_extend("javascript", { "html" })
 ls.filetype_extend("javascriptreact", { "html" })
 ls.filetype_extend("typescript", { "html" })
 ls.filetype_extend("typescriptreact", { "html" })
--- ls.filetype_extend("htmldjango", { "html" })
--- ls.filetype_extend("django-html", { "html" })
+ls.filetype_extend("htmldjango", { "html" })
+ls.filetype_extend("django-html", { "html" })
 
 -- snip_env = {
 -- 	s = require("luasnip.nodes.snippet").S,

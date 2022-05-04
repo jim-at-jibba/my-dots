@@ -30,6 +30,7 @@ local options = {
 	writebackup = false,
 	swapfile = false,
 	termguicolors = true,
+	cursorline = false,
 }
 
 for k, v in pairs(options) do

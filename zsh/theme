@@ -7,6 +7,8 @@ rosepinedawn [Rose Pine Dawn]
 tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
 nightfoxnord [Nightfox Nord]
+nightfoxday [Nightfox Day]
+nightfoxdawn [Nightfox Dawn]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
