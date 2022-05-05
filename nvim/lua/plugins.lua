@@ -212,4 +212,6 @@ packer.startup(function(use)
 			require("trld").setup()
 		end,
 	})
+
+	use("EdenEast/nightfox.nvim")
 end)

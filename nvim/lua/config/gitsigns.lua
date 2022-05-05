@@ -1,5 +1,4 @@
 local status_ok, gitsigns = pcall(require, "gitsigns")
-print("GIT ")
 
 if not status_ok then
 	return

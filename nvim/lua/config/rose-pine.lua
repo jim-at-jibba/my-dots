@@ -8,7 +8,7 @@ rose_pine.setup({
 	---@usage 'main'|'moon'
 	dark_variant = "moon",
 	bold_vert_split = false,
-	dim_nc_background = false,
+	dim_nc_background = true,
 	disable_background = true,
 	disable_float_background = false,
 	disable_italics = false,
@@ -43,5 +43,5 @@ rose_pine.setup({
 	},
 })
 
--- vim.cmd("set background=light")
--- vim.cmd("colorscheme rose-pine")
+-- vim.cmd("set background=dark")
+vim.cmd("colorscheme rose-pine")
