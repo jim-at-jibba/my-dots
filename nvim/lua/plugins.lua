@@ -107,11 +107,6 @@ packer.startup(function(use)
 	use({ "TaDaa/vimade" })
 
 	use({
-		"tami5/lspsaga.nvim",
-		config = get_config("lspsaga"),
-	})
-
-	use({
 		"kyazdani42/nvim-tree.lua",
 		config = get_config("nvim-tree"),
 	})
@@ -214,4 +209,16 @@ packer.startup(function(use)
 	})
 
 	use("EdenEast/nightfox.nvim")
+
+	use("stevearc/dressing.nvim")
+
+	use({
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
+	})
+
+	use({
+		"folke/zen-mode.nvim",
+		config = get_config("zen"),
+	})
 end)

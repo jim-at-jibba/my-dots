@@ -36,7 +36,7 @@ local servers = {
 	"tsserver",
 	"yamlls",
 	"jsonls",
-	"tailwindcss",
+	-- "tailwindcss",
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers
@@ -46,10 +46,11 @@ for _, lsp in ipairs(servers) do
 			-- disable formatting for LSP clients as this is handled by null-ls
 			client.resolved_capabilities.document_formatting = false
 			client.resolved_capabilities.document_range_formatting = false
-			vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsError" })
-			vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsWarning" })
-			vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", texthl = "LspDiagnosticsInformation" })
-			vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsHint" })
+			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
 			vim.diagnostic.config({ virtual_text = false })
 
 			if client.resolved_capabilities.document_formatting then
@@ -65,7 +66,6 @@ for _, lsp in ipairs(servers) do
 
 			map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 			map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-			-- map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 		end,
@@ -106,6 +106,18 @@ for _, lsp in ipairs(servers) do
 							".renovaterc.json",
 						},
 						url = "https://docs.renovatebot.com/renovate-schema",
+					},
+					{
+						fileMatch = { "tsconfig*.json" },
+						url = "https://json.schemastore.org/tsconfig.json",
+					},
+					{
+						fileMatch = {
+							".prettierrc",
+							".prettierrc.json",
+							"prettier.config.json",
+						},
+						url = "https://json.schemastore.org/prettierrc.json",
 					},
 					{
 						description = "OpenApi config",

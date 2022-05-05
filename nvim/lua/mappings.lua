@@ -33,6 +33,10 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 
 map("v", "<leader>p", '"_dP', opts)
 
+map("n", "<leader>ca", ":CodeActionMenu<CR>", opts)
+map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
+map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
 
@@ -43,7 +47,6 @@ map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
 map("n", "<leader>f", ":Telescope live_grep preview=true<CR>", opts)
 map("n", "<C-p>", ":Telescope git_files preview=true<CR>", opts)
 map("n", "<leader>g", ":Telescope git_status preview=true<CR>", opts)
-map("n", "<leader>ca", ":Telescope lsp_code_actions<CR>", opts)
 
 --Nvimtree
 map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
@@ -71,16 +74,8 @@ map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
 map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
 map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
 map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
-
--- lsp saga
-map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
-map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
--- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
-map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
-map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
-map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+map("n", "<leader>dn", "lua require('trouble').next({skip_groups = true, jump = true})", opts)
+map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jump = true})", opts)
 
 --spectre
 map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)

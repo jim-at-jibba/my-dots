@@ -5,9 +5,9 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
-local status_ok, trouble = pcall(require, "trouble")
+local trouble_status_ok, trouble = pcall(require, "trouble.providers.telescope")
 
-if not status_ok then
+if not trouble_status_ok then
 	return
 end
 
