@@ -117,6 +117,7 @@ alias gs="git status -s \
  --preview-window=right:60%:wrap"
 alias gr='git remote -v'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glogNoDays="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias ga='git add .'
 alias gpush='git push'
 alias gpull='git pull'
