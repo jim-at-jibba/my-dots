@@ -218,7 +218,15 @@ packer.startup(function(use)
 	})
 
 	use({
-		"folke/zen-mode.nvim",
-		config = get_config("zen"),
+		"lukas-reineke/indent-blankline.nvim",
+		ft = { "python" },
+		config = get_config("indent-line"),
 	})
+
+	use({
+		"NTBBloodbath/rest.nvim",
+		config = get_config("rest"),
+	})
+
+	use("folke/tokyonight.nvim")
 end)

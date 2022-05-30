@@ -86,3 +86,7 @@ map("n", "tf", ":TestFile<cr>", opts)
 map("n", "ts", ":TestSuite<cr>", opts)
 
 map("n", "<leader>m", ":MaximizerToggle!<cr>", opts)
+
+--rest
+map("n", "<leader>rr", ":lua require('rest-nvim').run()<CR>")
+map("n", "<leader>rp", ":lua require('rest-nvim').run(true)<CR>")
