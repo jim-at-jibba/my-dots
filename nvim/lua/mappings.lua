@@ -33,7 +33,7 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 
 map("v", "<leader>p", '"_dP', opts)
 
-map("n", "<leader>ca", ":CodeActionMenu<CR>", opts)
+map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
 map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
@@ -74,8 +74,8 @@ map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
 map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
 map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
 map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
-map("n", "<leader>dn", "lua require('trouble').next({skip_groups = true, jump = true})", opts)
-map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jump = true})", opts)
+map("n", "<leader>dn", "lua require('trouble').next({skip_groups = true, jump = true})<CR>", opts)
+map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jump = true})<CR>", opts)
 
 --spectre
 map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)

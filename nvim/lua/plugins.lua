@@ -210,12 +210,7 @@ packer.startup(function(use)
 
 	use("EdenEast/nightfox.nvim")
 
-	use("stevearc/dressing.nvim")
-
-	use({
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-	})
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
 
 	use({
 		"lukas-reineke/indent-blankline.nvim",
