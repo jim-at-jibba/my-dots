@@ -37,6 +37,16 @@ case $color in
     # configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
     configure_vim 'vim.cmd("set background=light")'
     ;;
+  catppuccinfrappe)
+    configure_kitty
+    # configure_tmux
+    configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "frappe"\nvim.cmd("colorscheme catppuccin")'
+    ;;
+  catppuccinlatte)
+    configure_kitty
+    # configure_tmux
+    configure_vim 'vim.cmd("set background=light")\nvim.g.catppuccin_flavour = "latte"\nvim.cmd("colorscheme catppuccin")'
+    ;;
   tokyolight)
     configure_alacritty
     configure_kitty
