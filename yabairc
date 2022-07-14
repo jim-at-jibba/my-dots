@@ -13,11 +13,11 @@ declare -A color
 # gaps["right"]="4"
 # gaps["inner"]="4"
 
-gaps["top"]="10"
-gaps["bottom"]="10"
-gaps["left"]="10"
-gaps["right"]="10"
-gaps["inner"]="10"
+gaps["top"]="15"
+gaps["bottom"]="15"
+gaps["left"]="15"
+gaps["right"]="15"
+gaps["inner"]="15"
 
 color["focused"]="0xff775759"
 color["normal"]="0x00010101"

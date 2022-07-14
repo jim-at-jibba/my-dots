@@ -36,6 +36,9 @@ lctrl + alt - k : yabai -m window --resize top:0:-50; \
 lctrl + alt - l : yabai -m window --resize right:50:0; \
                   yabai -m window --resize left:50:0
 
+# toggle window split type
+hyper - e : yabai -m window --toggle split
+
 # Equalize size of windows
 hyper - e : yabai -m space --balance
 
@@ -61,9 +64,16 @@ shift + alt - space : \
     yabai -m window --toggle float; \
     yabai -m window --toggle border
 
+# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
 hyper - n : yabai -m space --create && \
                 index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
                 yabai -m space --focus "${index}"
+
+
+shift + alt - n : yabai -m space --create && \
+   index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+   yabai -m window --space "${index}" && \
+   yabai -m space --focus "${index}"
 
 # Restart Yabai
 shift + lctrl + alt - r : \
