@@ -8,6 +8,7 @@ ls.filetype_extend("typescript", { "html" })
 ls.filetype_extend("typescriptreact", { "html" })
 ls.filetype_extend("htmldjango", { "html" })
 ls.filetype_extend("django-html", { "html" })
+ls.filetype_extend("python", { "django" })
 
 -- snip_env = {
 -- 	s = require("luasnip.nodes.snippet").S,
@@ -36,6 +37,7 @@ ls.filetype_extend("django-html", { "html" })
 -- ls.config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
 
 -- load friendly-snippets
+-- vsc.lazy_load({ paths = os.getenv("HOME") .. "/.config/nvim/snippets/"})
 vsc.lazy_load()
 -- load lua snippets
 -- lua.load({ paths = os.getenv("HOME") .. "/.config/nvim/snippets/" })

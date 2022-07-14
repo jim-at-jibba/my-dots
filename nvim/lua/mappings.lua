@@ -9,6 +9,7 @@ vim.g.mapleader = " "
 map("i", "jj", "<Esc>", opts)
 map("n", "H", "^", opts)
 map("n", "L", "g_", opts)
+map("n", "q", "<Nop>", opts)
 
 map("n", "<Up>", "<Nop>", opts)
 map("n", "<Down>", "<Nop>", opts)
@@ -42,15 +43,21 @@ map("n", "<leader><leader>", "<c-^>", opts)
 
 map("n", "<leader>.", ":TSLspImportAll<CR>", opts)
 
+map("n", "<leader>cs", ":CheatSH<CR>", opts)
+
 --Telescope
 map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
 map("n", "<leader>f", ":Telescope live_grep preview=true<CR>", opts)
 map("n", "<C-p>", ":Telescope git_files preview=true<CR>", opts)
 map("n", "<leader>g", ":Telescope git_status preview=true<CR>", opts)
+map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 
 --Nvimtree
 map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+
+-- Diagnostics Show
+map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
 
 map("n", "<leader>gs", ":LazyGit<CR>", opts)
 
@@ -73,7 +80,7 @@ map("n", "<leader>xx", ":TroubleToggle<CR>", opts)
 map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
 map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
 map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
-map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
+-- map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
 map("n", "<leader>dn", "lua require('trouble').next({skip_groups = true, jump = true})<CR>", opts)
 map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jump = true})<CR>", opts)
 
@@ -81,12 +88,64 @@ map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jum
 map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)
 
 --vimtest
-map("n", "tt", ":TestNearest<cr>", opts)
-map("n", "tf", ":TestFile<cr>", opts)
-map("n", "ts", ":TestSuite<cr>", opts)
+-- map("n", "tt", ":TestNearest<cr>", opts)
+-- map("n", "tf", ":TestFile<cr>", opts)
+-- map("n", "ts", ":TestSuite<cr>", opts)
 
 map("n", "<leader>m", ":MaximizerToggle!<cr>", opts)
 
 --rest
 map("n", "<leader>rr", ":lua require('rest-nvim').run()<CR>")
 map("n", "<leader>rp", ":lua require('rest-nvim').run(true)<CR>")
+
+-- dap
+map("n", "<leader>dc", ":lua require('dap').continue()<CR>")
+map("n", "<leader>dv", ":lua require('dap').step_over()<CR>")
+map("n", "<leader>di", ":lua require('dap').step_into()<CR>")
+map("n", "<leader>do", ":lua require('dap').step_out()<CR>")
+map("n", "<leader>db", ":lua require('dap').toggle_breakpoint()<CR>")
+map("n", "<leader>de", ":lua require('dap').close()<CR>")
+-- map("n", "<leader>db", ":lua require('dap').toggle_breakpoint()<CR>")
+
+-- tests
+map("n", "<leader>tf", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
+map("n", "<leader>tt", ":lua require('neotest').run.run()<CR>")
+map("n", "<leader>tt", ":lua require('neotest').run.run()<CR>")
+map("n", "<leader>ts", ":lua require('neotest').summary.toggle()<CR>")
+map("n", "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>")
+-- nnoremap <silent><leader>nr <cmd>lua require("neotest").run(vim.fn.expand("%"))<CR>
+-- nnoremap <silent><leader>ns <cmd>lua require("neotest").run(vim.fn.getcwd())<CR>
+-- nnoremap <silent><leader>nn <cmd>lua require("neotest").run()<CR>
+-- nnoremap <silent><leader>nd <cmd>lua require("neotest").run({strategy = "dap"})<CR>
+-- nnoremap <silent><leader>na <cmd>lua require("neotest").attach()<CR>
+-- nnoremap <silent><leader>no <cmd>lua require("neotest").output.open({ enter = true })<CR>
+-- nnoremap <silent><leader>nO <cmd>lua require("neotest").output.open({enter = true, short = true})<CR>
+-- nnoremap <silent><leader>np <cmd>lua require("neotest").summary.toggle()<CR>
+
+-- telekasten
+map("n", "<leader>zp", ":lua require('telekasten').panel()<CR>")
+map("n", "<leader>zf", ":lua require('telekasten').find_notes()<CR>")
+map("n", "<leader>zd", ":lua require('telekasten').find_daily_notes()<CR>")
+map("n", "<leader>zg", ":lua require('telekasten').search_notes()<CR>")
+map("n", "<leader>zz", ":lua require('telekasten').follow_link()<CR>")
+map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
+
+-- map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+-- map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
+-- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+-- map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
+-- map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
+-- map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+-- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+-- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+
+-- HOP
+map("n", "<leader>hl", ":HopLine<CR>", opts)
+map("n", "<leader>hh", ":HopChar2<CR>", opts)
+map(
+	"n",
+	"f",
+	":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+	opts
+)
+map("n", "<leader>hw", ":HopWord<CR>", opts)

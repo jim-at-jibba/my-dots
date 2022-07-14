@@ -36,6 +36,7 @@ local servers = {
 	"tsserver",
 	"yamlls",
 	"jsonls",
+	"marksman",
 	-- "tailwindcss",
 }
 

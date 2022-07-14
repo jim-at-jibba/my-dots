@@ -30,6 +30,7 @@ end
 packer.init({
 	enable = true, -- enable profiling via :PackerCompile profile=true
 	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+	max_jobs = 10,
 	display = {
 		open_fn = function()
 			return require("packer.util").float({ border = "single" })
@@ -61,6 +62,13 @@ packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = get_config("treesitter"),
+	})
+
+	use({
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup()
+		end,
 	})
 
 	use({
@@ -116,6 +124,19 @@ packer.startup(function(use)
 		config = get_config("vim-test"),
 	})
 
+	use({
+		"rcarriga/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"rcarriga/neotest-vim-test",
+			"nvim-neotest/neotest-python",
+			"haydenmeade/neotest-jest",
+		},
+		config = get_config("neotest"),
+	})
+
 	use({ "szw/vim-maximizer" })
 
 	use({
@@ -157,7 +178,7 @@ packer.startup(function(use)
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-emoji" },
-			{ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
+			-- { "hrsh7th/cmp-copilot" },
 		},
 		config = get_config("cmp"),
 	})
@@ -196,17 +217,17 @@ packer.startup(function(use)
 		config = get_config("null-ls"),
 	})
 
-	use({
-		"goolord/alpha-nvim",
-		config = get_config("alpha"),
-	})
+	-- use({
+	-- 	"goolord/alpha-nvim",
+	-- 	config = get_config("alpha"),
+	-- })
 
-	use({
-		"Mofiqul/trld.nvim",
-		config = function()
-			require("trld").setup()
-		end,
-	})
+	-- use({
+	-- 	"Mofiqul/trld.nvim",
+	-- 	config = function()
+	-- 		require("trld").setup()
+	-- 	end,
+	-- })
 
 	use("EdenEast/nightfox.nvim")
 
@@ -224,4 +245,68 @@ packer.startup(function(use)
 	})
 
 	use("folke/tokyonight.nvim")
+
+	use({
+		"Djancyp/cheat-sheet",
+	})
+
+	-- dap
+	use({
+		"mfussenegger/nvim-dap",
+		config = get_config("dap"),
+	})
+
+	use({
+		"leoluz/nvim-dap-go",
+		config = get_config("dap-go"),
+	})
+
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+
+	-- use({ "github/copilot.vim" })
+
+	use({
+		"theHamsta/nvim-dap-virtual-text",
+		config = get_config("dap-virt"),
+	})
+
+	use({
+		"renerocksai/telekasten.nvim",
+		config = get_config("telekasten"),
+	})
+
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	})
+
+	-- use({
+	-- 	"glepnir/lspsaga.nvim",
+	-- 	branch = "main",
+	-- 	config = function()
+	-- 		local saga = require("lspsaga")
+	--
+	-- 		saga.init_lsp_saga({
+	-- 			-- your configuration
+	-- 		})
+	-- 	end,
+	-- })
+
+	use({
+		"cseickel/diagnostic-window.nvim",
+		requires = { "MunifTanjim/nui.nvim" },
+	})
+
+	use({
+		"phaazon/hop.nvim",
+		branch = "v1", -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+		end,
+	})
 end)
