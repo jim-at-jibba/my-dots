@@ -12,7 +12,7 @@ end
 
 local config = {
 	options = {
-		theme = "tokyonight", -- tokyonight nightfox rose-pine
+		theme = "catppuccin", -- tokyonight nightfox rose-pine
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 		icons_enabled = true,
@@ -61,7 +61,7 @@ function M.load()
 	if ok then
 		config.options.theme = name
 	end
-	require("lualine").setup(config)
+	-- require("lualine").setup(config)
 end
 
 M.load()
