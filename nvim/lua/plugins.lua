@@ -82,6 +82,23 @@ packer.startup(function(use)
 		config = get_config("nvim-tree"),
 	})
 
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+		config = get_config("neo-tree"),
+	})
+
+	use({
+		"mrbjarksen/neo-tree-diagnostics.nvim",
+		requires = "nvim-neo-tree/neo-tree.nvim",
+		module = "neo-tree.sources.diagnostics", -- if wanting to lazyload
+	})
+
 	-- test
 	use({
 		"vim-test/vim-test",
@@ -165,10 +182,6 @@ packer.startup(function(use)
 		config = get_config("indent-line"),
 	})
 	use({
-		"NTBBloodbath/rest.nvim",
-		config = get_config("rest"),
-	})
-	use({
 		"Djancyp/cheat-sheet",
 	})
 	use({
@@ -207,6 +220,13 @@ packer.startup(function(use)
 		"numToStr/Comment.nvim",
 		config = get_config("comment"),
 	})
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = get_config("lualine"),
+		event = "VimEnter",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+	use({ "github/copilot.vim", config = get_config("copilot") })
 
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
@@ -215,6 +235,17 @@ packer.startup(function(use)
 		"ray-x/lsp_signature.nvim",
 		require = { "neovim/nvim-lspconfig" },
 		config = get_config("lsp-signature"),
+	})
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		config = function()
+			local saga = require("lspsaga")
+
+			saga.init_lsp_saga({
+				border_style = "rounded",
+			})
+		end,
 	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",

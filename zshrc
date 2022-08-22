@@ -30,7 +30,8 @@ SPACESHIP_NODE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
 DISABLE_AUTO_TITLE="true"
 
-plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
 
 # User configuration
 # TERM=xterm-256color
@@ -126,6 +127,8 @@ gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged i
 alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
 alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
 alias lg="lazygit"
+alias epoc="date +%s | pbcopy"
+alias cput='sudo powermetrics --samplers smc |grep -i "CPU die temperature"'
 
 # General
 ##########
@@ -276,3 +279,6 @@ eval "$(starship init zsh)"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/jamesbest/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;

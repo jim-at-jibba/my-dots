@@ -61,7 +61,7 @@ function M.load()
 	if ok then
 		config.options.theme = name
 	end
-	-- require("lualine").setup(config)
+	require("lualine").setup(config)
 end
 
 M.load()

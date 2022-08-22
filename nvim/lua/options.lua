@@ -31,7 +31,7 @@ local options = {
 	swapfile = false,
 	termguicolors = true,
 	cursorline = false,
-	laststatus = 0,
+	-- laststatus = 0,
 }
 
 for k, v in pairs(options) do

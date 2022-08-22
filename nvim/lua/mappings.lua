@@ -34,9 +34,9 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 
 map("v", "<leader>p", '"_dP', opts)
 
-map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
-map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
+-- map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
@@ -55,6 +55,10 @@ map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 --Nvimtree
 map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+
+--Neotree
+-- map("n", "<leader><leader>1", ":Neotree filesystem reveal right<CR>", opts)
+map("n", "<leader><leader>2", ":Neotree diagnostics reveal bottom<CR>", opts)
 
 -- Diagnostics Show
 map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
@@ -130,14 +134,15 @@ map("n", "<leader>zg", ":lua require('telekasten').search_notes()<CR>")
 map("n", "<leader>zz", ":lua require('telekasten').follow_link()<CR>")
 map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
 
--- map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
--- map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
--- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
+map("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
+map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 -- map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
 -- map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
--- map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
--- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
--- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 
 -- HOP
 map("n", "<leader>hl", ":HopLine<CR>", opts)
@@ -149,3 +154,6 @@ map(
 	opts
 )
 map("n", "<leader>hw", ":HopWord<CR>", opts)
+
+-- Copilot
+map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
