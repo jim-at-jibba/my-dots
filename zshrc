@@ -18,7 +18,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded. pygmalion
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 
 SPACESHIP_CHAR_SYMBOL='🦄 🐙 '
 SPACESHIP_BATTERY_SHOW='false'
@@ -59,6 +59,8 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="$HOME/.fastlane/bin:$PATH"
   export PATH=$PATH:/opt/apache-maven/bin
   export PATH="/usr/local/opt/helm@2/bin:$PATH"
+  export PATH=/opt/homebrew/bin:$PATH
+  export PATH=/opt/homebrew/sbin:$PATH
   export PATH="$HOME/neovim/bin:$PATH"
   export PATH="$HOME/bin:$PATH"
 
@@ -92,9 +94,9 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
 # }}}
 
 # Auto Jump initialisation
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-# intergrates autojump with fzf
+# # intergrates autojump with fzf
 j() {
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
@@ -155,7 +157,7 @@ alias server="python3 -m http.server"
 alias python3='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
-export EDITOR='~/neovim/bin/nvim'
+# export EDITOR='~/neovim/bin/nvim'
 
 # Docker
 alias ld="lazydocker"
