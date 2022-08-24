@@ -62,6 +62,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH=/opt/homebrew/bin:$PATH
   export PATH=/opt/homebrew/sbin:$PATH
   export PATH="$HOME/neovim/bin:$PATH"
+  export PATH="$HOME/.rover/bin:$PATH"
   export PATH="$HOME/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -154,7 +155,7 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
-alias python3='python'
+# alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
 # export EDITOR='~/neovim/bin/nvim'
