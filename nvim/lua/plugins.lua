@@ -169,14 +169,6 @@ packer.startup(function(use)
 		config = get_config("pomodoro"),
 	})
 	use({
-		"j-hui/fidget.nvim",
-		config = get_config("fidget"),
-	})
-	use({
-		"SmiteshP/nvim-gps",
-		config = get_config("nvim-gps"),
-	})
-	use({
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml" },
 		config = get_config("indent-line"),
