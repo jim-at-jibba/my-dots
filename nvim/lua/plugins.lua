@@ -167,6 +167,17 @@ packer.startup(function(use)
 	})
 	use("EdenEast/nightfox.nvim")
 	use("folke/tokyonight.nvim")
+	use({
+		"olivercederborg/poimandres.nvim",
+		config = function()
+			require("poimandres").setup({
+				disable_background = true,
+				-- leave this setup function empty for default config
+				-- or refer to the configuration section
+				-- for configuration options
+			})
+		end,
+	})
 
 	-- utils
 	use({
@@ -184,7 +195,7 @@ packer.startup(function(use)
 	})
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		ft = { "python", "yml" },
+		ft = { "python", "yml", "yaml" },
 		config = get_config("indent-line"),
 	})
 	use({
@@ -289,5 +300,17 @@ packer.startup(function(use)
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
+	})
+
+	-- Databases
+	use({
+		"tpope/vim-dadbod",
+		opt = true,
+		requires = {
+			"kristijanhusak/vim-dadbod-ui",
+			"kristijanhusak/vim-dadbod-completion",
+		},
+		config = get_config("dad-bod"),
+		cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
 	})
 end)

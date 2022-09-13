@@ -160,3 +160,8 @@ map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, norema
 
 -- Debugprint
 map("n", "<leader>pr", ":lua require('debugprint').debugprint({variable = true})<cr>", opts)
+
+-- Database
+map("n", "<leader>du", ":DBUIToggle<CR>", opts)
+map("n", "<leader>df", ":DBUIFindBuffer<CR>", opts)
+-- map("n", "<leader>d", ":DBUIFindBuffer<CR>", opts)

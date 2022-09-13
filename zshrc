@@ -114,7 +114,7 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gme='git config user.name "jim-at-jibba"'
 gitnm () { git branch --no-merge "$1"; }           # Lists branches not merged into branch passed as arg
-alias workname="git config user.name 'James Best' && git config user.email 'james.best@gravitywell.co.uk'"
+alias workname="git config user.name 'James Best' && git config user.email 'james.best@reedr.co'"
 alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
 alias lg="lazygit"
 alias epoc="date +%s | pbcopy"
@@ -145,7 +145,8 @@ alias server="python3 -m http.server"
 # alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
-# export EDITOR='~/neovim/bin/nvim'
+export EDITOR='~/neovim/bin/nvim'
+export sso='aws sso login --profile breedr_develop_data_analysis_user'
 
 # Docker
 alias ld="lazydocker"

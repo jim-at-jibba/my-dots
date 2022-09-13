@@ -39,6 +39,13 @@ case $color in
     dark-mode off
     configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
     ;;
+  poimandres)
+    configure_kitty
+    configure_tmux
+    # configure_vim 'vim.cmd("set background=dark")'
+    dark-mode on
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme poimandres")'
+    ;;
   catppuccinfrappe)
     configure_kitty
     configure_tmux
