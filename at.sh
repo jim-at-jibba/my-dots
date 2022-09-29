@@ -27,54 +27,54 @@ configure_vim() {
 case $color in
   rosepinemoon)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     # configure_vim 'vim.cmd("set background=dark")'
     dark-mode on
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
     ;;
   rosepinedawn)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     # configure_vim 'vim.cmd("set background=light")'
     dark-mode off
     configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
     ;;
   poimandres)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     # configure_vim 'vim.cmd("set background=dark")'
     dark-mode on
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme poimandres")'
     ;;
   catppuccinfrappe)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "frappe"\nvim.cmd("colorscheme catppuccin")'
     dark-mode on
     ;;
   catppuccinlatte)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     configure_vim 'vim.cmd("set background=light")\nvim.g.catppuccin_flavour = "latte"\nvim.cmd("colorscheme catppuccin")'
     dark-mode off
     ;;
   tokyolight)
     configure_alacritty
     configure_kitty
-    configure_tmux
+    # configure_tmux
     configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme tokyonight")'
     dark-mode off
     ;;
   tokyonight)
     configure_alacritty
     configure_kitty
-    configure_tmux
+    # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme tokyonight")'
     dark-mode on
     ;;
   nightfoxnord)
     configure_kitty
-    configure_tmux
+    # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme nordfox")'
     dark-mode on
     ;;
