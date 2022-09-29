@@ -2,6 +2,7 @@
 *.swp
 *.un~
 npm-debug.log
+node_modules
 morning-routine-cli/*
 tiny.env
 tags

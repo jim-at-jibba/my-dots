@@ -28,16 +28,16 @@ case $color in
   rosepinemoon)
     configure_kitty
     configure_tmux
-    configure_vim 'vim.cmd("set background=dark")'
+    # configure_vim 'vim.cmd("set background=dark")'
     dark-mode on
-    # configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
     ;;
   rosepinedawn)
     configure_kitty
     configure_tmux
-    configure_vim 'vim.cmd("set background=light")'
+    # configure_vim 'vim.cmd("set background=light")'
     dark-mode off
-    # configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
+    configure_vim 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
     ;;
   catppuccinfrappe)
     configure_kitty

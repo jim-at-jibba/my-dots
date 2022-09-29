@@ -157,3 +157,6 @@ map("n", "<leader>hw", ":HopWord<CR>", opts)
 
 -- Copilot
 map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
+
+-- Debugprint
+map("n", "<leader>pr", ":lua require('debugprint').debugprint({variable = true})<cr>", opts)

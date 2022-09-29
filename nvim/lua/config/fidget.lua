@@ -1,12 +1,17 @@
 local status_ok, fidget = pcall(require, "fidget")
 
 if not status_ok then
-    return
+	return
 end
 
 fidget.setup({
-    window = { blend = 0 },
-    text = {
-      spinner = 'arc',
-    },
-  })
+	window = { blend = 0 },
+	text = {
+		spinner = "arc",
+	},
+	sources = {
+		["null-ls"] = {
+			ignore = true,
+		},
+	},
+})

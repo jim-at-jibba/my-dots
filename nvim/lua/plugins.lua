@@ -71,6 +71,14 @@ packer.startup(function(use)
 	})
 	use({ "kdheepak/lazygit.nvim" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- File nav
 	use({
@@ -161,20 +169,18 @@ packer.startup(function(use)
 	use("folke/tokyonight.nvim")
 
 	-- utils
+	use({
+		"andrewferrier/debugprint.nvim",
+		config = function()
+			require("debugprint").setup()
+		end,
+	})
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
 		"wthollingsworth/pomodoro.nvim",
 		requires = "MunifTanjim/nui.nvim",
 		config = get_config("pomodoro"),
-	})
-	use({
-		"j-hui/fidget.nvim",
-		config = get_config("fidget"),
-	})
-	use({
-		"SmiteshP/nvim-gps",
-		config = get_config("nvim-gps"),
 	})
 	use({
 		"lukas-reineke/indent-blankline.nvim",

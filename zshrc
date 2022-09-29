@@ -1,16 +1,3 @@
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the start of this file.
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-#### END FIG ENV VARIABLES ####
-
-if [ -f ~/dotfiles/zsh/priv-env ]; then
-    source ~/dotfiles/zsh/priv-env
-else
-    print "404: ~/dotfiles/zsh/priv-env not found."
-fi
-
-
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -18,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded. pygmalion
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 
 SPACESHIP_CHAR_SYMBOL='🦄 🐙 '
 SPACESHIP_BATTERY_SHOW='false'
@@ -59,7 +46,10 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="$HOME/.fastlane/bin:$PATH"
   export PATH=$PATH:/opt/apache-maven/bin
   export PATH="/usr/local/opt/helm@2/bin:$PATH"
+  export PATH=/opt/homebrew/bin:$PATH
+  export PATH=/opt/homebrew/sbin:$PATH
   export PATH="$HOME/neovim/bin:$PATH"
+  export PATH="$HOME/.rover/bin:$PATH"
   export PATH="$HOME/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -92,9 +82,9 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
 # }}}
 
 # Auto Jump initialisation
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-# intergrates autojump with fzf
+# # intergrates autojump with fzf
 j() {
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
@@ -152,10 +142,10 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
-alias python3='python'
+# alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
-export EDITOR='~/neovim/bin/nvim'
+# export EDITOR='~/neovim/bin/nvim'
 
 # Docker
 alias ld="lazydocker"
@@ -280,5 +270,26 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+### Add these next lines to protect your system python from
+### pollution from 3rd-party packages
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+# commands to override pip restriction above.
+# use `gpip` or `gpip3` to force installation of
+# a package in the global python environment
+# Never do this! It is just an escape hatch.
+gpip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+gpip3(){
+   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+}
+
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/jamesbest/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
