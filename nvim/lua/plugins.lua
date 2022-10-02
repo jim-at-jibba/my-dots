@@ -142,6 +142,7 @@ packer.startup(function(use)
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
 	})
+	use("B4mbus/oxocarbon-lua.nvim")
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",

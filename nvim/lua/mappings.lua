@@ -43,7 +43,7 @@ map("n", "<leader><leader>", "<c-^>", opts)
 
 map("n", "<leader>.", ":TSLspImportAll<CR>", opts)
 
-map("n", "<leader>cs", ":CheatSH<CR>", opts)
+map("n", "<leader>?", ":CheatSH<CR>", opts)
 
 --Telescope
 map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
@@ -140,24 +140,5 @@ map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
 -- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 -- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 
--- HOP
-map("n", "<leader>hl", ":HopLine<CR>", opts)
-map("n", "<leader>hh", ":HopChar2<CR>", opts)
-map(
-	"n",
-	"f",
-	":lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
-	opts
-)
-map("n", "<leader>hw", ":HopWord<CR>", opts)
-
 -- Copilot
 map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
-
--- Debugprint
-map("n", "<leader>pr", ":lua require('debugprint').debugprint({variable = true})<cr>", opts)
-
--- Database
-map("n", "<leader>du", ":DBUIToggle<CR>", opts)
-map("n", "<leader>df", ":DBUIFindBuffer<CR>", opts)
--- map("n", "<leader>d", ":DBUIFindBuffer<CR>", opts)
