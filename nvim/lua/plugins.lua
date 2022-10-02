@@ -78,7 +78,6 @@ packer.startup(function(use)
 			require("git-conflict").setup()
 		end,
 	})
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- File nav
 	use({
@@ -300,17 +299,5 @@ packer.startup(function(use)
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
-	})
-
-	-- Databases
-	use({
-		"tpope/vim-dadbod",
-		opt = true,
-		requires = {
-			"kristijanhusak/vim-dadbod-ui",
-			"kristijanhusak/vim-dadbod-completion",
-		},
-		config = get_config("dad-bod"),
-		cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
 	})
 end)
