@@ -37,7 +37,8 @@ local servers = {
 	"yamlls",
 	"jsonls",
 	"marksman",
-	-- "tailwindcss",
+	"sqlls",
+	"tailwindcss",
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers
@@ -69,20 +70,21 @@ for _, lsp in ipairs(servers) do
 			map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 
 			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
-			vim.api.nvim_create_autocmd("CursorHold", {
-				buffer = bufnr,
-				callback = function()
-					local opts = {
-						focusable = false,
-						close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-						border = "rounded",
-						source = "always",
-						prefix = " ",
-						scope = "cursor",
-					}
-					vim.diagnostic.open_float(nil, opts)
-				end,
-			})
+			-- diagnotics on hover - disabled in favor of lspsaga
+			-- vim.api.nvim_create_autocmd("CursorHold", {
+			-- 	buffer = bufnr,
+			-- 	callback = function()
+			-- 		local opts = {
+			-- 			focusable = false,
+			-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			-- 			border = "rounded",
+			-- 			source = "always",
+			-- 			prefix = " ",
+			-- 			scope = "cursor",
+			-- 		}
+			-- 		vim.diagnostic.open_float(nil, opts)
+			-- 	end,
+			-- })
 		end,
 		before_init = function(_, config)
 			if lsp == "pyright" then

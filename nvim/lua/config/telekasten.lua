@@ -1,6 +1,6 @@
 local status_ok, telekasten = pcall(require, "telekasten")
 -- local home = vim.fn.expand("~/code/other/zettelkasten")
-local home = vim.fn.expand("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten")
+local home = vim.fn.expand("~/My Drive/second_brain/zettelkasten")
 
 if not status_ok then
 	return

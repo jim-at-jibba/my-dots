@@ -85,8 +85,8 @@ map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
 map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
 map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
 -- map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
-map("n", "<leader>dn", "lua require('trouble').next({skip_groups = true, jump = true})<CR>", opts)
-map("n", "<leader>dp", "lua require('trouble').previous({skip_groups = true, jump = true})<CR>", opts)
+map("n", "<leader>dn", ":lua require('trouble').next({skip_groups = true, jump = true})<CR>", opts)
+map("n", "<leader>dp", ":lua require('trouble').previous({skip_groups = true, jump = true})<CR>", opts)
 
 --spectre
 map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)
@@ -141,8 +141,8 @@ map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 -- map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
 -- map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
 map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+-- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+-- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 
 -- HOP
 map("n", "<leader>hl", ":HopLine<CR>", opts)
