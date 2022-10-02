@@ -34,9 +34,9 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 
 map("v", "<leader>p", '"_dP', opts)
 
--- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
--- map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
--- map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
+map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
@@ -98,10 +98,6 @@ map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)
 
 map("n", "<leader>m", ":MaximizerToggle!<cr>", opts)
 
---rest
-map("n", "<leader>rr", ":lua require('rest-nvim').run()<CR>")
-map("n", "<leader>rp", ":lua require('rest-nvim').run(true)<CR>")
-
 -- dap
 map("n", "<leader>dc", ":lua require('dap').continue()<CR>")
 map("n", "<leader>dv", ":lua require('dap').step_over()<CR>")
@@ -134,13 +130,13 @@ map("n", "<leader>zg", ":lua require('telekasten').search_notes()<CR>")
 map("n", "<leader>zz", ":lua require('telekasten').follow_link()<CR>")
 map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
 
-map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
-map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
-map("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
-map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+-- map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+-- map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
+-- map("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
+-- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
 -- map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
 -- map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
-map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+-- map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
 -- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
 -- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 

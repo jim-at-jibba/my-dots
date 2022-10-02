@@ -49,6 +49,7 @@ packer.startup(function(use)
 		config = get_config("telescope"),
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
 
 	-- Treesitter
 	use({
@@ -62,7 +63,6 @@ packer.startup(function(use)
 			require("treesitter-context").setup()
 		end,
 	})
-	use({ "nvim-telescope/telescope-ui-select.nvim" })
 
 	-- Git
 	use({
@@ -87,23 +87,6 @@ packer.startup(function(use)
 	use({
 		"kyazdani42/nvim-tree.lua",
 		config = get_config("nvim-tree"),
-	})
-
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		},
-		config = get_config("neo-tree"),
-	})
-
-	use({
-		"mrbjarksen/neo-tree-diagnostics.nvim",
-		requires = "nvim-neo-tree/neo-tree.nvim",
-		module = "neo-tree.sources.diagnostics", -- if wanting to lazyload
 	})
 
 	-- test
@@ -179,12 +162,6 @@ packer.startup(function(use)
 	})
 
 	-- utils
-	use({
-		"andrewferrier/debugprint.nvim",
-		config = function()
-			require("debugprint").setup()
-		end,
-	})
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
@@ -199,14 +176,6 @@ packer.startup(function(use)
 	})
 	use({
 		"Djancyp/cheat-sheet",
-	})
-	use({
-		"phaazon/hop.nvim",
-		branch = "v1", -- optional but strongly recommended
-		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-		end,
 	})
 	use({
 		"folke/trouble.nvim",
@@ -251,17 +220,6 @@ packer.startup(function(use)
 		"ray-x/lsp_signature.nvim",
 		require = { "neovim/nvim-lspconfig" },
 		config = get_config("lsp-signature"),
-	})
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		config = function()
-			local saga = require("lspsaga")
-
-			saga.init_lsp_saga({
-				border_style = "rounded",
-			})
-		end,
 	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
