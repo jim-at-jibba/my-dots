@@ -248,10 +248,6 @@ packer.startup(function(use)
 
 	-- Notes
 	use({
-		"renerocksai/telekasten.nvim",
-		config = get_config("telekasten"),
-	})
-	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && npm install",
 		setup = function()

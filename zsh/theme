@@ -7,11 +7,11 @@ rosepinedawn [Rose Pine Dawn]
 poimandres [Poimandres]
 catppuccinfrappe [Catppuccin Frappe]
 catppuccinlatte [Catppuccin Latte]
+catppuccinmocha [Catppuccin Mocha]
 tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
 nightfoxnord [Nightfox Nord]
-nightfoxday [Nightfox Day]
-nightfoxdawn [Nightfox Dawn]
+oxocarbon [OxoCarbon]
 "
 
 local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

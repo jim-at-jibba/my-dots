@@ -1,2 +1,3 @@
 vim.cmd("set background=dark")
-vim.cmd("colorscheme tokyonight")
+vim.g.catppuccin_flavour = "mocha"
+vim.cmd.colorscheme "catppuccin"

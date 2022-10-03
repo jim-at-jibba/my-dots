@@ -85,7 +85,7 @@ case $color in
     dark-mode on
     ;;
   oxocarbon)
-    # configure_kitty
+    configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "oxocarbon-lua"'
     dark-mode on
