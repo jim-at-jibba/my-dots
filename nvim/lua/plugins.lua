@@ -150,17 +150,6 @@ packer.startup(function(use)
 	})
 	use("EdenEast/nightfox.nvim")
 	use("folke/tokyonight.nvim")
-	use({
-		"olivercederborg/poimandres.nvim",
-		config = function()
-			require("poimandres").setup({
-				disable_background = true,
-				-- leave this setup function empty for default config
-				-- or refer to the configuration section
-				-- for configuration options
-			})
-		end,
-	})
 
 	-- utils
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
