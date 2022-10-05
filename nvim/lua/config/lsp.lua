@@ -46,8 +46,8 @@ for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		on_attach = function(client)
 			-- disable formatting for LSP clients as this is handled by null-ls
-			client.server_capabilities.document_formatting = false
-			client.server_capabilities.document_range_formatting = false
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
 			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
@@ -55,7 +55,7 @@ for _, lsp in ipairs(servers) do
 			end
 			vim.diagnostic.config({ virtual_text = false })
 
-			if client.server_capabilities.document_formatting then
+			if client.server_capabilities.documentFormattingProvider then
 				vim.cmd([[augroup Format]])
 				vim.cmd([[autocmd! * <buffer>]])
 				vim.cmd([[autocmd BufWritePost <buffer> lua require'lsp.formatting'.format()]])
