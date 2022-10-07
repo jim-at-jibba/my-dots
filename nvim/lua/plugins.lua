@@ -152,13 +152,16 @@ packer.startup(function(use)
 	use("folke/tokyonight.nvim")
 
 	-- utils
-	use({ "rcarriga/nvim-notify", config = get_config("notify") })
-	use({ "folke/which-key.nvim", config = get_config("which") })
+	-- use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use({
-		"wthollingsworth/pomodoro.nvim",
-		requires = "MunifTanjim/nui.nvim",
-		config = get_config("pomodoro"),
+		"vigoux/notifier.nvim",
+		config = function()
+			require("notifier").setup({
+				-- You configuration here
+			})
+		end,
 	})
+	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml", "yaml" },
@@ -201,7 +204,7 @@ packer.startup(function(use)
 		event = "VimEnter",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use({ "github/copilot.vim", config = get_config("copilot") })
+	-- use({ "github/copilot.vim", config = get_config("copilot") })
 
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
