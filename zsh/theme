@@ -13,7 +13,8 @@ nightfoxnord [Nightfox Nord]
 oxocarbon [OxoCarbon]
 "
 
-local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
+# local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
+local cmd=$(echo $themes | eval "gum filter --placeholder 'Pick a theme'" | awk '{print $1}')
 
 if [[ -n $cmd ]]; then
  ~/dotfiles/at.sh ${cmd}

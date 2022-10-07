@@ -2,10 +2,11 @@
 # update multiple packages at once
 # mnemonic [B]rew [I]nstall [P]lugin
 
-local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
+# local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
+local inst=$(brew search | eval "gum filter 'Search for a brew package'")
 
 if [[ $inst ]]; then
   for prog in $(echo $inst)
-  do brew install $prog
+    do brew install $prog
   done
 fi
