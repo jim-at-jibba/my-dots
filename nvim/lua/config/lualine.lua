@@ -12,7 +12,7 @@ end
 
 local config = {
 	options = {
-		theme = "poimandres", -- tokyonight nightfox rose-pine
+		theme = "tokyonight", -- tokyonight nightfox rose-pine
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 		icons_enabled = true,
@@ -25,7 +25,7 @@ local config = {
 			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 			{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 		},
-		lualine_x = { my_favs, require("pomodoro").statusline },
+		-- lualine_x = { my_favs, require("pomodoro").statusline },
 		lualine_y = { "location" },
 		lualine_z = { clock },
 	},

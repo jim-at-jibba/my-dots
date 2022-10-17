@@ -141,4 +141,4 @@ map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
 -- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 
 -- Copilot
-map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
+-- map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })

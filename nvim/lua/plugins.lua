@@ -204,7 +204,30 @@ packer.startup(function(use)
 		event = "VimEnter",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	-- use({ "github/copilot.vim", config = get_config("copilot") })
+	use({
+		"zbirenbaum/copilot.lua",
+		after = "lualine.nvim", -- whichever statusline plugin you use here
+		config = function()
+			vim.defer_fn(function()
+				require("copilot").setup({
+					suggestion = {
+						enabled = true,
+						auto_trigger = true,
+						debounce = 75,
+						keymap = {
+							accept = "<C-e>",
+							next = "<M-]>",
+							prev = "<M-[>",
+							dismiss = "<C-]>",
+						},
+					},
+					filetypes = {
+						golang = false,
+					},
+				})
+			end, 100)
+		end,
+	})
 
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
