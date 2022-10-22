@@ -222,7 +222,7 @@ packer.startup(function(use)
 						},
 					},
 					filetypes = {
-						golang = false,
+						go = false,
 					},
 				})
 			end, 100)
