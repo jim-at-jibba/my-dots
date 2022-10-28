@@ -163,7 +163,15 @@ packer.startup(function(use)
 		end,
 	})
 	use({ "folke/which-key.nvim", config = get_config("which") })
-	use({ "mbbill/undotree", config = get_config("which") })
+	use({
+		"folke/noice.nvim",
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+		},
+		config = get_config("noice"),
+	})
+	use({ "mbbill/undotree" })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml", "yaml" },
