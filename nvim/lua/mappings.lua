@@ -110,7 +110,6 @@ map("n", "<leader>de", ":lua require('dap').close()<CR>")
 -- tests
 map("n", "<leader>tf", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>")
 map("n", "<leader>tt", ":lua require('neotest').run.run()<CR>")
-map("n", "<leader>tt", ":lua require('neotest').run.run()<CR>")
 map("n", "<leader>ts", ":lua require('neotest').summary.toggle()<CR>")
 map("n", "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>")
 -- nnoremap <silent><leader>nr <cmd>lua require("neotest").run(vim.fn.expand("%"))<CR>
