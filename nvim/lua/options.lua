@@ -31,6 +31,7 @@ local options = {
 	swapfile = false,
 	termguicolors = true,
 	cursorline = false,
+	undodir = "/Users/jamesbest/.cache/nvim/undodir",
 	-- laststatus = 0,
 }
 

@@ -163,6 +163,7 @@ packer.startup(function(use)
 		end,
 	})
 	use({ "folke/which-key.nvim", config = get_config("which") })
+	use({ "mbbill/undotree", config = get_config("which") })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml", "yaml" },

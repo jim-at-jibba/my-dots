@@ -120,6 +120,7 @@ map("n", "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>"
 -- nnoremap <silent><leader>no <cmd>lua require("neotest").output.open({ enter = true })<CR>
 -- nnoremap <silent><leader>nO <cmd>lua require("neotest").output.open({enter = true, short = true})<CR>
 -- nnoremap <silent><leader>np <cmd>lua require("neotest").summary.toggle()<CR>
+map("n", "<leader>u", ":UndotreeToggle<CR>")
 
 -- telekasten
 map("n", "<leader>zp", ":lua require('telekasten').panel()<CR>")
