@@ -9,7 +9,6 @@ cmp.setup({
 			mode = "symbol",
 			menu = {
 				buffer = "[BUF]",
-				cmp_tabnine = "[TN]",
 				nvim_lsp = "[LSP]",
 				path = "[PATH]",
 				luasnip = "[SNIP]",
@@ -53,6 +52,6 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "emoji" },
 		{ name = "path" },
-		{ name = "cmp_tabnine" },
+		{ name = "cmdline" },
 	},
 })
