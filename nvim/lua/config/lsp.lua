@@ -26,6 +26,47 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+-- local python_root_files = {
+-- 	"WORKSPACE", -- added for Bazel; items below are from default config
+-- 	"pyproject.toml",
+-- 	"setup.py",
+-- 	"setup.cfg",
+-- 	"requirements.txt",
+-- 	"Pipfile",
+-- 	"pyrightconfig.json",
+-- }
+--
+-- nvim_lsp.pyright.setup({
+-- 	root_dir = nvim_lsp.util.root_pattern(unpack(python_root_files)),
+-- 	on_attach = function(client)
+-- 		-- disable formatting for LSP clients as this is handled by null-ls
+-- 		client.server_capabilities.documentFormattingProvider = false
+-- 		client.server_capabilities.documentRangeFormattingProvider = false
+-- 		local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+-- 		for type, icon in pairs(signs) do
+-- 			local hl = "DiagnosticSign" .. type
+-- 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- 		end
+-- 		vim.diagnostic.config({ virtual_text = false })
+--
+-- 		if client.server_capabilities.documentFormattingProvider then
+-- 			vim.cmd([[augroup Format]])
+-- 			vim.cmd([[autocmd! * <buffer>]])
+-- 			vim.cmd([[autocmd BufWritePost <buffer> lua require'lsp.formatting'.format()]])
+-- 			vim.cmd([[augroup END]])
+-- 		end
+--
+-- 		map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+-- 		map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+--
+-- 		vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
+-- 	end,
+-- 	flags = {
+-- 		debounce_text_changes = 200,
+-- 	},
+-- 	capabilities = capabilities,
+-- })
+
 local servers = {
 	"gopls",
 	"pyright",
@@ -39,6 +80,7 @@ local servers = {
 	"marksman",
 	"sqlls",
 	"tailwindcss",
+	-- "pylsp",
 }
 
 -- Use a loop to conveniently call 'setup' on multiple servers
