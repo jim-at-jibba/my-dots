@@ -103,6 +103,7 @@ packer.startup(function(use)
 			"rcarriga/neotest-vim-test",
 			"nvim-neotest/neotest-python",
 			"haydenmeade/neotest-jest",
+			"nvim-neotest/neotest-go",
 		},
 		config = get_config("neotest"),
 	})
@@ -180,7 +181,6 @@ packer.startup(function(use)
 	use({ "szw/vim-maximizer" })
 	use({
 		"windwp/nvim-ts-autotag",
-		config = get_config("vim-test"),
 	})
 	use({
 		"folke/todo-comments.nvim",
