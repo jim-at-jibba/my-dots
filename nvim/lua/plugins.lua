@@ -154,21 +154,22 @@ packer.startup(function(use)
 	use("folke/tokyonight.nvim")
 
 	-- utils
-	-- use({ "rcarriga/nvim-notify", config = get_config("notify") })
-	use({
-		"vigoux/notifier.nvim",
-		config = function()
-			require("notifier").setup({
-				-- You configuration here
-			})
-		end,
-	})
+	use({ "rcarriga/nvim-notify", config = get_config("notify") })
+	-- use({
+	-- 	"vigoux/notifier.nvim",
+	-- 	config = function()
+	-- 		require("notifier").setup({
+	-- 			-- You configuration here
+	-- 		})
+	-- 	end,
+	-- })
 	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
 		"folke/noice.nvim",
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 		config = get_config("noice"),
 	})
@@ -242,11 +243,11 @@ packer.startup(function(use)
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
-	use({
-		"ray-x/lsp_signature.nvim",
-		require = { "neovim/nvim-lspconfig" },
-		config = get_config("lsp-signature"),
-	})
+	-- use({
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	require = { "neovim/nvim-lspconfig" },
+	-- 	config = get_config("lsp-signature"),
+	-- })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),

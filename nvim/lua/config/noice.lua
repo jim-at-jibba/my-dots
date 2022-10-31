@@ -79,6 +79,11 @@ noice.setup({
 		view = "notify",
 	},
 	lsp = {
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true,
+		},
 		progress = {
 			enabled = true,
 			-- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
@@ -91,13 +96,13 @@ noice.setup({
 			view = "mini",
 		},
 		hover = {
-			enabled = false,
+			enabled = true,
 			view = nil, -- when nil, use defaults from documentation
 			---@type NoiceViewOptions
 			opts = {}, -- merged with defaults from documentation
 		},
 		signature = {
-			enabled = false,
+			enabled = true,
 			auto_open = true, -- Automatically show signature help when typing a trigger character from the LSP
 			view = nil, -- when nil, use defaults from documentation
 			---@type NoiceViewOptions

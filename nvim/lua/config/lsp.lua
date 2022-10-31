@@ -234,7 +234,7 @@ for _, lsp in ipairs(servers) do
 				format = { enabled = false },
 				validate = false, -- TODO: conflicts between Kubernetes resources and kustomization.yaml
 				completion = true,
-				hover = true,
+				hover = false,
 			},
 		},
 		flags = { debounce_text_changes = 150 },
