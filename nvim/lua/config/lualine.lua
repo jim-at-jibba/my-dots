@@ -25,7 +25,12 @@ local config = {
 			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 			{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 		},
-		-- lualine_x = { my_favs, require("pomodoro").statusline },
+		lualine_x = {
+			{
+				require("noice").api.status.message.get_hl,
+				cond = require("noice").api.status.message.has,
+			},
+		},
 		lualine_y = { "location" },
 		lualine_z = { clock },
 	},
