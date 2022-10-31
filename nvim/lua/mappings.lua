@@ -10,6 +10,7 @@ map("i", "jj", "<Esc>", opts)
 map("n", "H", "^", opts)
 map("n", "L", "g_", opts)
 map("n", "q", "<Nop>", opts)
+map("n", "<Space>/", ":noh<cr>", opts)
 
 map("n", "<Up>", "<Nop>", opts)
 map("n", "<Down>", "<Nop>", opts)
@@ -124,25 +125,5 @@ map("n", "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>"
 -- nnoremap <silent><leader>np <cmd>lua require("neotest").summary.toggle()<CR>
 map("n", "<leader>u", ":UndotreeToggle<CR>")
 
--- telekasten
-map("n", "<leader>zp", ":lua require('telekasten').panel()<CR>")
-map("n", "<leader>zf", ":lua require('telekasten').find_notes()<CR>")
-map("n", "<leader>zd", ":lua require('telekasten').find_daily_notes()<CR>")
-map("n", "<leader>zg", ":lua require('telekasten').search_notes()<CR>")
-map("n", "<leader>zz", ":lua require('telekasten').follow_link()<CR>")
-map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
-
--- map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
--- map("n", "<leader>gh", "<cmd>Lspsaga hover_doc<cr>", opts)
--- map("n", "<leader>gd", "<cmd>Lspsaga preview_definition<cr>", opts)
--- map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
--- map("n", "<C-f>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opts)
--- map("n", "<C-b>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<cr>', opts)
--- map("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
--- map("n", "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
--- map("n", "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-
--- Copilot
--- map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
 -- zippy
 map("n", "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>")
