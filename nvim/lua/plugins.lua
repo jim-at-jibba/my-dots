@@ -154,6 +154,7 @@ packer.startup(function(use)
 
 	-- utils
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
+	use("PatschD/zippy.nvim")
 	-- use({
 	-- 	"vigoux/notifier.nvim",
 	-- 	config = function()
