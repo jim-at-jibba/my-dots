@@ -144,3 +144,5 @@ map("n", "<leader>zi", ":lua require('telekasten').insert_link()<CR>")
 
 -- Copilot
 -- map("i", "<C-e>", "copilot#Accept('<CR>')", { expr = true, silent = true, noremap = true })
+-- zippy
+map("n", "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>")

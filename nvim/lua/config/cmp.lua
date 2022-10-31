@@ -52,6 +52,5 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "emoji" },
 		{ name = "path" },
-		{ name = "cmdline" },
 	},
 })
