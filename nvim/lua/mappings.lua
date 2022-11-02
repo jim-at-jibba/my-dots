@@ -66,7 +66,7 @@ map("n", "<leader><leader>2", ":Neotree diagnostics reveal bottom<CR>", opts)
 -- Diagnostics Show
 map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
 
-map("n", "<leader>gs", ":Magit<CR>", opts)
+map("n", "<leader>gs", ":Lazygit<CR>", opts)
 
 --BarBar
 map("n", "<leader>1", ":BufferGoto 1<CR>", opts)

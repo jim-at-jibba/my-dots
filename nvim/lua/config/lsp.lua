@@ -79,7 +79,7 @@ local servers = {
 	"jsonls",
 	"marksman",
 	"sqlls",
-	"tailwindcss",
+	-- "tailwindcss",
 	-- "pylsp",
 }
 
