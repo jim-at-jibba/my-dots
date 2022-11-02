@@ -69,7 +69,8 @@ packer.startup(function(use)
 		"lewis6991/gitsigns.nvim",
 		config = get_config("gitsigns"),
 	})
-	use({ "kdheepak/lazygit.nvim" })
+	-- use({ "kdheepak/lazygit.nvim" })
+	use({ "jreybert/vimagit" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({
 		"akinsho/git-conflict.nvim",
