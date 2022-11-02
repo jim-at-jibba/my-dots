@@ -155,24 +155,24 @@ packer.startup(function(use)
 	-- utils
 	use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use("PatschD/zippy.nvim")
-	-- use({
-	-- 	"vigoux/notifier.nvim",
-	-- 	config = function()
-	-- 		require("notifier").setup({
-	-- 			-- You configuration here
-	-- 		})
-	-- 	end,
-	-- })
-	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
-		"folke/noice.nvim",
-		requires = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-		config = get_config("noice"),
+		"vigoux/notifier.nvim",
+		config = function()
+			require("notifier").setup({
+				-- You configuration here
+			})
+		end,
 	})
+	use({ "folke/which-key.nvim", config = get_config("which") })
+	-- use({
+	-- 	"folke/noice.nvim",
+	-- 	requires = {
+	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"rcarriga/nvim-notify",
+	-- 	},
+	-- 	config = get_config("noice"),
+	-- })
 	use({ "mbbill/undotree" })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
@@ -239,11 +239,11 @@ packer.startup(function(use)
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
-	-- use({
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	require = { "neovim/nvim-lspconfig" },
-	-- 	config = get_config("lsp-signature"),
-	-- })
+	use({
+		"ray-x/lsp_signature.nvim",
+		require = { "neovim/nvim-lspconfig" },
+		config = get_config("lsp-signature"),
+	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),
