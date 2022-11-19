@@ -79,6 +79,7 @@ local servers = {
 	"jsonls",
 	"marksman",
 	"sqlls",
+	"emmet_ls",
 	-- "tailwindcss",
 	-- "pylsp",
 }
@@ -135,6 +136,23 @@ for _, lsp in ipairs(servers) do
 		end,
 		capabilities = capabilities,
 		settings = {
+			html = {
+				filetypes = {
+					"html",
+					"tmpl",
+				},
+			},
+			emmet_ls = {
+				filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+				init_options = {
+					html = {
+						options = {
+							-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+							["bem.enabled"] = true,
+						},
+					},
+				},
+			},
 			gopls = { analyses = { unusedparams = true }, staticcheck = true },
 			json = {
 				format = { enabled = false },

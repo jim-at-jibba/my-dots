@@ -84,6 +84,12 @@ case $color in
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
     dark-mode on
     ;;
+  tundra)
+    configure_kitty
+    # configure_tmux
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tundra"'
+    dark-mode on
+    ;;
   oxocarbon)
     configure_kitty
     # configure_tmux

@@ -60,6 +60,8 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH=$PATH:$ANDROID_HOME/build-tools/29.0.2
   export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
   export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+  export PATH="$HOME/.rbenv/shims:$PATH"
+  export PATH="$HOME/.rbenv/bin:$PATH"
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
   source $ZSH/oh-my-zsh.sh
 
@@ -292,6 +294,7 @@ gpip3(){
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/jamesbest/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
+# source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

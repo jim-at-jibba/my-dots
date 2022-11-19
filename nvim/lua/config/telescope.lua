@@ -13,9 +13,6 @@ end
 
 telescope.setup({
 	defaults = {
-		-- TEMP FIX: https://github.com/nvim-telescope/telescope.nvim/issues/484
-		set_env = { ["COLORTERM"] = "truecolor" },
-		file_sorter = require("telescope.sorters").get_fzy_sorter,
 		prompt_prefix = "🦄 ",
 		color_devicons = true,
 		selection_caret = " ",
@@ -25,14 +22,20 @@ telescope.setup({
 		sorting_strategy = "descending",
 		layout_strategy = "horizontal",
 		layout_config = {
-			width = 0.75,
-			prompt_position = "bottom",
-			preview_cutoff = 120,
-			horizontal = { mirror = false },
+			horizontal = {
+				prompt_position = "bottom",
+				preview_width = 0.55,
+				results_width = 0.8,
+			},
 			vertical = { mirror = false },
+			width = 0.87,
+			height = 0.80,
+			preview_cutoff = 120,
 		},
 		winblend = 0,
 		border = {},
+		set_env = { ["COLORTERM"] = "truecolor" },
+		file_sorter = require("telescope.sorters").get_fzy_sorter,
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
@@ -59,4 +62,4 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
--- telescope.load_extension("noice")
+telescope.load_extension("noice")

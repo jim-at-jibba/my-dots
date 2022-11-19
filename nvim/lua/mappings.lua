@@ -8,6 +8,8 @@ vim.g.mapleader = " "
 --General
 map("i", "jj", "<Esc>", opts)
 map("n", "H", "^", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "L", "g_", opts)
 map("n", "q", "<Nop>", opts)
 map("n", "<Space>/", ":noh<cr>", opts)

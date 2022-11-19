@@ -1,4 +1,5 @@
 local status_ok, noice = pcall(require, "noice")
+local status_ok_not, notify = pcall(require, "notify")
 
 if not status_ok then
 	return
@@ -162,4 +163,9 @@ noice.setup({
 	status = {}, --- @see section on statusline components
 	---@type NoiceFormatOptions
 	format = {}, --- @see section on formatting
+})
+
+notify.setup({
+	background_colour = "#1a1b26",
+	timeout = 1000,
 })

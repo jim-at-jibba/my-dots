@@ -103,7 +103,7 @@ packer.startup(function(use)
 			"antoinemadec/FixCursorHold.nvim",
 			"rcarriga/neotest-vim-test",
 			"nvim-neotest/neotest-python",
-			"haydenmeade/neotest-jest",
+			-- "haydenmeade/neotest-jest",
 			"nvim-neotest/neotest-go",
 		},
 		config = get_config("neotest"),
@@ -141,6 +141,10 @@ packer.startup(function(use)
 
 	-- themes
 	use({
+		"sam4llis/nvim-tundra",
+		config = get_config("tundra"),
+	})
+	use({
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
 	})
@@ -153,8 +157,18 @@ packer.startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use("folke/tokyonight.nvim")
 
+	-- language specific
+	use({
+		"crispgm/nvim-go",
+		config = function()
+			require("go").setup({
+				notify = true,
+				lint_prompt_style = "vt",
+			})
+		end,
+	})
 	-- utils
-	use({ "rcarriga/nvim-notify", config = get_config("notify") })
+	-- use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use("PatschD/zippy.nvim")
 	use({
 		"vigoux/notifier.nvim",
@@ -165,15 +179,15 @@ packer.startup(function(use)
 		end,
 	})
 	use({ "folke/which-key.nvim", config = get_config("which") })
-	-- use({
-	-- 	"folke/noice.nvim",
-	-- 	requires = {
-	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"rcarriga/nvim-notify",
-	-- 	},
-	-- 	config = get_config("noice"),
-	-- })
+	use({
+		"folke/noice.nvim",
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+		config = get_config("noice"),
+	})
 	use({ "mbbill/undotree" })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
@@ -240,11 +254,11 @@ packer.startup(function(use)
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
-	use({
-		"ray-x/lsp_signature.nvim",
-		require = { "neovim/nvim-lspconfig" },
-		config = get_config("lsp-signature"),
-	})
+	-- use({
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	require = { "neovim/nvim-lspconfig" },
+	-- 	config = get_config("lsp-signature"),
+	-- })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),
