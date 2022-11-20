@@ -10,6 +10,7 @@ nls.setup({
 		nls.builtins.formatting.gofmt,
 		nls.builtins.formatting.prettier.with({
 			extra_args = { "--single-quote", "false" },
+			extra_filetypes = { "astro" },
 		}),
 		nls.builtins.formatting.autopep8,
 		nls.builtins.formatting.isort,

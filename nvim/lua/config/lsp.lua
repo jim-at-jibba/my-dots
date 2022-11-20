@@ -80,7 +80,8 @@ local servers = {
 	"marksman",
 	"sqlls",
 	"emmet_ls",
-	-- "tailwindcss",
+	"astro",
+	"tailwindcss",
 	-- "pylsp",
 }
 
