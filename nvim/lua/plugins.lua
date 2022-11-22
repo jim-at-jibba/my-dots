@@ -82,8 +82,9 @@ packer.startup(function(use)
 
 	-- File nav
 	use({
-		"romgrk/barbar.nvim",
-		config = get_config("barbar"),
+		"noib3/nvim-cokeline",
+		requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
+		config = get_config("cokeline"),
 	})
 	use({
 		"kyazdani42/nvim-tree.lua",
