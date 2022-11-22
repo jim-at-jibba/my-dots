@@ -39,6 +39,8 @@ map("v", "<leader>p", '"_dP', opts)
 
 map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
+map("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+map("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 
@@ -70,26 +72,14 @@ map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
 
 map("n", "<leader>gs", ":LazyGit<CR>", opts)
 
---BarBar
--- map("n", "<leader>1", ":BufferGoto 1<CR>", opts)
--- map("n", "<leader>2", ":BufferGoto 2<CR>", opts)
--- map("n", "<leader>3", ":BufferGoto 3<CR>", opts)
--- map("n", "<leader>4", ":BufferGoto 4<CR>", opts)
--- map("n", "<leader>5", ":BufferGoto 5<CR>", opts)
--- map("n", "<leader>6", ":BufferGoto 6<CR>", opts)
--- map("n", "<leader>7", ":BufferGoto 7<CR>", opts)
--- map("n", "<leader>8", ":BufferGoto 8<CR>", opts)
--- map("n", "<leader>9", ":BufferGoto 9<CR>", opts)
--- map("n", "<leader>0", ":BufferLast<CR>", opts)
+-- Cokeline
 for i = 1, 9 do
 	map("n", ("<Leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), opts)
 	map("n", ("<F%s"):format(i), ("<Plug>(cokeline-switch-%s)"):format(i), opts)
 end
 
--- Cokelline
-
 -- Close buffer
-map("n", "<leader>q", ":BufferClose<CR>", opts)
+map("n", "<leader>q", ":b#|bd#<CR>", opts)
 
 --Trouble
 map("n", "<leader>xx", ":TroubleToggle<CR>", opts)
@@ -97,8 +87,6 @@ map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
 map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
 map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
 -- map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
-map("n", "<leader>dn", ":lua require('trouble').next({skip_groups = true, jump = true})<CR>", opts)
-map("n", "<leader>dp", ":lua require('trouble').previous({skip_groups = true, jump = true})<CR>", opts)
 
 --spectre
 map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)
