@@ -170,6 +170,7 @@ packer.startup(function(use)
 	})
 	-- utils
 	-- use({ "rcarriga/nvim-notify", config = get_config("notify") })
+	use({ "akinsho/toggleterm.nvim", config = get_config("toggleterm") })
 	use("PatschD/zippy.nvim")
 	use({
 		"vigoux/notifier.nvim",
