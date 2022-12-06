@@ -90,10 +90,10 @@ case $color in
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tundra"'
     dark-mode on
     ;;
-  oxocarbon)
+  nord)
     configure_kitty
     # configure_tmux
-    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "oxocarbon-lua"'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nord"'
     dark-mode on
     ;;
   *)

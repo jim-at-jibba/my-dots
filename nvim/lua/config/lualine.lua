@@ -12,7 +12,7 @@ end
 
 local config = {
 	options = {
-		theme = "tundra", -- tokyonight nightfox rose-pine
+		theme = "nord", -- tokyonight nightfox rose-pine
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 		icons_enabled = true,

@@ -50,6 +50,7 @@ packer.startup(function(use)
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
+	use("danielvolchek/tailiscope.nvim")
 
 	-- Treesitter
 	use({
@@ -146,6 +147,10 @@ packer.startup(function(use)
 		config = get_config("tundra"),
 	})
 	use({
+		"gbprod/nord.nvim",
+		config = get_config("nord"),
+	})
+	use({
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
 	})
@@ -164,7 +169,8 @@ packer.startup(function(use)
 		config = function()
 			require("go").setup({
 				notify = true,
-				lint_prompt_style = "vt",
+				auto_lint = false,
+				lint_prompt_style = "ql",
 			})
 		end,
 	})

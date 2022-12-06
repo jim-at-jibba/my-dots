@@ -11,7 +11,7 @@ tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
 nightfoxnord [Nightfox Nord]
 tundra [Tundra]
-oxocarbon [OxoCarbon]
+nord [Nord]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
