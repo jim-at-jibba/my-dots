@@ -8,6 +8,6 @@ nord.setup({
 	transparent = true,
 	terminal_colors = true,
 	diff = { mode = "bg" },
-	borders = true,
-	errors = { mode = "bg" },
+	borders = false,
+	errors = { mode = "fg" },
 })

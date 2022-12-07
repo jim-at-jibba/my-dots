@@ -82,6 +82,7 @@ local servers = {
 	"emmet_ls",
 	"astro",
 	"tailwindcss",
+	"grammarly",
 	-- "pylsp",
 }
 
@@ -141,6 +142,12 @@ for _, lsp in ipairs(servers) do
 				filetypes = {
 					"html",
 					"tmpl",
+				},
+			},
+			grammarly = {
+				filetypes = { "markdown", "text" },
+				init_options = {
+					clientId = "clientId=client_2zkt1YpZ613xS1H6m68nsE",
 				},
 			},
 			emmet_ls = {

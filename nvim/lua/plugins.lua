@@ -128,7 +128,6 @@ packer.startup(function(use)
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-emoji" },
-			-- { "hrsh7th/cmp-copilot" },
 		},
 		config = get_config("cmp"),
 	})
@@ -154,13 +153,11 @@ packer.startup(function(use)
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
 	})
-	use("B4mbus/oxocarbon-lua.nvim")
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
 		config = get_config("catppuccin"),
 	})
-	use("EdenEast/nightfox.nvim")
 	use("folke/tokyonight.nvim")
 
 	-- language specific
@@ -175,18 +172,8 @@ packer.startup(function(use)
 		end,
 	})
 	-- utils
-	-- use({ "rcarriga/nvim-notify", config = get_config("notify") })
 	use({ "akinsho/toggleterm.nvim", config = get_config("toggleterm") })
 	use("PatschD/zippy.nvim")
-	use({
-		"vigoux/notifier.nvim",
-		config = function()
-			require("notifier").setup({
-				-- You configuration here
-			})
-		end,
-	})
-	use({ "folke/which-key.nvim", config = get_config("which") })
 	use({
 		"folke/noice.nvim",
 		requires = {
@@ -201,9 +188,6 @@ packer.startup(function(use)
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml", "yaml" },
 		config = get_config("indent-line"),
-	})
-	use({
-		"Djancyp/cheat-sheet",
 	})
 	use({
 		"folke/trouble.nvim",
@@ -262,18 +246,9 @@ packer.startup(function(use)
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
-	-- use({
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	require = { "neovim/nvim-lspconfig" },
-	-- 	config = get_config("lsp-signature"),
-	-- })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = get_config("null-ls"),
-	})
-	use({
-		"cseickel/diagnostic-window.nvim",
-		requires = { "MunifTanjim/nui.nvim" },
 	})
 
 	-- dap
