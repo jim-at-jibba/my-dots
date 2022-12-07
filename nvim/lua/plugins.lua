@@ -209,9 +209,10 @@ packer.startup(function(use)
 		config = get_config("neoscroll"),
 	})
 	use({
-		"numToStr/Comment.nvim",
+		"echasnovski/mini.nvim",
 		config = get_config("comment"),
 	})
+	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use({
 		"nvim-lualine/lualine.nvim",
 		config = get_config("lualine"),
