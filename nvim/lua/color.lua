@@ -1,2 +1,2 @@
 vim.cmd("set background=dark")
-vim.cmd.colorscheme "nord"
+vim.cmd.colorscheme "tokyonight-storm"

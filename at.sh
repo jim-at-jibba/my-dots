@@ -65,17 +65,17 @@ case $color in
     dark-mode off
     ;;
   tokyolight)
-    configure_alacritty
+    # configure_alacritty
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=light")\nvim.cmd.colorscheme "tokyonight"'
     dark-mode off
     ;;
   tokyonight)
-    configure_alacritty
+    # configure_alacritty
     configure_kitty
     # configure_tmux
-    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tokyonight"'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tokyonight-storm"'
     dark-mode on
     ;;
   tundra)
