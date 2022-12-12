@@ -25,15 +25,27 @@ spacebar -m config icon_font                   "Font Awesome 5 Free:Solid:14.0"
 # spacebar -m config space_icon_color_tertiary   0xffA6E3A1
 
 # Nord
-spacebar -m config background_color            0xff3B4252
-spacebar -m config foreground_color            0xffD8DEE9
-spacebar -m config power_icon_color            0xff89B4FA
-spacebar -m config battery_icon_color          0xffA3BE8C
-spacebar -m config dnd_icon_color              0xffa8a8a8
-spacebar -m config clock_icon_color            0xff8FBCBB
-spacebar -m config space_icon_color            0xff88C0D0
-spacebar -m config space_icon_color_secondary  0xffB48EAD
-spacebar -m config space_icon_color_tertiary   0xffBF616A
+# spacebar -m config background_color            0xff3B4252
+# spacebar -m config foreground_color            0xffD8DEE9
+# spacebar -m config power_icon_color            0xff89B4FA
+# spacebar -m config battery_icon_color          0xffA3BE8C
+# spacebar -m config dnd_icon_color              0xffa8a8a8
+# spacebar -m config clock_icon_color            0xff8FBCBB
+# spacebar -m config space_icon_color            0xff88C0D0
+# spacebar -m config space_icon_color_secondary  0xffB48EAD
+# spacebar -m config space_icon_color_tertiary   0xffBF616A
+
+# Tokyo night
+spacebar -m config background_color            0xff24283b
+spacebar -m config foreground_color            0xffa9b1d6
+spacebar -m config power_icon_color            0xff7dcfff
+spacebar -m config battery_icon_color          0xfff7768e
+spacebar -m config dnd_icon_color              0xff7dcfff
+spacebar -m config clock_icon_color            0xffbb9af7
+spacebar -m config space_icon_color            0xffbb9af7
+spacebar -m config space_icon_color_secondary  0xff2ac3de
+spacebar -m config space_icon_color_tertiary   0xffff9e64
+
 spacebar -m config power_icon_strip             
 spacebar -m config space_icon                  •
 spacebar -m config space_icon_strip            1 2 3 4 5 6 7 8 9 10
