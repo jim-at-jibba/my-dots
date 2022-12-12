@@ -70,7 +70,6 @@ packer.startup(function(use)
 		"lewis6991/gitsigns.nvim",
 		config = get_config("gitsigns"),
 	})
-	use({ "kdheepak/lazygit.nvim" })
 	-- use({ "jreybert/vimagit" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({
@@ -213,15 +212,15 @@ packer.startup(function(use)
 		config = get_config("comment"),
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = get_config("lualine"),
-		event = "VimEnter",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	config = get_config("lualine"),
+	-- 	event = "VimEnter",
+	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	-- })
 	use({
 		"zbirenbaum/copilot.lua",
-		after = "lualine.nvim", -- whichever statusline plugin you use here
+		-- after = "lualine.nvim", -- whichever statusline plugin you use here
 		config = function()
 			vim.defer_fn(function()
 				require("copilot").setup({

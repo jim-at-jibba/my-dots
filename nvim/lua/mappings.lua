@@ -73,7 +73,7 @@ map("n", "<leader><leader>2", ":Neotree diagnostics reveal bottom<CR>", opts)
 -- Diagnostics Show
 map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
 
-map("n", "<leader>gs", ":LazyGit<CR>", opts)
+-- map("n", "<leader>gs", ":LazyGit<CR>", opts)
 
 -- Cokeline
 for i = 1, 9 do
