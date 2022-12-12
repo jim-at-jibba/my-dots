@@ -1,5 +1,7 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
+local utils = require("yanky.utils")
+local mapping = require("yanky.telescope.mapping")
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
@@ -144,10 +146,10 @@ packer.startup(function(use)
 		"sam4llis/nvim-tundra",
 		config = get_config("tundra"),
 	})
-	use({
-		"gbprod/nord.nvim",
-		config = get_config("nord"),
-	})
+	-- use({
+	-- 	"shaunsingh/nord.nvim",
+	-- 	config = get_config("nord"),
+	-- })
 	use({
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
@@ -157,7 +159,7 @@ packer.startup(function(use)
 		as = "catppuccin",
 		config = get_config("catppuccin"),
 	})
-	use("folke/tokyonight.nvim")
+	use({ "folke/tokyonight.nvim", config = get_config("tokyonight") })
 
 	-- language specific
 	use({
@@ -212,12 +214,12 @@ packer.startup(function(use)
 		config = get_config("comment"),
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
-	-- use({
-	-- 	"nvim-lualine/lualine.nvim",
-	-- 	config = get_config("lualine"),
-	-- 	event = "VimEnter",
-	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	-- })
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = get_config("lualine"),
+		event = "VimEnter",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
 	use({
 		"zbirenbaum/copilot.lua",
 		-- after = "lualine.nvim", -- whichever statusline plugin you use here
@@ -240,6 +242,33 @@ packer.startup(function(use)
 					},
 				})
 			end, 100)
+		end,
+	})
+
+	use({
+		"gbprod/yanky.nvim",
+		config = function()
+			require("yanky").setup({
+				picker = {
+					telescope = {
+						mappings = {
+							default = mapping.put("p"),
+							i = {
+								["<c-p>"] = mapping.put("p"),
+								["<c-k>"] = mapping.put("P"),
+								["<c-x>"] = mapping.delete(),
+								["<c-r>"] = mapping.set_register(utils.get_default_register()),
+							},
+							n = {
+								p = mapping.put("p"),
+								P = mapping.put("P"),
+								d = mapping.delete(),
+								r = mapping.set_register(utils.get_default_register()),
+							},
+						},
+					},
+				},
+			})
 		end,
 	})
 

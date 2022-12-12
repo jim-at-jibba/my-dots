@@ -127,3 +127,9 @@ map("n", "<leader>u", ":UndotreeToggle<CR>")
 
 -- zippy
 map("n", "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>")
+
+-- yanky
+map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+map("n", "<c-j>", "<Plug>(YankyCycleForward)")
+map("n", "<c-k>", "<Plug>(YankyCycleBackward)")
