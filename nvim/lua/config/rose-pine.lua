@@ -43,4 +43,4 @@ rose_pine.setup({
 })
 
 -- vim.cmd("set background=light")
--- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme rose-pine")
