@@ -37,3 +37,12 @@ vim.keymap.set("n", "<leader>de", "<cmd>Telescope diagnostics<CR>", { desc = "Te
 vim.keymap.set("n", "<leader>tw", "<cmd>Telescope tailiscope<CR>", { desc = "Telescope tailiscope" })
 
 vim.keymap.set("n", "<leader>S", ":lua require('spectre').open()<cr>", { desc = "Spectre search" })
+
+for i = 1, 9 do
+  vim.keymap.set(
+    "n",
+    ("<Leader>%s"):format(i),
+    ("<cmd>BufferLineGoToBuffer %s<cr>"):format(i),
+    { desc = "Go to buffer by number" }
+  )
+end
