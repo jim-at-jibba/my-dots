@@ -37,6 +37,8 @@ vim.keymap.set("n", "<leader>de", "<cmd>Telescope diagnostics<CR>", { desc = "Te
 vim.keymap.set("n", "<leader>tw", "<cmd>Telescope tailiscope<CR>", { desc = "Telescope tailiscope" })
 
 vim.keymap.set("n", "<leader>S", ":lua require('spectre').open()<cr>", { desc = "Spectre search" })
+vim.keymap.set("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+vim.keymap.set("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 
 for i = 1, 9 do
   vim.keymap.set(
