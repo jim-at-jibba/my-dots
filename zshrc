@@ -63,6 +63,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="$HOME/.rbenv/shims:$PATH"
   export PATH="$HOME/.rbenv/bin:$PATH"
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
 
   # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home

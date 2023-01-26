@@ -49,7 +49,7 @@ map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
 
-map("n", "<leader>.", ":TSLspImportAll<CR>", opts)
+map("n", "<leader>.", ":TypescriptAddMissingImports<CR>", opts)
 
 map("n", "<leader>?", ":CheatSH<CR>", opts)
 
