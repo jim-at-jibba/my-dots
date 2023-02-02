@@ -189,6 +189,16 @@ packer.startup(function(use)
 		config = get_config("indent-line"),
 	})
 	use({
+		"echasnovski/mini.indentscope",
+		config = function()
+			require("mini.indentscope").setup({
+				options = {
+					try_as_border = true,
+				},
+			})
+		end,
+	})
+	use({
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("trouble"),
@@ -251,20 +261,21 @@ packer.startup(function(use)
 		config = get_config("null-ls"),
 	})
 
-	-- dap
-	use({
-		"mfussenegger/nvim-dap",
-		config = get_config("dap"),
-	})
-	use({
-		"leoluz/nvim-dap-go",
-		config = get_config("dap-go"),
-	})
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use({
-		"theHamsta/nvim-dap-virtual-text",
-		config = get_config("dap-virt"),
-	})
+	-- -- dap
+	-- use({
+	-- 	"mfussenegger/nvim-dap",
+	-- 	config = get_config("dap"),
+	-- })
+	-- use({
+	-- 	"leoluz/nvim-dap-go",
+	-- 	config = get_config("dap-go"),
+	-- })
+	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	-- use({
+	-- 	"theHamsta/nvim-dap-virtual-text",
+	--  })
+	-- config =
+	-- 	get_config("dap-virt"),
 
 	-- Notes
 	use({

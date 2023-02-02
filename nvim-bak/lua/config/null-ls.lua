@@ -17,7 +17,6 @@ nls.setup({
 		nls.builtins.formatting.black,
 		nls.builtins.diagnostics.flake8,
 		-- nls.builtins.diagnostics.mypy,
-		require("typescript.extensions.null-ls.code-actions"),
 	},
 	on_attach = function(client)
 		if client.server_capabilities.documentFormattingProvider then

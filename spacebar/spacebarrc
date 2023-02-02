@@ -14,15 +14,15 @@ spacebar -m config spacing_right               15
 spacebar -m config text_font                   "MonoLisa:Regular:14.0"
 spacebar -m config icon_font                   "Font Awesome 5 Free:Solid:14.0"
 # Rose Pine
-spacebar -m config background_color            0xff1E1E2E
-spacebar -m config foreground_color            0xffCDD6F4
-spacebar -m config power_icon_color            0xff89B4FA
-spacebar -m config battery_icon_color          0xffF38BA8
-spacebar -m config dnd_icon_color              0xffa8a8a8
-spacebar -m config cloc_icon_color             0xffBAC2DE
-spacebar -m config space_icon_color            0xff74C7EC
-spacebar -m config space_icon_color_secondary  0xffF38BA8
-spacebar -m config space_icon_color_tertiary   0xffA6E3A1
+# spacebar -m config background_color            0xff1E1E2E
+# spacebar -m config foreground_color            0xffCDD6F4
+# spacebar -m config power_icon_color            0xff89B4FA
+# spacebar -m config battery_icon_color          0xffF38BA8
+# spacebar -m config dnd_icon_color              0xffa8a8a8
+# spacebar -m config cloc_icon_color             0xffBAC2DE
+# spacebar -m config space_icon_color            0xff74C7EC
+# spacebar -m config space_icon_color_secondary  0xffF38BA8
+# spacebar -m config space_icon_color_tertiary   0xffA6E3A1
 
 # Nord
 # spacebar -m config background_color            0xff3B4252
@@ -36,15 +36,15 @@ spacebar -m config space_icon_color_tertiary   0xffA6E3A1
 # spacebar -m config space_icon_color_tertiary   0xffBF616A
 
 # Tokyo night
-# spacebar -m config background_color            0xff24283b
-# spacebar -m config foreground_color            0xffa9b1d6
-# spacebar -m config power_icon_color            0xff7dcfff
-# spacebar -m config battery_icon_color          0xfff7768e
-# spacebar -m config dnd_icon_color              0xff7dcfff
-# spacebar -m config clock_icon_color            0xffbb9af7
-# spacebar -m config space_icon_color            0xffbb9af7
-# spacebar -m config space_icon_color_secondary  0xff2ac3de
-# spacebar -m config space_icon_color_tertiary   0xffff9e64
+spacebar -m config background_color            0xff24283b
+spacebar -m config foreground_color            0xffa9b1d6
+spacebar -m config power_icon_color            0xff7dcfff
+spacebar -m config battery_icon_color          0xfff7768e
+spacebar -m config dnd_icon_color              0xff7dcfff
+spacebar -m config clock_icon_color            0xffbb9af7
+spacebar -m config space_icon_color            0xffbb9af7
+spacebar -m config space_icon_color_secondary  0xff2ac3de
+spacebar -m config space_icon_color_tertiary   0xffff9e64
 
 spacebar -m config power_icon_strip             
 spacebar -m config space_icon                  •
