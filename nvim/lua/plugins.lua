@@ -199,6 +199,20 @@ packer.startup(function(use)
 		end,
 	})
 	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	})
+	use({
+		"ggandor/flit.nvim",
+		config = function()
+			require("flit").setup({
+				labeled_modes = "nv",
+			})
+		end,
+	})
+	use({
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("trouble"),
@@ -228,30 +242,6 @@ packer.startup(function(use)
 		event = "VimEnter",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use({
-		"zbirenbaum/copilot.lua",
-		-- after = "lualine.nvim", -- whichever statusline plugin you use here
-		config = function()
-			vim.defer_fn(function()
-				require("copilot").setup({
-					suggestion = {
-						enabled = true,
-						auto_trigger = true,
-						debounce = 75,
-						keymap = {
-							accept = "<C-e>",
-							next = "<M-]>",
-							prev = "<M-[>",
-							dismiss = "<C-]>",
-						},
-					},
-					filetypes = {
-						go = false,
-					},
-				})
-			end, 100)
-		end,
-	})
 
 	-- lsp
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
@@ -261,21 +251,20 @@ packer.startup(function(use)
 		config = get_config("null-ls"),
 	})
 
-	-- -- dap
-	-- use({
-	-- 	"mfussenegger/nvim-dap",
-	-- 	config = get_config("dap"),
-	-- })
-	-- use({
-	-- 	"leoluz/nvim-dap-go",
-	-- 	config = get_config("dap-go"),
-	-- })
-	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	-- use({
-	-- 	"theHamsta/nvim-dap-virtual-text",
-	--  })
-	-- config =
-	-- 	get_config("dap-virt"),
+	-- dap
+	use({
+		"mfussenegger/nvim-dap",
+		config = get_config("dap"),
+	})
+	use({
+		"leoluz/nvim-dap-go",
+		config = get_config("dap-go"),
+	})
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use({
+		"theHamsta/nvim-dap-virtual-text",
+		config = get_config("dap-virt"),
+	})
 
 	-- Notes
 	use({
