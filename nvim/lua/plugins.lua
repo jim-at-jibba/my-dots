@@ -213,6 +213,17 @@ packer.startup(function(use)
 		end,
 	})
 	use({
+		"epwalsh/obsidian.nvim",
+		config = function()
+			require("obsidian").setup({
+				dir = "/Users/jamesbest/Library/Mobile Documents/iCloud~md~obsidian/Documents/Home",
+				completion = {
+					nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+				},
+			})
+		end,
+	})
+	use({
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("trouble"),
@@ -267,6 +278,11 @@ packer.startup(function(use)
 	})
 
 	-- Notes
+	use({
+		"preservim/vim-markdown",
+		requires = { "godlygeek/tabular" },
+	})
+
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && npm install",
