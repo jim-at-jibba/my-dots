@@ -255,19 +255,7 @@ packer.startup(function(use)
 	})
 
 	-- lsp
-	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"jay-babu/mason-null-ls.nvim",
-
-			-- Additional lua configuration, makes nvim stuff amazing
-			"folke/neodev.nvim",
-		},
-		config = get_config("lsp"),
-	})
+	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",

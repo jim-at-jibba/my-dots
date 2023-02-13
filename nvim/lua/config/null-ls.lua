@@ -1,9 +1,4 @@
 local nls = require("null-ls")
-
-require("mason-null-ls").setup({
-	ensure_installed = { "stylua", "jq", "eslint_d", "prettier", "golangci_lint", "goimports", "gofmt" },
-})
-
 nls.setup({
 	sources = {
 		nls.builtins.code_actions.gitsigns,
