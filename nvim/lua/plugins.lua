@@ -255,6 +255,11 @@ packer.startup(function(use)
 	})
 
 	-- lsp
+	use({
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"jay-babu/mason-null-ls.nvim",
+	})
 	use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 	use({

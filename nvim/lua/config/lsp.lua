@@ -2,6 +2,9 @@ local nvim_lsp = require("lspconfig")
 local map = vim.keymap.set
 opts = { silent = true, noremap = true }
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 -- detect python venv
 -- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-851247107
 local util = require("lspconfig/util")
