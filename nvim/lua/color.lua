@@ -1,2 +1,3 @@
 vim.cmd("set background=dark")
-vim.cmd.colorscheme "rose-pine"
+vim.g.catppuccin_flavour = "frappe"
+vim.cmd("colorscheme catppuccin")
