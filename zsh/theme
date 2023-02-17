@@ -9,8 +9,10 @@ catppuccinlatte [Catppuccin Latte]
 catppuccinmocha [Catppuccin Mocha]
 tokyolight [Tokyo Day]
 tokyonight [Tokyo Storm]
-tundra [Tundra]
-nord [Nord]
+nightfoxdusk [Nightfox Dusk]
+nightfoxnord [Nightfox Nord]
+nightfoxtera [Nightfox Tera]
+nightfoxdawn [Nightfox Dawn]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

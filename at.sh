@@ -39,13 +39,6 @@ case $color in
     dark-mode off
     configure_vim 'vim.cmd("set background=light")\nvim.cmd.colorscheme "rose-pine"'
     ;;
-  poimandres)
-    configure_kitty
-    # configure_tmux
-    # configure_vim 'vim.cmd("set background=dark")'
-    dark    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "poimandres"'
-    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "poimandres"'
-    ;;
   catppuccinfrappe)
     configure_kitty
     # configure_tmux
@@ -78,20 +71,28 @@ case $color in
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tokyonight-storm"'
     dark-mode on
     ;;
-  tundra)
+  nightfoxdusk)
     configure_kitty
-    # configure_tmux
-    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tundra"'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "duskfox"'
     dark-mode on
     ;;
-  nord)
+  nightfoxnord)
     configure_kitty
-    # configure_tmux
-    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nord"'
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
     dark-mode on
+    ;;
+  nightfoxtera)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "terafox"'
+    dark-mode on
+    ;;
+  nightfoxdawn)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "dawnfox"'
+    dark-mode off
     ;;
   *)
-    echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nord, tundra"
+    echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera"
     exit 1
     ;;
 esac

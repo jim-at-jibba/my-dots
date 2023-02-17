@@ -141,14 +141,6 @@ packer.startup(function(use)
 
 	-- themes
 	use({
-		"sam4llis/nvim-tundra",
-		config = get_config("tundra"),
-	})
-	-- use({
-	-- 	"shaunsingh/nord.nvim",
-	-- 	config = get_config("nord"),
-	-- })
-	use({
 		"rose-pine/neovim",
 		config = get_config("rose-pine"),
 	})
@@ -158,6 +150,7 @@ packer.startup(function(use)
 		config = get_config("catppuccin"),
 	})
 	use({ "folke/tokyonight.nvim", config = get_config("tokyonight") })
+	use({ "EdenEast/nightfox.nvim", config = get_config("nightfox") })
 
 	-- language specific
 	use({

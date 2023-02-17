@@ -36,14 +36,25 @@ spacebar -m config icon_font                   "Font Awesome 5 Free:Solid:14.0"
 # spacebar -m config space_icon_color_tertiary   0xffBF616A
 
 # Tokyo night
-spacebar -m config background_color            0xff24283b
-spacebar -m config foreground_color            0xffa9b1d6
-spacebar -m config power_icon_color            0xff7dcfff
-spacebar -m config battery_icon_color          0xfff7768e
-spacebar -m config dnd_icon_color              0xff7dcfff
-spacebar -m config clock_icon_color            0xffbb9af7
-spacebar -m config space_icon_color            0xffbb9af7
-spacebar -m config space_icon_color_secondary  0xff2ac3de
+# spacebar -m config background_color            0xff24283b
+# spacebar -m config foreground_color            0xffa9b1d6
+# spacebar -m config power_icon_color            0xff7dcfff
+# spacebar -m config battery_icon_color          0xfff7768e
+# spacebar -m config dnd_icon_color              0xff7dcfff
+# spacebar -m config clock_icon_color            0xffbb9af7
+# spacebar -m config space_icon_color            0xffbb9af7
+# spacebar -m config space_icon_color_secondary  0xff2ac3de
+# spacebar -m config space_icon_color_tertiary   0xffff9e64
+
+#tera
+spacebar -m config background_color            0xff293e40
+spacebar -m config foreground_color            0xffe6eaea
+spacebar -m config power_icon_color            0xff7aa4a1
+spacebar -m config battery_icon_color          0xffad5c7c
+spacebar -m config dnd_icon_color              0xfffda47f
+spacebar -m config clock_icon_color            0xffa1cdd8
+spacebar -m config space_icon_color            0xffe85c51
+spacebar -m config space_icon_color_secondary  0xff5a93aa
 spacebar -m config space_icon_color_tertiary   0xffff9e64
 
 spacebar -m config power_icon_strip             
