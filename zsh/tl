@@ -1,7 +1,6 @@
 ### TREE
 # list files using tree if available
 
-echo 'what'
 if hash tree &>/dev/null; then
   if [[ "x$1" != "x" ]]
   then
