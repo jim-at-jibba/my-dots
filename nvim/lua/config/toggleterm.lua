@@ -4,7 +4,12 @@ if not status_ok then
 	return
 end
 
-toggleterm.setup()
+toggleterm.setup({
+	open_mapping = [[<c-\>]],
+	shade_filetypes = { "none" },
+	shade_terminals = true,
+	shading_factor = "1",
+})
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }

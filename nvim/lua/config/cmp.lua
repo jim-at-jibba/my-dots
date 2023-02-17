@@ -4,7 +4,7 @@ local lspkind = require("lspkind")
 cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
-			with_text = false,
+			with_text = true,
 			maxwidth = 50,
 			mode = "symbol",
 			menu = {

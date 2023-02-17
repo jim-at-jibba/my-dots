@@ -13,7 +13,7 @@ map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "n", "nzzzv", opts)
 map("n", "N", "nzzzv", opts)
 map("n", "L", "g_", opts)
-map("n", "q", "<Nop>", opts)
+-- map("n", "q", "<Nop>", opts)
 map("n", "<Space>/", ":noh<cr>", opts)
 
 map("n", "<Up>", "<Nop>", opts)

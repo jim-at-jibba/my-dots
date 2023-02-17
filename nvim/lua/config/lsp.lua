@@ -117,7 +117,7 @@ for _, lsp in ipairs(servers) do
 			map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 			map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 
-			vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
+			-- vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 			-- diagnotics on hover - disabled in favor of lspsaga
 			-- vim.api.nvim_create_autocmd("CursorHold", {
 			-- 	buffer = bufnr,
