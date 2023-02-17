@@ -15,6 +15,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
+require("utils")
+
 require("lazy").setup("plugins")
 -- Vim mappings, see lua/config/which.lua for more mappings
 require("mappings")
