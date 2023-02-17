@@ -78,7 +78,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   java11
 
   fpath=(~/dotfiles/zsh "${fpath[@]}")
-  autoload -Uz utils bip bup bcp tl kp ks vim tmuxify theme
+  autoload -Uz utils tl kp ks vim tmuxify theme tea
 
   typeset -U PATH fpath
 
@@ -93,7 +93,7 @@ j() {
         cd $(autojump $@)
         return
     fi
-    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)"
+    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  gum filter --placeholder 'Search....')"
 }
 
 # Easier navigation: .., ..., ...., ....., ~ and -
@@ -129,6 +129,7 @@ alias myip='ip addr show en0'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
+alias reload='source ~/.zshrc'
 alias l='exa --long --header --all --icons'
 alias ls='exa --header'
 alias tree='exa --tree --level=2'
@@ -149,7 +150,7 @@ alias server="python3 -m http.server"
 # alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export REACT_EDITOR='code'
-export EDITOR='~/neovim/bin/nvim'
+export EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export sso='aws sso login --profile breedr_develop_data_analysis_user'
 
 # Docker
@@ -174,7 +175,7 @@ tm() {
   if [ $1 ]; then
     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
   fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | gum filter --placeholder "Pick a session") &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
 # Teamocil Autocomplete
