@@ -1,0 +1,17 @@
+### Search and select teamocil layouts
+# show a list of commands and keybinds
+
+local teamocils="
+mob [Breedr Mobile]
+api [Breeder API]
+web [Breedr Web]
+daily [Daily window]
+dev [Empty dev window]
+wiki [Wiki and til]
+"
+
+local cmd=$(echo $teamocils | eval "gum filter --placeholder 'Pick a teamocil layout'" | awk '{print $1}')
+
+if [[ -n $cmd ]]; then
+ teamocil ${cmd}
+fi

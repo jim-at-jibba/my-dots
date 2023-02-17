@@ -1,9 +1,8 @@
 ### Utils
 # show a list of commands and alias
 
-local helptxt="bcp    [brew:clean]
-bip    [brew:install]
-bup    [brew:update]
+local helptxt="
+tea    [teamocils]
 ll     [tree view]
 kp     [kill:path]
 ks     [kill:tcp]
