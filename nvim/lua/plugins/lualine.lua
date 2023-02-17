@@ -3,6 +3,7 @@ return {
 	event = "VimEnter",
 	dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
+		local navic = require("nvim-navic")
 		local function clock()
 			return " " .. os.date("%H:%M")
 		end
@@ -30,14 +31,11 @@ return {
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 				},
-				-- lualine_x = {
-				-- 	{
-				-- 		require("noice").api.status.message.get_hl,
-				-- 		cond = require("noice").api.status.message.has,
-				-- 	},
-				-- },
+				lualine_x = {
+					{ navic.get_location, cond = navic.is_available },
+				},
 				lualine_y = { "location" },
-				lualine_z = { clock },
+				lualine_z = { clock, my_favs },
 			},
 			inactive_sections = {
 				lualine_a = {},

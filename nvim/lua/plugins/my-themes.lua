@@ -1,6 +1,7 @@
 return {
 	{
 		"catppuccin/nvim",
+		lazy = true,
 		name = "catppuccin",
 		config = function()
 			require("catppuccin").setup({
@@ -10,6 +11,7 @@ return {
 	},
 	{
 		"folke/tokyonight.nvim",
+		lazy = true,
 		config = function()
 			require("tokyonight").setup({
 				-- your configuration comes here
@@ -50,6 +52,7 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
+		lazy = true,
 		config = function()
 			require("nightfox").setup({
 				options = {

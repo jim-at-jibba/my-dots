@@ -62,14 +62,6 @@ map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 map("n", "<leader>de", ":Telescope diagnostics<CR>", opts)
 map("n", "<leader>tw", ":Telescope tailiscope<CR>", opts)
 
---Nvimtree
-map("n", "<leader><leader>1", ":NvimTreeToggle<CR>", opts)
-map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
-
---Neotree
--- map("n", "<leader><leader>1", ":Neotree filesystem reveal right<CR>", opts)
-map("n", "<leader><leader>2", ":Neotree diagnostics reveal bottom<CR>", opts)
-
 -- Diagnostics Show
 map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
 
@@ -83,16 +75,6 @@ end
 
 -- Close buffer
 map("n", "<leader>q", ":b#|bd#<CR>", opts)
-
---Trouble
-map("n", "<leader>xx", ":TroubleToggle<CR>", opts)
-map("n", "<leader>xw", ":Trouble lsp<CR>", opts)
-map("n", "<leader>xw", ":Trouble workspace_diagnostics<CR>", opts)
-map("n", "<leader>xd", ":Trouble document_diagnostics<CR>", opts)
--- map("n", "<leader>dr", ":TroubleToggle lsp_references<CR>", opts)
-
---spectre
-map("n", "<leader>S", ":lua require('spectre').open()<cr>", opts)
 
 --vimtest
 -- map("n", "tt", ":TestNearest<cr>", opts)

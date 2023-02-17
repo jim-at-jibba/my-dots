@@ -60,7 +60,12 @@ return {
 			-- Use a loop to conveniently call 'setup' on multiple servers
 			for _, lsp in ipairs(servers) do
 				nvim_lsp[lsp].setup({
-					on_attach = function(client)
+					on_attach = function(client, bufnr)
+						local navic = require("nvim-navic")
+
+						if client.server_capabilities.documentSymbolProvider then
+							navic.attach(client, bufnr)
+						end
 						-- disable formatting for LSP clients as this is handled by null-ls
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
