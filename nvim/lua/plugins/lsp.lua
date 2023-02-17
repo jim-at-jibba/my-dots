@@ -255,7 +255,7 @@ return {
 	{
 		"jay-babu/mason-null-ls.nvim",
 		config = function()
-			require("mason-lspconfig").setup({
+			require("mason-null-ls").setup({
 				ensure_installed = { "stylua", "jq", "eslint_d", "golangci_lint", "goimports", "gofmt" },
 			})
 		end,

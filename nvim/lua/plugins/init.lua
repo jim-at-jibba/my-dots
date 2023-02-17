@@ -7,12 +7,6 @@ return {
 		config = true,
 	},
 	{
-		"karb94/neoscroll.nvim",
-		config = function()
-			require("neoscroll").setup()
-		end,
-	},
-	{
 		"echasnovski/mini.nvim",
 		config = function()
 			require("mini.comment").setup({
@@ -117,4 +111,11 @@ return {
 	},
 
 	{ "p00f/nvim-ts-rainbow" },
+	{
+		"windwp/nvim-spectre",
+    -- stylua: ignore
+    keys = {
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+	},
 }
