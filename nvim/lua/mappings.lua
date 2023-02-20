@@ -62,11 +62,6 @@ map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 map("n", "<leader>de", ":Telescope diagnostics<CR>", opts)
 map("n", "<leader>tw", ":Telescope tailiscope<CR>", opts)
 
--- Diagnostics Show
-map("n", "<leader>ds", ":DiagWindowShow<CR>", opts)
-
--- map("n", "<leader>gs", ":LazyGit<CR>", opts)
-
 -- Cokeline
 for i = 1, 9 do
 	map("n", ("<Leader>%s"):format(i), ("<Plug>(cokeline-focus-%s)"):format(i), opts)
@@ -74,7 +69,7 @@ for i = 1, 9 do
 end
 
 -- Close buffer
-map("n", "<leader>q", ":b#|bd#<CR>", opts)
+-- map("n", "<leader>q", ":b#|bd#<CR>", opts)
 
 --vimtest
 -- map("n", "tt", ":TestNearest<cr>", opts)
@@ -106,6 +101,3 @@ map("n", "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>"
 -- nnoremap <silent><leader>nO <cmd>lua require("neotest").output.open({enter = true, short = true})<CR>
 -- nnoremap <silent><leader>np <cmd>lua require("neotest").summary.toggle()<CR>
 map("n", "<leader>u", ":UndotreeToggle<CR>")
-
--- zippy
-map("n", "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>")

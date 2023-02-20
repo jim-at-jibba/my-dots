@@ -6,6 +6,7 @@ return {
 		"folke/todo-comments.nvim",
 		config = true,
 	},
+	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
 		"echasnovski/mini.nvim",
 		config = function()
@@ -18,7 +19,6 @@ return {
 			})
 		end,
 	},
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
 		"echasnovski/mini.indentscope",
 		event = { "BufReadPre", "BufNewFile" },
@@ -82,7 +82,12 @@ return {
 			vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
 		end,
 	},
-	{ "PatschD/zippy.nvim" },
+	{
+		"PatschD/zippy.nvim",
+		keys = {
+			{ "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>", desc = "Add debug log" },
+		},
+	},
 	{ "mbbill/undotree" },
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -113,8 +118,6 @@ return {
 			})
 		end,
 	},
-
-	{ "p00f/nvim-ts-rainbow" },
 	{
 		"windwp/nvim-spectre",
         -- stylua: ignore
@@ -149,7 +152,7 @@ return {
 		"echasnovski/mini.bufremove",
         -- stylua: ignore
         keys = {
-            { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+            { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
             { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
         },
 	},
