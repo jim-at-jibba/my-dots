@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VimEnter",
+	event = "VeryLazy",
 	dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
 		local navic = require("nvim-navic")

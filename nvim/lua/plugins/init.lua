@@ -4,11 +4,13 @@ return {
 	{ "danielvolchek/tailiscope.nvim" },
 	{
 		"folke/todo-comments.nvim",
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
 		"echasnovski/mini.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("mini.comment").setup({
 				hooks = {
@@ -38,17 +40,32 @@ return {
 	},
 	{
 		"ggandor/leap.nvim",
-		config = function()
-			require("leap").add_default_mappings()
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+			{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+		},
+		config = function(_, opts)
+			local leap = require("leap")
+			for k, v in pairs(opts) do
+				leap.opts[k] = v
+			end
+			leap.add_default_mappings(true)
+			vim.keymap.del({ "x", "o" }, "x")
+			vim.keymap.del({ "x", "o" }, "X")
 		end,
 	},
 	{
 		"ggandor/flit.nvim",
-		config = function()
-			require("flit").setup({
-				labeled_modes = "nv",
-			})
+		keys = function()
+			---@type LazyKeys[]
+			local ret = {}
+			for _, key in ipairs({ "f", "F", "t", "T" }) do
+				ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+			end
+			return ret
 		end,
+		opts = { labeled_modes = "nx" },
 	},
 	{ "cohama/lexima.vim" },
 	{ "szw/vim-maximizer" },
@@ -92,6 +109,7 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		ft = { "python", "yml", "yaml" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("indent_blankline").setup({
 				char = "│",
@@ -159,5 +177,8 @@ return {
 	{
 		"SmiteshP/nvim-navic",
 		dependencies = "neovim/nvim-lspconfig",
+	},
+	{
+		"dstein64/vim-startuptime",
 	},
 }

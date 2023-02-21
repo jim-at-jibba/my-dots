@@ -44,7 +44,7 @@ return {
 				"prismals",
 				"html",
 				"cssls",
-				"sumneko_lua",
+				"lua_ls",
 				"tsserver",
 				"yamlls",
 				"jsonls",
@@ -187,7 +187,7 @@ return {
 								},
 							},
 						},
-						Lua = {
+						lua_ls = {
 							cmd = { "lua-language-server" },
 							filetypes = { "lua" },
 							runtime = {
