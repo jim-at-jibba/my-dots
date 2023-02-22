@@ -39,13 +39,6 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 
 map("v", "<leader>p", '"_dP', opts)
 
-map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>", opts)
-map("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-map("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
 
@@ -58,7 +51,6 @@ map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)
 map("n", "<leader>f", ":Telescope live_grep preview=true<CR>", opts)
 map("n", "<C-p>", ":Telescope git_files preview=true<CR>", opts)
 map("n", "<leader>g", ":Telescope git_status preview=true<CR>", opts)
-map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 map("n", "<leader>de", ":Telescope diagnostics<CR>", opts)
 map("n", "<leader>tw", ":Telescope tailiscope<CR>", opts)
 

@@ -61,11 +61,6 @@ return {
 			for _, lsp in ipairs(servers) do
 				nvim_lsp[lsp].setup({
 					on_attach = function(client, bufnr)
-						local navic = require("nvim-navic")
-
-						if client.server_capabilities.documentSymbolProvider then
-							navic.attach(client, bufnr)
-						end
 						-- disable formatting for LSP clients as this is handled by null-ls
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
@@ -86,26 +81,6 @@ return {
 						if lsp == "tsserver" then
 							require("nvim-lsp-ts-utils").setup({})
 						end
-
-						map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-						map("n", "<leader>d", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-
-						-- vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
-						-- diagnotics on hover - disabled in favor of lspsaga
-						-- vim.api.nvim_create_autocmd("CursorHold", {
-						-- 	buffer = bufnr,
-						-- 	callback = function()
-						-- 		local opts = {
-						-- 			focusable = false,
-						-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-						-- 			border = "rounded",
-						-- 			source = "always",
-						-- 			prefix = " ",
-						-- 			scope = "cursor",
-						-- 		}
-						-- 		vim.diagnostic.open_float(nil, opts)
-						-- 	end,
-						-- })
 					end,
 					before_init = function(_, config)
 						if lsp == "pyright" then
@@ -271,7 +246,7 @@ return {
 			local nls = require("null-ls")
 			nls.setup({
 				sources = {
-					nls.builtins.code_actions.gitsigns,
+					-- nls.builtins.code_actions.gitsigns,
 					nls.builtins.code_actions.eslint,
 					nls.builtins.diagnostics.eslint,
 					nls.builtins.diagnostics.golangci_lint,
