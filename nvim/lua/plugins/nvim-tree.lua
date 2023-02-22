@@ -1,7 +1,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	keys = {
-		{ "<leader><leader>1", ":NvimTreeToggle<CR>", desc = "Toggle NVIM tree" },
+		{ "<leader><leader>1", ":NvimTreeToggle<CR>", desc = "Toggle NVIM tree", silent = true, remap = false },
 		{ "<leader>r", ":NvimTreeRefresh<CR>", desc = "Refresh NVIM tree" },
 	},
 	config = function()
