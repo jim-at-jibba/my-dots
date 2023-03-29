@@ -54,6 +54,8 @@ return {
 				"astro",
 				"tailwindcss",
 				"grammarly",
+				"arduino_language_server",
+				"clangd",
 				-- "pylsp",
 			}
 
@@ -253,6 +255,7 @@ return {
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.goimports,
 					nls.builtins.formatting.gofmt,
+					nls.builtins.formatting.prismaFmt,
 					nls.builtins.formatting.prettier.with({
 						extra_args = { "--single-quote", "false" },
 						extra_filetypes = { "astro" },

@@ -180,6 +180,10 @@ return {
 		dependencies = "neovim/nvim-lspconfig",
 	},
 	{
+		"mrjones2014/tldr.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
+	},
+	{
 		"dstein64/vim-startuptime",
 	},
 }
