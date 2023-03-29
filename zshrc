@@ -62,6 +62,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="/usr/local/opt/python@3.8/bin:$PATH"
   export PATH="$HOME/.rbenv/shims:$PATH"
   export PATH="$HOME/.rbenv/bin:$PATH"
+  export PATH="/Users/jamesbest/.cargo/bin:$PATH"
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
@@ -101,6 +102,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+# BT
+alias bton="blueutil -p 1"
+alias btoff="blueutil -p 0"
 
 # Git
 ##########

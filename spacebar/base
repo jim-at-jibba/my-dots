@@ -33,13 +33,3 @@ spacebar -m config right_shell_command         "whoami"
 # spacebar -m config cloc_icon_color             0xff62D196
 
 echo "spacebar configuration loaded.."
-# Tokyo night
-spacebar -m config background_color            0xff24283b
-spacebar -m config foreground_color            0xffa9b1d6
-spacebar -m config power_icon_color            0xff7dcfff
-spacebar -m config battery_icon_color          0xfff7768e
-spacebar -m config dnd_icon_color              0xff7dcfff
-spacebar -m config clock_icon_color            0xffbb9af7
-spacebar -m config space_icon_color            0xffbb9af7
-spacebar -m config space_icon_color_secondary  0xff2ac3de
-spacebar -m config space_icon_color_tertiary   0xffff9e64

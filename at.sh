@@ -3,12 +3,12 @@
 
 color=$1
 dotfiles=~/dotfiles
-alacritty=${dotfiles}/alacritty
+spacebar=${dotfiles}/spacebar
 kitty=${dotfiles}/kitty
 tmux=${dotfiles}/tmux
 
-configure_alacritty() {
-  cat ${alacritty}/base.yml ${alacritty}/${color}.yml > ${dotfiles}/alacritty.yml
+configure_spacebar() {
+  cat ${spacebar}/base ${spacebar}/${color} > ${spacebar}/spacebarrc && brew services restart spacebar
 }
 
 configure_kitty() {
@@ -31,6 +31,7 @@ case $color in
     # configure_vim 'vim.cmd("set background=dark")'
     dark-mode on
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "rose-pine"'
+    configure_spacebar
     ;;
   rosepinedawn)
     configure_kitty
@@ -38,23 +39,27 @@ case $color in
     # configure_vim 'vim.cmd("set background=light")'
     dark-mode off
     configure_vim 'vim.cmd("set background=light")\nvim.cmd.colorscheme "rose-pine"'
+    configure_spacebar
     ;;
   catppuccinfrappe)
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "frappe"\nvim.cmd("colorscheme catppuccin")'
+    configure_spacebar
     dark-mode on
     ;;
   catppuccinmocha)
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "mocha"\nvim.cmd.colorscheme "catppuccin"'
+    configure_spacebar
     dark-mode on
     ;;
   catppuccinlatte)
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=light")\nvim.g.catppuccin_flavour = "latte"\nvim.cmd("colorscheme catppuccin")'
+    configure_spacebar
     dark-mode off
     ;;
   tokyolight)
@@ -62,6 +67,7 @@ case $color in
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=light")\nvim.cmd.colorscheme "tokyonight"'
+    configure_spacebar
     dark-mode off
     ;;
   tokyonight)
@@ -69,26 +75,31 @@ case $color in
     configure_kitty
     # configure_tmux
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "tokyonight-storm"'
+    configure_spacebar
     dark-mode on
     ;;
   nightfoxdusk)
     configure_kitty
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "duskfox"'
+    configure_spacebar
     dark-mode on
     ;;
   nightfoxnord)
     configure_kitty
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
+    configure_spacebar
     dark-mode on
     ;;
   nightfoxtera)
     configure_kitty
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "terafox"'
+    configure_spacebar
     dark-mode on
     ;;
   nightfoxdawn)
     configure_kitty
     configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "dawnfox"'
+    configure_spacebar
     dark-mode off
     ;;
   *)
