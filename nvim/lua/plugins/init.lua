@@ -67,8 +67,14 @@ return {
 		end,
 		opts = { labeled_modes = "nx" },
 	},
-	{ "cohama/lexima.vim" },
 	{ "szw/vim-maximizer" },
+	{
+		"echasnovski/mini.pairs",
+		version = "*",
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	},
 	{
 		"windwp/nvim-ts-autotag",
 	},
