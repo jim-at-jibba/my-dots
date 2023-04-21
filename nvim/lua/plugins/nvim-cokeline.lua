@@ -126,8 +126,24 @@ return {
 				fg = function(buffer)
 					return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
 				end,
-				bg = get_hex("ColorColumn", "bg"),
+				bg = "NONE",
 			},
+
+			-- default_hl = {
+			-- 	fg = function(buffer)
+			-- 		return buffer.is_focused and get_hex("ColorColumn", "bg") or get_hex("Normal", "fg")
+			-- 	end,
+			-- 	bg = function(buffer)
+			-- 		return buffer.is_focused and get_hex("DarkenedPanel", "fg") or get_hex("DarkenedPanel", "bg")
+			-- 	end,
+			-- },
+
+			-- default_hl = {
+			-- 	fg = function(buffer)
+			-- 		return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
+			-- 	end,
+			-- 	bg = get_hex("ColorColumn", "bg"),
+			-- },
 
 			components = {
 				components.space,
