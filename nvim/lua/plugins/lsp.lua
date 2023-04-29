@@ -56,6 +56,7 @@ return {
 				"grammarly",
 				"arduino_language_server",
 				"clangd",
+				"rust_analyzer",
 				-- "pylsp",
 			}
 
@@ -256,6 +257,7 @@ return {
 					nls.builtins.formatting.goimports,
 					nls.builtins.formatting.gofmt,
 					nls.builtins.formatting.prismaFmt,
+					nls.builtins.formatting.rustFmt,
 					nls.builtins.formatting.prettier.with({
 						extra_args = { "--single-quote", "false" },
 						extra_filetypes = { "astro" },
