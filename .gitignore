@@ -11,3 +11,7 @@ tags
 wtf/client_secret.json
 
 zsh/priv-env
+spacebar/spacebarrc
+spacebar/spacebarrc
+nvim/lua/color.lua
+kitty.conf
