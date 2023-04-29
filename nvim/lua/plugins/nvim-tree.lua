@@ -11,7 +11,7 @@ return {
 			disable_netrw = true,
 			hijack_cursor = true,
 			view = {
-				hide_root_folder = true,
+				hide_root_folder = false,
 				side = "right",
 				width = 40,
 				mappings = {
