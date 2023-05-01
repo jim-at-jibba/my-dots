@@ -130,7 +130,6 @@ alias cput='sudo powermetrics --samplers smc |grep -i "CPU die temperature"'
 
 # General
 ##########
-alias myip='ip addr show en0'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 alias v='nvim'
 alias zshrc='vim ~/.zshrc'
@@ -154,8 +153,8 @@ alias lip="ip addr show en0"
 alias server="python3 -m http.server"
 # alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
-export REACT_EDITOR='code'
 export EDITOR='/Users/jamesbest/neovim/bin/nvim'
+export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export sso='aws sso login --profile breedr_develop_data_analysis_user'
 
 # Docker
@@ -299,6 +298,8 @@ gpip3(){
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/jamesbest/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+eval "$(atuin init zsh)"
 
 # source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
