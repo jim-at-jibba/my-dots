@@ -86,7 +86,6 @@ return {
 		end,
 	},
 	-- use({ "jreybert/vimagit" })
-	{ "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",
