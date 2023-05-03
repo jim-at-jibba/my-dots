@@ -20,7 +20,7 @@ return {
 				enabled = false,
 			},
 			suggestion = {
-				enabled = true, -- I am using cmp
+				enabled = false, -- I am using cmp
 				auto_trigger = true,
 				debounce = 75,
 				keymap = {
