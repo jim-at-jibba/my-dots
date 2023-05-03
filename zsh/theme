@@ -13,6 +13,7 @@ nightfoxdusk [Nightfox Dusk]
 nightfoxnord [Nightfox Nord]
 nightfoxtera [Nightfox Tera]
 nightfoxdawn [Nightfox Dawn]
+retrowave [Synthwave]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

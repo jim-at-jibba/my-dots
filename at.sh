@@ -102,6 +102,12 @@ case $color in
     configure_spacebar
     dark-mode off
     ;;
+  retrowave)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "fluoromachine"'
+    configure_spacebar
+    dark-mode on
+    ;;
   *)
     echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera"
     exit 1
