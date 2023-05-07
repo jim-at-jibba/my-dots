@@ -16,6 +16,7 @@ return {
 			return "🦄🐙"
 		end
 
+		local signs = { error = " ", warn = " ", hint = " ", info = " " }
 		local config = {
 			options = {
 				theme = "catpuccin", -- tokyonight nightfox rose-pine
@@ -27,7 +28,17 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch" },
 				lualine_c = {
-					{ "diagnostics", sources = { "nvim_diagnostic" } },
+					{
+						"diagnostics",
+						diagnostics_color = {
+							-- Same values as the general color option can be used here.
+							error = "DiagnosticError", -- Changes diagnostics' error color.
+							warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+							info = "DiagnosticInfo", -- Changes diagnostics' info color.
+							hint = "DiagnosticHint", -- Changes diagnostics' hint color.
+						},
+						symbols = signs,
+					},
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 				},
