@@ -72,7 +72,25 @@ return {
 							local hl = "DiagnosticSign" .. type
 							vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 						end
-						vim.diagnostic.config({ virtual_text = false })
+
+						local config = {
+							-- disable virtual text
+							virtual_text = false,
+							-- show signs
+							signs = { active = signs },
+							update_in_insert = false,
+							underline = true,
+							severity_sort = true,
+							float = {
+								focusable = false,
+								style = "minimal",
+								border = "rounded",
+								source = "always",
+								header = "",
+								prefix = "",
+							},
+						}
+						vim.diagnostic.config(config)
 
 						if client.server_capabilities.documentFormattingProvider then
 							vim.cmd([[augroup Format]])
@@ -252,7 +270,7 @@ return {
 					-- nls.builtins.code_actions.gitsigns,
 					nls.builtins.code_actions.eslint,
 					nls.builtins.diagnostics.eslint,
-					nls.builtins.diagnostics.golangci_lint,
+					-- nls.builtins.diagnostics.golangci_lint,
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.goimports,
 					nls.builtins.formatting.gofmt,
