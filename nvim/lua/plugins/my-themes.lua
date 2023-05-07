@@ -17,13 +17,21 @@ return {
 				terminalColors = true, -- define vim.g.terminal_color_{0,17}
 				colors = { -- add/modify theme and palette colors
 					palette = {},
-					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+					theme = {
+						wave = {},
+						lotus = {},
+						dragon = {},
+						all = {
+							ui = {
+								bg_gutter = "none",
+							},
+						},
+					},
 				},
 				overrides = function(colors)
 					local theme = colors.theme
 					return {
-						NormalFloat = { bg = "none" },
-						FloatBorder = { bg = "none" },
+						FloatBorder = { bg = theme.ui.bg_p1, fg = theme.ui.bg_p1 },
 						FloatTitle = { bg = "none" },
 
 						-- Save an hlgroup with dark background and dimmed foreground
@@ -35,6 +43,23 @@ return {
 						-- set their background accordingly if you wish to keep them dark and borderless
 						LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 						MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+
+						TelescopeTitle = { fg = theme.ui.special, bold = true },
+						TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+						TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+						TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+						TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+						TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+						TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+
+						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+						PmenuSbar = { bg = theme.ui.bg_m1 },
+						PmenuThumb = { bg = theme.ui.bg_p2 },
+
+						NoiceCmdLinePrompt = { fg = theme.ui.special, bold = true },
+						NoiceCmdlinePopup = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+						NoiceCmdlinePopupBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
 					}
 				end,
 				theme = "wave", -- Load "wave" theme when 'background' option is not set
@@ -161,6 +186,28 @@ return {
 					-- Blend colours against the "base" background
 					CursorLine = { bg = "foam", blend = 10 },
 					StatusLine = { fg = "love", bg = "love", blend = 10 },
+
+					FloatBorder = { fg = "surface", bg = "surface" },
+					FloatTitle = { bg = "surface" },
+
+					TelescopeTitle = { fg = "love", bold = true },
+					TelescopePromptNormal = { bg = "surface" },
+					TelescopePromptBorder = { fg = "surface", bg = "surface" },
+					TelescopeResultsNormal = { fg = "text", bg = "nc" },
+					TelescopeResultsBorder = { fg = "nc", bg = "nc" },
+					TelescopePreviewNormal = { fg = "text", bg = "overlay" },
+					TelescopePreviewBorder = { fg = "overlay", bg = "overlay" },
+
+					NoiceCmdLinePrompt = { fg = "foam", bold = true },
+					NoiceCmdlinePopup = { fg = "surface", bg = "surface" },
+					NoiceCmdlinePopupBorder = { fg = "surface", bg = "surface" },
+
+					-- -- TitleString = { fg = "rose", bg = "surface" },
+					-- -- TitleIcon = { fg = "surface", bg = "surface" },
+					-- DiagnosticBorder = { fg = "surface", bg = "surface" },
+					-- DiagnosticNormal = { bg = "surface" },
+					-- DiagnosticShowNormal = { fg = "surface", bg = "surface" },
+					-- DiagnosticShowBorder = { bg = "surface" },
 				},
 			})
 		end,
