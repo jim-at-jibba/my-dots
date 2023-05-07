@@ -17,8 +17,6 @@ return {
 		{ "<leader>r", ":NvimTreeRefresh<CR>", desc = "Refresh NVIM tree" },
 	},
 	config = function()
-		local nvim_tree_config = require("nvim-tree.config")
-		local tree_cb = nvim_tree_config.nvim_tree_callback
 		require("nvim-tree").setup({
 			on_attach = on_attach,
 			disable_netrw = true,
