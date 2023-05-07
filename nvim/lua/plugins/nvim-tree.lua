@@ -1,3 +1,15 @@
+local function on_attach(bufnr)
+	local api = require("nvim-tree.api")
+
+	local function opts(desc)
+		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+	end
+
+	api.config.mappings.default_on_attach(bufnr)
+
+	vim.keymap.set("n", "s", api.node.open.vertical, opts("Open: Vertical Split"))
+end
+
 return {
 	"nvim-tree/nvim-tree.lua",
 	keys = {
@@ -8,19 +20,13 @@ return {
 		local nvim_tree_config = require("nvim-tree.config")
 		local tree_cb = nvim_tree_config.nvim_tree_callback
 		require("nvim-tree").setup({
+			on_attach = on_attach,
 			disable_netrw = true,
 			hijack_cursor = true,
 			view = {
 				hide_root_folder = false,
 				side = "right",
 				width = 40,
-				mappings = {
-					list = {
-						{ key = "s", cb = tree_cb("vsplit") },
-						{ key = "z", cb = tree_cb("") },
-						{ key = "m", cb = tree_cb("") },
-					},
-				},
 			},
 			renderer = {
 				indent_markers = { enable = true },
