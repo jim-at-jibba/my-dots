@@ -67,3 +67,8 @@ vim.api.nvim_create_autocmd("User", {
 		vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
+	pattern = "*",
+	command = "wa",
+})
