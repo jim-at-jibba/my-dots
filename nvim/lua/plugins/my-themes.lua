@@ -58,7 +58,7 @@ return {
 						PmenuThumb = { bg = theme.ui.bg_p2 },
 
 						NoiceCmdLinePrompt = { fg = theme.ui.special, bold = true },
-						NoiceCmdlinePopup = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+						NoiceCmdlinePopup = { fg = theme.ui.fg_dim, bg = theme.ui.bg_p1 },
 						NoiceCmdlinePopupBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
 					}
 				end,
@@ -199,7 +199,7 @@ return {
 					TelescopePreviewBorder = { fg = "overlay", bg = "overlay" },
 
 					NoiceCmdLinePrompt = { fg = "foam", bold = true },
-					NoiceCmdlinePopup = { fg = "surface", bg = "surface" },
+					NoiceCmdlinePopup = { fg = "iris", bg = "surface" },
 					NoiceCmdlinePopupBorder = { fg = "surface", bg = "surface" },
 
 					-- -- TitleString = { fg = "rose", bg = "surface" },
