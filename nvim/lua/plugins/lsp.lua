@@ -1,5 +1,10 @@
 return {
-
+	{
+		"folke/neodev.nvim",
+		config = function()
+			require("neodev").setup()
+		end,
+	},
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -38,6 +43,11 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+			local clangd_capabilities = capabilities
+			clangd_capabilities.textDocument.semanticHighlighting = true
+			clangd_capabilities.offsetEncoding = "utf-8"
+
 			local servers = {
 				"gopls",
 				"pyright",
@@ -62,6 +72,13 @@ return {
 
 			-- Use a loop to conveniently call 'setup' on multiple servers
 			for _, lsp in ipairs(servers) do
+				local lsp_capabilities
+				if lsp == "clangd" then
+					lsp_capabilities = clangd_capabilities
+				else
+					lsp_capabilities = capabilities
+				end
+
 				nvim_lsp[lsp].setup({
 					on_attach = function(client, bufnr)
 						-- disable formatting for LSP clients as this is handled by null-ls
@@ -108,7 +125,7 @@ return {
 							config.settings.python.pythonPath = get_python_path(config.root_dir)
 						end
 					end,
-					capabilities = capabilities,
+					capabilities = lsp_capabilities,
 					settings = {
 						html = {
 							filetypes = {
