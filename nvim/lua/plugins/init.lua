@@ -159,6 +159,7 @@ return {
 	-- references
 	{
 		"RRethy/vim-illuminate",
+		enabled = false,
 		event = { "BufReadPost", "BufNewFile" },
 		opts = { delay = 200 },
 		config = function(_, opts)
@@ -194,9 +195,7 @@ return {
 	},
 	{
 		"mrjones2014/tldr.nvim",
+		enabled = false,
 		dependencies = "nvim-telescope/telescope.nvim",
-	},
-	{
-		"dstein64/vim-startuptime",
 	},
 }
