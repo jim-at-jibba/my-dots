@@ -14,7 +14,22 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
-			require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup({
+				opts = function(_, opts)
+					vim.list_extend(opts.ensure_installed, {
+						"delve",
+						"gotests",
+						"golangci-lint",
+						"gofumpt",
+						"goimports",
+						"golangci-lint-langserver",
+						"impl",
+						"gomodifytags",
+						"iferr",
+						"gotestsum",
+					})
+				end,
+			})
 		end,
 	},
 	{
@@ -67,6 +82,7 @@ return {
 				"arduino_language_server",
 				"clangd",
 				"rust_analyzer",
+				"golangci_lint_ls",
 				-- "pylsp",
 			}
 
@@ -140,7 +156,15 @@ return {
 							},
 						},
 						emmet_ls = {
-							filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+							filetypes = {
+								"html",
+								"typescriptreact",
+								"javascriptreact",
+								"css",
+								"sass",
+								"scss",
+								"less",
+							},
 							init_options = {
 								html = {
 									options = {
@@ -150,7 +174,27 @@ return {
 								},
 							},
 						},
-						gopls = { analyses = { unusedparams = true }, staticcheck = true },
+						golangci_lint_ls = {},
+						gopls = {
+							settings = {
+								gopls = {
+									analyses = {
+										unusedparams = true,
+									},
+									hints = {
+										assignVariableTypes = true,
+										compositeLiteralFields = true,
+										compositeLiteralTypes = true,
+										constantValues = true,
+										functionTypeParameters = true,
+										parameterNames = true,
+										rangeVariableTypes = true,
+									},
+									staticcheck = true,
+									semanticTokens = true,
+								},
+							},
+						},
 						json = {
 							format = { enabled = false },
 							schemas = {
