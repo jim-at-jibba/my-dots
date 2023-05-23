@@ -9,7 +9,7 @@ return {
 	},
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
-		"echasnovski/mini.nvim",
+		"echasnovski/mini.comment",
 		event = "VeryLazy",
 		config = function()
 			require("mini.comment").setup({
@@ -86,14 +86,19 @@ return {
 		"windwp/nvim-ts-autotag",
 	},
 	{
-		"crispgm/nvim-go",
-		config = function()
-			require("go").setup({
-				notify = true,
-				auto_lint = false,
-				lint_prompt_style = "ql",
-			})
+		"ray-x/go.nvim",
+		dependencies = {
+			"ray-x/guihua.lua",
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {},
+		config = function(_, opts)
+			require("go").setup(opts)
 		end,
+		event = { "CmdlineEnter" },
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 	},
 	{
 		"alexghergh/nvim-tmux-navigation",
