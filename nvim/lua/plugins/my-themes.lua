@@ -154,6 +154,10 @@ return {
 						NoiceCmdLinePrompt = { fg = "orange", bold = "true" },
 						NoiceCmdlinePopup = { fg = "palette.magenta", bg = "palette.bg2" },
 						NoiceCmdlinePopupBorder = { fg = "palette.bg2", bg = "palette.bg2" },
+						NoiceMini = { fg = "orange", bg = "bg2" },
+						-- NoiceLspProgressSpinner = { bg = colors.theme.ui.bg },
+						-- NoiceLspProgressClient = { bg = colors.theme.ui.bg },
+						-- NoiceLspProgressTitle = { bg = colors.theme.ui.bg },
 
 						-- DiagnosticBorder = { fg = "surface", bg = "surface" },
 						DiagnosticNormal = { bg = "bg2", fg = "bg2" },
