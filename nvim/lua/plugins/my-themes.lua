@@ -139,7 +139,7 @@ return {
 						CursorLine = { bg = "bg2" },
 						StatusLine = { fg = "pink", bg = "pink", blend = "10" },
 
-						NormalFloat = { bg = "bg2" },
+						normalfloat = { bg = "bg2" },
 						FloatBorder = { fg = "palette.bg2", bg = "palette.bg2" },
 						FloatTitle = { bg = "palette.bg2" },
 
@@ -245,6 +245,25 @@ return {
 					-- DiagnosticShowBorder = { bg = "surface" },
 				},
 			})
+		end,
+	},
+	{
+		"hardhackerlabs/theme-vim",
+		name = "hardhacker",
+		lazy = false,
+		priority = 1000,
+		init = function()
+			vim.g.hardhacker_darker = 0
+			vim.g.hardhacker_hide_tilde = 1
+			vim.g.hardhacker_keyword_italic = 1
+		end,
+		config = function()
+			FloatBorder = { fg = "#282433", bg = "#282433" }
+			NoiceCmdLinePrompt = { fg = "#282433", bold = true }
+			NoiceCmdlinePopup = { fg = "iris", bg = "nc" }
+			-- NoiceCmdlinePopup = { fg = "iris", bg = "nc" }
+			-- NoiceCmdlinePopupBorder = { fg = "nc", bg = "nc" }
+			vim.cmd("colorscheme hardhacker")
 		end,
 	},
 }

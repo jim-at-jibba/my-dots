@@ -114,6 +114,12 @@ case $color in
     # configure_spacebar
     dark-mode on
     ;;
+  hardhacker)
+    configure_kitty
+    configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "hardhacker"'
+    configure_spacebar
+    dark-mode on
+    ;;
   *)
     echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera"
     exit 1

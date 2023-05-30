@@ -15,6 +15,7 @@ nightfoxtera [Nightfox Tera]
 nightfoxdawn [Nightfox Dawn]
 kanagawawave [Kanagawa wave]
 kanagawalotus [Kanagawa lotus]
+hardhacker [Hard Hacker]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

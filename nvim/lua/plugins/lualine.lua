@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
-		local navic = require("nvim-navic")
+		-- local navic = require("nvim-navic")
 		local function clock()
 			return " " .. os.date("%H:%M")
 		end
@@ -19,7 +19,7 @@ return {
 		local signs = { error = " ", warn = " ", hint = " ", info = " " }
 		local config = {
 			options = {
-				theme = "catpuccin", -- tokyonight nightfox rose-pine
+				theme = "auto", -- tokyonight nightfox rose-pine
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
 				icons_enabled = true,
