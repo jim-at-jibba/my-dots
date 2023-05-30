@@ -138,7 +138,10 @@ return {
 					end,
 					before_init = function(_, config)
 						if lsp == "pyright" then
+							print(get_python_path(config.root_dir))
 							config.settings.python.pythonPath = get_python_path(config.root_dir)
+							config.settings.python.venvPath = "/Users/jamesbest/.pyenv/versions/"
+							config.settings.python.venv = "breedr-api"
 						end
 					end,
 					capabilities = lsp_capabilities,
