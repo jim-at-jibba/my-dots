@@ -48,22 +48,22 @@ map("n", "<leader>?", ":CheatSH<CR>", opts)
 
 -- lsp
 map("n", "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", opts)
-map(
-	"n",
-	"<leader>dn",
-	"<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>",
-	opts
-)
-map(
-	"n",
-	"<leader>dp",
-	"<cmd>lua vim.diagnostic.goto_previous({ float = { border = 'rounded', max_width = 100 }})<CR>",
-	opts
-)
+-- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+-- map("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- map("n", "<leader>dl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", opts)
+-- map(
+-- 	"n",
+-- 	"<leader>dn",
+-- 	"<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>",
+-- 	opts
+-- )
+-- map(
+-- 	"n",
+-- 	"<leader>dp",
+-- 	"<cmd>lua vim.diagnostic.goto_previous({ float = { border = 'rounded', max_width = 100 }})<CR>",
+-- 	opts
+-- )
 
 --Telescope
 map("n", "<leader>b", ":Telescope buffers preview=true<CR>", opts)

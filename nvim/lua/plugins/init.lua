@@ -125,20 +125,6 @@ return {
 	},
 	{ "mbbill/undotree" },
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		ft = { "python", "yml", "yaml" },
-		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			require("indent_blankline").setup({
-				char = "│",
-				filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-				show_trailing_blankline_indent = false,
-				show_current_context = false,
-			})
-		end,
-	},
-
-	{
 		"norcalli/nvim-colorizer.lua",
 		event = "BufReadPre",
 		config = function()
@@ -161,29 +147,6 @@ return {
             { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
         },
 	},
-	-- references
-	{
-		"RRethy/vim-illuminate",
-		enabled = false,
-		event = { "BufReadPost", "BufNewFile" },
-		opts = { delay = 200 },
-		config = function(_, opts)
-			require("illuminate").configure(opts)
-			vim.api.nvim_create_autocmd("FileType", {
-				callback = function()
-					local buffer = vim.api.nvim_get_current_buf()
-					pcall(vim.keymap.del, "n", "]]", { buffer = buffer })
-					pcall(vim.keymap.del, "n", "[[", { buffer = buffer })
-				end,
-			})
-		end,
-        -- stylua: ignore
-        keys = {
-            { "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
-            { "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
-        },
-	},
-
 	-- buffer remove
 	{
 		"echasnovski/mini.bufremove",
@@ -192,15 +155,5 @@ return {
             { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
             { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
         },
-	},
-	{
-		"SmiteshP/nvim-navic",
-		enable = false,
-		dependencies = "neovim/nvim-lspconfig",
-	},
-	{
-		"mrjones2014/tldr.nvim",
-		enabled = false,
-		dependencies = "nvim-telescope/telescope.nvim",
 	},
 }
