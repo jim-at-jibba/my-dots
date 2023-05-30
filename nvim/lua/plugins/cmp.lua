@@ -96,7 +96,7 @@ return {
 				},
 				sources = {
 					{ name = "nvim_lsp" },
-					{ name = "copilot" },
+					-- { name = "copilot" },
 					{ name = "buffer", keyword_length = 5 },
 					{ name = "luasnip" },
 					{ name = "emoji" },
