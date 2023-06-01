@@ -2,8 +2,13 @@
 # show a list of commands and alias
 
 local helptxt="
-create-task     [create task]
-archive-task    [archive task]
+ts              [Todoist task show]
+tc              [Todoist Task complete]
+td              [Todoist Task delete]
+tl              [Todoist Task list]
+tp              [Todoist Task Projects]
+create-task     [Breedr create task]
+archive-task    [Breedr archive task]
 tea             [teamocils]
 ll              [tree view]
 kp              [kill:path]
