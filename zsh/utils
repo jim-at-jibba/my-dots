@@ -2,13 +2,15 @@
 # show a list of commands and alias
 
 local helptxt="
-tea    [teamocils]
-ll     [tree view]
-kp     [kill:path]
-ks     [kill:tcp]
-theme  [themes]"
+create-task     [create task]
+archive-task    [archive task]
+tea             [teamocils]
+ll              [tree view]
+kp              [kill:path]
+ks              [kill:tcp]
+theme           [themes]"
 
-local cmd=$(echo $helptxt | eval "fzf ${FZF_DEFAULT_OPTS} --header='[utils:show]'" | awk '{print $1}')
+local cmd=$(echo $helptxt | eval "gum filter --placeholder 'Pick a command'" | awk '{print $1}')
 
 if [[ -n $cmd ]]; then
  eval ${cmd}
