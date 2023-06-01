@@ -213,6 +213,14 @@ alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 alias nmdelete='find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;'
 alias readme='npx readme-md-generator'
 
+# Todoist
+##########
+alias ts='todoist list | gum filter | awk "{print $1}" | xargs todoist show'
+alias tc='todoist list | gum filter | awk "{print $1}" | xargs todoist close'
+alias td='todoist list | gum filter | awk "{print $1}" | xargs todoist delete'
+alias tl='todoist list | gum filter'
+alias tp='todoist projects | gum filter'
+
 # twf
 
 twf-widget() {
