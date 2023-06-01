@@ -263,7 +263,6 @@ return {
 			NoiceCmdlinePopup = { fg = "iris", bg = "nc" }
 			-- NoiceCmdlinePopup = { fg = "iris", bg = "nc" }
 			-- NoiceCmdlinePopupBorder = { fg = "nc", bg = "nc" }
-			vim.cmd("colorscheme hardhacker")
 		end,
 	},
 }
