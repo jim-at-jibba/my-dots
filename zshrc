@@ -220,6 +220,7 @@ alias tc='todoist list | gum filter | awk "{print $1}" | xargs todoist close'
 alias td='todoist list | gum filter | awk "{print $1}" | xargs todoist delete'
 alias tl='todoist list | gum filter'
 alias tp='todoist projects | gum filter'
+alias dl='diary-log'
 
 # twf
 
