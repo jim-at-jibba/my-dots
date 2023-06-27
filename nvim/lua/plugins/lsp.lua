@@ -179,24 +179,20 @@ return {
 						},
 						golangci_lint_ls = {},
 						gopls = {
-							settings = {
-								gopls = {
-									analyses = {
-										unusedparams = true,
-									},
-									hints = {
-										assignVariableTypes = true,
-										compositeLiteralFields = true,
-										compositeLiteralTypes = true,
-										constantValues = true,
-										functionTypeParameters = true,
-										parameterNames = true,
-										rangeVariableTypes = true,
-									},
-									staticcheck = true,
-									semanticTokens = true,
-								},
+							analyses = {
+								unusedparams = true,
 							},
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							},
+							staticcheck = true,
+							semanticTokens = true,
 						},
 						json = {
 							format = { enabled = false },
