@@ -33,7 +33,7 @@ local options = {
 	termguicolors = true,
 	cursorline = false,
 	undodir = "/Users/jamesbest/.cache/nvim/undodir",
-	-- laststatus = 0,
+	laststatus = 0,
 }
 
 for k, v in pairs(options) do
