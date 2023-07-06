@@ -85,12 +85,4 @@ return {
 			})
 		end,
 	},
-	-- use({ "jreybert/vimagit" })
-	{
-		"akinsho/git-conflict.nvim",
-		version = "*",
-		config = function()
-			require("git-conflict").setup()
-		end,
-	},
 }
