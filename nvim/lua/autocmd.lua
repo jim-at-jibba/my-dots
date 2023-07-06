@@ -72,3 +72,12 @@ vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	pattern = "*",
 	command = "wa",
 })
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyVimStarted",
+	callback = function()
+		local stats = require("lazy").stats()
+		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+    vim.notify("⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms")
+	end,
+})
