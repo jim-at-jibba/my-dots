@@ -1,7 +1,5 @@
 return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	{ "nvim-telescope/telescope-ui-select.nvim" },
-	{ "danielvolchek/tailiscope.nvim" },
 	{
 		"folke/todo-comments.nvim",
 		event = { "BufReadPost", "BufNewFile" },
