@@ -1,10 +1,5 @@
 return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	{
-		"folke/todo-comments.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		config = true,
-	},
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
 		"echasnovski/mini.comment",
@@ -15,23 +10,6 @@ return {
 					pre = function()
 						require("ts_context_commentstring.internal").update_commentstring()
 					end,
-				},
-			})
-		end,
-	},
-	{
-		"echasnovski/mini.indentscope",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-				callback = function()
-					vim.b.miniindentscope_disable = true
-				end,
-			})
-			require("mini.indentscope").setup({
-				options = {
-					try_as_border = true,
 				},
 			})
 		end,
@@ -80,7 +58,6 @@ return {
 			},
 		},
 	},
-	{ "szw/vim-maximizer" },
 	{
 		"echasnovski/mini.pairs",
 		version = "*",
@@ -130,13 +107,6 @@ return {
 			vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
 		end,
 	},
-	{
-		"PatschD/zippy.nvim",
-		keys = {
-			{ "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>", desc = "Add debug log" },
-		},
-	},
-	{ "mbbill/undotree" },
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "BufReadPre",
