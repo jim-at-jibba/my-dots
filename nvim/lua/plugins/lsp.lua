@@ -1,5 +1,9 @@
 return {
 	{
+		"dgagn/diagflow.nvim",
+		opts = {},
+	},
+	{
 		"folke/neodev.nvim",
 		config = function()
 			require("neodev").setup()
