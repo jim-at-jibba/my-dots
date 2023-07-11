@@ -32,7 +32,7 @@ return {
 			},
 			notify = {
 				enabled = true,
-				view = "mini",
+				view = "notify",
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
