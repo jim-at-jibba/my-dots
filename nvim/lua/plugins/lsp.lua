@@ -1,9 +1,5 @@
 return {
 	{
-		"dgagn/diagflow.nvim",
-		opts = {},
-	},
-	{
 		"folke/neodev.nvim",
 		config = function()
 			require("neodev").setup()
@@ -118,14 +114,6 @@ return {
 							update_in_insert = false,
 							underline = true,
 							severity_sort = true,
-							float = {
-								focusable = false,
-								style = "minimal",
-								border = "rounded",
-								source = "always",
-								header = "",
-								prefix = "",
-							},
 						}
 						vim.diagnostic.config(config)
 
