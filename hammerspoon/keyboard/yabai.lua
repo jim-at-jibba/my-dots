@@ -36,6 +36,12 @@ local function altShiftNumber(number)
 	altShift(number, { "window --space " .. number, "space --focus " .. number })
 end
 
+local function hyper(key, commands)
+	hs.hotkey.bind({ "cmd", "alt", "ctrl" }, key, function()
+		yabai(commands)
+	end)
+end
+
 for i = 1, 9 do
 	local num = tostring(i)
 	alt(num, { "space --focus " .. num })
@@ -47,4 +53,11 @@ local homeRow = { h = "west", j = "south", k = "north", l = "east" }
 for key, direction in pairs(homeRow) do
 	alt(key, { "window --focus " .. direction })
 	altShift(key, { "window --swap " .. direction })
+	-- hyper(key, { "window --swap " .. direction })
 end
+
+-- resize
+hyper("h", { "window --resize left:-50:0", "window --resize right:-50:0" })
+hyper("j", { "window --resize bottom:0:50", "window --resize top:0:50" })
+hyper("k", { "window --resize top:0:-50", "window --resize bottom:0:-50" })
+hyper("l", { "window --resize right:50:0", "window --resize left:50:0" })
