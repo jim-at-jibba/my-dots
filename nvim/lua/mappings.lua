@@ -61,7 +61,7 @@ map(
 map(
 	"n",
 	"<leader>dp",
-	"<cmd>lua vim.diagnostic.goto_previous({ float = { border = 'rounded', max_width = 100 }})<CR>",
+	"<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>",
 	opts
 )
 
@@ -72,6 +72,13 @@ map("n", "<leader>dr", ":Telescope lsp_references<CR>", opts)
 map("n", "<C-p>", ":Telescope git_files preview=true<CR>", opts)
 map("n", "<leader>g", ":Telescope git_status preview=true<CR>", opts)
 map("n", "<leader>de", ":Telescope diagnostics<CR>", opts)
+map("n", "<leader>/", function()
+	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer" })
 
 -- Cokeline
 for i = 1, 9 do

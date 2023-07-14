@@ -78,6 +78,21 @@ vim.api.nvim_create_autocmd("User", {
 	callback = function()
 		local stats = require("lazy").stats()
 		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-    vim.notify("⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms")
+		vim.notify("⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms")
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+	pattern = "*",
+	callback = function()
+		local opts = {
+			focusable = false,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = "rounded",
+			source = "always",
+			prefix = " ",
+			scope = "cursor",
+		}
+		vim.diagnostic.open_float(nil, opts)
 	end,
 })
