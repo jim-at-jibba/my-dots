@@ -42,6 +42,10 @@ local function hyper(key, commands)
 	end)
 end
 
+hs.hotkey.bind({ "rightcmd" }, "1", function()
+	hs.eventtap.keyStroke({}, "`")
+end)
+
 for i = 1, 9 do
 	local num = tostring(i)
 	alt(num, { "space --focus " .. num })
