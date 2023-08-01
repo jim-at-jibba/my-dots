@@ -78,7 +78,6 @@ return {
 				"emmet_ls",
 				"astro",
 				"tailwindcss",
-				"grammarly",
 				"arduino_language_server",
 				"clangd",
 				"rust_analyzer",
@@ -142,12 +141,6 @@ return {
 							filetypes = {
 								"html",
 								"tmpl",
-							},
-						},
-						grammarly = {
-							filetypes = { "markdown", "text" },
-							init_options = {
-								clientId = "clientId=client_2zkt1YpZ613xS1H6m68nsE",
 							},
 						},
 						emmet_ls = {
