@@ -19,6 +19,7 @@ return {
 					"go",
 					"gomod",
 					"gosum",
+					"toml",
 				}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 				indent = {
 					enable = true,
