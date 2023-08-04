@@ -6,7 +6,20 @@ return {
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+				ensure_installed = {
+					"help",
+					"javascript",
+					"typescript",
+					"c",
+					"lua",
+					"rust",
+					"python",
+					"css",
+					"html",
+					"go",
+					"gomod",
+					"gosum",
+				}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 				indent = {
 					enable = true,
 				},
