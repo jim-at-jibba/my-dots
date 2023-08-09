@@ -14,6 +14,7 @@ return {
 				svn = false,
 				cvs = false,
 				go = false,
+				rust = false,
 				["."] = false,
 			},
 			panel = {
