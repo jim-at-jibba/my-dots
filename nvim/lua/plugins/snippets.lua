@@ -1,8 +1,9 @@
 return {
 
-	{ "rafamadriz/friendly-snippets" },
+	{ "rafamadriz/friendly-snippets", event = "VeryLazy" },
 	{
 		"L3MON4D3/LuaSnip",
+		event = "VeryLazy",
 		dependencies = "saadparwaiz1/cmp_luasnip",
 		config = function()
 			local ls = require("luasnip")

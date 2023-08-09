@@ -1,4 +1,4 @@
 return {
-	{ "normen/vim-pio" },
-	{ "sago35/tinygo.vim" },
+	{ "normen/vim-pio", event = "VeryLazy" },
+	{ "sago35/tinygo.vim", event = "VeryLazy" },
 }

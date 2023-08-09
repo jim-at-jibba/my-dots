@@ -16,6 +16,7 @@ return {
 		{ "<leader><leader>1", ":NvimTreeToggle<CR>", desc = "Toggle NVIM tree", silent = true, remap = false },
 		{ "<leader>r", ":NvimTreeRefresh<CR>", desc = "Refresh NVIM tree" },
 	},
+	event = "VeryLazy",
 	config = function()
 		require("nvim-tree").setup({
 			on_attach = on_attach,
