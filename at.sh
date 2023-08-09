@@ -84,6 +84,12 @@ nightfoxdusk)
 	configure_spacebar
 	dark-mode on
 	;;
+nightfoxday)
+	configure_kitty
+	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "dayfox"'
+	configure_spacebar
+	dark-mode on
+	;;
 nightfoxnord)
 	configure_kitty
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
