@@ -83,6 +83,8 @@ return {
 				"clangd",
 				"rust_analyzer",
 				"golangci_lint_ls",
+				"svelte",
+				"dockerls",
 				-- "pylsp",
 			}
 
