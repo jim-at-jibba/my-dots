@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
+		local wtf = require("wtf")
 		-- local navic = require("nvim-navic")
 		local function clock()
 			return " " .. os.date("%H:%M")
@@ -42,7 +43,7 @@ return {
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 				},
-				lualine_x = {},
+				lualine_x = { wtf.get_status },
 				lualine_y = { "location" },
 				lualine_z = { clock, my_favs },
 			},
