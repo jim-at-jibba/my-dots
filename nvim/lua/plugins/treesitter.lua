@@ -10,6 +10,8 @@ return {
 					"help",
 					"javascript",
 					"typescript",
+					"markdown",
+					"markdown_inline",
 					"c",
 					"lua",
 					"rust",
@@ -39,7 +41,8 @@ return {
 				},
 				highlight = {
 					enable = true, -- false will disable the whole extension
-					disable = { "c", "rust" }, -- list of language that will be disabled
+					disable = { "c" }, -- list of language that will be disabled
+					additional_vim_regex_highlighting = { "markdown" },
 				},
 				-- refactor = {
 				--   highlight_definitions = {
