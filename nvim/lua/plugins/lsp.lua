@@ -85,6 +85,7 @@ return {
 				"golangci_lint_ls",
 				"svelte",
 				"dockerls",
+				"graphql",
 				-- "pylsp",
 			}
 
@@ -140,6 +141,9 @@ return {
 					end,
 					capabilities = lsp_capabilities,
 					settings = {
+						graphql = {
+							filetypes = { "graphql", "javascript", "typescript", "typescriptreact", "javascriptreact" },
+						},
 						html = {
 							filetypes = {
 								"tmpl",
