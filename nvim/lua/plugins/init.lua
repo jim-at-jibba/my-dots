@@ -15,6 +15,12 @@ return {
 		end,
 	},
 	{
+		"PatschD/zippy.nvim",
+		keys = {
+			{ "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>", desc = "Add debug log" },
+		},
+	},
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		---@type Flash.Config
