@@ -142,8 +142,15 @@ return {
 					settings = {
 						html = {
 							filetypes = {
-								"html",
 								"tmpl",
+								"html",
+								"javascript",
+								"javascriptreact",
+								"javascript.jsx",
+								"typescript",
+								"typescriptreact",
+								"typescript.tsx",
+								"svelte",
 							},
 						},
 						emmet_ls = {
@@ -155,6 +162,7 @@ return {
 								"sass",
 								"scss",
 								"less",
+								"svelte",
 							},
 							init_options = {
 								html = {
@@ -328,7 +336,7 @@ return {
 					nls.builtins.formatting.shfmt,
 					nls.builtins.formatting.prettier.with({
 						extra_args = { "--single-quote", "false" },
-						extra_filetypes = { "astro" },
+						extra_filetypes = { "astro", "svelte" },
 					}),
 					nls.builtins.formatting.autopep8,
 					nls.builtins.formatting.isort,
