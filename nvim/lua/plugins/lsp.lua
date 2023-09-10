@@ -71,7 +71,7 @@ return {
 				"html",
 				"cssls",
 				"lua_ls",
-				"tsserver",
+				-- "tsserver",
 				"yamlls",
 				"jsonls",
 				"marksman",
@@ -127,9 +127,9 @@ return {
 							vim.cmd([[augroup END]])
 						end
 
-						if lsp == "tsserver" then
-							require("nvim-lsp-ts-utils").setup({})
-						end
+						-- if lsp == "tsserver" then
+						-- 	require("nvim-lsp-ts-utils").setup({})
+						-- end
 					end,
 					before_init = function(_, config)
 						if lsp == "pyright" then
@@ -342,11 +342,12 @@ return {
 						extra_args = { "--single-quote", "false" },
 						extra_filetypes = { "astro", "svelte" },
 					}),
-					nls.builtins.formatting.autopep8,
+					-- nls.builtins.formatting.autopep8,
 					nls.builtins.formatting.isort,
 					nls.builtins.formatting.black,
 					nls.builtins.diagnostics.flake8,
 					-- nls.builtins.diagnostics.mypy,
+					nls.builtins.diagnostics.ruff,
 				},
 				on_attach = function(client)
 					if client.server_capabilities.documentFormattingProvider then
