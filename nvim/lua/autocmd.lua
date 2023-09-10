@@ -46,27 +46,27 @@ api.nvim_create_autocmd(
 	{ pattern = "*", command = "set nocursorline", group = cursorGrp }
 )
 
-api.nvim_create_autocmd("CursorHold", {
-	buffer = bufnr,
-	callback = function()
-		local opts = {
-			focusable = false,
-			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-			border = "rounded",
-			source = "always",
-			prefix = " ",
-			scope = "cursor",
-		}
-		vim.diagnostic.open_float(nil, opts)
-	end,
-})
+-- api.nvim_create_autocmd("CursorHold", {
+-- 	buffer = bufnr,
+-- 	callback = function()
+-- 		local opts = {
+-- 			focusable = false,
+-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+-- 			border = "rounded",
+-- 			source = "always",
+-- 			prefix = " ",
+-- 			scope = "cursor",
+-- 		}
+-- 		vim.diagnostic.open_float(nil, opts)
+-- 	end,
+-- })
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "GitConflictDetected",
-	callback = function()
-		vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
-	end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "GitConflictDetected",
+-- 	callback = function()
+-- 		vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	pattern = "*",
