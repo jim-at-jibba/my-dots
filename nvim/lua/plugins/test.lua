@@ -23,14 +23,9 @@ return {
 				adapters = {
 					require("neotest-python"),
 					require("neotest-rust"),
-					require("neotest-go")({
-						experimental = {
-							test_table = true,
-						},
-						args = { "-count=1", "-timeout=60s" },
-					}),
+					require("neotest-go"),
 					require("neotest-vim-test")({
-						ignore_file_types = { "python", "vim", "lua" },
+						ignore_file_types = { "python", "vim", "lua", "go" },
 					}),
 				},
 			})

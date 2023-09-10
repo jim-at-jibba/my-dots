@@ -103,6 +103,7 @@ map("n", "<leader>di", ":lua require('dap').step_into()<CR>")
 map("n", "<leader>do", ":lua require('dap').step_out()<CR>")
 map("n", "<leader>db", ":lua require('dap').toggle_breakpoint()<CR>")
 map("n", "<leader>de", ":lua require('dap').close()<CR>")
+map("n", "<leader>dpr", ":lua require('dap-python').test_method()<CR>")
 -- map("n", "<leader>db", ":lua require('dap').toggle_breakpoint()<CR>")
 
 -- tests
