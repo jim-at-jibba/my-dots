@@ -15,3 +15,4 @@ spacebar/spacebarrc
 spacebar/spacebarrc
 nvim/lua/color.lua
 kitty.conf
+tmux.conf
