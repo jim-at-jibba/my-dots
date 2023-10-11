@@ -8,6 +8,13 @@ return {
 			shade_filetypes = { "none" },
 			shade_terminals = true,
 			shading_factor = "1",
+			size = function(term)
+				if term.direction == "horizontal" then
+					return 15
+				elseif term.direction == "vertical" then
+					return vim.o.columns * 0.4
+				end
+			end,
 		})
 
 		function _G.set_terminal_keymaps()
@@ -106,5 +113,28 @@ return {
 			"<cmd>lua _pio_monitor_toggle()<CR>",
 			{ noremap = true, silent = true }
 		)
+
+		local verticalTerm = Terminal:new({
+			dir = "git_dir",
+			direction = "vertical",
+			float_opts = {
+				border = "double",
+			},
+			-- function to run on opening the terminal
+			on_open = function(term)
+				vim.cmd("startinsert!")
+				vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+			end,
+			-- function to run on closing the terminal
+			on_close = function(term)
+				vim.cmd("startinsert!")
+			end,
+		})
+
+		function _vertical_toggle()
+			verticalTerm:toggle()
+		end
+
+		vim.api.nvim_set_keymap("n", "<leader>vt", "<cmd>lua _vertical_toggle()<CR>", { noremap = true, silent = true })
 	end,
 }
