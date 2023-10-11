@@ -313,53 +313,53 @@ return {
 		end,
 	},
 	{ "jose-elias-alvarez/nvim-lsp-ts-utils" },
-	{
-		"jay-babu/mason-null-ls.nvim",
-		config = function()
-			require("mason-null-ls").setup({
-				ensure_installed = { "stylua", "jq", "eslint_d", "golangci_lint", "goimports", "gofmt" },
-			})
-		end,
-	},
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			local nls = require("null-ls")
-			nls.setup({
-				sources = {
-					-- nls.builtins.code_actions.gitsigns,
-					nls.builtins.code_actions.eslint,
-					nls.builtins.diagnostics.eslint,
-					nls.builtins.diagnostics.shellcheck,
-					-- nls.builtins.diagnostics.golangci_lint,
-					nls.builtins.formatting.stylua,
-					nls.builtins.formatting.goimports,
-					nls.builtins.formatting.gofmt,
-					nls.builtins.formatting.prismaFmt,
-					nls.builtins.formatting.rustFmt,
-					nls.builtins.formatting.shfmt,
-					nls.builtins.formatting.prettier.with({
-						extra_args = { "--single-quote", "false" },
-						extra_filetypes = { "astro", "svelte" },
-					}),
-					-- nls.builtins.formatting.autopep8,
-					nls.builtins.formatting.isort,
-					nls.builtins.formatting.black,
-					nls.builtins.diagnostics.flake8,
-					-- nls.builtins.diagnostics.mypy,
-					nls.builtins.diagnostics.ruff,
-				},
-				on_attach = function(client)
-					if client.server_capabilities.documentFormattingProvider then
-						-- auto format on save (not asynchronous)
-						local LspFormattingGrp = vim.api.nvim_create_augroup("LspFormattingGrp", { clear = true })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							command = "lua vim.lsp.buf.format()",
-							group = LspFormattingGrp,
-						})
-					end
-				end,
-			})
-		end,
-	},
+	-- {
+	-- 	"jay-babu/mason-null-ls.nvim",
+	-- 	config = function()
+	-- 		require("mason-null-ls").setup({
+	-- 			ensure_installed = { "stylua", "jq", "eslint_d", "golangci_lint", "goimports", "gofmt" },
+	-- 		})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"jose-elias-alvarez/null-ls.nvim",
+	-- 	config = function()
+	-- 		local nls = require("null-ls")
+	-- 		nls.setup({
+	-- 			sources = {
+	-- 				-- nls.builtins.code_actions.gitsigns,
+	-- 				nls.builtins.code_actions.eslint,
+	-- 				nls.builtins.diagnostics.eslint,
+	-- 				nls.builtins.diagnostics.shellcheck,
+	-- 				-- nls.builtins.diagnostics.golangci_lint,
+	-- 				nls.builtins.formatting.stylua,
+	-- 				nls.builtins.formatting.goimports,
+	-- 				nls.builtins.formatting.gofmt,
+	-- 				nls.builtins.formatting.prismaFmt,
+	-- 				nls.builtins.formatting.rustFmt,
+	-- 				nls.builtins.formatting.shfmt,
+	-- 				nls.builtins.formatting.prettier.with({
+	-- 					extra_args = { "--single-quote", "false" },
+	-- 					extra_filetypes = { "astro", "svelte" },
+	-- 				}),
+	-- 				-- nls.builtins.formatting.autopep8,
+	-- 				nls.builtins.formatting.isort,
+	-- 				nls.builtins.formatting.black,
+	-- 				nls.builtins.diagnostics.flake8,
+	-- 				-- nls.builtins.diagnostics.mypy,
+	-- 				nls.builtins.diagnostics.ruff,
+	-- 			},
+	-- 			on_attach = function(client)
+	-- 				if client.server_capabilities.documentFormattingProvider then
+	-- 					-- auto format on save (not asynchronous)
+	-- 					local LspFormattingGrp = vim.api.nvim_create_augroup("LspFormattingGrp", { clear = true })
+	-- 					vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 						command = "lua vim.lsp.buf.format()",
+	-- 						group = LspFormattingGrp,
+	-- 					})
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 }
