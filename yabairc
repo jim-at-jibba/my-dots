@@ -75,6 +75,7 @@ yabai -m space 4 --label mob
 yabai -m space 5 --label web
 yabai -m space 6 --label comms
 yabai -m space 7 --label ide
+yabai -m space 8 --label media
 
 # ===== Rules ==================================
 
