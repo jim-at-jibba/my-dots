@@ -7,11 +7,65 @@ return {
 	},
 	event = "VeryLazy",
 	config = function()
+		local cmdline_opts = {}
 		require("notify").setup({
 			background_colour = "#000000",
 			timeout = 500,
 		})
 		require("noice").setup({
+			cmdline = {
+				view = "cmdline_popup",
+				format = {
+					cmdline = { pattern = "^:", icon = "", opts = cmdline_opts },
+					search_down = {
+						kind = "Search",
+						pattern = "^/",
+						icon = "🔎 ",
+						ft = "regex",
+						opts = cmdline_opts,
+					},
+					search_up = {
+						kind = "Search",
+						pattern = "^%?",
+						icon = "🔎 ",
+						ft = "regex",
+						opts = cmdline_opts,
+					},
+					filter = { pattern = "^:%s*!", icon = "$", ft = "sh", opts = cmdline_opts },
+					f_filter = {
+						kind = "CmdLine",
+						pattern = "^:%s*%%%s*!",
+						icon = " $",
+						ft = "sh",
+						opts = cmdline_opts,
+					},
+					v_filter = {
+						kind = "CmdLine",
+						pattern = "^:%s*%'<,%'>%s*!",
+						icon = " $",
+						ft = "sh",
+						opts = cmdline_opts,
+					},
+					lua = { pattern = "^:%s*lua%s+", icon = "", conceal = true, ft = "lua", opts = cmdline_opts },
+					rename = {
+						pattern = "^:%s*IncRename%s+",
+						icon = " ",
+						conceal = true,
+						opts = {
+							relative = "cursor",
+							size = { min_width = 20 },
+							position = { row = -3, col = 0 },
+							buf_options = { filetype = "text" },
+							border = {
+								text = {
+									top = " rename ",
+								},
+							},
+						},
+					},
+				},
+			},
+			views = { split = { enter = true } },
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
@@ -25,13 +79,13 @@ return {
 				-- This is a current Neovim limitation.
 				enabled = true, -- enables the Noice messages UI
 				view = "mini", -- default view for messages
-				view_error = "notify", -- view for errors
-				view_warn = "notify", -- view for warnings
+				view_error = "mini", -- view for errors
+				view_warn = "mini", -- view for warnings
 				view_history = "messages", -- view for :messages
 				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 			},
 			notify = {
-				enabled = true,
+				enabled = false,
 				view = "notify",
 			},
 			-- you can enable a preset for easier configuration
