@@ -67,6 +67,9 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
 
+  # make iex keep shell history
+  export ERL_AFLAGS="-kernel shell_history enabled"
+
   # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
   export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
   export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
