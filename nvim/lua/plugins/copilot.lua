@@ -15,7 +15,8 @@ return {
 				cvs = false,
 				go = false,
 				rust = false,
-				["."] = false,
+				elixir = false,
+				["."] = true,
 			},
 			panel = {
 				enabled = false,

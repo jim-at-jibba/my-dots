@@ -98,6 +98,9 @@ return {
 					lsp_capabilities = capabilities
 				end
 
+				-- https://www.reddit.com/r/neovim/s/TgMwZpSVWj
+				-- lsp_capabilities.didChangeWatchedFiles.dynamicRegistration = true
+
 				nvim_lsp[lsp].setup({
 					on_attach = function(client, bufnr)
 						-- disable formatting for LSP clients as this is handled by null-ls

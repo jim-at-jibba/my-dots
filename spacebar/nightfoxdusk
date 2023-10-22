@@ -1,0 +1,11 @@
+# Nord
+spacebar -m config background_color            0xff232136
+spacebar -m config foreground_color            0xffe0def4
+spacebar -m config power_icon_color            0xff569FBA
+spacebar -m config battery_icon_color          0xffeb6f92
+spacebar -m config dnd_icon_color              0xff9ccfd8
+spacebar -m config clock_icon_color            0xffea9a97
+spacebar -m config space_icon_color            0xffEB98C3
+spacebar -m config space_icon_color_secondary  0xff569FBA
+spacebar -m config space_icon_color_tertiary   0xff569FBA
+
