@@ -1,0 +1,10 @@
+# Tokyo night
+spacebar -m config background_color            0xff002B36
+spacebar -m config foreground_color            0xffFDF6E3
+spacebar -m config power_icon_color            0xff268BD2
+spacebar -m config battery_icon_color          0xffD33682
+spacebar -m config dnd_icon_color              0xff2AA198
+spacebar -m config clock_icon_color            0xffD33682
+spacebar -m config space_icon_color            0xff268BD2
+spacebar -m config space_icon_color_secondary  0xffD33682
+spacebar -m config space_icon_color_tertiary   0xffff9e64

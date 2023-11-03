@@ -125,6 +125,13 @@ nightfoxdawn)
 	configure_spacebar
 	dark-mode off
 	;;
+solarized)
+	configure_kitty
+	configure_tmux_dark
+	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "solarized-osaka"'
+	configure_spacebar
+	dark-mode off
+	;;
 *)
 	echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera"
 	exit 1
