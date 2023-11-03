@@ -13,6 +13,7 @@ return {
 					javascriptreact = { { "prettierd", "prettier" } },
 					typescriptreact = { { "prettierd", "prettier" } },
 					go = { "gofmt", "goimports" },
+					elixir = { "mix" },
 				},
 			})
 		end,
