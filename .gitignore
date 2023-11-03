@@ -16,3 +16,4 @@ spacebar/spacebarrc
 nvim/lua/color.lua
 kitty.conf
 tmux.conf
+utilities/diary.text
