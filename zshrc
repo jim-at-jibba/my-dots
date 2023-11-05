@@ -134,7 +134,7 @@ alias cput='sudo powermetrics --samplers smc |grep -i "CPU die temperature"'
 # General
 ##########
 alias whereami='npx @rafaelrinaldi/whereami -f json'
-alias v='nvim'
+alias v='NVIM_APPNAME=nvim-minimal nvim'
 alias zshrc='vim ~/.zshrc'
 alias reload='source ~/.zshrc'
 alias l='exa --long --header --all --icons'
