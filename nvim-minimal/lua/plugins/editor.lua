@@ -820,8 +820,12 @@ return {
 							["<C-x>"] = false,
 							["<C-q>"] = require("telescope.actions").send_to_qflist,
 							["<c-t>"] = trouble.open_with_trouble,
+              ['<c-d>'] = require('telescope.actions').delete_buffer
 						},
-						n = { ["<c-t>"] = trouble.open_with_trouble },
+						n = {
+              ["<c-t>"] = trouble.open_with_trouble,
+              ['<c-d>'] = require('telescope.actions').delete_buffer
+            },
 					},
 				},
 				extensions = {
@@ -1038,6 +1042,11 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+    config = function ()
+      require("harpoon").setup({
+        tabline = true,
+      })
+    end,
 		keys = {
 			{ "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = "Harpoon menu" },
 			{ "<leader>hj", "<cmd>lua require('harpoon.mark').add_file()<CR>", desc = "Add file to Harpoon" },
