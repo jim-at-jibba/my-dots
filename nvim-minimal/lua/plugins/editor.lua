@@ -37,7 +37,7 @@ return {
 					enabled = false,
 				},
 				suggestion = {
-					enabled = true, -- I am using cmp
+					enabled = true,
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
@@ -270,7 +270,6 @@ return {
 				"html",
 				"cssls",
 				"lua_ls",
-				-- "tsserver",
 				"yamlls",
 				"jsonls",
 				"marksman",
@@ -285,7 +284,6 @@ return {
 				"svelte",
 				"dockerls",
 				"graphql",
-				-- "pylsp",
 			}
 
 			-- Use a loop to conveniently call 'setup' on multiple servers
