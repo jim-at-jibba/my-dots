@@ -17,3 +17,4 @@ nvim/lua/color.lua
 kitty.conf
 tmux.conf
 utilities/diary.text
+nvim-minimal/lua/color.lua
