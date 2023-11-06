@@ -27,6 +27,7 @@ configure_tmux_dark() {
 
 configure_vim() {
 	echo $1 >${dotfiles}/nvim/lua/color.lua
+	echo $1 >${dotfiles}/nvim-minimal/lua/color.lua
 }
 
 case $color in
