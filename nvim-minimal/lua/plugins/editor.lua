@@ -820,12 +820,12 @@ return {
 							["<C-x>"] = false,
 							["<C-q>"] = require("telescope.actions").send_to_qflist,
 							["<c-t>"] = trouble.open_with_trouble,
-              ['<c-d>'] = require('telescope.actions').delete_buffer
+							["<c-d>"] = require("telescope.actions").delete_buffer,
 						},
 						n = {
-              ["<c-t>"] = trouble.open_with_trouble,
-              ['<c-d>'] = require('telescope.actions').delete_buffer
-            },
+							["<c-t>"] = trouble.open_with_trouble,
+							["<c-d>"] = require("telescope.actions").delete_buffer,
+						},
 					},
 				},
 				extensions = {
@@ -1021,11 +1021,31 @@ return {
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		config = function()
+			-- Don't like showing which key all the time...
+			-- So I disable it in visual mode and when yanking, deleting
+			-- https://github.com/folke/which-key.nvim/issues/304
+			local preset = require("which-key.plugins.presets")
+			preset.operators["v"] = nil
+			preset.operators["y"] = nil
+			preset.operators["d"] = nil
+			require("which-key").setup({
+				window = {
+					border = "single",
+					position = "bottom",
+					margin = { 1, 0, 1, 0.75 },
+					padding = { 0, 0, 0, 0 },
+					winblend = 0,
+					zindex = 1000,
+				},
+				layout = {
+					height = { min = 4, max = 25 },
+					width = { min = 20, max = 70 },
+					spacing = 3,
+					align = "left",
+				},
+			})
+		end,
 	},
 	-- mini notifier
 	{
@@ -1042,11 +1062,11 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-    config = function ()
-      require("harpoon").setup({
-        tabline = true,
-      })
-    end,
+		config = function()
+			require("harpoon").setup({
+				tabline = false,
+			})
+		end,
 		keys = {
 			{ "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = "Harpoon menu" },
 			{ "<leader>hj", "<cmd>lua require('harpoon.mark').add_file()<CR>", desc = "Add file to Harpoon" },
