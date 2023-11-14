@@ -51,6 +51,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="$HOME/neovim/bin:$PATH"
   export PATH="$HOME/.rover/bin:$PATH"
   export PATH="$HOME/bin:$PATH"
+  export PATH="$HOME/.local/bin:$PATH"
 
   export ANDROID_HOME=$HOME/Library/Android/sdk
   export PATH=$PATH:$ANDROID_HOME/emulator
@@ -66,6 +67,7 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
+
 
   # make iex keep shell history
   export ERL_AFLAGS="-kernel shell_history enabled"

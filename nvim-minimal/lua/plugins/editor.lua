@@ -186,6 +186,29 @@ return {
 	},
 	-- LSP
 	{
+		"rmagatti/goto-preview",
+		keys = {
+			{
+				"<leader>dpd",
+				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+				desc = "Preview definition",
+			},
+			{
+				"<leader>dpr",
+				"<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+				desc = "Preview definition",
+			},
+			{
+				"<esc>",
+				"<cmd>lua require('goto-preview').close_all_win()<CR>",
+				desc = "Preview definition",
+			},
+		},
+		config = function()
+			require("goto-preview").setup({})
+		end,
+	},
+	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
@@ -207,6 +230,8 @@ return {
 						"gomodifytags",
 						"iferr",
 						"gotestsum",
+						"intelephense",
+						"phpactor",
 					})
 				end,
 			})
@@ -284,6 +309,8 @@ return {
 				"svelte",
 				"dockerls",
 				"graphql",
+				"intelephense",
+				"phpactor",
 			}
 
 			-- Use a loop to conveniently call 'setup' on multiple servers
@@ -828,10 +855,12 @@ return {
 							["<C-q>"] = require("telescope.actions").send_to_qflist,
 							["<c-t>"] = trouble.open_with_trouble,
 							["<c-d>"] = require("telescope.actions").delete_buffer,
+							["jk"] = require("telescope.actions").close,
 						},
 						n = {
 							["<c-t>"] = trouble.open_with_trouble,
 							["<c-d>"] = require("telescope.actions").delete_buffer,
+							["jk"] = require("telescope.actions").close,
 						},
 					},
 				},
@@ -1043,15 +1072,6 @@ return {
 			})
 		end,
 	},
-	-- mini notifier
-	{
-		"vigoux/notifier.nvim",
-		config = function()
-			require("notifier").setup({
-				-- You configuration here
-			})
-		end,
-	},
 	-- harpoon
 	{
 		"ThePrimeagen/harpoon",
@@ -1096,7 +1116,7 @@ return {
 			function _G.set_terminal_keymaps()
 				local opts = { buffer = 0 }
 				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-				vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+				vim.keymap.set("t", "jj", [[<C-\><C-n>]], opts)
 				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
 				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
 				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
@@ -1211,6 +1231,99 @@ return {
 				"<cmd>lua _vertical_toggle()<CR>",
 				{ noremap = true, silent = true }
 			)
+		end,
+	},
+
+	{
+		"folke/noice.nvim",
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+		},
+		event = "VeryLazy",
+		config = function()
+			local cmdline_opts = {}
+			require("noice").setup({
+				cmdline = {
+					view = "cmdline_popup",
+					format = {
+						cmdline = { pattern = "^:", icon = "", opts = cmdline_opts },
+						search_down = {
+							kind = "Search",
+							pattern = "^/",
+							icon = "🔎 ",
+							ft = "regex",
+							opts = cmdline_opts,
+						},
+						search_up = {
+							kind = "Search",
+							pattern = "^%?",
+							icon = "🔎 ",
+							ft = "regex",
+							opts = cmdline_opts,
+						},
+						filter = { pattern = "^:%s*!", icon = "$", ft = "sh", opts = cmdline_opts },
+						f_filter = {
+							kind = "CmdLine",
+							pattern = "^:%s*%%%s*!",
+							icon = " $",
+							ft = "sh",
+							opts = cmdline_opts,
+						},
+						v_filter = {
+							kind = "CmdLine",
+							pattern = "^:%s*%'<,%'>%s*!",
+							icon = " $",
+							ft = "sh",
+							opts = cmdline_opts,
+						},
+						lua = { pattern = "^:%s*lua%s+", icon = "", conceal = true, ft = "lua", opts = cmdline_opts },
+						rename = {
+							pattern = "^:%s*IncRename%s+",
+							icon = " ",
+							conceal = true,
+							opts = {
+								relative = "cursor",
+								size = { min_width = 20 },
+								position = { row = -3, col = 0 },
+								buf_options = { filetype = "text" },
+								border = {
+									text = {
+										top = " rename ",
+									},
+								},
+							},
+						},
+					},
+				},
+				views = { split = { enter = true } },
+				lsp = {
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true,
+					},
+				},
+				messages = {
+					-- NOTE: If you enable messages, then the cmdline is enabled automatically.
+					-- This is a current Neovim limitation.
+					enabled = true, -- enables the Noice messages UI
+					view = "mini", -- default view for messages
+					view_error = "mini", -- view for errors
+					view_warn = "mini", -- view for warnings
+					view_history = "messages", -- view for :messages
+					view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+				},
+				-- you can enable a preset for easier configuration
+				presets = {
+					bottom_search = true, -- use a classic bottom cmdline for search
+					command_palette = true, -- position the cmdline and popupmenu together
+					long_message_to_split = true, -- long messages will be sent to a split
+					inc_rename = true, -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false, -- add a border to hover docs and signature help
+				},
+			})
 		end,
 	},
 }
