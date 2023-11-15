@@ -167,6 +167,7 @@ return {
 					NoiceCmdLinePrompt = { fg = "foam", bold = true },
 					NoiceCmdlinePopup = { fg = "iris", bg = "nc" },
 					NoiceCmdlinePopupBorder = { fg = "nc", bg = "nc" },
+					NoiceMini = { fg = "iris", bg = "overlay" },
 
 					-- -- TitleString = { fg = "rose", bg = "surface" },
 					-- -- TitleIcon = { fg = "surface", bg = "surface" },
