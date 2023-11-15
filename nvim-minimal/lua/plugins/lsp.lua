@@ -57,7 +57,7 @@ return {
 		keys = {
 			{ "<leader>dd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "Go to definition (LSP)" },
 			{ "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code action (LSP)" },
-			{ "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "Rename (LSP)" },
+			-- { "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "Rename (LSP)" },
 			{ "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Show docs (LSP)" },
 			{
 				"<leader>dl",
