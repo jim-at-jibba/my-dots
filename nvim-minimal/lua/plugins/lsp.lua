@@ -2,19 +2,25 @@ return {
 	-- LSP
 	{
 		"rmagatti/goto-preview",
+		enabled = true,
 		keys = {
 			{
-				"<leader>dpd",
+				"<leader>dD",
 				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
 				desc = "Preview definition",
 			},
 			{
-				"<leader>dpr",
+				"<leader>dR",
 				"<cmd>lua require('goto-preview').goto_preview_references()<CR>",
 				desc = "Preview definition",
 			},
 			{
 				"<esc>",
+				"<cmd>lua require('goto-preview').close_all_win()<CR>",
+				desc = "Preview definition",
+			},
+			{
+				"jj",
 				"<cmd>lua require('goto-preview').close_all_win()<CR>",
 				desc = "Preview definition",
 			},
