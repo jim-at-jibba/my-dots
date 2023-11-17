@@ -54,6 +54,11 @@ local routes = {
 
 	-- DAP
 	{ filter = { event = "notify", find = "^Session terminated$" }, view = "mini" },
+	-- LSP
+	{
+		filter = { event = "notify", find = "No information available" },
+		view = "mini",
+	},
 }
 
 return {
@@ -120,7 +125,7 @@ return {
 				mini = {
 					timeout = 3000,
 					zindex = 10, -- lower, so it does not cover nvim-notify
-					position = { col = "96%" }, -- to the left to avoid collision with scrollbar
+					-- position = { col = "96%" }, -- to the left to avoid collision with scrollbar
 				},
 				hover = {
 					size = { max_width = 80 },
