@@ -19,11 +19,6 @@ return {
 				"<cmd>lua require('goto-preview').close_all_win()<CR>",
 				desc = "Preview definition",
 			},
-			{
-				"jj",
-				"<cmd>lua require('goto-preview').close_all_win()<CR>",
-				desc = "Preview definition",
-			},
 		},
 		config = function()
 			require("goto-preview").setup({})

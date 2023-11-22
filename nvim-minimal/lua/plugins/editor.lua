@@ -14,6 +14,14 @@ end
 return {
 	-- mini
 	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
+		end,
+	},
+	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
 		config = function()
@@ -400,7 +408,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring",
 			"windwp/nvim-ts-autotag",
 		},
 		event = { "BufReadPost", "BufNewFile" },
@@ -425,10 +432,6 @@ return {
 				}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 				indent = {
 					enable = true,
-				},
-				context_commentstring = {
-					enable = true,
-					enable_autocmd = false,
 				},
 				incremental_selection = {
 					enable = true,
@@ -467,6 +470,7 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
