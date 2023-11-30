@@ -1,6 +1,14 @@
 return {
 	-- LSP
 	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
+	},
+	{
 		"rmagatti/goto-preview",
 		enabled = true,
 		keys = {
@@ -98,6 +106,10 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			local clangd_capabilities = capabilities
@@ -105,6 +117,7 @@ return {
 			clangd_capabilities.offsetEncoding = "utf-8"
 
 			local servers = {
+				"typos_lsp",
 				"gopls",
 				"pyright",
 				"prismals",
@@ -125,8 +138,6 @@ return {
 				"svelte",
 				"dockerls",
 				"graphql",
-				"intelephense",
-				"phpactor",
 			}
 
 			-- Use a loop to conveniently call 'setup' on multiple servers
@@ -143,6 +154,7 @@ return {
 
 				nvim_lsp[lsp].setup({
 					on_attach = function(client, bufnr)
+						require("lsp_signature").on_attach({}, bufnr)
 						-- disable formatting for LSP clients as this is handled by null-ls
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
@@ -221,6 +233,10 @@ return {
 							},
 						},
 						golangci_lint_ls = {},
+						typos_lsp = {
+							cmd = { "typos-lsp" },
+							filetypes = { "*" },
+						},
 						gopls = {
 							analyses = {
 								unusedparams = true,

@@ -23,7 +23,9 @@ local options = {
 	showmode = true,
 	foldenable = true,
 	foldlevel = 99,
+	foldlevelstart = 99,
 	foldmethod = "indent",
+	foldcolumn = "1",
 	-- foldmethod = "expr",
 	-- foldexpr = "nvim_treesitter#foldexpr()",
 

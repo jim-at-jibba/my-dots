@@ -58,6 +58,13 @@ return {
         },
 	},
 	{
+		"echasnovski/mini.indentscope",
+		version = false,
+		config = function()
+			require("mini.indentscope").setup()
+		end,
+	},
+	{
 		"PatschD/zippy.nvim",
 		keys = {
 			{ "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>", desc = "Add debug log" },
@@ -642,6 +649,17 @@ return {
 		end,
 	},
 	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(bufnr, filetype, buftype)
+					return { "lsp", "indent" }
+				end,
+			})
+		end,
+	},
+	{
 		"j-hui/fidget.nvim",
 		enabled = false,
 		config = function()
@@ -656,7 +674,7 @@ return {
 						max_height = 0, -- Maximum height of the notification window
 						x_padding = 1, -- Padding from right edge of window boundary
 						y_padding = 0, -- Padding from bottom edge of window boundary
-						align_bottom = true, -- Whether to bottom-align the notification window
+						align = "bottom", -- Whether to bottom-align the notification window
 						relative = "editor", -- What the notification window position is relative to
 					},
 				},

@@ -41,3 +41,12 @@ map("v", "<leader>p", '"_dP', opts)
 
 map("n", "Y", "y$", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
+
+map("n", "zR", ':lua require("ufo").openAllFolds()<CR>', opts)
+map("n", "zM", ':lua require("ufo").closeAllFolds()<CR>', opts)
+map("n", "zK", function()
+	local winid = require("ufo").peekFoldedLinesUnderCursor()
+	if not winid then
+		vim.lsp.buf.hover()
+	end
+end, opts)
