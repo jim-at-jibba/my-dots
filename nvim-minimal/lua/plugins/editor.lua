@@ -148,7 +148,7 @@ return {
 				hsl_fn = true, -- CSS hsl() and hsla() functions
 				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
 				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-				namess = true, -- "Name" codes like Blue
+				names = true, -- "Name" codes like Blue
 			})
 		end,
 	},
@@ -255,7 +255,7 @@ return {
 			{ "<leader>f", ":Telescope live_grep preview=true<CR>", desc = "Search (Telescope)" },
 			{ "<leader>dr", ":Telescope lsp_references<CR>", desc = "LSP References (Telescope)" },
 			{ "<C-p>", ":Telescope git_files preview=true<CR>", desc = "Fuzzy search (Telescope)" },
-			{ "<leader>g", ":Telescope git_status preview=true<CR>", desc = "Git staus (Telescope)" },
+			{ "<leader>g", ":Telescope git_status preview=true<CR>", desc = "Git status (Telescope)" },
 		},
 		config = function()
 			local trouble = require("trouble.providers.telescope")
@@ -646,17 +646,6 @@ return {
 		},
 		config = function()
 			require("inc_rename").setup()
-		end,
-	},
-	{
-		"kevinhwang91/nvim-ufo",
-		dependencies = "kevinhwang91/promise-async",
-		config = function()
-			require("ufo").setup({
-				provider_selector = function(bufnr, filetype, buftype)
-					return { "lsp", "indent" }
-				end,
-			})
 		end,
 	},
 	{

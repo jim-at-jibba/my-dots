@@ -36,6 +36,13 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
 	},
+	{
+		"OlegGulevskyy/better-ts-errors.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		config = {
+			keymap = "<leader>te",
+		},
+	},
 	-- go
 	{
 		"ray-x/go.nvim",
@@ -86,6 +93,8 @@ return {
 					typescriptreact = { { "prettierd", "prettier" } },
 					go = { "gofmt", "goimports" },
 					elixir = { "mix" },
+					["*"] = { "typos" },
+					["_"] = { "typos" },
 				},
 			})
 		end,
