@@ -1,16 +1,6 @@
 return {
 	-- git
 	{
-		"kdheepak/lazygit.nvim",
-
-		keys = {
-			{ "<leader>gs", ":LazyGit<cr>", desc = "Harpoon menu" },
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
