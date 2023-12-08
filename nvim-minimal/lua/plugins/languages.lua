@@ -93,8 +93,8 @@ return {
 					typescriptreact = { { "prettierd", "prettier" } },
 					go = { "gofmt", "goimports" },
 					elixir = { "mix" },
-					["*"] = { "typos" },
-					["_"] = { "typos" },
+					-- ["*"] = { "typos" },
+					-- ["_"] = { "typos" },
 				},
 			})
 		end,
