@@ -112,4 +112,6 @@ return {
 			}
 		end,
 	},
+	-- arduino
+	{ "normen/vim-pio", event = "VeryLazy" },
 }
