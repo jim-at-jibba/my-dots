@@ -28,6 +28,7 @@ local options = {
 	foldcolumn = "1",
 	-- foldmethod = "expr",
 	-- foldexpr = "nvim_treesitter#foldexpr()",
+	laststatus = 0,
 
 	backup = false,
 	writebackup = false,
