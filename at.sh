@@ -20,6 +20,11 @@ configure_tmux_light() {
 	tmux source-file ~/.tmux.conf
 }
 
+configure_tmux() {
+	cat ${tmux}/base.conf >${dotfiles}/tmux.conf
+	tmux source-file ~/.tmux.conf
+}
+
 configure_tmux_dark() {
 	cat ${tmux}/base.conf ${tmux}/dark.conf >${dotfiles}/tmux.conf
 	tmux source-file ~/.tmux.conf
@@ -51,24 +56,24 @@ rosepinedawn)
 	;;
 catppuccinfrappe)
 	configure_kitty
-	# configure_tmux
-	configure_tmux_dark
+	configure_tmux
+	# configure_tmux_dark
 	configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "frappe"\nvim.cmd("colorscheme catppuccin")'
 	configure_spacebar
 	dark-mode on
 	;;
 catppuccinmocha)
 	configure_kitty
-	configure_tmux_dark
-	# configure_tmux
+	# configure_tmux_dark
+	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.g.catppuccin_flavour = "mocha"\nvim.cmd.colorscheme "catppuccin"'
 	configure_spacebar
 	dark-mode on
 	;;
 catppuccinlatte)
 	configure_kitty
-	configure_tmux_light
-	# configure_tmux
+	# configure_tmux_light
+	configure_tmux
 	configure_vim 'vim.cmd("set background=light")\nvim.g.catppuccin_flavour = "latte"\nvim.cmd("colorscheme catppuccin")'
 	configure_spacebar
 	dark-mode off

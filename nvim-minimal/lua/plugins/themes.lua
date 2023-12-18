@@ -179,4 +179,39 @@ return {
 			})
 		end,
 	},
+	{
+		"catppuccin/nvim",
+		lazy = true,
+		name = "catppuccin",
+		config = function()
+			require("catppuccin").setup({
+				transparent_background = true,
+				custom_highlights = function(colors)
+					return {
+						ColorColumn = { bg = colors.pink },
+
+						-- Blend colours against the "base" background
+						CursorLine = { bg = colors.sapphire, blend = 10 },
+						StatusLine = { fg = colors.flamingo, bg = colors.flamingo, blend = 10 },
+
+						FloatBorder = { fg = colors.surface0, bg = colors.surface0 },
+						NormalFloat = { bg = colors.surface0 },
+						FloatTitle = { bg = colors.surface0 },
+
+						TelescopeTitle = { fg = colors.teal, bold = true },
+						TelescopePromptNormal = { bg = colors.surface0 },
+						TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
+						TelescopeResultsNormal = { fg = colors.text, bg = colors.mantle },
+						TelescopeResultsBorder = { fg = colors.mantle, bg = colors.mantle },
+						TelescopePreviewNormal = { fg = colors.text, bg = colors.crust },
+						TelescopePreviewBorder = { fg = colors.crust, bg = colors.crust },
+
+						NoiceCmdLinePrompt = { fg = colors.sapphire, bold = true },
+						NoiceCmdlinePopup = { fg = colors.sapphire, bg = colors.surface0 },
+						NoiceCmdlinePopupBorder = { fg = colors.surface0, bg = colors.surface0 },
+					}
+				end,
+			})
+		end,
+	},
 }

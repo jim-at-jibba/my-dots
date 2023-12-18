@@ -218,6 +218,8 @@ alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 alias nmdelete='find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;'
 alias readme='npx readme-md-generator'
 alias run="(jq -r '.scripts|to_entries[]|((.key))' package.json) | fzf-tmux -p --border-label='Yarn run' | xargs yarn"
+alias love='open "$(basename "$PWD")" -a /Applications/love.app'
+
 
 # Todoist
 ##########

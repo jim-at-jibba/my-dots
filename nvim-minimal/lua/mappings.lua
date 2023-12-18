@@ -40,11 +40,12 @@ map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
 map("v", "<leader>p", '"_dP', opts)
 
 map("n", "Y", "y$", opts)
-map("n", "<leader><leader>", "<c-^>", opts)
+map("n", "<leader>6", "<c-^>", opts)
 
-map("n", "<leader><leader>x", ':lua require("utils").declutter_terminal()<CR>', opts)
-map("n", "<leader><leader>c", ':lua require("utils").clutter_terminal()<CR>', opts)
+-- map("n", "<leader><leader>x", ':lua require("utils").declutter_terminal()<CR>', opts)
+-- map("n", "<leader><leader>c", ':lua require("utils").clutter_terminal()<CR>', opts)
 
+map("n", "dw", "ciw", opts)
 vim.cmd("cnoreabbrev W! w!")
 vim.cmd("cnoreabbrev Q! q!")
 vim.cmd("cnoreabbrev Qall! qall!")
