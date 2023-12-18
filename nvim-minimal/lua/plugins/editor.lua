@@ -346,7 +346,7 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		keys = {
-			{ "<leader><leader>1", ":NvimTreeToggle<CR>", desc = "Toggle NVIM tree", silent = true, remap = false },
+			{ "<leader>tr", ":NvimTreeToggle<CR>", desc = "Toggle NVIM tree", silent = true, remap = false },
 			{ "<leader>r", ":NvimTreeRefresh<CR>", desc = "Refresh NVIM tree" },
 		},
 		event = "VeryLazy",
@@ -478,10 +478,6 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		enabled = false,
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
 		config = function()
 			-- Don't like showing which key all the time...
 			-- So I disable it in visual mode and when yanking, deleting
@@ -490,6 +486,7 @@ return {
 			preset.operators["v"] = nil
 			preset.operators["y"] = nil
 			preset.operators["d"] = nil
+			preset.operators["i"] = nil
 			require("which-key").setup({
 				window = {
 					border = "single",
@@ -498,6 +495,17 @@ return {
 					padding = { 0, 0, 0, 0 },
 					winblend = 0,
 					zindex = 1000,
+				},
+				triggers_nowait = { "<leader>", "<space>" },
+				triggers_blacklist = {
+					-- list of mode / prefixes that should never be hooked by WhichKey
+					-- this is mostly relevant for keymaps that start with a native binding
+					i = { "j", "k" },
+					v = { "j", "k" },
+				},
+				disable = {
+					buftypes = {},
+					filetypes = { "markdown" },
 				},
 				layout = {
 					height = { min = 4, max = 25 },
