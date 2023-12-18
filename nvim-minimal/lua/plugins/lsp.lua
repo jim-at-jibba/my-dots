@@ -1,5 +1,6 @@
 return {
 	-- LSP
+	{ "folke/neodev.nvim", opts = {} },
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
@@ -186,6 +187,42 @@ return {
 						-- 	require("nvim-lsp-ts-utils").setup({})
 						-- end
 					end,
+					on_init = function(client)
+						local path = client.workspace_folders[1].name
+						if
+							not vim.loop.fs_stat(path .. "/.luarc.json")
+							and not vim.loop.fs_stat(path .. "/.luarc.jsonc")
+						then
+							client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+								Lua = {
+									runtime = {
+										-- Tell the language server which version of Lua you're using
+										-- (most likely LuaJIT in the case of Neovim)
+										version = "LuaJIT",
+									},
+									diagnostics = {
+										enable = true,
+										globals = { "vim", "describe", "love" },
+										disable = { "lowercase-global" },
+									},
+									-- Make the server aware of Neovim runtime files
+									workspace = {
+										checkThirdParty = false,
+										library = {
+											vim.env.VIMRUNTIME,
+											"${3rd}/love2d/library",
+											-- "${3rd}/busted/library",
+										},
+										-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+										-- library = vim.api.nvim_get_runtime_file("", true)
+									},
+								},
+							})
+
+							client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+						end
+						return true
+					end,
 					before_init = function(_, config)
 						if lsp == "pyright" then
 							print(get_python_path(config.root_dir))
@@ -315,7 +352,10 @@ return {
 								globals = { "vim", "describe" },
 								disable = { "lowercase-global" },
 							},
+							-- Look into this https://github.com/LuaLS/lua-language-server/wiki/Configuration-File for LOVE
+							-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
 							workspace = {
+								checkThirdParty = false,
 								library = {
 									vim.api.nvim_get_runtime_file("", true),
 									[vim.fn.expand("$VIMRUNTIME/lua")] = true,
