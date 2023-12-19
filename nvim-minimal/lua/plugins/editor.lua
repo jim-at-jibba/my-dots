@@ -473,49 +473,6 @@ return {
 			require("treesitter-context").setup()
 		end,
 	},
-	-- which-key
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		enabled = false,
-		config = function()
-			-- Don't like showing which key all the time...
-			-- So I disable it in visual mode and when yanking, deleting
-			-- https://github.com/folke/which-key.nvim/issues/304
-			local preset = require("which-key.plugins.presets")
-			preset.operators["v"] = nil
-			preset.operators["y"] = nil
-			preset.operators["d"] = nil
-			preset.operators["i"] = nil
-			require("which-key").setup({
-				window = {
-					border = "single",
-					position = "bottom",
-					margin = { 1, 0, 1, 0.75 },
-					padding = { 0, 0, 0, 0 },
-					winblend = 0,
-					zindex = 1000,
-				},
-				triggers_nowait = { "<leader>", "<space>" },
-				triggers_blacklist = {
-					-- list of mode / prefixes that should never be hooked by WhichKey
-					-- this is mostly relevant for keymaps that start with a native binding
-					i = { "j", "k" },
-					v = { "j", "k" },
-				},
-				disable = {
-					buftypes = {},
-					filetypes = { "markdown" },
-				},
-				layout = {
-					height = { min = 4, max = 25 },
-					width = { min = 20, max = 70 },
-					spacing = 3,
-					align = "left",
-				},
-			})
-		end,
-	},
 	-- harpoon
 	{
 		"ThePrimeagen/harpoon",
