@@ -1,10 +1,6 @@
 return {
 	-- themes
 	{
-		"fynnfluegge/monet.nvim",
-		name = "monet",
-	},
-	{
 		"oxfist/night-owl.nvim",
 		lazy = true,
 		event = "VeryLazy",
