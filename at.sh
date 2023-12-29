@@ -138,6 +138,13 @@ nightowl)
 	configure_spacebar
 	dark-mode on
 	;;
+ariakedark)
+	configure_kitty
+	configure_tmux_dark
+	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "ariake"'
+	# configure_spacebar
+	dark-mode on
+	;;
 *)
 	echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl"
 	exit 1

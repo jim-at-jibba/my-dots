@@ -1,6 +1,9 @@
 return {
 	-- themes
 	{
+		dir = "~/code/other/ariake.nvim",
+	},
+	{
 		"oxfist/night-owl.nvim",
 		lazy = true,
 		event = "VeryLazy",

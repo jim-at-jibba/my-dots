@@ -15,7 +15,7 @@ catppuccinfrappe [Catpuccino Frappe]
 catppuccinmocha [Catpuccino Mocha]
 catppuccinlatte [Catpuccino Latte]
 nightowl [Night Owl]
-monet [Monet]
+ariakedark [Ariake Dark]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
