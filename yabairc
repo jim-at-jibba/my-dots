@@ -65,7 +65,7 @@ yabai -m config auto_balance off
 yabai -m config mouse_modifier fn
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
-yabai -m config external_bar all:26:0
+yabai -m config external_bar all:40:0
 
 # mission-control desktop labels
 yabai -m space 1 --label code
@@ -101,6 +101,9 @@ yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
 
 # ===== Signals ================================
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
 set +x
 printf "yabai: configuration loaded...\\n"
