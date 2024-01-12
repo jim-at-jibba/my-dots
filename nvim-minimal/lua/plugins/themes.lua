@@ -3,6 +3,7 @@ return {
 	{
 		dir = "~/code/other/ariake.nvim",
 	},
+	{ "akinsho/horizon.nvim", version = "*" },
 	{
 		"oxfist/night-owl.nvim",
 		lazy = true,

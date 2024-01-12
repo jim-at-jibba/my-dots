@@ -145,8 +145,22 @@ ariakedark)
 	# configure_spacebar
 	dark-mode on
 	;;
+horizondark)
+	configure_kitty
+	configure_tmux_dark
+	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "horizon"'
+	# configure_spacebar
+	dark-mode on
+	;;
+horizonlight)
+	configure_kitty
+	configure_tmux_light
+	configure_vim 'vim.cmd("set background=light")\nvim.cmd.colorscheme "horizon"'
+	# configure_spacebar
+	dark-mode off
+	;;
 *)
-	echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl"
+	echo "Supported colorschemes: tokyolight, tokyonight, rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl horizon-dark horizon-light ariake-dark"
 	exit 1
 	;;
 esac

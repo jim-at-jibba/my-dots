@@ -16,6 +16,8 @@ catppuccinmocha [Catpuccino Mocha]
 catppuccinlatte [Catpuccino Latte]
 nightowl [Night Owl]
 ariakedark [Ariake Dark]
+horizonlight [Horizon Light]
+horizondark [Horizon Light]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
