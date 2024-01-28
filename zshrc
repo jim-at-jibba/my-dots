@@ -1,3 +1,5 @@
+# https://dev.to/thraizz/fix-slow-zsh-startup-due-to-nvm-408k
+# zmodload zsh/zprof
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -18,7 +20,9 @@ SPACESHIP_DOCKER_SHOW=false
 DISABLE_AUTO_TITLE="true"
 
 # plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
-plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
+# plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
+zstyle ':omz:plugins:nvm' lazy yes
+plugins=(git vi-mode nvm zsh-autosuggestions)
 
 # User configuration
 # TERM=xterm-256color
@@ -64,8 +68,9 @@ plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
   export PATH="$HOME/.rbenv/shims:$PATH"
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="/Users/jamesbest/.cargo/bin:$PATH"
-  export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/zlib/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/usr/local/opt/zlib/include"
+  export PATH="$HOME/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@3.2/lib -L/usr/local/opt/zlib/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/openssl@3.2/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
 
 
@@ -156,7 +161,6 @@ alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
 alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
-# alias pythonj='python'
 alias daily='teamocil mob; teamocil wiki; teamocil spotify'
 export EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
@@ -167,9 +171,6 @@ alias ld="lazydocker"
 
 # go
 alias coverage="go test -coverprofile=coverage.out && go tool cover -html=coverage.out"
-
-# Taskwarrior
-alias in="task add +in"
 
 # tmux
 name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
@@ -188,26 +189,12 @@ tm() {
 }
 
 # Teamocil Autocomplete
-# alias tee='teamocil'
-compctl -g '~/.teamocil/*(:t:r)' teamocil
-
-# Python
-##########
-#alias python='python3'
+alias tee='teamocil'
 
 # Hacking
 ##########
 alias papk="~/hacking/scripts/pull-apk.sh"
 alias patch="~/hacking/scripts/patch.sh"
-
-# Vagrant
-alias vu='vagrant up'
-alias vh='vagrant halt'
-alias vp='vagrant provision'
-alias vd='vagrant destroy'
-
-# Ngrok
-# alias ngrok='~/code/ngrok'
 
 # Dev Shit
 ###########
@@ -220,78 +207,15 @@ alias readme='npx readme-md-generator'
 alias run="(jq -r '.scripts|to_entries[]|((.key))' package.json) | fzf-tmux -p --border-label='Yarn run' | xargs yarn"
 alias love='open "$(basename "$PWD")" -a /Applications/love.app'
 
-
-# Todoist
-##########
-alias ts='todoist list | gum filter | awk "{print $1}" | xargs todoist show'
-alias tc='todoist list | gum filter | awk "{print $1}" | xargs todoist close'
-alias td='todoist list | gum filter | awk "{print $1}" | xargs todoist delete'
-alias tl='todoist list | gum filter'
-alias tp='todoist projects | gum filter'
-alias dl='diary-log'
-
-# twf
-
-twf-widget() {
-  local selected=$(twf --height=0.5)
-  BUFFER="$BUFFER$selected"
-  zle reset-prompt
-  zle end-of-line
-  return $ret
-}
-zle -N twf-widget
-bindkey '^w' twf-widget
-
-# Codepush
-###########
-cpDeets () { appcenter codepush deployment list -a "$1"; }           # Shows deploy keys for codepush
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/jamesbest/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/jamesbest/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-#tmuxify
-
-# # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/Users/james.best/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/path.zsh.inc'; fi
-
-# # The next line enables shell command completion for gcloud.
-# if [ -f '/Users/james.best/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/james.best/google-cloud-sdk/completion.zsh.inc'; fi
-# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
-
-# source /Users/james.best/Library/Preferences/org.dystroy.broot/launcher/bash/br
-
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
-# Added by serverless binary installer
-# export PATH="$HOME/.serverless/bin:$PATH"
-
-# export PATH="$HOME/.poetry/bin:$PATH"
+eval "$(starship init zsh)"
 
 eval $(thefuck --alias)
-
 export PATH="$HOME/.poetry/bin:$PATH"
-export PATH="$PATH:/Users/jamesbest/.kit/bin"
-eval "$(starship init zsh)"
+# export PATH="$PATH:/Users/jamesbest/.kit/bin"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -313,8 +237,6 @@ gpip3(){
    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 
-# heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/jamesbest/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 eval "$(atuin init zsh)"
 
@@ -332,3 +254,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # flashlight
 export PATH="/Users/jamesbest/.flashlight/bin:$PATH"
+# zprof
