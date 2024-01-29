@@ -278,6 +278,228 @@ require("lazy").setup({
 		end,
 	},
 	-- cmp end
+
+	-- editor plugins start
+
+	{
+		"echasnovski/mini.comment",
+		event = "VeryLazy",
+		config = function()
+			require("mini.comment").setup({
+				options = {
+					custom_commentstring = function()
+						return require("ts_context_commentstring.internal").calculate_commentstring()
+							or vim.bo.commentstring
+					end,
+				},
+			})
+		end,
+	},
+	{
+		"echasnovski/mini.pairs",
+		version = "*",
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.bufremove",
+        -- stylua: ignore
+        keys = {
+            { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+            { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
+        },
+	},
+	{
+		"echasnovski/mini.indentscope",
+		version = false,
+		config = function()
+			require("mini.indentscope").setup()
+		end,
+	},
+	{
+		"PatschD/zippy.nvim",
+		keys = {
+			{ "<leader>l", "<cmd>lua require('zippy').insert_print()<CR>", desc = "Add debug log" },
+		},
+	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					-- default options: exact mode, multi window, all directions, with a backdrop
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				function()
+					-- show labeled treesitter nodes around the cursor
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					-- jump to a remote location to execute the operator
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "n", "o", "x" },
+				function()
+					-- show labeled treesitter nodes around the search matches
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+		},
+	},
+	{
+		"alexghergh/nvim-tmux-navigation",
+		config = function()
+			local nvim_tmux_nav = require("nvim-tmux-navigation")
+
+			nvim_tmux_nav.setup({
+				disable_when_zoomed = true, -- defaults to false
+			})
+
+			vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+			vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+			vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+			vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+			vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+			vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+		end,
+	},
+	-- telescope
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<leader>b", ":Telescope buffers preview=true<CR>", desc = "View Buffers (Telescope)" },
+			{ "<leader>lg", ":Telescope live_grep<CR>", desc = "Live grep (Telescope)" },
+			{ "<leader>f", ":Telescope live_grep preview=true<CR>", desc = "Search (Telescope)" },
+			{ "<leader>dr", ":Telescope lsp_references<CR>", desc = "LSP References (Telescope)" },
+			{ "<C-p>", ":Telescope git_files preview=true<CR>", desc = "Fuzzy search (Telescope)" },
+			{ "<leader>g", ":Telescope git_status preview=true<CR>", desc = "Git status (Telescope)" },
+		},
+		config = function()
+			local trouble = require("trouble.providers.telescope")
+			require("telescope").setup({
+				defaults = {
+					prompt_prefix = "🦄 ",
+					color_devicons = true,
+					selection_caret = " ",
+					entry_prefix = "  ",
+					initial_mode = "insert",
+					selection_strategy = "reset",
+					sorting_strategy = "descending",
+					layout_strategy = "horizontal",
+					layout_config = {
+						horizontal = {
+							prompt_position = "bottom",
+							preview_width = 0.55,
+							results_width = 0.8,
+						},
+						vertical = { mirror = false },
+						width = 0.87,
+						height = 0.80,
+						preview_cutoff = 120,
+					},
+					winblend = 0,
+					border = {},
+					set_env = { ["COLORTERM"] = "truecolor" },
+					file_sorter = require("telescope.sorters").get_fzy_sorter,
+					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+
+					mappings = {
+						i = {
+							["<C-x>"] = false,
+							["<C-q>"] = require("telescope.actions").send_to_qflist,
+							["<c-t>"] = trouble.open_with_trouble,
+							["<c-d>"] = require("telescope.actions").delete_buffer,
+							["jk"] = require("telescope.actions").close,
+						},
+						n = {
+							["<c-t>"] = trouble.open_with_trouble,
+							["<c-d>"] = require("telescope.actions").delete_buffer,
+							["jk"] = require("telescope.actions").close,
+						},
+					},
+				},
+				extensions = {
+					fzf_native = {
+						fuzzy = true,
+						override_generic_sorter = false,
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+					tldr = {
+						-- your config here, see below for options
+					},
+				},
+			})
+
+			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("ui-select")
+		end,
+	},
+	{ "nvim-telescope/telescope-ui-select.nvim" },
+	{
+		"folke/trouble.nvim",
+		event = "VeryLazy",
+		dependencies = "kyazdani42/nvim-web-devicons",
+		cmd = { "TroubleToggle", "Trouble" },
+		keys = {
+			{ "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+			{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+		},
+		config = function()
+			require("trouble").setup({
+				auto_open = false,
+				auto_close = true,
+				auto_preview = true,
+				use_lsp_diagnostic_signs = false,
+			})
+		end,
+	},
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			vim.keymap.set("n", "<leader><leader>1", ":Neotree toggle show filesystem right<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", { silent = true })
+		end,
+	},
+	-- editor plugins end
 }, {
 	defaults = { version = false },
 	install = { colorscheme = { "rose-pine" } },
