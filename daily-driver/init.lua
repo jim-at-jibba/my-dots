@@ -597,6 +597,41 @@ require("lazy").setup({
 			keymap = "<leader>te",
 		},
 	},
+	-- conform
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					-- Conform will run multiple formatters sequentially
+					python = { "isort", "black", "ruff" },
+					-- Use a sub-list to run only the first available formatter
+					javascript = { { "prettierd", "prettier" } },
+					typescript = { { "prettierd", "prettier" } },
+					javascriptreact = { { "prettierd", "prettier" } },
+					typescriptreact = { { "prettierd", "prettier" } },
+					go = { "gofmt", "goimports" },
+					elixir = { "mix" },
+					-- ["*"] = { "typos" },
+					-- ["_"] = { "typos" },
+				},
+			})
+		end,
+	},
+	-- lint
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("lint").linters_by_ft = {
+				javascript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				lua = { "luacheck" },
+			}
+		end,
+	},
 	-- Languages END
 
 	-- LSP START
