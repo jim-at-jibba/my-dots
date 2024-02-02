@@ -188,6 +188,14 @@ tm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | gum filter --placeholder "Pick a session") &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
+oatmeal-sessions() {
+    (
+        cd "$(oatmeal sessions dir)"
+        id=$(rg --color always -n . | fzf --ansi | awk -F ':' '{print $1}' | head -n1 | awk -F '.' '{print $1}')
+        oatmeal sessions open --id "$id"
+    )
+}
+
 # Teamocil Autocomplete
 alias tee='teamocil'
 

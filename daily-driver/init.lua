@@ -2,7 +2,10 @@ vim.g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
 vim.g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python3"
 local api = vim.api
 
+--[[======================================
 -- Options START
+--
+--======================================]]
 local options = {
 	tabstop = 2,
 	softtabstop = 2,
@@ -142,8 +145,8 @@ require("lazy").setup({
 			{ "<leader>om", mode = "n", desc = "Start Oatmeal session" },
 		},
 		opts = {
-			backend = "ollama",
-			model = "codellama:latest",
+			backend = "openai",
+			model = "gpt-3.5-turbo",
 		},
 	},
 	{
@@ -347,6 +350,95 @@ require("lazy").setup({
 
 	-- editor plugins start
 
+	-- Lualine
+	{
+		"nvim-lualine/lualine.nvim",
+		event = "VeryLazy",
+		dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = function()
+			local function clock()
+				return " " .. os.date("%H:%M")
+			end
+
+			local function holidays()
+				return "🎅🎄🌟🎁"
+			end
+
+			local function my_favs()
+				return "🦄🐙"
+			end
+
+			local signs = { error = " ", warn = " ", hint = " ", info = " " }
+			local config = {
+				options = {
+					theme = "auto", -- tokyonight nightfox rose-pine
+					section_separators = { left = "", right = "" },
+					component_separators = { left = "", right = "" },
+					icons_enabled = true,
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch" },
+					lualine_c = {
+						{
+							"diagnostics",
+							diagnostics_color = {
+								-- Same values as the general color option can be used here.
+								error = "DiagnosticError", -- Changes diagnostics' error color.
+								warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+								info = "DiagnosticInfo", -- Changes diagnostics' info color.
+								hint = "DiagnosticHint", -- Changes diagnostics' hint color.
+							},
+							symbols = signs,
+						},
+						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+						{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
+					},
+					lualine_x = {},
+					lualine_y = { "location" },
+					lualine_z = { clock, my_favs },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = {},
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = {},
+				},
+				extensions = { "nvim-tree" },
+			}
+
+			-- try to load matching lualine theme
+
+			local M = {}
+
+			function M.load()
+				local name = vim.g.colors_name or ""
+				local ok, _ = pcall(require, "lualine.themes." .. name)
+				if ok then
+					config.options.theme = name
+				end
+				require("lualine").setup(config)
+			end
+
+			M.load()
+
+			-- vim.api.nvim_exec([[
+			--   autocmd ColorScheme * lua require("config.lualine").load();
+			-- ]], false)
+
+			return M
+		end,
+	},
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
+		end,
+	},
 	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
@@ -656,13 +748,6 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
 	},
-	{
-		"OlegGulevskyy/better-ts-errors.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = {
-			keymap = "<leader>te",
-		},
-	},
 	-- conform
 	{
 		"stevearc/conform.nvim",
@@ -690,10 +775,10 @@ require("lazy").setup({
 		"mfussenegger/nvim-lint",
 		config = function()
 			require("lint").linters_by_ft = {
-				javascript = { "eslint_d" },
-				javascriptreact = { "eslint_d" },
-				typescript = { "eslint_d" },
-				typescriptreact = { "eslint_d" },
+				javascript = { "eslint" },
+				javascriptreact = { "eslint" },
+				typescript = { "eslint" },
+				typescriptreact = { "eslint" },
 				lua = { "luacheck" },
 			}
 		end,
@@ -708,30 +793,6 @@ require("lazy").setup({
 		opts = {},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
-		end,
-	},
-	{
-		"rmagatti/goto-preview",
-		enabled = true,
-		keys = {
-			{
-				"<leader>dD",
-				"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-				desc = "Preview definition",
-			},
-			{
-				"<leader>dR",
-				"<cmd>lua require('goto-preview').goto_preview_references()<CR>",
-				desc = "Preview definition",
-			},
-			{
-				"<esc>",
-				"<cmd>lua require('goto-preview').close_all_win()<CR>",
-				desc = "Preview definition",
-			},
-		},
-		config = function()
-			require("goto-preview").setup({})
 		end,
 	},
 	{
@@ -1407,6 +1468,8 @@ map("v", "<leader>p", '"_dP', opts)
 map("n", "Y", "y$", opts)
 -- map("n", "<leader>6", "<c-^>", opts)
 map("n", "<leader><leader>", "<c-^>", opts)
+
+map("t", "<Esc>", "<C-\\><C-n>", opts)
 
 map("n", "dw", "ciw", opts)
 vim.cmd("cnoreabbrev W! w!")
