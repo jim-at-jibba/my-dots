@@ -18,3 +18,4 @@ kitty.conf
 tmux.conf
 utilities/diary.text
 nvim-minimal/lua/color.lua
+daily-driver/lua/color.lua

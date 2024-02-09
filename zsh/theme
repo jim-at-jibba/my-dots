@@ -4,20 +4,12 @@
 local themes="
 rosepinemoon [Rose Pine Moon]
 rosepinedawn [Rose Pine Dawn]
-tokyolight [Tokyo Day]
-tokyonight [Tokyo Storm]
 nightfoxdusk [Nightfox Dusk]
 nightfoxday [Nightfox Day]
 nightfoxnord [Nightfox Nord]
 nightfoxtera [Nightfox Tera]
 nightfoxdawn [Nightfox Dawn]
-catppuccinfrappe [Catpuccino Frappe]
-catppuccinmocha [Catpuccino Mocha]
-catppuccinlatte [Catpuccino Latte]
 nightowl [Night Owl]
-ariakedark [Ariake Dark]
-horizonlight [Horizon Light]
-horizondark [Horizon Light]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

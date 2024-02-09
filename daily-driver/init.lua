@@ -1188,6 +1188,11 @@ require("lazy").setup({
 
 	-- THEMES START
 	{
+		"oxfist/night-owl.nvim",
+		lazy = true,
+		event = "VeryLazy",
+	},
+	{
 		"EdenEast/nightfox.nvim",
 		lazy = true,
 		config = function()
@@ -1569,8 +1574,8 @@ require("lazy").setup({
 -- Vim mappings, see lua/config/which.lua for more mappings
 local map = vim.keymap.set
 local opts = { silent = true, noremap = true }
-vim.cmd("set background=dark")
-vim.cmd.colorscheme("rose-pine")
+
+require("color")
 
 --Remap space as leader key
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
