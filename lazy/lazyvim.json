@@ -1,6 +1,10 @@
 {
   "extras": [
-
+    "lazyvim.plugins.extras.coding.copilot",
+    "lazyvim.plugins.extras.lang.go",
+    "lazyvim.plugins.extras.lang.tailwind",
+    "lazyvim.plugins.extras.lang.typescript",
+    "lazyvim.plugins.extras.lang.yaml"
   ],
   "news": {
     "NEWS.md": "2123"
