@@ -1,5 +1,5 @@
 vim.g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
-vim.g.python3_host_prog = "~/.pyenv/versions/neovim3/bin/python3"
+vim.g.python3_host_prog = "~/.pyenv/versions/3.10.6/bin/python3"
 local api = vim.api
 
 --[[======================================
@@ -136,6 +136,43 @@ local routes = {
 }
 -- NOICE SETUP END
 
+-- HELPER FUNCTIONS START
+local get_project_name = function()
+	local project_directory, err = vim.loop.cwd()
+	if project_directory == nil then
+		vim.notify(err, vim.log.levels.WARN)
+		return nil
+	end
+
+	local project_name = vim.fs.basename(project_directory)
+	if project_name == nil then
+		vim.notify("Unable to get the project name", vim.log.levels.WARN)
+		return nil
+	end
+
+	return project_name
+end
+
+local get_git_branch = function()
+	local result = vim.system({
+		"git",
+		"symbolic-ref",
+		"--short",
+		"HEAD",
+	}, {
+		text = true,
+	}):wait()
+
+	if result.stderr ~= "" then
+		vim.notify(result.stderr, vim.log.levels.WARN)
+		return nil
+	end
+
+	return result.stdout:gsub("\n", "")
+end
+
+-- HELPER FUNCTIONS END
+
 require("lazy").setup({
 	-- ai start
 	{
@@ -170,10 +207,10 @@ require("lazy").setup({
 					["."] = true,
 				},
 				panel = {
-					enabled = true,
+					enabled = false,
 				},
 				suggestion = {
-					enabled = true,
+					enabled = false,
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
@@ -296,6 +333,7 @@ require("lazy").setup({
 					end, { "i", "s" }),
 				},
 				sources = {
+					{ name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "buffer", keyword_length = 5 },
 					{ name = "luasnip" },
@@ -374,8 +412,8 @@ require("lazy").setup({
 					icons_enabled = true,
 				},
 				sections = {
-					lualine_a = { "mode" },
-					lualine_b = { "branch" },
+					lualine_a = {},
+					lualine_b = {},
 					lualine_c = {
 						{
 							"diagnostics",
@@ -392,8 +430,8 @@ require("lazy").setup({
 						{ "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
 					},
 					lualine_x = {},
-					lualine_y = { "location" },
-					lualine_z = { clock, my_favs },
+					lualine_y = {},
+					lualine_z = {},
 				},
 				inactive_sections = {
 					lualine_a = {},
@@ -737,6 +775,34 @@ require("lazy").setup({
 			{ "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", desc = "Navigate to file 4 in Harpoon" },
 		},
 	},
+	{
+		"backdround/global-note.nvim",
+		config = function()
+			local global_note = require("global-note")
+			global_note.setup({
+				additional_presets = {
+					project_local = {
+						command_name = "ProjectNote",
+
+						filename = function()
+							return get_project_name() .. ".md"
+						end,
+
+						title = get_project_name() .. " note",
+					},
+				},
+			})
+		end,
+		keys = {
+			{
+				"<leader>gn",
+				function()
+					require("global-note").toggle_note("project_local")
+				end,
+				desc = "Toggle git branch note",
+			},
+		},
+	},
 	-- editor plugins end
 
 	-- Languages START
@@ -804,29 +870,6 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				opts = function(_, opts)
-					vim.list_extend(opts.ensure_installed, {
-						"delve",
-						"gotests",
-						"golangci-lint",
-						"gofumpt",
-						"goimports",
-						"golangci-lint-langserver",
-						"impl",
-						"gomodifytags",
-						"iferr",
-						"gotestsum",
-						"intelephense",
-						"phpactor",
-					})
-				end,
-			})
 		end,
 	},
 	{
@@ -1176,6 +1219,29 @@ require("lazy").setup({
 					border = "rounded",
 				})(...)
 			end
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup({
+				opts = function(_, opts)
+					vim.list_extend(opts.ensure_installed, {
+						"delve",
+						"gotests",
+						"golangci-lint",
+						"gofumpt",
+						"goimports",
+						"golangci-lint-langserver",
+						"impl",
+						"gomodifytags",
+						"iferr",
+						"gotestsum",
+						"intelephense",
+						"phpactor",
+					})
+				end,
+			})
 		end,
 	},
 	{
@@ -1565,7 +1631,23 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		"pwntester/octo.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("octo").setup({ enable_builtin = true })
+			vim.cmd([[hi OctoEditable guibg=none]])
+		end,
+		keys = {
+			{ "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
+		},
+	},
 	-- GIT END
+	{ "wakatime/vim-wakatime", lazy = false },
 }, {
 	defaults = { version = false },
 	install = { colorscheme = { "rose-pine" } },
