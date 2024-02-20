@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # Color Palette - ROSE PINE
-export BLACK=0xff393552
-export WHITE=0xffe0def4
-export RED=0xffeb6f92
-export GREEN=0xff3e8fb0
-export BLUE=0xff9ccfd8
-export YELLOW=0xfff6c177
-export ORANGE=0xfff5a97f
-export MAGENTA=0xffc4a7e7
-export GREY=0xff939ab7
-export TRANSPARENT=0x00000000
+# export BLACK=0xff393552
+# export WHITE=0xffe0def4
+# export RED=0xffeb6f92
+# export GREEN=0xff3e8fb0
+# export BLUE=0xff9ccfd8
+# export YELLOW=0xfff6c177
+# export ORANGE=0xfff5a97f
+# export MAGENTA=0xffc4a7e7
+# export GREY=0xff939ab7
+# export TRANSPARENT=0x00000000
+# export BAR_COLOR=0xff232136
 
 # Color Palette - TERA
 # export BLACK=0xff2f3239
@@ -23,10 +24,22 @@ export TRANSPARENT=0x00000000
 # export MAGENTA=0xffad5c7c
 # export GREY=0xff6d7f8b
 # export TRANSPARENT=0x00000000
+# export BAR_COLOR=0xff152528
+
+# Color Palette - NORD
+export BLACK=0xff3b4252
+export WHITE=0xffbf616a
+export RED=0xffa3be8c
+export GREEN=0xffebcb8b
+export BLUE=0xff81a1c1
+export YELLOW=0xffb48ead
+export ORANGE=0xff88c0d0
+export MAGENTA=0xffe7ecf4
+export GREY=0xff60728a
+export TRANSPARENT=0x00000000
+export BAR_COLOR=0xff2e3440
 
 # General bar colors
-export BAR_COLOR=0xff232136
-# export BAR_COLOR=0xff152528
 export ICON_COLOR=$WHITE # Color of all icons
 export LABEL_COLOR=$WHITE # Color of all labels
 export BACKGROUND_1=0x152528

@@ -65,7 +65,7 @@ yabai -m config auto_balance off
 yabai -m config mouse_modifier fn
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
-yabai -m config external_bar all:40:0
+yabai -m config external_bar all:34:0 # 40 for sketchybar
 
 # mission-control desktop labels
 yabai -m space 1 --label code
