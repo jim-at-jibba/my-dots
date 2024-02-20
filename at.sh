@@ -43,7 +43,7 @@ rosepinemoon)
 	# configure_tmux_dark
 	dark-mode on
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "rose-pine"'
-	# configure_spacebar
+	configure_spacebar
 	;;
 rosepinedawn)
 	configure_kitty
@@ -58,36 +58,42 @@ nightfoxdusk)
 	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "duskfox"'
 	dark-mode on
+	configure_spacebar
 	;;
 nightfoxday)
 	configure_kitty
 	configure_tmux_light
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "dayfox"'
 	dark-mode on
+	configure_spacebar
 	;;
 nightfoxnord)
 	configure_kitty
   configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
 	dark-mode on
+	configure_spacebar
 	;;
 nightfoxtera)
 	configure_kitty
 	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "terafox"'
 	dark-mode on
+	configure_spacebar
 	;;
 nightfoxdawn)
 	configure_kitty
 	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "dawnfox"'
 	dark-mode off
+	configure_spacebar
 	;;
 nightowl)
 	configure_kitty
 	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "night-owl"'
 	dark-mode on
+	configure_spacebar
 	;;
 *)
 	echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl"
