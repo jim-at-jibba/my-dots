@@ -1,6 +1,7 @@
 return {
   {
     "dustinblackman/oatmeal.nvim",
+    event = "VeryLazy",
     cmd = { "Oatmeal" },
     keys = {
       { "<leader>om", mode = "n", desc = "Start Oatmeal session" },
