@@ -1,3 +1,6 @@
+vim.g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
+vim.g.python3_host_prog = "~/.pyenv/versions/3.10.6/bin/python3"
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
