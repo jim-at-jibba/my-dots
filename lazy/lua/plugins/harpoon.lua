@@ -7,7 +7,11 @@ return {
     config = function()
       local harpoon = require("harpoon")
       -- REQUIRED
-      harpoon:setup()
+      harpoon:setup({
+        settings = {
+          save_on_toggle = true,
+        },
+      })
 
       vim.keymap.set("n", "<leader>hj", function()
         harpoon:list():append()
@@ -27,6 +31,14 @@ return {
       end)
       vim.keymap.set("n", "<leader>4", function()
         harpoon:list():select(4)
+      end)
+
+      vim.keymap.set("n", "<leader>5", function()
+        harpoon:list():select(5)
+      end)
+
+      vim.keymap.set("n", "<leader>6", function()
+        harpoon:list():select(6)
       end)
     end,
   },
