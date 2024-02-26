@@ -18,11 +18,11 @@ local api = vim.api
 --   end,
 -- })
 
--- -- Write file on focus lost
--- vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
---   pattern = "*",
---   command = "wa",
--- })
+-- Write file on focus lost
+vim.api.nvim_create_autocmd({ "FocusLost" }, {
+  pattern = "*",
+  command = "wa",
+})
 
 local TrimWhiteSpaceGrp = api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
 api.nvim_create_autocmd("BufWritePre", {
