@@ -1546,6 +1546,7 @@ require("lazy").setup({
 		},
 	},
 	-- GIT START
+	{ "dmmulroy/ts-error-translator.nvim", config = true },
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
