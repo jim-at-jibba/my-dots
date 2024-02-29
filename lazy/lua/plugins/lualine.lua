@@ -13,7 +13,7 @@ return {
         vim.o.laststatus = 0
       end
     end,
-    opts = function(_, opts)
+    opts = function()
       -- PERF: we don't need this lualine require madness 🤷
       local lualine_require = require("lualine_require")
       lualine_require.require = require
