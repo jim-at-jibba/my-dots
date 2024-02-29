@@ -13,7 +13,7 @@ return {
         vim.o.laststatus = 0
       end
     end,
-    opts = function()
+    opts = function(_, opts)
       -- PERF: we don't need this lualine require madness 🤷
       local lualine_require = require("lualine_require")
       lualine_require.require = require
@@ -77,7 +77,16 @@ return {
               end,
             },
           },
-          lualine_y = {},
+          lualine_y = {
+
+            {
+              "venv-selector",
+              color = { fg = "#ebbcba" },
+              cond = function()
+                return vim.bo.filetype == "python"
+              end,
+            },
+          },
           lualine_z = {},
         },
         extensions = { "neo-tree", "lazy" },
