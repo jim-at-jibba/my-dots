@@ -44,7 +44,7 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { Util.lualine.pretty_path() },
+            { "filename", path = 1, symbols = { modified = "  ", readonly = "" } },
           },
           lualine_x = {
           -- stylua: ignore
