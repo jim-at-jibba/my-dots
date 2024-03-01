@@ -1,3 +1,3 @@
 return {
-  { "dmmulroy/ts-error-translator.nvim", config = true },
+  { "dmmulroy/ts-error-translator.nvim", event = "VeryLazy", config = true },
 }
