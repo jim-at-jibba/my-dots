@@ -32,7 +32,7 @@ configure_tmux_dark() {
 
 configure_vim() {
 	echo $1 >${dotfiles}/daily-driver/lua/color.lua
-	echo $1 >${dotfiles}/nvim-minimal/lua/color.lua
+	echo $1 >${dotfiles}/lazy/lua/color.lua
 }
 
 case $color in
@@ -69,7 +69,7 @@ nightfoxday)
 	;;
 nightfoxnord)
 	configure_kitty
-  configure_tmux
+	configure_tmux
 	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "nordfox"'
 	dark-mode on
 	configure_spacebar
