@@ -1,4 +1,5 @@
 local Util = require("lazyvim.util")
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -87,7 +88,12 @@ return {
               end,
             },
           },
-          lualine_z = {},
+          lualine_z = {
+            {
+              require("grapple").statusline,
+              cond = require("grapple").exists,
+            },
+          },
         },
         extensions = { "neo-tree", "lazy" },
       }
