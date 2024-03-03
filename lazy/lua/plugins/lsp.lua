@@ -5,6 +5,10 @@ return {
       diagnostics = {
         virtual_text = false,
       },
+      servers = {
+        -- harper_ls = {},
+        htmx = {},
+      },
     },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
