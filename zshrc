@@ -95,8 +95,6 @@ plugins=(git vi-mode nvm zsh-autosuggestions)
 
 # }}}
 
-# Auto Jump initialisation
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # # intergrates autojump with fzf
 j() {
@@ -264,3 +262,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # flashlight
 export PATH="/Users/jamesbest/.flashlight/bin:$PATH"
 # zprof
+eval "$(zoxide init --cmd j zsh)"
