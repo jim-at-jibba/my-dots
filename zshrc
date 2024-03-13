@@ -244,6 +244,19 @@ gpip3(){
    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 
+pips() {
+    local pkg=$1
+
+    if [ -z "$1" ]; then
+        echo "usage: pips <pkg name>"
+        return 1
+    fi
+
+    local _ins="pip install $pkg"
+    eval $_ins
+    pip freeze | grep $pkg -i >> requirements.txt
+}
+
 
 eval "$(atuin init zsh)"
 
