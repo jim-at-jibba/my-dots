@@ -6,8 +6,7 @@
     "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.tailwind",
     "lazyvim.plugins.extras.lang.typescript",
-    "lazyvim.plugins.extras.lang.yaml",
-    "lazyvim.plugins.extras.test.core"
+    "lazyvim.plugins.extras.lang.yaml"
   ],
   "news": {
     "NEWS.md": "2123"
