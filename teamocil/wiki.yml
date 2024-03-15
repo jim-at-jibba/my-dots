@@ -1,12 +1,11 @@
 windows:
   - name: WIKI
-    root: ~/code/other
+    root: ~/code
     layout: even-horizontal
     panes:
       - commands:
-        - name wiki
-        - cd wiki && v
+          - name wiki
+          - cd Obsidian/Home && v
       - commands:
-        - name til
-        - cd til && v
-
+          - name til
+          - cd other/til && v

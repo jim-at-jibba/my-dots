@@ -1,9 +1,0 @@
-windows:
-  - name: Daily
-    root: ~/
-    layout: 90be,320x90,0,0[320x25,0,0,0,320x64,0,26,2]
-    panes:
-      - commands:
-        - name Todo
-        - vit
-      - wtfutil
