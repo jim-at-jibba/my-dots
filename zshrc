@@ -164,6 +164,8 @@ alias daily='teamocil mob; teamocil wiki'
 export EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export sso='aws sso login --profile breedr_develop_data_analysis_user'
+# Can be added as an alias in your zshrc
+alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | gum filter | xargs yarn test --silent -i"
 
 # Docker
 alias ld="lazydocker"
