@@ -278,3 +278,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/Users/jamesbest/.flashlight/bin:$PATH"
 # zprof
 eval "$(zoxide init --cmd j zsh)"
+
+source "$HOME/.rye/env"
