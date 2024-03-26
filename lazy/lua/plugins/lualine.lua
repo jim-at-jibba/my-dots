@@ -34,6 +34,11 @@ return {
           lualine_b = { "branch" },
 
           lualine_c = {
+            {
+              require("noice").api.statusline.mode.get,
+              cond = require("noice").api.statusline.mode.has,
+              color = { fg = "#ff9e64" },
+            },
             Util.lualine.root_dir(),
             {
               "diagnostics",
