@@ -83,7 +83,7 @@ yabai -m rule --add app="^Kitty$" space=code
 yabai -m rule --add app="^Slack$" space=comms
 yabai -m rule --add app="^Chrome$" space=web
 yabai -m rule --add app="^Code$" space=code
-yabai -m rule --add app="^Simulator$" space=mob
+yabai -m rule --add app="^Simulator$" space=mob manage=off
 yabai -m rule --add app="^Xcode$" space=ide
 yabai -m rule --add app="^Insomnia$" space=data
 yabai -m rule --add app="^Postico$" space=data
