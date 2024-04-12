@@ -34,7 +34,7 @@ map("i", "<C-n>", "<C-x><C-o>", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
-map({ "n", "v" }, "<leader>y", '"+y', opts)
+-- map({ "n", "v" }, "<leader>y", '"+y', opts)
 
 map({ "n", "v" }, "K", ":m '<-2<CR>gv=gv", opts)
 map({ "n", "v" }, "J", ":m '>+1<CR>gv=gv", opts)
