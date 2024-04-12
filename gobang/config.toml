@@ -1,0 +1,7 @@
+[[conn]]
+type = "sqlite"
+path = "/Users/jamesbest/code/other/breedr-bot/emb/chroma.sqlite3"
+
+[[conn]]
+type = "sqlite"
+path = "/Users/jamesbest/telecharger/sqlite-database.db"
