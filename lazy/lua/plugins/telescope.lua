@@ -6,6 +6,6 @@ return {
     { "<leader><space>", false },
     { "<C-p>", ":Telescope git_files preview=true<CR>", desc = "Fuzzy search (Telescope)" },
     { "<leader>b", ":Telescope buffers preview=true<CR>", desc = "View Buffers (Telescope)" },
-    { "<leader>g", ":Telescope git_status preview=true<CR>", desc = "Git status (Telescope)" },
+    { "<leader>gs", ":Telescope git_status preview=true<CR>", desc = "Git status (Telescope)" },
   },
 }

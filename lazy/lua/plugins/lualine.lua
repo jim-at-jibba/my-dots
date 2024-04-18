@@ -95,6 +95,10 @@ return {
           },
           lualine_z = {
             {
+              require("micropython_nvim").statusline,
+              cond = require("micropython_nvim").exists,
+            },
+            {
               require("grapple").statusline,
               cond = require("grapple").exists,
             },
