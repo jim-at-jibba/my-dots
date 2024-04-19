@@ -96,7 +96,7 @@ return {
           lualine_z = {
             {
               require("micropython_nvim").statusline,
-              cond = require("micropython_nvim").exists,
+              cond = package.loaded["micropython_nvim"] and require("micropython_nvim").exists,
             },
             {
               require("grapple").statusline,
