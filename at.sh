@@ -102,6 +102,12 @@ nordic)
 	dark-mode on
 	configure_spacebar
 	;;
+ariake)
+	configure_kitty
+	configure_tmux
+	dark-mode on
+	configure_vim 'vim.cmd("set background=dark")\nvim.cmd.colorscheme "ariake"'
+	;;
 *)
 	echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl"
 	exit 1
