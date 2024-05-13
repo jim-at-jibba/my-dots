@@ -53,6 +53,7 @@ rosepinedawn)
 	# configure_vim 'vim.cmd("set background=light")'
 	configure_tmux
 	dark-mode off
+	configure_spacebar
 	configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
 	;;
 nightfoxdusk)
@@ -111,8 +112,15 @@ ariake)
 	configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "ariake"}}}'
 	configure_spacebar
 	;;
+oldworld)
+	configure_kitty
+	configure_tmux
+	dark-mode on
+	configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "oldworld"}}}'
+	configure_spacebar
+	;;
 *)
-	echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl"
+	echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl oldworld"
 	exit 1
 	;;
 esac
