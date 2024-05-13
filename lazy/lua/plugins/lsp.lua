@@ -8,6 +8,7 @@ return {
       servers = {
         -- harper_ls = {},
         htmx = {},
+        gleam = { mason = false },
       },
     },
     init = function()
