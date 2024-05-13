@@ -1,5 +1,19 @@
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+        gleam = false,
+      },
+    },
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     event = "VeryLazy",
