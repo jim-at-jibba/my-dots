@@ -3,6 +3,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
+    enabled = false,
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")

@@ -1,6 +1,7 @@
 return {
   {
     "chrisgrieser/nvim-chainsaw",
+    event = "VeryLazy",
     config = true,
     keys = {
       { "<leader>l", "<cmd>lua require('chainsaw').variableLog()<CR>", { desc = "Chainsaw variable log" } },
