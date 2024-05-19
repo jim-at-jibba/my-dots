@@ -8,7 +8,7 @@ return {
     },
     opts = {
       backend = "openai",
-      model = "gpt-4-turbo-preview",
+      model = "gpt-4o",
     },
   },
 }
