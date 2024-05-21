@@ -3,22 +3,22 @@
 -- Add any additional autocmds here
 local api = vim.api
 
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-  pattern = "*",
-  callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = "rounded",
-      source = "always",
-      prefix = " ",
-      scope = "cursor",
-    }
-    vim.defer_fn(function()
-      vim.diagnostic.open_float(nil, opts)
-    end, 1000)
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+--   pattern = "*",
+--   callback = function()
+--     local opts = {
+--       focusable = false,
+--       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+--       border = "rounded",
+--       source = "always",
+--       prefix = " ",
+--       scope = "cursor",
+--     }
+--     vim.defer_fn(function()
+--       vim.diagnostic.open_float(nil, opts)
+--     end, 1000)
+--   end,
+-- })
 
 -- Write file on focus lost
 vim.api.nvim_create_autocmd({ "FocusLost" }, {
