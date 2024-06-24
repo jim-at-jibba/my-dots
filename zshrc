@@ -220,6 +220,15 @@ alias love='open "$(basename "$PWD")" -a /Applications/love.app'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 eval "$(starship init zsh)"
 
 eval $(thefuck --alias)
@@ -279,4 +288,4 @@ export PATH="/Users/jamesbest/.flashlight/bin:$PATH"
 # zprof
 eval "$(zoxide init --cmd j zsh)"
 
-source "$HOME/.rye/env"
+# source "$HOME/.rye/env"

@@ -6,3 +6,5 @@ local opt = vim.opt
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
+opt.conceallevel = 0
+vim.g.lazyvim_python_lsp = "basedpyright"

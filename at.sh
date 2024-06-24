@@ -112,11 +112,11 @@ ariake)
 	configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "ariake"}}}'
 	configure_spacebar
 	;;
-oldworld)
+tokyonight)
 	configure_kitty
 	configure_tmux
 	dark-mode on
-	configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "oldworld"}}}'
+	configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "tokyonight"}}}'
 	configure_spacebar
 	;;
 *)

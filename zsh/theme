@@ -12,7 +12,7 @@ nightfoxdawn [Nightfox Dawn]
 nightowl [Night Owl]
 nordic [Nordic]
 ariake [Ariake]
-oldworld [Old World]
+tokyonight [Tokyo Night]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
