@@ -8,4 +8,11 @@ return {
       require("render-markdown").setup({})
     end,
   },
+  {
+    "henriklovhaug/Preview.nvim",
+    cmd = { "Preview" },
+    config = function()
+      require("preview").setup()
+    end,
+  },
 }
