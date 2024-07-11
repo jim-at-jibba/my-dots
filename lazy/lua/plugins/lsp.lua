@@ -20,6 +20,7 @@ return {
       keys[#keys + 1] = { "gr", false }
       keys[#keys + 1] = { "K", false }
       keys[#keys + 1] = { "<leader>cr", false }
+      keys[#keys + 1] = { "<leader>cr", false }
       keys[#keys + 1] = {
         "<leader>dd",
         function()
