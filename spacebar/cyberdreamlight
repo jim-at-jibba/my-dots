@@ -1,0 +1,10 @@
+# Cyberdream light
+spacebar -m config background_color            0xffffffff
+spacebar -m config foreground_color            0xff16181a
+spacebar -m config power_icon_color            0xffa018ff
+spacebar -m config battery_icon_color          0xff008c99
+spacebar -m config dnd_icon_color              0xff0057d1
+spacebar -m config clock_icon_color            0xff997b00
+spacebar -m config space_icon_color            0xffa018ff
+spacebar -m config space_icon_color_secondary  0xff0057d1
+spacebar -m config space_icon_color_tertiary   0xffff9e64
