@@ -1,0 +1,9 @@
+# Solarized light
+spacebar -m config background_color            0xfffcf4dc
+spacebar -m config foreground_color            0xff002b36
+spacebar -m config power_icon_color            0xff268bd2
+spacebar -m config battery_icon_color          0xffd33682
+spacebar -m config dnd_icon_color              0xff2AA198
+spacebar -m config clock_icon_color            0xff859900
+spacebar -m config space_icon_color            0xff2aa198
+spacebar -m config space_icon_color_secondary  0xffd33682
