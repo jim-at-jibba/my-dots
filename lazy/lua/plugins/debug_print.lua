@@ -2,7 +2,11 @@ return {
   {
     "chrisgrieser/nvim-chainsaw",
     event = "VeryLazy",
-    config = true,
+    config = function()
+      require("chainsaw").setup({
+        beepEmojis = { "🔵 1:", "🟩 2:", "⭐ 3:", "⭕ 4:", "💜 5:", "🔲 6:" },
+      })
+    end,
     keys = {
       { "<leader>l", "<cmd>lua require('chainsaw').variableLog()<CR>", { desc = "Chainsaw variable log" } },
       { "<leader>lo", "<cmd>lua require('chainsaw').objectLog()<CR>", { desc = "Chainsaw object log" } },
