@@ -57,6 +57,14 @@ local keys = {
 			end),
 		}),
 	},
+	{
+		key = "g",
+		mods = "LEADER",
+		action = wezterm.action.SpawnCommandInNewTab({
+			args = { "lazygit" },
+			cwd = wezterm.current_pane_cwd,
+		}),
+	},
 }
 
 module.keys = keys
