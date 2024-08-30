@@ -68,6 +68,7 @@ nightfoxdusk)
   configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "duskfox"}}}'
   dark-mode on
+  configure_sketchybar
   # configure_spacebar
   ;;
 nightfoxday)
