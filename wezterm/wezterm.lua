@@ -41,7 +41,8 @@ config.keys = keys_bindings.keys
 config.color_scheme = colors.color_scheme
 config.macos_window_background_blur = 30
 config.window_decorations = "RESIZE"
-config.font = wezterm.font("MonoLisa", { weight = "Regular" })
+local font = wezterm.font("MonoLisa", { weight = "Regular" })
+config.font = font
 config.font_size = 16
 config.adjust_window_size_when_changing_font_size = true
 config.native_macos_fullscreen_mode = true
@@ -53,9 +54,13 @@ config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = false
 
 local tab_bar_theme = tab_bar.extract_tab_bar_colors_from_theme(colors.color_scheme)
+-- config.window_frame = tab_bar.merge_tables({
+-- 	font = wezterm.font(font, { weight = "DemiBold" }),
+-- 	font_size = 14,
+-- }, tab_bar_theme.window_frame_colors)
 config.colors = {
 	tab_bar = tab_bar_theme.tab_bar_colors,
 }
-config.window_background_opacity = 0.90
+-- config.window_background_opacity = 0.90
 
 return config
