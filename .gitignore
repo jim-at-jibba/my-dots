@@ -21,3 +21,4 @@ nvim-minimal/lua/color.lua
 daily-driver/lua/color.lua
 lazy/lua/color.lua
 lazy/lua/plugins/theme.lua
+sketchybar/colors.sh
