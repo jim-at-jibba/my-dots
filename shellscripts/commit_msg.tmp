@@ -1,0 +1,11 @@
+chore: updated configurations and plugins, added new snippets and scripts
+
+### CHANGES
+- Comment out `configure_kitty` and `configure_tmux` in `at.sh`
+- Add `configure_sketchybar` for `nightfoxtera` case in `at.sh`
+- Replace `olimorris/codecompanion.nvim` with `yetone/avante.nvim`
+- Add `HakonHarnes/img-clip.nvim` for image pasting support
+- Enable `zbirenbaum/copilot.lua` with new configurations
+- Add custom log statements in `debug_print.lua`
+- Implement functions to fetch current function name and cursor word in `luasnip.lua`
+- Change permissions for `yt-rate.sh` and update its script
