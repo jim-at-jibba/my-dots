@@ -4,6 +4,11 @@ return {
     event = "VeryLazy",
     config = function()
       require("chainsaw").setup({
+        logStatements = {
+          objectLog = {
+            javascript = 'console.log("%s %s:", JSON.stringify(%s, null, 2));',
+          },
+        },
         beepEmojis = { "🔵 1:", "🟩 2:", "⭐ 3:", "⭕ 4:", "💜 5:", "🔲 6:" },
       })
     end,
