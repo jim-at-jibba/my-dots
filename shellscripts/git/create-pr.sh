@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage: ./create-pr.sh
-# Usage: gcpr
+# Usage: git-create-pr
 
 # Get the current branch name
 current_branch=$(git rev-parse --abbrev-ref HEAD)
@@ -15,4 +15,4 @@ changes=$(git log --no-merges "$base_branch".."$current_branch" | fabric --patte
 pr_title=$(gum input --placeholder "Enter PR title")
 
 # Create the pull request using the extracted changes and user-provided title
-gh pr create --body "$changes" --title "$pr_title" --base "$base_branch" --head "$current_branch" --draft --dry-run
+gh pr create --body "$changes" --title "$pr_title" --base "$base_branch" --head "$current_branch" --draft

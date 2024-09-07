@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage: git-stage.sh
-# Usage: gsf
+# Usage: git-stage
 
 # Check if gum is installed
 if ! command -v gum &>/dev/null; then

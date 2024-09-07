@@ -1,20 +1,38 @@
 #!/bin/bash
 
-# Array of commands
+# Array of commands with labels
 commands=(
-  "git-commit"
-  "git-stage"
-  "git-pull-pr"
-  "git-create-pr"
-  "git-stage-commit"
+  "Commit changes:git-commit"
+  "Stage files:git-stage"
+  "Pull PR:git-pull-pr"
+  "Create PR:git-create-pr"
+  "Stage and commit:git-stage-commit"
 )
 
-# Use gum choose to select a command
-selected_command=$(gum choose "${commands[@]}")
+# Extract labels for display
+labels=()
+for item in "${commands[@]}"; do
+  labels+=("${item%%:*}")
+done
 
-# Execute the selected command
-if [ -n "$selected_command" ]; then
-  eval "$selected_command"
+# Use gum choose to select a command by label
+selected_label=$(gum choose "${labels[@]}")
+
+# Find the corresponding command for the selected label
+if [ -n "$selected_label" ]; then
+  for item in "${commands[@]}"; do
+    if [[ "$item" == "$selected_label:"* ]]; then
+      selected_command="${item#*:}"
+      break
+    fi
+  done
+
+  # Execute the selected command
+  if [ -n "$selected_command" ]; then
+    eval "$selected_command"
+  else
+    echo "Error: Command not found for selected label."
+  fi
 else
   echo "No command selected."
 fi
