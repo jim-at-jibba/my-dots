@@ -18,6 +18,7 @@ local process_icons = {
 	["gh"] = wezterm.nerdfonts.dev_github_badge,
 	["git"] = wezterm.nerdfonts.fa_git,
 	["go"] = wezterm.nerdfonts.seti_go,
+	["Python"] = wezterm.nerdfonts.seti_python,
 	["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
 	["kubectl"] = wezterm.nerdfonts.linux_docker,
 	["kuberlr"] = wezterm.nerdfonts.linux_docker,
@@ -74,13 +75,13 @@ local function format_title(tab)
 	local cwd = get_display_cwd(tab)
 	local process = get_process(tab)
 
-	local active_title = tab.active_pane.title
-	if active_title:find("- NVIM") then
-		active_title = active_title:gsub("^([^ ]+) .*", "%1")
-	end
+	-- local active_title = tab.active_pane.title
+	-- if active_title:find("- NVIM") then
+	-- 	active_title = active_title:gsub("^([^ ]+) .*", "%1")
+	-- end
 
-	local description = (not active_title or active_title == cwd) and "~" or active_title
-	return string.format(" %s %s/ %s ", process, cwd, description)
+	-- local description = (not active_title or active_title == cwd) and "~" or active_title
+	return string.format(" %d: %s %s/ ", tab.tab_index + 1, process, cwd)
 end
 
 -- Determine if a tab has unseen output since last visited
@@ -98,9 +99,10 @@ end
 -- Returns manually set title (from `tab:set_title()` or `wezterm cli set-tab-title`) or creates a new one
 local function get_tab_title(tab)
 	local title = tab.tab_title
+	local process = get_process(tab)
 	-- if the tab title is explicitly set, take that
 	if title and #title > 0 then
-		return title
+		return string.format(" %d: %s%s ", tab.tab_index + 1, process, title)
 	end
 	return format_title(tab)
 end
