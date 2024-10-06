@@ -92,6 +92,7 @@ yabai -m rule --add app="^Android\ Studio$" space=ide
 yabai -m rule --add app="^qemu_system-x86_64$" space=mob manage=off
 yabai -m rule --add app="^Electron$" manage=off
 yabai -m rule --add app="^Flipper$" space=mob manage=off
+yabai -m rule --add app="^Reactatron$" space=mob manage=off
 yabai -m rule --add app="^Spotify$" space=media
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add label="App Store" app="^App Store$" manage=off
