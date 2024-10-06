@@ -105,6 +105,7 @@ nightowl)
   configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "night-owl"}}}'
   dark-mode on
+  configure_sketchybar
   # configure_spacebar
   ;;
 nordic)
@@ -119,6 +120,7 @@ ariake)
   configure_tmux
   dark-mode on
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "ariake"}}}'
+  configure_sketchybar
   # configure_spacebar
   ;;
 solarizeddark)
