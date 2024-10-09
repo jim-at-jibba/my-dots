@@ -14,7 +14,7 @@ if git diff --staged --quiet; then
   fi
 fi
 
-git diff --staged | fabric --pattern summarize_git_diff >commit_msg.tmp
+git diff --staged | fabric -sp summarize_git_diff >commit_msg.tmp
 if [ -s commit_msg.tmp ]; then
   commit_msg=$(cat commit_msg.tmp | gum write --width 80 --height 20)
   if gum confirm "Commit with message: $commit_msg"; then
