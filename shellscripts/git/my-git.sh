@@ -9,6 +9,23 @@ commands=(
   "Stage and commit:git-stage-commit"
 )
 
+# Print a blank line
+echo
+
+cat <<"EOF"
+/$$$$$$$$$/$$$$$$$/$$$$$$$$$   o--o--o
+|__  $$__/|_  $$_/|__  $$__/   |     \
+   | $$     | $$     | $$      o--o   o
+   | $$     | $$     | $$      |   \
+   | $$     | $$     | $$      o    o
+   | $$     | $$     | $$      |     \
+   | $$    /$$$$$$   | $$      o--o--o
+   |__/   |______/   |__/      Git tool
+EOF
+
+# Print a blank line
+echo
+
 # Extract labels for display
 labels=()
 for item in "${commands[@]}"; do
