@@ -2,6 +2,7 @@
 
 # Array of commands with labels
 commands=(
+  "Question AI:question_ai"
   "Rate Youtube:fytr"
   "Summarise Youtube:fyts"
   "To Flashcards:to_flashcards"
