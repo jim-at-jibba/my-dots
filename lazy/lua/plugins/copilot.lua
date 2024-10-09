@@ -1,104 +1,116 @@
 return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    build = "make", -- This is Optional, only if you want to use tiktoken_core to calculate tokens count
+    opts = {
+      -- add any opts here
+    },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below is optional, make sure to setup it properly if you have lazy=true
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+    },
+  },
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<C-e>",
+          clear_suggestion = "<C-]>",
+          accept_word = "<C-j>",
+        },
+      })
+    end,
+  },
   -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   build = "make", -- This is Optional, only if you want to use tiktoken_core to calculate tokens count
-  --   opts = {
-  --     -- add any opts here
-  --   },
+  --   "olimorris/codecompanion.nvim",
   --   dependencies = {
-  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-  --     "stevearc/dressing.nvim",
   --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --     --- The below is optional, make sure to setup it properly if you have lazy=true
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-telescope/telescope.nvim", -- Optional
   --     {
-  --       "MeanderingProgrammer/render-markdown.nvim",
-  --       opts = {
-  --         file_types = { "markdown", "Avante" },
-  --       },
-  --       ft = { "markdown", "Avante" },
+  --       "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
   --     },
-  --     {
-  --       -- support for image pasting
-  --       "HakonHarnes/img-clip.nvim",
-  --       event = "VeryLazy",
-  --       opts = {
-  --         -- recommended settings
-  --         default = {
-  --           embed_image_as_base64 = false,
-  --           prompt_for_file_name = false,
-  --           drag_and_drop = {
-  --             insert_mode = true,
-  --           },
-  --           -- required for Windows users
-  --           use_absolute_path = true,
+  --   },
+  --   opts = {},
+  --   keys = {
+  --     { "<leader>aa", "<cmd>CodeCompanionToggle<CR>", desc = "Toggle codecompanion chat window" },
+  --     { "<leader>ac", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanion actions" },
+  --     { "<leader>ga", "<cmd>CodeCompanionAdd<CR>", desc = "CodeCompanion Add" },
+  --   },
+  --   config = function()
+  --     require("codecompanion").setup({
+  --       adapters = {
+  --         anthropic = function()
+  --           return require("codecompanion.adapters").extend("anthropic", {
+  --             schema = {
+  --               model = {
+  --                 default = "claude-3-5-sonnet-20240620",
+  --               },
+  --             },
+  --           })
+  --         end,
+  --       },
+  --       strategies = {
+  --         chat = {
+  --           adapter = "anthropic",
+  --         },
+  --         inline = {
+  --           adapter = "copilot",
+  --         },
+  --         agent = {
+  --           adapter = "anthropic",
   --         },
   --       },
+  --     })
+  --
+  --     -- Expand 'cc' into 'CodeCompanion' in the command line
+  --     vim.cmd([[cab cc CodeCompanion]])
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "VeryLazy",
+  --   cmd = "Copilot",
+  --   build = ":Copilot auth",
+  --   opts = {
+  --     suggestion = { enabled = true },
+  --     panel = { enabled = false },
+  --     filetypes = {
+  --       markdown = true,
+  --       help = true,
+  --       gleam = false,
   --     },
   --   },
   -- },
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- Optional
-      {
-        "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
-      },
-    },
-    opts = {},
-    keys = {
-      { "<leader>aa", "<cmd>CodeCompanionToggle<CR>", desc = "Toggle codecompanion chat window" },
-      { "<leader>ac", "<cmd>CodeCompanionActions<CR>", desc = "CodeCompanion actions" },
-      { "<leader>ga", "<cmd>CodeCompanionAdd<CR>", desc = "CodeCompanion Add" },
-    },
-    config = function()
-      require("codecompanion").setup({
-        adapters = {
-          anthropic = function()
-            return require("codecompanion.adapters").extend("anthropic", {
-              schema = {
-                model = {
-                  default = "claude-3-5-sonnet-20240620",
-                },
-              },
-            })
-          end,
-        },
-        strategies = {
-          chat = {
-            adapter = "anthropic",
-          },
-          inline = {
-            adapter = "copilot",
-          },
-          agent = {
-            adapter = "anthropic",
-          },
-        },
-      })
-
-      -- Expand 'cc' into 'CodeCompanion' in the command line
-      vim.cmd([[cab cc CodeCompanion]])
-    end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    opts = {
-      suggestion = { enabled = true },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-        gleam = false,
-      },
-    },
-  },
   -- {
   --   "CopilotC-Nvim/CopilotChat.nvim",
   --   branch = "canary",
