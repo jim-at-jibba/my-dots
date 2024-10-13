@@ -115,6 +115,10 @@ alias .....="cd ../../../.."
 alias bton="blueutil -p 1"
 alias btoff="blueutil -p 0"
 
+# Fabric
+alias up="cp -R ~/dotfiles/shellscripts/fabric/custompatterns/* ~/.config/fabric/patterns && echo 'Patterns updated!'"
+alias p="pbpaste"
+
 # Git
 ##########
 alias gs="git status -s \
