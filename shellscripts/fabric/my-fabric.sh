@@ -3,6 +3,8 @@
 # Array of commands with labels
 commands=(
   "Question AI:question_ai"
+  "Format Geekbot: format_geekbot"
+  "Weekly menu: weekly_dinner_generator"
   "Rate Youtube:fytr"
   "Summarise Youtube:fyts"
   "To Flashcards:to_flashcards"
