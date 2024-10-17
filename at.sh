@@ -86,8 +86,8 @@ nightfoxnord)
   # configure_spacebar
   ;;
 nightfoxtera)
-  # configure_kitty
-  # configure_tmux
+  configure_kitty
+  configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "terafox"}}}'
   dark-mode on
   configure_sketchybar
