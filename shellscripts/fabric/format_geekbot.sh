@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# Set up trap to handle SIGINT (Ctrl+C)
+trap 'exit 130' SIGINT
+
+# Source the get_model function
+source_file="/Users/jamesbest/dotfiles/shellscripts/get_model.sh"
+
+if [ -f "$source_file" ]; then
+  source "$source_file"
+else
+  echo "Error: $source_file not found" >&2
+  exit 1
+fi
+
+# Check if the function is available
+if ! command -v get_model &>/dev/null; then
+  echo "Error: get_model function not found" >&2
+  exit 1
+fi
+
+# Use the get_model function
+model=$(get_model)
+echo "current model :: $model"
 # Select name using gum choose
 name=$(gum choose "me" "ben" "dav" "myles")
 
@@ -21,7 +43,7 @@ fi
 text=$(pbpaste | gum write --width 80 --height 20)
 
 # Format the text using fabric
-formatted_text=$(echo "$text" | fabric -p format_geekbot)
+formatted_text=$(echo "$text" | fabric -m "$model" -p format_geekbot)
 
 # Use perl to replace [name] with the formatted text
 perl -i -p0e "s/\[$name\]/$formatted_text/s" "$file_path"

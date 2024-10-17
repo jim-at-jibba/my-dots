@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set up trap to handle SIGINT (Ctrl+C)
+trap 'exit 130' SIGINT
+
 # Get the video URL from user input
 video_url=$(gum input --placeholder "Video URL...")
 

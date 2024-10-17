@@ -1,5 +1,28 @@
 #!/bin/bash
 
+# Set up trap to handle SIGINT (Ctrl+C)
+trap 'exit 130' SIGINT
+
+# Source the get_model function
+source_file="/Users/jamesbest/dotfiles/shellscripts/get_model.sh"
+
+if [ -f "$source_file" ]; then
+  source "$source_file"
+else
+  echo "Error: $source_file not found" >&2
+  exit 1
+fi
+
+# Check if the function is available
+if ! command -v get_model &>/dev/null; then
+  echo "Error: get_model function not found" >&2
+  exit 1
+fi
+
+# Use the get_model function
+model=$(get_model)
+echo "current model :: $model"
+
 # Let user choose the week
 week_choice=$(gum choose "Current Week" "Next Week")
 
@@ -32,7 +55,7 @@ write_to_file() {
 }
 
 # Generate the menu
-menu=$(gum spin --spinner points --title "Generating menu" --show-output -- fabric -p weekly-dinner-generator)
+menu=$(gum spin --spinner points --title "Generating menu" --show-output -- fabric -m "$model" -p weekly-dinner-generator)
 
 # Display the menu
 gum pager <<<"$menu"
