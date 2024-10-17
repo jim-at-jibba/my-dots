@@ -20,8 +20,6 @@ generate_header() {
   echo "source:" "$url"
   echo "---"
   echo
-  echo "# $title"
-  echo
   echo "## Summary"
   echo
 }
