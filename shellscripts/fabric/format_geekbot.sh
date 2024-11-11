@@ -45,8 +45,10 @@ text=$(pbpaste | gum write --width 80 --height 20)
 # Format the text using fabric
 formatted_text=$(echo "$text" | fabric -m "$model" -p format_geekbot)
 
+escaped_text=$(printf '%s\n' "$formatted_text" | sed 's/[\/&]/\\&/g')
+
 # Use perl to replace [name] with the formatted text
-perl -i -p0e "s/\[$name\]/$formatted_text/s" "$file_path"
+perl -i -p0e "s/\[$name\]/$escaped_text/s" "$file_path"
 
 if [ $? -eq 0 ]; then
   echo "Text has been inserted into $file_path"
