@@ -119,6 +119,8 @@ alias btoff="blueutil -p 0"
 alias up="cp -R ~/dotfiles/shellscripts/fabric/custompatterns/* ~/.config/fabric/patterns && echo 'Patterns updated!'"
 alias p="pbpaste"
 
+alias image_gen="cd ~/dotfiles/shellscripts/image_generator && ./image_generator.sh"
+
 # Git
 ##########
 alias gs="git status -s \
@@ -145,23 +147,14 @@ alias cput='sudo powermetrics --samplers smc |grep -i "CPU die temperature"'
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 # alias v='NVIM_APPNAME=daily-driver nvim'
 alias v='NVIM_APPNAME=lazy nvim'
-alias zshrc='vim ~/.zshrc'
-alias reload='source ~/.zshrc'
 alias l='exa --long --header --all --icons'
 alias ls='exa --header'
 alias tree='exa --tree --level=2'
 alias c='clear'
-alias svim='source ~/.config/nvim/init.vim'
-alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
-alias npmLocal="npm list -g --depth 0"
-# alias w='curl -4 wttr.in/bristol'
 alias generate='date | md5 | cut -c1-16 | pbcopy'
 alias f='fuck'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-alias clp='pgcli -h localhost -p $(navy port postgres 5432) -U postgres'
-# alias cp='pgcli -h localhost -U jamesbest'
-alias qotd="curl GET http://quotes.rest/qod.json | jq '. | {quote: .contents.quotes[0].quote, author: .contents.quotes[0].author }'"
 alias lip="ip addr show en0"
 alias server="python3 -m http.server"
 alias daily='teamocil mob; teamocil wiki'
@@ -170,6 +163,7 @@ export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export sso='aws sso login --profile breedr_develop_data_analysis_user'
 # Can be added as an alias in your zshrc
 alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | gum filter | xargs yarn test --silent -i"
+alias y="yazi"
 
 # Docker
 alias ld="lazydocker"
