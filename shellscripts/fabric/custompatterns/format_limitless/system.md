@@ -7,7 +7,7 @@ Take a step back and think step-by-step about how to achieve the best possible r
 # OUTPUT INSTRUCTIONS
 
 - Only output the markdown document
-- Covert all the questions to markdown level 4 headings
-- convert all the answers to markdown paragraphs
+- Covert all the headings to markdown level 4 headings
+- convert all the other text to markdown paragraphs
 
 # INPUT
