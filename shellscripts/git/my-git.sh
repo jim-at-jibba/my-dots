@@ -7,6 +7,7 @@ commands=(
   "Pull PR:git-pull-pr"
   "Create PR:git-create-pr"
   "Stage and commit:git-stage-commit"
+  "Todays summary:todays-summary"
 )
 
 # Print a blank line
