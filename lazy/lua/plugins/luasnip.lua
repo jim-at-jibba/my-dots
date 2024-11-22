@@ -27,6 +27,7 @@ end
 
 return {
   "L3MON4D3/LuaSnip",
+  dependencies = "rafamadriz/friendly-snippets",
   opts = {
     ls.add_snippets("all", {
       s("todo", {
@@ -53,18 +54,6 @@ return {
         i(1, "perf name"),
         t("', endTime - startTime)"),
       }),
-      -- make this into a function
-      -- s("log-object", {
-      --   t("console.log('"),
-      --   f(function()
-      --     return get_function_name()
-      --   end),
-      --   t(":, "),
-      --   f(function()
-      --     return get_word_under_cursor()
-      --   end),
-      --   t("')"),
-      -- }),
     }, {
       key = "all",
     }),

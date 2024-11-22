@@ -46,6 +46,7 @@ return {
           { name = "nvim_lsp" },
           { name = "path" },
           { name = "supermaven" },
+          { name = "luasnip" },
         }, {
           { name = "buffer" },
         }),
