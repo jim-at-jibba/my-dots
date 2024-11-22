@@ -16,7 +16,7 @@ fi
 
 gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -sp summarize_git_diff >commit_msg.tmp
 if [ -s commit_msg.tmp ]; then
-  commit_msg=$(cat commit_msg.tmp | gum write --width 80 --height 20)
+  commit_msg=$(cat commit_msg.tmp | gum write --width 80 --height 30)
   if gum confirm "Commit with message: $commit_msg"; then
     git commit -m "$commit_msg"
   else
