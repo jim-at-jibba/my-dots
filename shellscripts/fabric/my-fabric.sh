@@ -4,10 +4,11 @@
 commands=(
   "Question AI:question_ai"
   "Format Geekbot: format_geekbot"
+  "Format Limitless: format_limitless"
   "Weekly menu: weekly_dinner_generator"
   "Rate Youtube:fytr"
   "Summarise Youtube:fyts"
-  "To Flashcards:to_flashcards"
+  "To Motchi:to_flashcards"
 )
 
 echo
