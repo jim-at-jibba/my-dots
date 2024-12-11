@@ -13,10 +13,7 @@ nightowl [Night Owl]
 nordic [Nordic]
 ariake [Ariake]
 tokyonight [Tokyo Night]
-solarizeddark [Solarized Dark]
-solarizedlight [Solarized Light]
-cyberdreamlight [CyberDream Light]
-cyberdreamdark [CyberDream Dark]
+poimandres [Poimandres]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
