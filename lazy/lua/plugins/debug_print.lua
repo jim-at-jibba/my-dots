@@ -4,14 +4,24 @@ return {
     event = "VeryLazy",
     config = function()
       require("chainsaw").setup({
+        marker = "🪚",
         logStatements = {
           objectLog = {
-            javascript = 'console.log("%s %s:", JSON.stringify(%s, null, 2));',
-            typescript = 'console.log("%s %s:", JSON.stringify(%s, null, 2));',
-            typescriptreact = 'console.log("%s %s:", JSON.stringify(%s, null, 2));',
+            javascript = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", JSON.stringify({{var}}, null, 2));',
+            typescript = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", JSON.stringify({{var}}, null, 2));',
+            typescriptreact = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", JSON.stringify({{var}}, null, 2));',
+          },
+          variableLog = {
+            javascript = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", {{{var}}});',
+            typescript = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", {{{var}}});',
+            typescriptreact = 'console.log("{{marker}} {{filename}}({{lnum}}) {{var}}:", {{{var}}});',
           },
         },
-        logEmojis = { "🔵 1:", "🟩 2:", "⭐ 3:", "⭕ 4:", "💜 5:", "🔲 6:" },
+        logTypes = {
+          emojiLog = {
+            emojis = { "🔵 1:", "🟩 2:", "⭐ 3:", "⭕ 4:", "💜 5:", "🔲 6:" },
+          },
+        },
       })
     end,
     keys = {
