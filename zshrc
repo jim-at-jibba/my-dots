@@ -291,3 +291,5 @@ export PATH="/Users/jamesbest/.flashlight/bin:$PATH"
 eval "$(zoxide init --cmd j zsh)"
 
 # source "$HOME/.rye/env"
+
+export PATH="$HOME/.local/bin:$PATH"
