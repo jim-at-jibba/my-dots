@@ -200,7 +200,7 @@ oatmeal-sessions() {
 }
 
 # Teamocil Autocomplete
-alias tee='teamocil'
+# alias tee='teamocil'
 
 # Hacking
 ##########
