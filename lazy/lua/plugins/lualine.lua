@@ -1,4 +1,5 @@
 local Util = require("lazyvim.util")
+local Snacks = require("snacks")
 
 return {
   {
@@ -34,11 +35,6 @@ return {
           lualine_b = { "branch" },
 
           lualine_c = {
-            {
-              require("noice").api.statusline.mode.get,
-              cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#ff9e64" },
-            },
             Util.lualine.root_dir(),
             {
               "diagnostics",
@@ -57,12 +53,12 @@ return {
           {
             function() return "  " .. require("dap").status() end,
             cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-            color = Util.ui.fg("Debug"),
+            color = {fg = Snacks.util.color("Special")}
           },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = Util.ui.fg("Special"),
+              color = { fg = Snacks.util.color("Special") },
             },
             {
               "diff",
