@@ -63,6 +63,14 @@ rosepinedawn)
   # configure_spacebar
   configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
   ;;
+evergarden)
+  configure_kitty
+  configure_tmux
+  dark-mode on
+  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "evergarden"}}}'
+  configure_sketchybar
+  # configure_spacebar
+  ;;
 poimandres)
   configure_kitty
   configure_tmux

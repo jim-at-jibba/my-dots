@@ -14,6 +14,7 @@ nordic [Nordic]
 ariake [Ariake]
 tokyonight [Tokyo Night]
 poimandres [Poimandres]
+evergarden [Evergarden]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')
