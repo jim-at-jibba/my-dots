@@ -57,15 +57,6 @@ return {
       })
     end,
   },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      spec = {
-        { mapping_key_prefix, group = "AI Code Companion", mode = { "n", "v" } },
-      },
-    },
-  },
   -- {
   --   "olimorris/codecompanion.nvim",
   --   opts = {
