@@ -14,9 +14,12 @@ if git diff --staged --quiet; then
   fi
 fi
 
-gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -sp summarize_git_diff >commit_msg.tmp
+gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -p summarize_git_diff >commit_msg.tmp
+# printf "\n"
+# cat commit_msg.tmp
+# printf "\n"
 if [ -s commit_msg.tmp ]; then
-  commit_msg=$(cat commit_msg.tmp | gum write --width 80 --height 30)
+  commit_msg=$(cat commit_msg.tmp | gum write --show-line-numbers --char-limit 0)
   if gum confirm "Commit with message: $commit_msg"; then
     git commit -m "$commit_msg"
   else

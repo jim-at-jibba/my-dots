@@ -40,7 +40,7 @@ if [ ! -f "$file_path" ]; then
 fi
 
 # Get text input from user
-text=$(pbpaste | gum write --width 80 --height 20)
+text=$(pbpaste | gum write --show-line-numbers --char-limit 0)
 
 # Format the text using fabric
 formatted_text=$(echo "$text" | fabric -m "$model" -p format_geekbot)

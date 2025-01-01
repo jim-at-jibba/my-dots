@@ -12,7 +12,7 @@ base_branch=$(gum input --placeholder "Enter base branch (default: staging)" --v
 # changes=$(git log --no-merges "$base_branch".."$current_branch" | fabric --pattern summarize_git_changes | awk '/## CHANGES/ {flag=1; next} flag')
 changes=$(git log --no-merges "$base_branch".."$current_branch" | fabric --pattern summarize_git_changes)
 
-pr_message=$(echo "$changes" | gum write --width 80 --height 20)
+pr_message=$(echo "$changes" | gum write --show-line-numbers --char-limit 0)
 
 # Get the PR title using gum input
 pr_title=$(gum input --placeholder "Enter PR title")

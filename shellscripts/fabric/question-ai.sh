@@ -23,9 +23,7 @@ fi
 model=$(get_model)
 echo "current model :: $model"
 
-query=$(gum input --cursor.foreground "#FF0" \
-  --prompt.foreground "#0FF" \
-  --placeholder "What do you wanna know?" \
+query=$(gum input --placeholder "What do you wanna know?" \
   --prompt "* " \
   --width 80)
 echo "Query: $query"
@@ -34,6 +32,7 @@ echo
 filename="${query// /_}"
 answer=$(echo "$query" | fabric -m "$model" -sp ai)
 echo "$answer"
+printf "\n"
 
 if gum confirm "Do you want to create flash cards from this content?"; then
   output_dir="$HOME/Documents/generated-mochi"

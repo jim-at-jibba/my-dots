@@ -31,7 +31,7 @@ show_diff() {
 }
 
 # Use gum to select files for staging and show diff
-selected_files=$(echo "$unstaged_files" | gum choose --no-limit --height 15 --cursor.foreground="#FF0" --selected.foreground="#0FF" | tee /dev/tty)
+selected_files=$(echo "$unstaged_files" | gum choose --no-limit --height 15 | tee /dev/tty)
 
 echo "🪚 Selected files:"
 echo "$selected_files" | while read -r file; do
