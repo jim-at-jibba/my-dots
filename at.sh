@@ -55,8 +55,6 @@ rosepinemoon)
   ;;
 rosepinedawn)
   configure_kitty
-  # configure_tmux
-  # configure_vim 'vim.cmd("set background=light")'
   configure_tmux
   dark-mode off
   configure_sketchybar
