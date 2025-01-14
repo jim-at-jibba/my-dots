@@ -14,12 +14,12 @@ if git diff --staged --quiet; then
   fi
 fi
 
-gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -p summarize_git_diff >commit_msg.tmp
+gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -m claude-3-5-sonnet-20241022 -p summarize_git_diff >commit_msg.tmp
 # printf "\n"
 # cat commit_msg.tmp
 # printf "\n"
 if [ -s commit_msg.tmp ]; then
-  commit_msg=$(cat commit_msg.tmp | gum write --show-line-numbers --char-limit 0)
+  commit_msg=$(cat commit_msg.tmp | gum write --show-line-numbers --char-limit 0 --height 40)
   if gum confirm "Commit with message: $commit_msg"; then
     git commit -m "$commit_msg"
   else
