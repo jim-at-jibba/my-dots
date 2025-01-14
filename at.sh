@@ -69,6 +69,20 @@ evergarden)
   configure_sketchybar
   # configure_spacebar
   ;;
+everforestdark)
+  configure_kitty
+  configure_tmux
+  dark-mode on
+  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
+  configure_sketchybar
+  ;;
+everforestlight)
+  configure_kitty
+  configure_tmux
+  dark-mode off
+  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
+  configure_sketchybar
+  ;;
 poimandres)
   configure_kitty
   configure_tmux
