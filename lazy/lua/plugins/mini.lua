@@ -1,5 +1,8 @@
 return {
   {
+    "echasnovski/mini.statusline",
+  },
+  {
     "echasnovski/mini.bufremove",
 
     keys = {
