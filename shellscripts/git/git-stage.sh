@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Check if gum is installed
-if ! command -v gum &>/dev/null; then
-  echo "gum is not installed. Please install it first."
-  exit 1
-fi
-
 # Check if current directory is a git repository
 if ! git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "Not a git repository. Please run this script in a git repository."
@@ -30,23 +24,32 @@ show_diff() {
   fi
 }
 
-# Use gum to select files for staging and show diff
-selected_files=$(echo "$unstaged_files" | gum choose --no-limit --height 15 | tee /dev/tty)
+# Replace gum choose with select menu
+echo "Select files to stage (enter numbers separated by spaces, press Enter when done):"
+mapfile -t files_array <<< "$unstaged_files"
+select file in "${files_array[@]}"; do
+  if [ -n "$file" ]; then
+    selected_files+=("$file")
+  else
+    break
+  fi
+done
 
 echo "🪚 Selected files:"
-echo "$selected_files" | while read -r file; do
+for file in "${selected_files[@]}"; do
   echo "Diff for $file:"
   show_diff "$file" | less -R
 done
 
-if [ -z "$selected_files" ]; then
+if [ ${#selected_files[@]} -eq 0 ]; then
   echo "No files selected for staging."
   exit 0
 fi
 
-# Confirm staging
-if gum confirm "Do you want to stage these files?"; then
-  echo "$selected_files" | xargs git add
+# Replace gum confirm with read
+read -p "Do you want to stage these files? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+  printf "%s\n" "${selected_files[@]}" | xargs git add
   echo "Selected files have been staged."
 else
   echo "No files were staged."

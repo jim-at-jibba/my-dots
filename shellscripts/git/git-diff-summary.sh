@@ -8,19 +8,21 @@ fi
 
 if git diff --staged --quiet; then
   echo "No changes staged for commit."
-  if gum confirm "There are unstaged changes. Do you want to stage some?"; then
+  read -p "There are unstaged changes. Do you want to stage some? (y/N) " response
+  if [[ "$response" =~ ^[Yy]$ ]]; then
     git add -p
     exec "$0" "$@" # Recall the script
   fi
 fi
 
-gum spin --title "Generating commit message" --show-output -- git diff --staged | fabric -m claude-3-5-sonnet-20241022 -p summarize_git_diff >commit_msg.tmp
-# printf "\n"
-# cat commit_msg.tmp
-# printf "\n"
+echo "Generating commit message..."
+git diff --staged | fabric -m claude-3-5-sonnet-20241022 -p summarize_git_diff >commit_msg.tmp
+
 if [ -s commit_msg.tmp ]; then
-  commit_msg=$(cat commit_msg.tmp | gum write --show-line-numbers --char-limit 0 --height 40)
-  if gum confirm "Commit with message: $commit_msg"; then
+  echo "Enter/edit commit message (press Ctrl+D when done):"
+  commit_msg=$(cat commit_msg.tmp | cat)
+  read -p "Commit with message: $commit_msg (y/N) " response
+  if [[ "$response" =~ ^[Yy]$ ]]; then
     git commit -m "$commit_msg"
   else
     echo "Commit aborted."

@@ -33,8 +33,8 @@ for item in "${commands[@]}"; do
   labels+=("${item%%:*}")
 done
 
-# Use gum choose to select a command by label
-selected_label=$(gum choose "${labels[@]}")
+# Use fzf to select from the labels
+selected_label=$(printf "%s\n" "${labels[@]}" | fzf --height 40% --reverse --header="Select a Git command")
 
 # Find the corresponding command for the selected label
 if [ -n "$selected_label" ]; then

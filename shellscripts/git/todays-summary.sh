@@ -45,18 +45,10 @@ validate_repo() {
   fi
 }
 
-# Check for gum installation
-if ! command -v gum &>/dev/null; then
-  echo "Error: 'gum' is not installed. Please install it first:"
-  echo "brew install gum    # for macOS"
-  echo "apt install gum     # for Ubuntu/Debian"
-  exit 1
-fi
-
-# Handle repository selection
+# Use fzf for repository selection
 if [[ $# -eq 0 ]]; then
   echo "Searching for git repositories..."
-  REPO_PATH=$(find_git_repos | sort -u | gum filter --header "Select a repository:")
+  REPO_PATH=$(find_git_repos | sort -u | fzf --height 40% --reverse --header="Select a repository")
 
   if [[ -z "$REPO_PATH" ]]; then
     echo "No repository selected."
@@ -78,8 +70,15 @@ if [[ -z "$GIT_USER_EMAIL" ]]; then
   exit 1
 fi
 
-# Select date range
-DATE_RANGE=$(gum choose --header "Select commit date range:" "Today's commits" "Yesterday's commits")
+# Use fzf for date range selection
+DATE_RANGE=$(printf "Today's commits\nYesterday's commits" | \
+  fzf --height 20% --reverse --header="Select commit date range")
+
+if [[ -z "$DATE_RANGE" ]]; then
+  echo "No date range selected."
+  exit 1
+fi
+
 TODAY=$(date +%Y-%m-%d)
 YESTERDAY=$(date -v-1d +%Y-%m-%d)
 
@@ -150,5 +149,5 @@ EOF
 
 # Output and cleanup
 response=$(cat "$TEMP_FILE" | fabric -m "$model" -cp ai)
-gum pager <<<"$response"
+echo "$response" | less
 rm "$TEMP_FILE"

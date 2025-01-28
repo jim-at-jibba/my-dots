@@ -11,9 +11,9 @@ fi
 
 echo "$stage_output"
 
-# Ask for confirmation using gum confirm
-if gum confirm "Do you want to commit these changes?"; then
-  # If confirmed, add the changes
+# Replace gum confirm with read
+read -p "Do you want to commit these changes? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
   git-commit
   echo "Changes have been added."
 else
