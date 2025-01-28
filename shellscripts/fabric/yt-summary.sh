@@ -24,12 +24,15 @@ generate_header() {
   echo
 }
 
-# Get the video URL from user input
-video_url=$(gum input --placeholder "Video URL...")
-dest="$HOME/MyBrain/MyBrain/00_Fleeting"
-# Display the entered URL and ask for confirmation
-echo "Entered URL: $video_url"
-if gum confirm "Do you want to extract wisdom from this video?"; then
+# Replace gum input with read
+read -p "Video URL: " video_url
+
+# Replace gum confirm with simple yes/no prompt
+read -p "Do you want to extract wisdom from this video? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+  dest="$HOME/MyBrain/MyBrain/00_Fleeting"
+  # Display the entered URL and ask for confirmation
+  echo "Entered URL: $video_url"
 
   title=$(yt-dlp --get-title "$video_url")
   sanitized_title=$(echo "$title" | tr -cd '[:alnum:][:space:]' | tr '[:space:]' '_')

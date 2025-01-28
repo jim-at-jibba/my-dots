@@ -23,9 +23,8 @@ fi
 model=$(get_model)
 echo "current model :: $model"
 
-query=$(gum input --placeholder "What do you wanna know?" \
-  --prompt "* " \
-  --width 80)
+# Replace gum input with read
+read -p "What do you wanna know? " query
 echo "Query: $query"
 echo
 
@@ -34,7 +33,9 @@ answer=$(echo "$query" | fabric -m "$model" -sp ai)
 echo "$answer"
 printf "\n"
 
-if gum confirm "Do you want to create flash cards from this content?"; then
+# Replace gum confirm with simple yes/no prompt
+read -p "Do you want to create flash cards from this content? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
   output_dir="$HOME/Documents/generated-mochi"
   output_file="$output_dir/$(basename "$filename")"
   echo "$answer" | fabric -m "$model" -p to_mochi >"$output_file".md

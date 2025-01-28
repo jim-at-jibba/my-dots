@@ -22,8 +22,14 @@ fi
 # Use the get_model function
 model=$(get_model)
 echo "current model :: $model"
-# Select name using gum choose
-name=$(gum choose "me" "ben" "dav" "myles")
+# Replace gum choose with simple select menu
+PS3="Select name: "
+options=("me" "ben" "dav" "myles")
+select name in "${options[@]}"; do
+    if [ -n "$name" ]; then
+        break
+    fi
+done
 
 # Get current date
 current_date=$(date +"%Y-%m-%d")
@@ -39,8 +45,9 @@ if [ ! -f "$file_path" ]; then
   exit 1
 fi
 
-# Get text input from user
-text=$(pbpaste | gum write --show-line-numbers --char-limit 0)
+# Replace gum write with cat and standard input
+echo "Enter or paste your text (press Ctrl+D when done):"
+text=$(cat)
 
 # Format the text using fabric
 formatted_text=$(echo "$text" | fabric -m "$model" -p format_geekbot)

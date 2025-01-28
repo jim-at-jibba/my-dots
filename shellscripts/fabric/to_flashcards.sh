@@ -22,10 +22,20 @@ fi
 model=$(get_model)
 echo "current model :: $model"
 
-input_text_path=$(gum file ~/MyBrain/MyBrain)
+# Replace gum file selection with fzf
+input_text_path=$(find ~/MyBrain/MyBrain -type f | fzf --height 40% --reverse --prompt="Select file: ")
+
+# Exit if no file was selected (user pressed esc)
+if [ -z "$input_text_path" ]; then
+    echo "No file selected. Exiting."
+    exit 1
+fi
 
 echo "Chosen path: $input_text_path"
-if gum confirm "Do you want to create flash cards from this content?"; then
+
+# Replace gum confirm with a simple yes/no prompt
+read -p "Do you want to create flash cards from this content? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
   output_dir="$HOME/Documents/generated-mochi"
   output_file="$output_dir/$(basename "$input_text_path")"
   # Create a temporary file

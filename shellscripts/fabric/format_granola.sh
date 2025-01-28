@@ -45,7 +45,7 @@ echo "Enter or paste your text (press Ctrl+D when done):"
 text=$(cat)
 
 # Format the text using fabric
-formatted_text=$(echo "$text" | fabric -m "$model" -p format_limitless)
+formatted_text=$(echo "$text" | fabric -m "$model" -p format_granola)
 
 # Combine title and text
 formatted_text="## $title\n\n$formatted_text"

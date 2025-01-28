@@ -9,6 +9,7 @@ commands=(
   "Rate Youtube:fytr"
   "Summarise Youtube:fyts"
   "To Motchi:to_flashcards"
+  "Format Granola:format_granola"
 )
 
 echo
@@ -36,8 +37,14 @@ for item in "${commands[@]}"; do
   labels+=("${item%%:*}")
 done
 
-# Use gum choose to select a command by label
-selected_label=$(gum choose "${labels[@]}")
+# Replace gum choose with simple select menu
+PS3="Select an option: "
+select label in "${labels[@]}"; do
+    if [ -n "$label" ]; then
+        selected_label="$label"
+        break
+    fi
+done
 
 # Find the corresponding command for the selected label
 if [ -n "$selected_label" ]; then

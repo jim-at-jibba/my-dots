@@ -23,8 +23,14 @@ fi
 model=$(get_model)
 echo "current model :: $model"
 
-# Let user choose the week
-week_choice=$(gum choose "Current Week" "Next Week")
+# Replace gum choose with simple select menu
+PS3="Select week: "
+options=("Current Week" "Next Week")
+select week_choice in "${options[@]}"; do
+    if [ -n "$week_choice" ]; then
+        break
+    fi
+done
 
 # Get current date, year, week number, and month
 if [ "$week_choice" = "Current Week" ]; then
@@ -54,15 +60,17 @@ write_to_file() {
   fi
 }
 
-# Generate the menu
-menu=$(gum spin --spinner points --title "Generating menu" --show-output -- fabric -m "$model" -p weekly-dinner-generator)
+# Replace gum spin with simple message
+echo "Generating menu..."
+menu=$(fabric -m "$model" -p weekly-dinner-generator)
 
-# Display the menu
-gum pager <<<"$menu"
+# Replace gum pager with less
+echo "$menu" | less
 
-# Ask for confirmation
-if gum confirm "Do you want to save this meal plan?"; then
-  write_to_file "$file_path" "$menu"
+# Replace gum confirm with simple yes/no prompt
+read -p "Do you want to save this meal plan? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+    write_to_file "$file_path" "$menu"
 else
-  echo "Menu was not saved."
+    echo "Menu was not saved."
 fi
