@@ -50,7 +50,7 @@ source $ITEM_DIR/front_app.sh
 # source $ITEM_DIR/aerospace.sh
 
 # -- Right Side Of Notch Items --
-source $ITEM_DIR/media.sh
+# source $ITEM_DIR/media.sh
 
 # -- Right Side Items --
 source $ITEM_DIR/calendar.sh
