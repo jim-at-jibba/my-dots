@@ -40,9 +40,16 @@ fi
 # Replace gum input with read
 read -p "Enter a title for your text: " title
 
-# Replace gum write with cat and standard input
-echo "Enter or paste your text (press Ctrl+D when done):"
-text=$(cat)
+# Read input until a specific end marker
+echo "Enter or paste your text (type 'EOF' on a new line when done):"
+text=""
+while IFS= read -r line; do
+    if [ "$line" = "EOF" ]; then
+        break
+    fi
+    text+="$line"$'\n'
+done
+text=${text%$'\n'} # Remove trailing newline
 
 # Format the text using fabric
 formatted_text=$(echo "$text" | fabric -m "$model" -p format_granola)
