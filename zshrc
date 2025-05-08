@@ -151,7 +151,7 @@ alias cput='sudo powermetrics --samplers smc |grep -i "CPU die temperature"'
 ##########
 alias whereami='npx @rafaelrinaldi/whereami -f json'
 # alias v='NVIM_APPNAME=daily-driver nvim'
-alias v='NVIM_APPNAME=lazy nvim'
+alias v='NVIM_APPNAME=kick nvim'
 alias l='exa --long --header --all --icons'
 alias ls='exa --header'
 alias tree='exa --tree --level=2'
