@@ -26,14 +26,40 @@ select_and_convert_to_glob() {
     # Create a temporary file to store selected items
     selected_file=$(mktemp)
     
-    # Display both files and directories for selection
-    find . -type f -o -type d | grep -v "/\." | sort | fzf --multi --preview '
-        if [ -d {} ]; then
-            ls -la {}
-        else
-            file --mime {} | grep -q "text/" && bat --color=always --line-range :50 {} || echo "Binary file"
-        fi
-    ' > "$selected_file"
+    # Use fd-find if available (respects gitignore by default)
+    if command -v fd &> /dev/null; then
+        fd --type f --type d --hidden --exclude .git | fzf --multi --preview '
+            if [ -d {} ]; then
+                ls -la {}
+            else
+                file --mime {} | grep -q "text/" && bat --color=always --line-range :50 {} || echo "Binary file"
+            fi
+        ' > "$selected_file"
+    # Otherwise use git ls-files for files and find for directories, respecting gitignore
+    elif command -v git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
+        # Get all tracked and untracked files not in gitignore
+        (git ls-files && git ls-files --others --exclude-standard) | sort > /tmp/git_files
+        # Get all directories
+        find . -type d | grep -v "/\." | sort > /tmp/all_dirs
+        # Combine files and directories
+        cat /tmp/git_files /tmp/all_dirs | sort | uniq | fzf --multi --preview '
+            if [ -d {} ]; then
+                ls -la {}
+            else
+                file --mime {} | grep -q "text/" && bat --color=always --line-range :50 {} || echo "Binary file"
+            fi
+        ' > "$selected_file"
+        rm /tmp/git_files /tmp/all_dirs
+    # Fallback to regular find if not in git repo
+    else
+        find . -type f -o -type d | grep -v "/\." | sort | fzf --multi --preview '
+            if [ -d {} ]; then
+                ls -la {}
+            else
+                file --mime {} | grep -q "text/" && bat --color=always --line-range :50 {} || echo "Binary file"
+            fi
+        ' > "$selected_file"
+    fi
     
     # Check if any items were selected
     if [[ ! -s "$selected_file" ]]; then
