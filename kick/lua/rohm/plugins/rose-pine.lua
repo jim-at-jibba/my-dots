@@ -69,7 +69,7 @@ return {
           NoiceMini = { fg = 'iris', bg = 'overlay' },
         },
       }
-      vim.cmd 'colorscheme rose-pine'
+      -- vim.cmd 'colorscheme rose-pine'
     end,
   },
 }
