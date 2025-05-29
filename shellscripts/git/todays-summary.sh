@@ -13,6 +13,7 @@ Options:
   -t, --today             Show today's commits
   -y, --yesterday         Show yesterday's commits
   -d, --date DATE         Show commits for a specific date (format: YYYY-MM-DD)
+  -w, --week              Show this week's commits (Monday to Sunday)
   -r, --repos REPOS...    Specify one or more repository paths (separated by spaces)
 
 If no options are provided, shows interactive selection menus.
@@ -22,6 +23,7 @@ Examples:
     $0 ~/projects/my-repo                    # Interactive date selection for single repo
     $0 --today ~/projects/my-repo            # Today's commits for single repo
     $0 --date 2025-05-28 ~/projects/my-repo  # Commits for specific date
+    $0 --week ~/projects/my-repo             # This week's commits (Monday to Sunday)
     $0 --yesterday --repos ~/repo1 ~/repo2   # Yesterday's commits for multiple repos
 EOF
   exit 1
@@ -92,19 +94,61 @@ Date Range: $date_range_display
 ----------------------------------------
 EOF
   
-  # Get only commit messages for selected date range (no patches, no detailed info)
-  git log --all --author="$git_user_email" \
-    --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-    --pretty=format:"%h | %s" >>"$temp_file"
-  
-  # Add simple prompt for LLM
-  cat <<EOF >>"$temp_file"
+  # Get commit messages with more details for weekly summaries
+  if [[ "$IS_WEEKLY" == "true" ]]; then
+    # For weekly summaries, include more details and group by day
+    echo "\n## Commits by day:\n" >>"$temp_file"
+    
+    # Get list of days with commits in the date range
+    local days=$(git log --all --author="$git_user_email" \
+      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
+      --date=short --format="%ad" | sort -u)
+    
+    # For each day, list the commits
+    for day in $days; do
+      echo "\n### $day" >>"$temp_file"
+      git log --all --author="$git_user_email" \
+        --since="$day 00:00:00" --until="$day 23:59:59" \
+        --pretty=format:"%h | %s" >>"$temp_file"
+    done
+    
+    # Add files changed statistics
+    echo "\n\n## Files changed:\n" >>"$temp_file"
+    git log --all --author="$git_user_email" \
+      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
+      --name-only --pretty=format:"" | sort | uniq -c | sort -nr | head -10 >>"$temp_file"
+    
+    # Add detailed prompt for weekly summary
+    cat <<EOF >>"$temp_file"
+
+----------------------------------------
+Prompt:
+Based on these commit messages, provide a comprehensive weekly summary of work done in this repository.
+Please include:
+1. Key accomplishments and milestones reached
+2. Major features implemented or enhanced
+3. Important bug fixes
+4. Refactoring or code improvements
+5. Patterns or themes in the work
+6. Technical challenges addressed
+
+Organize the summary by categories of work rather than by day, and highlight the most significant changes.
+EOF
+  else
+    # For daily summaries, keep it simple
+    git log --all --author="$git_user_email" \
+      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
+      --pretty=format:"%h | %s" >>"$temp_file"
+    
+    # Add simple prompt for LLM
+    cat <<EOF >>"$temp_file"
 
 ----------------------------------------
 Prompt:
 Based on these commit messages, provide a brief summary of the work done in this repository.
 Include the main features, bug fixes, or improvements that were made.
 EOF
+  fi
   
   # Output and cleanup
   response=$(cat "$temp_file" | fabric -m "gpt-4.1-mini" -cp ai)
@@ -119,9 +163,30 @@ EOF
 INTERACTIVE=true
 TODAY_DATE=$(date +%Y-%m-%d)
 YESTERDAY_DATE=$(date -v-1d +%Y-%m-%d)
+
+# Calculate the current week's Monday and Sunday
+CURRENT_DAY=$(date +%u) # 1 is Monday, 7 is Sunday
+
+# Calculate days to subtract to get to Monday (if today is Monday, subtract 0)
+DAYS_TO_MONDAY=$((CURRENT_DAY - 1))
+if [[ $DAYS_TO_MONDAY -lt 0 ]]; then
+  DAYS_TO_MONDAY=0
+fi
+
+# Calculate days to add to get to Sunday (if today is Sunday, add 0)
+DAYS_TO_SUNDAY=$((7 - CURRENT_DAY))
+if [[ $DAYS_TO_SUNDAY -lt 0 ]]; then
+  DAYS_TO_SUNDAY=0
+fi
+
+# Calculate Monday and Sunday dates
+MONDAY_DATE=$(date -v-${DAYS_TO_MONDAY}d +%Y-%m-%d) # Go back to Monday
+SUNDAY_DATE=$(date -v+${DAYS_TO_SUNDAY}d +%Y-%m-%d) # Go forward to Sunday
+
 START_DATE=""
 END_DATE=""
 DATE_RANGE_DISPLAY=""
+IS_WEEKLY=false
 REPOSITORIES=()
 
 # Parse command line arguments
@@ -142,6 +207,14 @@ while [[ $# -gt 0 ]]; do
       START_DATE="$YESTERDAY_DATE"
       END_DATE="$YESTERDAY_DATE"
       DATE_RANGE_DISPLAY="Yesterday's commits"
+      shift
+      ;;
+    -w|--week)
+      INTERACTIVE=false
+      START_DATE="$MONDAY_DATE"
+      END_DATE="$SUNDAY_DATE"
+      DATE_RANGE_DISPLAY="This week's commits (${MONDAY_DATE} to ${SUNDAY_DATE})"
+      IS_WEEKLY=true
       shift
       ;;
     -d|--date)
@@ -204,7 +277,7 @@ fi
 
 # If no date range specified, show date range selection
 if [[ -z "$START_DATE" ]]; then
-  DATE_RANGE=$(printf "Today's commits\nYesterday's commits\nCustom date" | \
+  DATE_RANGE=$(printf "Today's commits\nYesterday's commits\nThis week's commits\nCustom date" | \
     fzf --height 20% --reverse --header="Select commit date range")
   
   if [[ -z "$DATE_RANGE" ]]; then
@@ -222,6 +295,12 @@ if [[ -z "$START_DATE" ]]; then
     START_DATE="$YESTERDAY_DATE"
     END_DATE="$YESTERDAY_DATE"
     DATE_RANGE_DISPLAY="$DATE_RANGE"
+    ;;
+  "This week's commits")
+    START_DATE="$MONDAY_DATE"
+    END_DATE="$SUNDAY_DATE"
+    DATE_RANGE_DISPLAY="This week's commits (${MONDAY_DATE} to ${SUNDAY_DATE})"
+    IS_WEEKLY=true
     ;;
   "Custom date")
     echo "Enter date (YYYY-MM-DD):"
