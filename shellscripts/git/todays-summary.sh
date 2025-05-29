@@ -12,6 +12,7 @@ Options:
   -h, --help              Show this help message
   -t, --today             Show today's commits
   -y, --yesterday         Show yesterday's commits
+  -d, --date DATE         Show commits for a specific date (format: YYYY-MM-DD)
   -r, --repos REPOS...    Specify one or more repository paths (separated by spaces)
 
 If no options are provided, shows interactive selection menus.
@@ -20,6 +21,7 @@ Examples:
     $0                                       # Interactive mode
     $0 ~/projects/my-repo                    # Interactive date selection for single repo
     $0 --today ~/projects/my-repo            # Today's commits for single repo
+    $0 --date 2025-05-28 ~/projects/my-repo  # Commits for specific date
     $0 --yesterday --repos ~/repo1 ~/repo2   # Yesterday's commits for multiple repos
 EOF
   exit 1
@@ -142,6 +144,25 @@ while [[ $# -gt 0 ]]; do
       DATE_RANGE_DISPLAY="Yesterday's commits"
       shift
       ;;
+    -d|--date)
+      INTERACTIVE=false
+      shift
+      if [[ $# -gt 0 ]]; then
+        CUSTOM_DATE="$1"
+        # Validate date format (YYYY-MM-DD)
+        if [[ ! "$CUSTOM_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          echo "Error: Invalid date format. Please use YYYY-MM-DD format." >&2
+          exit 1
+        fi
+        START_DATE="$CUSTOM_DATE"
+        END_DATE="$CUSTOM_DATE"
+        DATE_RANGE_DISPLAY="Commits for $CUSTOM_DATE"
+        shift
+      else
+        echo "Error: Date argument is missing." >&2
+        show_usage
+      fi
+      ;;
     -r|--repos)
       INTERACTIVE=false
       shift
@@ -183,7 +204,7 @@ fi
 
 # If no date range specified, show date range selection
 if [[ -z "$START_DATE" ]]; then
-  DATE_RANGE=$(printf "Today's commits\nYesterday's commits" | \
+  DATE_RANGE=$(printf "Today's commits\nYesterday's commits\nCustom date" | \
     fzf --height 20% --reverse --header="Select commit date range")
   
   if [[ -z "$DATE_RANGE" ]]; then
@@ -201,6 +222,18 @@ if [[ -z "$START_DATE" ]]; then
     START_DATE="$YESTERDAY_DATE"
     END_DATE="$YESTERDAY_DATE"
     DATE_RANGE_DISPLAY="$DATE_RANGE"
+    ;;
+  "Custom date")
+    echo "Enter date (YYYY-MM-DD):"
+    read CUSTOM_DATE
+    # Validate date format
+    if [[ ! "$CUSTOM_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+      echo "Error: Invalid date format. Please use YYYY-MM-DD format." >&2
+      exit 1
+    fi
+    START_DATE="$CUSTOM_DATE"
+    END_DATE="$CUSTOM_DATE"
+    DATE_RANGE_DISPLAY="Commits for $CUSTOM_DATE"
     ;;
   esac
 fi
