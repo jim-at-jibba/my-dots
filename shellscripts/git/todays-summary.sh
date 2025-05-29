@@ -79,65 +79,29 @@ process_repository() {
   fi
   
   local today=$(date +%Y-%m-%d)
+  local repo_name=$(basename "$abs_repo_path")
   
   # Create temp file and write header
   local temp_file=$(mktemp)
   cat <<EOF >"$temp_file"
-Git Repository Changes Analysis - Your Commits Across All Branches
+# Commit Summary - $repo_name
 Repository: $abs_repo_path
-Git User: $git_user_email
-Analysis Date: $today
-Analyzing commits for: $date_range_display
+Date Range: $date_range_display
 ----------------------------------------
 EOF
   
-  # Get commits for selected date range
+  # Get only commit messages for selected date range (no patches, no detailed info)
   git log --all --author="$git_user_email" \
     --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-    --pretty=format:"Commit: %h%nAuthor: %an%nDate: %ad%nBranch: %D%nMessage: %s%n" \
-    --patch | while IFS= read -r line; do
-    echo "$line" >>"$temp_file"
-  done
+    --pretty=format:"%h | %s" >>"$temp_file"
   
-  # Add contribution statistics
-  echo -e "\nYour Contribution Statistics:" >>"$temp_file"
-  echo "Total commits: $(git log --all --author="$git_user_email" --since="$start_date 00:00:00" --until="$end_date 23:59:59" --oneline | wc -l | tr -d ' ')" >>"$temp_file"
-  echo "Files changed: $(git log --all --author="$git_user_email" --since="$start_date 00:00:00" --until="$end_date 23:59:59" --name-only --pretty=format:"" | sort -u | wc -l | tr -d ' ')" >>"$temp_file"
-  
-  # Check if there are any commits before getting branches
-  if [[ -n "$(git log --all --author="$git_user_email" --since="$start_date 00:00:00" --until="$end_date 23:59:59" --format="%H" | head -n 1)" ]]; then
-    echo "Branches with activity: $(git branch -a --contains $(git log --all --author="$git_user_email" --since="$start_date 00:00:00" --format="%H" | head -n 1) | wc -l | tr -d ' ')" >>"$temp_file"
-  else
-    echo "Branches with activity: 0" >>"$temp_file"
-  fi
-  
-  # Get repo name and add prompt
-  local repo_name=$(basename "$abs_repo_path")
-  
+  # Add simple prompt for LLM
   cat <<EOF >>"$temp_file"
 
-Prompt for LLM analysis:
-Please analyze the above git repository changes and provide a detailed summary in the exact format below:
-
-# Summary of Changes - $repo_name
-- **Feature Addition**: [What was added or enhanced]
-- **Bug Fix**: [What issues were resolved]
-- **Code Refactoring**: [What code improvements were made]
-- **Impact**: [How changes affect the codebase and user experience]
-- **Technical Debt**: [What complexities or future improvements were introduced]
-
-Keep your response concise and focused on code changes rather than commit messages.
-Each bullet point should be brief but specific, highlighting the technical details of the changes.
-Use technical language when describing the changes but keep it clear and understandable.
-Identify concrete examples from the code when possible.
-
-For example:
-# Summary of Changes - session-manager
-- **Feature Addition**: Added \`isFinishedSession\` prop for enhanced session state management.
-- **Bug Fix**: Implemented check to prevent actions on finished sessions.
-- **Code Refactoring**: Modularized session versioning and improved async session saving.
-- **Impact**: Improved session control, reduced data loss, refined user experience.
-- **Technical Debt**: Introduced async complexity; potential error handling improvements needed.
+----------------------------------------
+Prompt:
+Based on these commit messages, provide a brief summary of the work done in this repository.
+Include the main features, bug fixes, or improvements that were made.
 EOF
   
   # Output and cleanup
