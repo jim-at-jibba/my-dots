@@ -15,7 +15,8 @@ local function scheme_for_appearance(appearance)
 		-- return "rose-pine"
 		return "terafox"
 	else
-		return "rose-pine-dawn"
+		-- return "rose-pine-dawn"
+		return "dawnfox"
 	end
 end
 

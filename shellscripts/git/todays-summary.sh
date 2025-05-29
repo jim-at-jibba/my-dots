@@ -141,7 +141,7 @@ For example:
 EOF
   
   # Output and cleanup
-  response=$(cat "$temp_file" | fabric -m "$model" -cp ai)
+  response=$(cat "$temp_file" | fabric -m "gpt-4.1-mini" -cp ai)
   echo "$response"
   rm "$temp_file"
   

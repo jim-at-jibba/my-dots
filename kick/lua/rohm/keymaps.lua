@@ -11,7 +11,13 @@ map('n', '<C-d>', '<C-d>zz', opts)
 map('n', 'L', 'g_', opts)
 map('v', '<leader>p', '"_dP', opts)
 map('n', 'Y', 'y$', opts)
-map('n', '<leader>6', '<c-^>', opts)
+-- Yank relative path to clipboard
+map('n', '<leader>yp', function()
+  local relative_path = vim.fn.expand '%'
+  vim.fn.setreg('+', relative_path)
+  vim.notify('Yanked relative path: ' .. relative_path, vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Yank relative path' })
+map('n', '<leader>`', '<c-^>', opts)
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

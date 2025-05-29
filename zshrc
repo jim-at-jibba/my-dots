@@ -282,3 +282,7 @@ export PATH="/Users/jamesbest/.codeium/windsurf/bin:$PATH"
 # Task Master aliases added on 24/04/2025
 alias tm='task-master'
 alias taskmaster='task-master'
+alias claude="/Users/jamesbest/.claude/local/claude"
+
+# Added by Windsurf
+export PATH="/Users/jamesbest/.codeium/windsurf/bin:$PATH"

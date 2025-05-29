@@ -16,7 +16,8 @@ if git diff --staged --quiet; then
 fi
 
 echo "Generating commit message..."
-git diff --staged | fabric -m claude-3-5-sonnet-20241022 -p summarize_git_diff >commit_msg.tmp
+# git diff --staged | fabric -m claude-3-7-sonnet-latest  -p summarize_git_diff >commit_msg.tmp
+git --no-pager log --since="1 day ago" --pretty=format:"%h - %s"| fabric -m claude-3-7-sonnet-latest  -p summarize_git_diff >commit_msg.tmp 
 
 if [ -s commit_msg.tmp ]; then
   echo "Enter/edit commit message (press Ctrl+D when done):"

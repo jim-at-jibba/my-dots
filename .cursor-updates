@@ -1,0 +1,3 @@
+# Cursor Updates
+
+- Modified repomix-selector.sh to respect gitignore patterns when displaying files in fzf using fd-find or git ls-files 

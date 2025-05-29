@@ -41,7 +41,7 @@ if [[ "$response" =~ ^[Yy]$ ]]; then
   # Generate header and write to file
   generate_header "$video_url" "$title" >"$output_file"
 
-  yt "$video_url" | fabric --pattern extract_wisdom >>"$output_file"
+  yt "$video_url" | fabric --pattern extract_wisdom --model "gpt-4o" >>"$output_file"
   echo "Wisdom extracted and saved to: $output_file"
 else
   echo "Operation cancelled."
