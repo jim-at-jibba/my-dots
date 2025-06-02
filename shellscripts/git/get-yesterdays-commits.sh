@@ -25,6 +25,11 @@ yesterday=$(date -v-1d +%Y-%m-%d)
 
 # Use Git log to fetch yesterday's commits and format the output
 # git -C "$repo_path" log --since="$yesterday 00:00:00" --until="$yesterday 23:59:59" --pretty=format:"%h - %s (%an)" --reverse
-git -C "$repo_path" log --since="$yesterday 00:00:00" --until="$yesterday 23:59:59" --pretty=format:"%s" --reverse
-
-echo "Total commits yesterday: $(git -C "$repo_path" log --since="$yesterday 00:00:00" --until="$yesterday 23:59:59" --oneline | wc -l)"
+# Add a blank line before commits
+echo "Commits for $yesterday:"
+echo "----------------------------------------"
+git --no-pager -C "$repo_path" log --all --since="$yesterday 00:00:00" --until="$yesterday 23:59:59" --pretty=format:"%h - %s (%cr) <%an>" --reverse
+echo ""  # Add a blank line
+echo "----------------------------------------"
+# Update the total commits count to match the same criteria as the log display
+echo "Total commits yesterday: $(git -C "$repo_path" log --all --since="$yesterday 00:00:00" --until="$yesterday 23:59:59" --oneline | wc -l | tr -d ' ')"

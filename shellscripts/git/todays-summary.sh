@@ -107,9 +107,11 @@ EOF
     # For each day, list the commits
     for day in $days; do
       echo "\n### $day" >>"$temp_file"
-      git log --all --author="$git_user_email" \
+      echo "----------------------------------------" >>"$temp_file"
+      git --no-pager log --all --author="$git_user_email" \
         --since="$day 00:00:00" --until="$day 23:59:59" \
-        --pretty=format:"%h | %s" >>"$temp_file"
+        --pretty=format:"%h - %s (%cr) <%an>" --reverse >>"$temp_file"
+      echo "----------------------------------------" >>"$temp_file"
     done
     
     # Add files changed statistics
@@ -136,9 +138,12 @@ Organize the summary by categories of work rather than by day, and highlight the
 EOF
   else
     # For daily summaries, keep it simple
-    git log --all --author="$git_user_email" \
+    echo "\nCommits for $start_date:" >>"$temp_file"
+    echo "----------------------------------------" >>"$temp_file"
+    git --no-pager log --all --author="$git_user_email" \
       --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-      --pretty=format:"%h | %s" >>"$temp_file"
+      --pretty=format:"%h - %s (%cr) <%an>" --reverse >>"$temp_file"
+    echo "----------------------------------------" >>"$temp_file"
     
     # Add simple prompt for LLM
     cat <<EOF >>"$temp_file"
