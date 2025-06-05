@@ -8,9 +8,11 @@ import subprocess
 import sys
 import os
 import argparse
-from typing import List, Optional
+from typing import List, Optional, Dict, Tuple
 import anthropic
 from pathlib import Path
+import re
+import tempfile
 
 # Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
@@ -18,6 +20,11 @@ DEFAULT_BASE_BRANCH = "staging"  # Default base branch
 # MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
 MODEL = "claude-3-opus-latest"  # For testing
 # MODEL = "claude-opus-4-20250514"  # Claude Opus 4
+
+# Token limits and chunking settings
+MAX_TOKENS = 190000  # Leave some buffer under 200k
+CHUNK_OVERLAP = 500  # Lines of overlap between chunks
+MIN_CHUNK_SIZE = 1000  # Minimum lines per chunk
 
 # Problem-solving prompt template
 PROBLEM_SOLVING_PROMPT = """
@@ -853,16 +860,19 @@ def get_current_branch(base_branch: str) -> str:
     
     return current_branch
 
-def get_git_diff(base_branch: str, target_branch: str) -> str:
+def get_git_diff(base_branch: str, target_branch: str, files_only: Optional[List[str]] = None, exclude_files: Optional[List[str]] = None) -> str:
     """Get git diff between branches with enhanced line number context"""
     print_colored(f"📊 Getting diff between '{base_branch}' and '{target_branch}'...", Colors.OKBLUE)
     
-    success, diff = run_git_command([
-        "git", "diff", 
-        f"{base_branch}...{target_branch}",
-        "--no-merges",
-        "--unified=3"  # Show 3 lines of context around changes
-    ])
+    # Build git diff command
+    cmd = ["git", "diff", f"{base_branch}...{target_branch}", "--no-merges", "--unified=3"]
+    
+    # Add file filters if specified
+    if files_only:
+        cmd.extend(["--"] + files_only)
+        print_colored(f"🎯 Analyzing only: {', '.join(files_only)}", Colors.OKCYAN)
+    
+    success, diff = run_git_command(cmd)
     
     if not success:
         print_colored(f"❌ Error getting diff: {diff}", Colors.FAIL)
@@ -872,7 +882,32 @@ def get_git_diff(base_branch: str, target_branch: str) -> str:
         print_colored("ℹ️  No differences found between branches.", Colors.WARNING)
         return ""
     
+    # Apply file exclusions if specified
+    if exclude_files:
+        diff = filter_excluded_files(diff, exclude_files)
+        print_colored(f"🚫 Excluded: {', '.join(exclude_files)}", Colors.OKCYAN)
+    
     return diff
+
+def filter_excluded_files(diff: str, exclude_files: List[str]) -> str:
+    """Remove excluded files from diff"""
+    lines = diff.split('\n')
+    filtered_lines = []
+    current_file = None
+    skip_current_file = False
+    
+    for line in lines:
+        if line.startswith('diff --git'):
+            # Check if this file should be excluded
+            current_file = line
+            skip_current_file = any(excluded in line for excluded in exclude_files)
+            
+            if not skip_current_file:
+                filtered_lines.append(line)
+        elif not skip_current_file:
+            filtered_lines.append(line)
+    
+    return '\n'.join(filtered_lines)
 
 def enhance_diff_with_context(diff: str) -> str:
     """Add helpful context about diff format for Claude"""
@@ -892,7 +927,7 @@ When referencing changes, use the NEW line numbers (from the `+new_start` in the
 """
     return context + diff
 
-def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_key: str = DEFAULT_PROMPT) -> str:
+def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_key: str = DEFAULT_PROMPT, max_file_size: int = 10000, allow_chunking: bool = True) -> str:
     """Send diff to Claude for analysis"""
     if not ANTHROPIC_API_KEY:
         print_colored("❌ Error: ANTHROPIC_API_KEY environment variable not set", Colors.FAIL)
@@ -901,7 +936,23 @@ def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_
     
     prompt_info = PROMPTS[prompt_key]
     print_colored(f"🤖 Using '{prompt_info['name']}' prompt...", Colors.OKBLUE)
-    print_colored("🤖 Sending to Claude Opus 4 for analysis...", Colors.OKBLUE)
+    
+    # Check if diff needs chunking
+    estimated_tokens = estimate_token_count(diff)
+    print_colored(f"📊 Estimated tokens: {estimated_tokens:,}", Colors.OKBLUE)
+    
+    if estimated_tokens > MAX_TOKENS:
+        if allow_chunking:
+            print_colored(f"⚠️  Large diff detected ({estimated_tokens:,} tokens). Chunking analysis...", Colors.WARNING)
+            return analyze_large_diff_chunked(diff, base_branch, target_branch, prompt_key, max_file_size)
+        else:
+            print_colored(f"⚠️  Large diff detected ({estimated_tokens:,} tokens) but chunking disabled. Truncating...", Colors.WARNING)
+            # Truncate to fit
+            available_chars = (MAX_TOKENS - 5000) * 4  # Reserve tokens and convert to chars
+            if len(diff) > available_chars:
+                diff = diff[:available_chars] + "\n\n... [TRUNCATED - diff too large]"
+    
+    print_colored("🤖 Sending to Claude for analysis...", Colors.OKBLUE)
     
     try:
         client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
@@ -930,6 +981,154 @@ def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_
     except Exception as e:
         print_colored(f"❌ Error calling Claude API: {str(e)}", Colors.FAIL)
         sys.exit(1)
+
+def analyze_large_diff_chunked(diff: str, base_branch: str, target_branch: str, prompt_key: str, max_file_size: int = 10000) -> str:
+    """Analyze large diff by breaking it into chunks"""
+    prompt_info = PROMPTS[prompt_key]
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    
+    # Get chunks with custom file size limit
+    chunks = chunk_diff_intelligently(diff, MAX_TOKENS, max_file_size)
+    
+    if len(chunks) == 1:
+        print_colored("⚠️  Single chunk still too large, attempting analysis with truncation", Colors.WARNING)
+        return analyze_with_claude(chunks[0], base_branch, target_branch, prompt_key, max_file_size, allow_chunking=False)
+    
+    print_colored(f"📦 Analyzing in {len(chunks)} chunks...", Colors.OKBLUE)
+    
+    chunk_analyses = []
+    
+    for i, chunk in enumerate(chunks, 1):
+        print_colored(f"🔍 Analyzing chunk {i}/{len(chunks)}...", Colors.OKBLUE)
+        
+        try:
+            # Create chunk-specific prompt
+            enhanced_chunk = enhance_diff_with_context(chunk)
+            chunk_prompt = create_chunk_prompt(prompt_info, base_branch, target_branch, enhanced_chunk, i, len(chunks))
+            
+            response = client.messages.create(
+                model=MODEL,
+                max_tokens=3000,  # Slightly less for chunks
+                temperature=0.1,
+                messages=[{
+                    "role": "user",
+                    "content": chunk_prompt
+                }]
+            )
+            
+            chunk_analyses.append({
+                'chunk_number': i,
+                'analysis': response.content[0].text
+            })
+            
+        except Exception as e:
+            print_colored(f"❌ Error analyzing chunk {i}: {str(e)}", Colors.FAIL)
+            chunk_analyses.append({
+                'chunk_number': i,
+                'analysis': f"Error analyzing this chunk: {str(e)}"
+            })
+    
+    # Merge analyses
+    return merge_chunk_analyses(chunk_analyses, base_branch, target_branch)
+
+def create_chunk_prompt(prompt_info: dict, base_branch: str, target_branch: str, chunk_diff: str, chunk_num: int, total_chunks: int) -> str:
+    """Create a chunk-specific prompt"""
+    chunk_context = f"""
+## CHUNK ANALYSIS ({chunk_num} of {total_chunks})
+
+This is part {chunk_num} of {total_chunks} of a large code review. Focus on analyzing this specific subset of changes.
+
+IMPORTANT: 
+- This is a partial analysis - only comment on the code changes present in this chunk
+- Use file:line references specific to the changes shown
+- Be concise but thorough for the changes present
+- Note if any changes appear to be dependent on code not shown in this chunk
+
+"""
+    
+    # Use a simplified version of the main prompt for chunks
+    simplified_prompt = f"""
+You are a senior software engineer reviewing code changes.
+
+## Task
+Analyze the code changes in this chunk between {base_branch} and {target_branch}.
+
+## Output Format (Simplified for Chunk)
+
+### Chunk {chunk_num} Analysis
+
+#### 🔍 **Critical Issues** (This Chunk)
+- [List critical issues with file:line references]
+
+#### ⚠️ **Warnings** (This Chunk)  
+- [List warnings with file:line references]
+
+#### ✅ **Improvements** (This Chunk)
+- [List positive changes with file:line references]
+
+#### 📁 **Files in This Chunk**
+- [Brief analysis of each file changed in this chunk]
+
+---
+
+{chunk_context}
+
+Here are the changes in this chunk:
+
+```diff
+{chunk_diff}
+```
+
+Provide analysis for this chunk only.
+"""
+    
+    return simplified_prompt
+
+def merge_chunk_analyses(chunk_analyses: List[Dict], base_branch: str, target_branch: str) -> str:
+    """Merge multiple chunk analyses into a single comprehensive report"""
+    
+    merged_report = f"""# Comprehensive Code Review: {target_branch} vs {base_branch}
+
+## Executive Summary
+**Analysis Method**: Large diff analyzed in {len(chunk_analyses)} chunks
+**Risk Level**: [Determined from individual chunk analyses]
+**Deployment Ready**: [Review individual chunk findings]
+
+## Chunk-by-Chunk Analysis
+
+"""
+    
+    # Add each chunk analysis
+    for chunk_data in chunk_analyses:
+        merged_report += f"""
+### Chunk {chunk_data['chunk_number']} Analysis
+
+{chunk_data['analysis']}
+
+---
+
+"""
+    
+    # Add combined summary
+    merged_report += """
+## Combined Summary
+
+⚠️  **Large PR Notice**: This analysis was performed on a large diff split into multiple chunks. 
+Please review each chunk section above for complete coverage.
+
+### Recommended Next Steps:
+1. Review each chunk analysis individually
+2. Focus on critical issues identified across all chunks
+3. Consider breaking this large PR into smaller, focused PRs for easier review
+4. Ensure integration testing covers interactions between components changed in different chunks
+
+### For Future PRs:
+- Consider smaller, more focused changes
+- Break large features into multiple PRs
+- Use feature flags for incremental rollouts
+"""
+    
+    return merged_report
 
 def sanitize_filename(name: str) -> str:
     """Sanitize branch name for use in filename"""
@@ -1100,6 +1299,13 @@ Examples:
   %(prog)s --list-prompts              # Show available prompts
   %(prog)s --generate-steps            # Generate problem-solving steps after code review analysis
   %(prog)s -b main -p react-native --generate-steps  # Full analysis with steps
+  
+Large PR Handling:
+  %(prog)s --max-file-size 5000        # Skip files larger than 5000 lines
+  %(prog)s --no-chunking               # Disable chunking (may fail on large PRs)
+  %(prog)s --files-only src/components/ src/utils/  # Only analyze specific files
+  %(prog)s --exclude-files package-lock.json yarn.lock  # Exclude specific files
+  %(prog)s --files-only src/auth/ --max-file-size 3000  # Combined filtering
         """
     )
     
@@ -1128,7 +1334,150 @@ Examples:
         help="Generate problem-solving steps after code review analysis"
     )
     
+    parser.add_argument(
+        "--max-file-size",
+        type=int,
+        default=10000,
+        help="Maximum lines per file to include in analysis (default: 10000)"
+    )
+    
+    parser.add_argument(
+        "--no-chunking",
+        action="store_true",
+        help="Disable chunking for large diffs (may fail with token limit error)"
+    )
+    
+    parser.add_argument(
+        "--files-only",
+        nargs="+",
+        help="Only analyze specific files (space-separated list of file paths)"
+    )
+    
+    parser.add_argument(
+        "--exclude-files",
+        nargs="+",
+        help="Exclude specific files from analysis (space-separated list of file paths)"
+    )
+    
     return parser.parse_args()
+
+def estimate_token_count(text: str) -> int:
+    """Rough estimation of token count (approximately 4 characters per token)"""
+    return len(text) // 4
+
+def filter_large_files(diff: str, max_file_size: int = 10000) -> Tuple[str, List[str]]:
+    """Filter out extremely large file changes from diff"""
+    lines = diff.split('\n')
+    filtered_lines = []
+    current_file = None
+    current_file_lines = []
+    skipped_files = []
+    
+    for line in lines:
+        if line.startswith('diff --git'):
+            # Process previous file
+            if current_file and len(current_file_lines) > max_file_size:
+                skipped_files.append(current_file)
+                # Add a summary instead
+                filtered_lines.append(f"diff --git {current_file}")
+                filtered_lines.append(f"# LARGE FILE SKIPPED: {len(current_file_lines)} lines")
+                filtered_lines.append(f"# File too large for analysis - review manually")
+            elif current_file:
+                filtered_lines.extend(current_file_lines)
+            
+            # Start new file
+            current_file = line.split(' ')[-1] if ' ' in line else line
+            current_file_lines = [line]
+        else:
+            current_file_lines.append(line)
+    
+    # Process last file
+    if current_file and len(current_file_lines) > max_file_size:
+        skipped_files.append(current_file)
+        filtered_lines.append(f"diff --git {current_file}")
+        filtered_lines.append(f"# LARGE FILE SKIPPED: {len(current_file_lines)} lines")
+    elif current_file:
+        filtered_lines.extend(current_file_lines)
+    
+    return '\n'.join(filtered_lines), skipped_files
+
+def split_diff_by_files(diff: str) -> List[Dict[str, str]]:
+    """Split diff into individual file chunks"""
+    files = []
+    lines = diff.split('\n')
+    current_file = None
+    current_content = []
+    
+    for line in lines:
+        if line.startswith('diff --git'):
+            # Save previous file
+            if current_file:
+                files.append({
+                    'file': current_file,
+                    'content': '\n'.join(current_content),
+                    'line_count': len(current_content)
+                })
+            
+            # Start new file
+            current_file = line.split(' ')[-1] if ' ' in line else "unknown"
+            current_content = [line]
+        else:
+            current_content.append(line)
+    
+    # Add last file
+    if current_file:
+        files.append({
+            'file': current_file,
+            'content': '\n'.join(current_content),
+            'line_count': len(current_content)
+        })
+    
+    return files
+
+def chunk_diff_intelligently(diff: str, max_tokens: int = MAX_TOKENS, max_file_size: int = 10000) -> List[str]:
+    """Split diff into chunks that fit within token limits"""
+    # First, try filtering large files
+    filtered_diff, skipped_files = filter_large_files(diff, max_file_size)
+    
+    if skipped_files:
+        print_colored(f"⚠️  Skipped {len(skipped_files)} large files: {', '.join(skipped_files[:3])}{'...' if len(skipped_files) > 3 else ''}", Colors.WARNING)
+    
+    # Check if filtered diff fits
+    if estimate_token_count(filtered_diff) <= max_tokens:
+        return [filtered_diff]
+    
+    # Split by files and group into chunks
+    file_chunks = split_diff_by_files(filtered_diff)
+    chunks = []
+    current_chunk = ""
+    current_chunk_tokens = 0
+    
+    # Reserve tokens for prompt template
+    available_tokens = max_tokens - 5000  # Reserve for prompt overhead
+    
+    for file_data in file_chunks:
+        file_content = file_data['content']
+        file_tokens = estimate_token_count(file_content)
+        
+        # If single file is too large, skip it
+        if file_tokens > available_tokens * 0.8:
+            print_colored(f"⚠️  Skipping large file: {file_data['file']} ({file_tokens} tokens)", Colors.WARNING)
+            continue
+        
+        # If adding this file would exceed limit, start new chunk
+        if current_chunk_tokens + file_tokens > available_tokens and current_chunk:
+            chunks.append(current_chunk)
+            current_chunk = file_content
+            current_chunk_tokens = file_tokens
+        else:
+            current_chunk += "\n\n" + file_content if current_chunk else file_content
+            current_chunk_tokens += file_tokens
+    
+    # Add final chunk
+    if current_chunk:
+        chunks.append(current_chunk)
+    
+    return chunks if chunks else [filtered_diff[:available_tokens * 4]]  # Fallback
 
 def main():
     """Main script execution"""
@@ -1152,6 +1501,16 @@ def main():
     print_colored(f"📝 Using prompt: {prompt_info['name']}", Colors.OKCYAN)
     print_colored(f"   {prompt_info['description']}", Colors.OKBLUE)
     
+    # Show configuration for large PR handling
+    if args.max_file_size != 10000:
+        print_colored(f"📏 Max file size: {args.max_file_size} lines", Colors.OKCYAN)
+    if args.no_chunking:
+        print_colored(f"⚠️  Chunking disabled - large PRs may fail", Colors.WARNING)
+    if args.files_only:
+        print_colored(f"🎯 Analyzing only: {', '.join(args.files_only)}", Colors.OKCYAN)
+    if args.exclude_files:
+        print_colored(f"🚫 Excluding: {', '.join(args.exclude_files)}", Colors.OKCYAN)
+    
     if generate_steps:
         print_colored("🔧 Problem-solving steps will be generated after analysis", Colors.OKCYAN)
     
@@ -1164,7 +1523,7 @@ def main():
     print_colored(f"🎯 Comparing against: {base_branch}", Colors.OKCYAN)
     
     # Get diff
-    diff = get_git_diff(base_branch, current_branch)
+    diff = get_git_diff(base_branch, current_branch, args.files_only, args.exclude_files)
     if not diff:
         print_colored("✅ No changes to analyze!", Colors.OKGREEN)
         sys.exit(0)
@@ -1176,7 +1535,7 @@ def main():
     print_colored(f"📁 Files changed: {files_changed}", Colors.OKBLUE)
     
     # Analyze with Claude
-    analysis = analyze_with_claude(diff, base_branch, current_branch, prompt_key)
+    analysis = analyze_with_claude(diff, base_branch, current_branch, prompt_key, args.max_file_size, not args.no_chunking)
     
     # Generate problem-solving steps if requested
     steps = None

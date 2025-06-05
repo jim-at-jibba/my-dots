@@ -19,3 +19,9 @@
 - Extended `shellscripts/git/code-review.py` with `--generate-steps` flag that extracts problems from code review analysis and generates actionable problem-solving steps using a second API call to Claude with the provided prompt template.
 
 - Fixed string formatting issue in `PROBLEM_SOLVING_PROMPT` by escaping curly braces in JSON and TypeScript code examples to prevent Python `.format()` errors when generating problem-solving steps.
+
+# Cursor Agent Updates
+
+## Recent Changes
+
+- **Enhanced code review script for large PRs**: Added intelligent chunking, file filtering, and token limit handling to avoid Claude API errors on large diffs
