@@ -1,0 +1,46 @@
+analysis:
+  max_tokens: 190000
+  chunk_overlap: 500
+  min_chunk_size: 1000
+  default_base_branch: "staging"
+  model: "claude-sonnet-4-20250514"
+  max_file_size: 10000
+  allow_chunking: true
+
+prompts:
+  default: "react-native"
+  available:
+    react-native:
+      name: "React Native/TypeScript"
+      description: "Expert React Native and TypeScript code review"
+      file: "react_native.txt"
+
+    breedr-mob:
+      name: "Breedr Mobile (React Native + Unistyles)"
+      description: "Breedr mobile app code review with React Native and react-native-unistyles focus"
+      file: "breedr_mobile.txt"
+
+    general:
+      name: "General Code Review"
+      description: "General purpose code review for any language/framework"
+      file: "general.txt"
+
+    python:
+      name: "Python Code Review"
+      description: "Python-focused code review with PEP standards"
+      file: "python.txt"
+
+    web:
+      name: "Web Development (React/JS/TS)"
+      description: "Frontend web development review for React, JavaScript, and TypeScript"
+      file: "web.txt"
+
+github:
+  require_cli: true
+  auto_comment: false
+  max_comments_per_pr: 20
+
+output:
+  analysis_dir: "analysis"
+  save_steps_separately: true
+  include_metadata: true
