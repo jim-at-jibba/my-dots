@@ -18,6 +18,178 @@ DEFAULT_BASE_BRANCH = "staging"  # Default base branch
 # MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
 MODEL = "claude-opus-4-20250514"  # Claude Opus 4
 
+# Problem-solving prompt template
+PROBLEM_SOLVING_PROMPT = """
+Create me a prompt that helps an ai agent work through a problem statement. Use the example as the returned format and the supporting docs attached to give as much information needed. Then create a list of steps to solve the problem.
+
+The Problem: {problem}
+Supporting information: {supporting_info}
+
+Return in the following format:
+
+# Problem
+
+# Supporting Information
+
+# Steps to Complete
+
+<example>
+## Problem
+
+We want to set up a new MCP server, written in TypeScript. We are starting from an empty directory.
+
+We are writing this in Cursor, so recording the important files in a `.cursor/rules/important-files.mdc` file is important.
+
+We need to set up the basic file system for the project, install necessary dependencies, and set up the project structure.
+
+## Supporting Information
+
+### Tools
+
+#### `pnpm`
+
+Use `pnpm` as the package manager.
+
+### File Structure
+
+Recommended file structure:
+
+#### `.cursor/rules/important-files.mdc`
+
+A file that lists the important files for the project, which should be included in every chat.
+
+Use the `mdc` format, which is a markdown format with these frontmatter fields:
+
+```md
+---
+globs: **/**
+alwaysApply: true
+---
+
+...content goes here...
+```
+
+Make sure to add a directive at the end of the file that if new files are added, they should be added to the `important-files.mdc` file.
+
+#### `package.json`
+
+The package.json file for the project.
+
+Recommended scripts:
+
+`build`: Builds the project using `tsc`.
+`dev`: Runs the project in development mode using `tsx watch src/main.ts`.
+
+Dependencies:
+
+- `@modelcontextprotocol/sdk`: The MCP SDK. Latest version is `0.9.0`.
+- `zod`: A schema declaration and validation library for TypeScript.
+
+Dev dependencies:
+
+- `tsx`: A faster version of `ts-node` that is optimized for the CLI.
+- `typescript`: The TypeScript compiler, latest version: `5.8`
+- `@types/node`: The types for Node.js, for 22+
+
+`bin` should be set to `dist/main.js`.
+
+`type` should be set to `module`.
+
+#### `tsconfig.json`
+
+The TypeScript configuration file for the project. Here is the recommended configuration from Matt Pocock's TSConfig cheat sheet.
+
+```jsonc
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* If transpiling with TypeScript: */
+    "module": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+
+    /* AND if you're building for a library: */
+    "declaration": true,
+
+    /* If your code doesn't run in the DOM: */
+    "lib": ["es2022"]
+  },
+  "include": ["src"]
+}
+```
+
+#### `src/main.ts`
+
+The entry point for the project.
+
+```ts
+import {
+  McpServer,
+  ResourceTemplate,
+} from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+
+// Create an MCP server
+const server = new McpServer({
+  name: "Demo",
+  version: "1.0.0",
+});
+
+// Add an addition tool
+server.tool("add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
+  content: [{ type: "text", text: String(a + b) }],
+}));
+
+// Add a dynamic greeting resource
+server.resource(
+  "greeting",
+  new ResourceTemplate("greeting://{name}", { list: undefined }),
+  async (uri, { name }) => ({
+    contents: [
+      {
+        uri: uri.href,
+        text: `Hello, ${name}!`,
+      },
+    ],
+  })
+);
+
+// Start receiving messages on stdin and sending messages on stdout
+const transport = new StdioServerTransport();
+await server.connect(transport);
+```
+
+#### `.gitignore`
+
+A file that lists the files to ignore in the project. `dist` should be ignored since it is the output directory.
+
+## Steps To Complete
+
+- Create the `package.json` file with the recommended scripts and dependencies.
+- Use a `pnpm add` command to install the dependencies so that they are pinned to the current version. Do NOT use `latest` or `next`.
+- Install the dependencies.
+- Create the `tsconfig.json` file with the recommended configuration.
+- Create the other files described above.
+- Run `pnpm build` to build the project.
+</example>
+"""
+
 # Available prompts
 PROMPTS = {
     "react-native": {
@@ -767,7 +939,105 @@ def sanitize_filename(name: str) -> str:
         sanitized = sanitized.replace(char, '_')
     return sanitized
 
-def save_analysis(analysis: str, base_branch: str, target_branch: str):
+def extract_problems_from_analysis(analysis: str, base_branch: str, target_branch: str) -> str:
+    """Extract key problems and issues from the code review analysis to create a problem statement"""
+    
+    # Extract the critical issues and warnings sections
+    lines = analysis.split('\n')
+    critical_issues = []
+    warnings = []
+    
+    in_critical = False
+    in_warnings = False
+    
+    for line in lines:
+        if '🔍 **Critical Issues**' in line or 'Critical Issues' in line:
+            in_critical = True
+            in_warnings = False
+            continue
+        elif '⚠️ **Warnings**' in line or 'Warnings' in line:
+            in_critical = False
+            in_warnings = True
+            continue
+        elif line.startswith('####') or line.startswith('###'):
+            in_critical = False
+            in_warnings = False
+            continue
+            
+        if in_critical and line.strip() and not line.startswith('#'):
+            critical_issues.append(line.strip())
+        elif in_warnings and line.strip() and not line.startswith('#'):
+            warnings.append(line.strip())
+    
+    # Create problem statement
+    problem_parts = []
+    
+    if critical_issues:
+        problem_parts.append("Critical issues identified in code review that must be resolved before merging:")
+        problem_parts.extend([f"- {issue}" for issue in critical_issues[:5]])  # Limit to top 5
+        
+    if warnings:
+        problem_parts.append("\nAdditional warnings that should be addressed:")
+        problem_parts.extend([f"- {warning}" for warning in warnings[:5]])  # Limit to top 5
+    
+    if not problem_parts:
+        problem_parts.append(f"Code review completed for changes between {base_branch} and {target_branch}. Need to implement recommended improvements and ensure code quality standards are met.")
+    
+    return "\n".join(problem_parts)
+
+def generate_problem_solving_steps(analysis: str, base_branch: str, target_branch: str) -> str:
+    """Generate problem-solving steps based on the code review analysis"""
+    if not ANTHROPIC_API_KEY:
+        print_colored("❌ Error: ANTHROPIC_API_KEY environment variable not set", Colors.FAIL)
+        sys.exit(1)
+    
+    print_colored("🔧 Generating problem-solving steps...", Colors.OKBLUE)
+    
+    try:
+        client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+        
+        # Extract problem statement from analysis
+        problem = extract_problems_from_analysis(analysis, base_branch, target_branch)
+        
+        # Use the full analysis as supporting information
+        supporting_info = f"""
+## Code Review Analysis Results
+
+The following is a complete code review analysis comparing {target_branch} branch against {base_branch} branch:
+
+{analysis}
+
+## Branch Context
+- **Base Branch**: {base_branch}
+- **Target Branch**: {target_branch}
+- **Review Type**: AI-powered code review using Claude Opus 4
+
+## Key Areas to Address
+Focus on resolving critical issues first, then warnings, and finally implementing recommended improvements.
+"""
+        
+        prompt = PROBLEM_SOLVING_PROMPT.format(
+            problem=problem,
+            supporting_info=supporting_info
+        )
+        
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=4000,
+            temperature=0.1,
+            messages=[{
+                "role": "user",
+                "content": prompt
+            }]
+        )
+        
+        return response.content[0].text
+        
+    except Exception as e:
+        print_colored(f"❌ Error generating problem-solving steps: {str(e)}", Colors.FAIL)
+        sys.exit(1)
+
+def save_analysis(analysis: str, base_branch: str, target_branch: str, steps: Optional[str] = None):
     """Save analysis to file in analysis folder"""
     # Create analysis directory if it doesn't exist
     analysis_dir = Path("analysis")
@@ -784,7 +1054,23 @@ def save_analysis(analysis: str, base_branch: str, target_branch: str):
         with open(filepath, 'w') as f:
             f.write(f"# Branch Analysis: {target_branch} vs {base_branch}\n\n")
             f.write(analysis)
+            
+            # Add problem-solving steps if provided
+            if steps:
+                f.write(f"\n\n---\n\n# Problem-Solving Steps\n\n")
+                f.write(steps)
+                
         print_colored(f"💾 Analysis saved to: {filepath}", Colors.OKGREEN)
+        
+        # Also save steps to a separate file if provided
+        if steps:
+            steps_filename = f"steps_{safe_target}_vs_{safe_base}.md"
+            steps_filepath = analysis_dir / steps_filename
+            with open(steps_filepath, 'w') as f:
+                f.write(f"# Problem-Solving Steps: {target_branch} vs {base_branch}\n\n")
+                f.write(steps)
+            print_colored(f"📋 Steps saved to: {steps_filepath}", Colors.OKGREEN)
+            
     except Exception as e:
         print_colored(f"⚠️  Could not save to file: {str(e)}", Colors.WARNING)
 
@@ -811,6 +1097,8 @@ Examples:
   %(prog)s -p python                   # Use Python-specific prompt
   %(prog)s -b develop -p general       # Compare with develop using general prompt
   %(prog)s --list-prompts              # Show available prompts
+  %(prog)s --generate-steps            # Generate problem-solving steps after code review analysis
+  %(prog)s -b main -p react-native --generate-steps  # Full analysis with steps
         """
     )
     
@@ -833,6 +1121,12 @@ Examples:
         help="List available prompts and exit"
     )
     
+    parser.add_argument(
+        "--generate-steps",
+        action="store_true",
+        help="Generate problem-solving steps after code review analysis"
+    )
+    
     return parser.parse_args()
 
 def main():
@@ -847,6 +1141,7 @@ def main():
     
     base_branch = args.base
     prompt_key = args.prompt
+    generate_steps = args.generate_steps
     
     print_colored("🚀 AI-Powered Code Review Tool", Colors.HEADER)
     print_colored("=" * 50, Colors.HEADER)
@@ -855,6 +1150,9 @@ def main():
     prompt_info = PROMPTS[prompt_key]
     print_colored(f"📝 Using prompt: {prompt_info['name']}", Colors.OKCYAN)
     print_colored(f"   {prompt_info['description']}", Colors.OKBLUE)
+    
+    if generate_steps:
+        print_colored("🔧 Problem-solving steps will be generated after analysis", Colors.OKCYAN)
     
     # Verify git repository
     check_git_repo()
@@ -879,16 +1177,30 @@ def main():
     # Analyze with Claude
     analysis = analyze_with_claude(diff, base_branch, current_branch, prompt_key)
     
+    # Generate problem-solving steps if requested
+    steps = None
+    if generate_steps:
+        steps = generate_problem_solving_steps(analysis, base_branch, current_branch)
+    
     # Display results
     print_colored("\n" + "=" * 80, Colors.HEADER)
     print_colored("📋 ANALYSIS RESULTS", Colors.HEADER)
     print_colored("=" * 80, Colors.HEADER)
     print(analysis)
     
+    # Display steps if generated
+    if steps:
+        print_colored("\n" + "=" * 80, Colors.HEADER)
+        print_colored("🔧 PROBLEM-SOLVING STEPS", Colors.HEADER)
+        print_colored("=" * 80, Colors.HEADER)
+        print(steps)
+    
     # Save to file
-    save_analysis(analysis, base_branch, current_branch)
+    save_analysis(analysis, base_branch, current_branch, steps)
     
     print_colored("\n✅ Analysis complete!", Colors.OKGREEN)
+    if generate_steps:
+        print_colored("✅ Problem-solving steps generated!", Colors.OKGREEN)
 
 if __name__ == "__main__":
     main()
