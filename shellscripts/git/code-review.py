@@ -16,7 +16,8 @@ from pathlib import Path
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 DEFAULT_BASE_BRANCH = "staging"  # Default base branch
 # MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
-MODEL = "claude-opus-4-20250514"  # Claude Opus 4
+MODEL = "claude-3-opus-latest"  # For testing
+# MODEL = "claude-opus-4-20250514"  # Claude Opus 4
 
 # Problem-solving prompt template
 PROBLEM_SOLVING_PROMPT = """
@@ -100,8 +101,8 @@ Dev dependencies:
 The TypeScript configuration file for the project. Here is the recommended configuration from Matt Pocock's TSConfig cheat sheet.
 
 ```jsonc
-{
-  "compilerOptions": {
+{{
+  "compilerOptions": {{
     /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -128,9 +129,9 @@ The TypeScript configuration file for the project. Here is the recommended confi
 
     /* If your code doesn't run in the DOM: */
     "lib": ["es2022"]
-  },
+  }},
   "include": ["src"]
-}
+}}
 ```
 
 #### `src/main.ts`
@@ -138,36 +139,36 @@ The TypeScript configuration file for the project. Here is the recommended confi
 The entry point for the project.
 
 ```ts
-import {
+import {{
   McpServer,
   ResourceTemplate,
-} from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
+}} from "@modelcontextprotocol/sdk/server/mcp.js";
+import {{ StdioServerTransport }} from "@modelcontextprotocol/sdk/server/stdio.js";
+import {{ z }} from "zod";
 
 // Create an MCP server
-const server = new McpServer({
+const server = new McpServer({{
   name: "Demo",
   version: "1.0.0",
-});
+}});
 
 // Add an addition tool
-server.tool("add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
-  content: [{ type: "text", text: String(a + b) }],
-}));
+server.tool("add", {{ a: z.number(), b: z.number() }}, async ({{ a, b }}) => ({{
+  content: [{{ type: "text", text: String(a + b) }}],
+}}));
 
 // Add a dynamic greeting resource
 server.resource(
   "greeting",
-  new ResourceTemplate("greeting://{name}", { list: undefined }),
-  async (uri, { name }) => ({
+  new ResourceTemplate("greeting://{{name}}", {{ list: undefined }}),
+  async (uri, {{ name }}) => ({{
     contents: [
-      {
+      {{
         uri: uri.href,
-        text: `Hello, ${name}!`,
-      },
+        text: `Hello, ${{name}}!`,
+      }},
     ],
-  })
+  }})
 );
 
 // Start receiving messages on stdin and sending messages on stdout
