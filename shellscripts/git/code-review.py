@@ -15,7 +15,8 @@ from pathlib import Path
 # Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 DEFAULT_BASE_BRANCH = "staging"  # Default base branch
-MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
+# MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
+MODEL = "claude-opus-4-20250514"  # Claude Opus 4
 
 # Available prompts
 PROMPTS = {
