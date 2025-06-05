@@ -13,12 +13,14 @@ import anthropic
 from pathlib import Path
 import re
 import tempfile
+import json
+from dataclasses import dataclass
 
 # Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 DEFAULT_BASE_BRANCH = "staging"  # Default base branch
-# MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
-MODEL = "claude-3-opus-latest"  # For testing
+MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
+# MODEL = "claude-3-opus-latest"  # For testing
 # MODEL = "claude-opus-4-20250514"  # Claude Opus 4
 
 # Token limits and chunking settings
@@ -820,6 +822,15 @@ class Colors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
 
+@dataclass
+class CodeIssue:
+    """Represents a code issue that can be commented on"""
+    file_path: str
+    line_number: Optional[int]
+    issue_type: str  # 'critical', 'warning', 'improvement'
+    description: str
+    full_context: str
+
 def print_colored(message: str, color: str = Colors.ENDC):
     """Print colored message to terminal"""
     print(f"{color}{message}{Colors.ENDC}")
@@ -1285,6 +1296,244 @@ def list_prompts():
         print_colored(f"                  {prompt_info['description']}", Colors.OKBLUE)
         print()
 
+def check_gh_cli() -> bool:
+    """Check if GitHub CLI is installed and authenticated"""
+    try:
+        # Check if gh is installed
+        result = subprocess.run(["gh", "--version"], capture_output=True, text=True, check=True)
+        
+        # Check if authenticated
+        result = subprocess.run(["gh", "auth", "status"], capture_output=True, text=True, check=True)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
+def get_pr_number(base_branch: str, target_branch: str) -> Optional[str]:
+    """Get PR number for the current branch"""
+    try:
+        # Try to find PR for current branch
+        result = subprocess.run([
+            "gh", "pr", "list", 
+            "--head", target_branch,
+            "--base", base_branch,
+            "--json", "number",
+            "--limit", "1"
+        ], capture_output=True, text=True, check=True)
+        
+        prs = json.loads(result.stdout)
+        if prs:
+            return str(prs[0]["number"])
+        return None
+    except (subprocess.CalledProcessError, json.JSONDecodeError):
+        return None
+
+def parse_issues_from_analysis(analysis: str) -> List[CodeIssue]:
+    """Parse code issues from the analysis text"""
+    issues = []
+    lines = analysis.split('\n')
+    
+    current_section = None
+    issue_type = None
+    
+    for line in lines:
+        line = line.strip()
+        
+        # Detect section headers
+        if '🔍 **Critical Issues**' in line or 'Critical Issues' in line:
+            current_section = 'critical'
+            issue_type = 'critical'
+            continue
+        elif '⚠️ **Warnings**' in line or 'Warnings' in line:
+            current_section = 'warnings'
+            issue_type = 'warning'
+            continue
+        elif '✅ **Improvements**' in line or 'Improvements' in line:
+            current_section = 'improvements'
+            issue_type = 'improvement'
+            continue
+        elif line.startswith('####') or line.startswith('###'):
+            current_section = None
+            continue
+        
+        # Parse issue lines
+        if current_section and line and not line.startswith('#'):
+            # Look for file:line pattern - handles both bullet points and direct mentions, with or without ** formatting
+            # Format: "- **`file.tsx:Line 27`** - description" or "- `file.tsx:Line 27` - description"
+            file_line_match = re.search(r'(?:[-*]\s*)?(?:\*\*)?`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))`(?:\*\*)?\s*[-–—]\s*(.+)', line)
+            
+            if file_line_match:
+                groups = file_line_match.groups()
+                file_path = groups[0]
+                line_num = groups[1] or groups[2]  # Single line or start of range
+                description = groups[4].strip() if len(groups) > 4 and groups[4] else "No description"  # Description is the 5th group (index 4)
+                
+                if line_num:
+                    line_num = int(line_num)
+                
+                issues.append(CodeIssue(
+                    file_path=file_path,
+                    line_number=line_num,
+                    issue_type=issue_type,
+                    description=description,
+                    full_context=line
+                ))
+    
+    return issues
+
+def interactive_comment_selection(issues: List[CodeIssue]) -> List[CodeIssue]:
+    """Interactive selection of issues to comment on"""
+    if not issues:
+        print_colored("No issues found to comment on.", Colors.WARNING)
+        return []
+    
+    print_colored("\n🔍 Found Issues for GitHub Comments:", Colors.HEADER)
+    print_colored("=" * 50, Colors.HEADER)
+    
+    selected_issues = []
+    
+    for i, issue in enumerate(issues, 1):
+        # Display issue
+        color = Colors.FAIL if issue.issue_type == 'critical' else Colors.WARNING if issue.issue_type == 'warning' else Colors.OKGREEN
+        type_emoji = "🔍" if issue.issue_type == 'critical' else "⚠️" if issue.issue_type == 'warning' else "✅"
+        
+        print_colored(f"\n{type_emoji} Issue {i}/{len(issues)} ({issue.issue_type.upper()})", color)
+        print_colored(f"File: {issue.file_path}", Colors.OKCYAN)
+        if issue.line_number:
+            print_colored(f"Line: {issue.line_number}", Colors.OKCYAN)
+        print_colored(f"Description: {issue.description}", Colors.OKBLUE)
+        
+        # Ask user
+        while True:
+            choice = input(f"\nComment on this issue? [y/n/q/s]: ").lower().strip()
+            if choice in ['y', 'yes']:
+                selected_issues.append(issue)
+                print_colored("✅ Added to comment list", Colors.OKGREEN)
+                break
+            elif choice in ['n', 'no']:
+                print_colored("⏭️  Skipped", Colors.WARNING)
+                break
+            elif choice in ['q', 'quit']:
+                print_colored("🛑 Stopping selection process", Colors.WARNING)
+                return selected_issues
+            elif choice in ['s', 'show']:
+                print_colored(f"Full context: {issue.full_context}", Colors.OKBLUE)
+            else:
+                print_colored("Please enter 'y' (yes), 'n' (no), 'q' (quit), or 's' (show full context)", Colors.WARNING)
+    
+    return selected_issues
+
+def create_pr_comments(issues: List[CodeIssue], pr_number: str, target_branch: str) -> bool:
+    """Create PR comments for selected issues"""
+    if not issues:
+        return True
+    
+    print_colored(f"\n💬 Creating {len(issues)} PR comments...", Colors.OKBLUE)
+    
+    success_count = 0
+    
+    for i, issue in enumerate(issues, 1):
+        try:
+            # Format comment body
+            type_emoji = "🔍" if issue.issue_type == 'critical' else "⚠️" if issue.issue_type == 'warning' else "✅"
+            comment_body = f"{type_emoji} **{issue.issue_type.title()} Issue**\n\n{issue.description}\n\n---\n*Generated by AI Code Review*"
+            
+            # Create comment command
+            cmd = ["gh", "pr", "comment", pr_number, "--body", comment_body]
+            
+            # Add file/line specific comment if we have line number
+            if issue.line_number and issue.file_path:
+                # Get the commit SHA for the current branch
+                success, commit_sha = run_git_command(["git", "rev-parse", target_branch])
+                if success:
+                    # Use gh pr comment with file/line targeting
+                    result = subprocess.run([
+                        "gh", "api", f"repos/:owner/:repo/pulls/{pr_number}/comments",
+                        "--method", "POST",
+                        "--field", f"body={comment_body}",
+                        "--field", f"commit_id={commit_sha.strip()}",
+                        "--field", f"path={issue.file_path}",
+                        "--field", f"line={issue.line_number}",
+                        "--field", "side=RIGHT"
+                    ], capture_output=True, text=True)
+                    
+                    if result.returncode == 0:
+                        print_colored(f"✅ Comment {i}/{len(issues)}: {issue.file_path}:{issue.line_number}", Colors.OKGREEN)
+                        success_count += 1
+                    else:
+                        # Fallback to general comment
+                        result = subprocess.run(["gh", "pr", "comment", pr_number, "--body", comment_body], 
+                                              capture_output=True, text=True)
+                        if result.returncode == 0:
+                            print_colored(f"✅ Comment {i}/{len(issues)}: {issue.file_path} (general)", Colors.OKGREEN)
+                            success_count += 1
+                        else:
+                            print_colored(f"❌ Failed to comment on {issue.file_path}: {result.stderr}", Colors.FAIL)
+                else:
+                    # Fallback to general comment
+                    result = subprocess.run(["gh", "pr", "comment", pr_number, "--body", comment_body], 
+                                          capture_output=True, text=True)
+                    if result.returncode == 0:
+                        print_colored(f"✅ Comment {i}/{len(issues)}: {issue.file_path} (general)", Colors.OKGREEN)
+                        success_count += 1
+                    else:
+                        print_colored(f"❌ Failed to comment on {issue.file_path}: {result.stderr}", Colors.FAIL)
+            else:
+                # General PR comment
+                result = subprocess.run(["gh", "pr", "comment", pr_number, "--body", comment_body], 
+                                      capture_output=True, text=True)
+                if result.returncode == 0:
+                    print_colored(f"✅ Comment {i}/{len(issues)}: General comment", Colors.OKGREEN)
+                    success_count += 1
+                else:
+                    print_colored(f"❌ Failed to create general comment: {result.stderr}", Colors.FAIL)
+                    
+        except Exception as e:
+            print_colored(f"❌ Error creating comment for {issue.file_path}: {str(e)}", Colors.FAIL)
+    
+    print_colored(f"\n📊 Successfully created {success_count}/{len(issues)} comments", 
+                  Colors.OKGREEN if success_count == len(issues) else Colors.WARNING)
+    
+    return success_count > 0
+
+def handle_github_comments(analysis: str, base_branch: str, target_branch: str) -> bool:
+    """Handle the complete GitHub commenting workflow"""
+    print_colored("\n🐙 GitHub CLI Integration", Colors.HEADER)
+    print_colored("-" * 30, Colors.HEADER)
+    
+    # Check GitHub CLI
+    if not check_gh_cli():
+        print_colored("❌ GitHub CLI not found or not authenticated", Colors.FAIL)
+        print_colored("Please install and authenticate with: gh auth login", Colors.OKBLUE)
+        return False
+    
+    print_colored("✅ GitHub CLI authenticated", Colors.OKGREEN)
+    
+    # Get PR number
+    pr_number = get_pr_number(base_branch, target_branch)
+    if not pr_number:
+        print_colored(f"❌ No PR found for {target_branch} -> {base_branch}", Colors.FAIL)
+        print_colored("Please create a PR first or ensure you're on the correct branch", Colors.OKBLUE)
+        return False
+    
+    print_colored(f"✅ Found PR #{pr_number}", Colors.OKGREEN)
+    
+    # Parse issues from analysis
+    issues = parse_issues_from_analysis(analysis)
+    if not issues:
+        print_colored("ℹ️  No commentable issues found in analysis", Colors.WARNING)
+        return True
+    
+    print_colored(f"🔍 Found {len(issues)} potential issues to comment on", Colors.OKCYAN)
+    
+    # Interactive selection
+    selected_issues = interactive_comment_selection(issues)
+    if not selected_issues:
+        print_colored("ℹ️  No issues selected for commenting", Colors.WARNING)
+        return True
+    
+    # Create comments
+    return create_pr_comments(selected_issues, pr_number, target_branch)
+
 def parse_arguments():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(
@@ -1299,6 +1548,8 @@ Examples:
   %(prog)s --list-prompts              # Show available prompts
   %(prog)s --generate-steps            # Generate problem-solving steps after code review analysis
   %(prog)s -b main -p react-native --generate-steps  # Full analysis with steps
+  %(prog)s --github-comments           # Interactive GitHub PR commenting
+  %(prog)s --github-comments --generate-steps  # Full workflow with GitHub integration
   
 Large PR Handling:
   %(prog)s --max-file-size 5000        # Skip files larger than 5000 lines
@@ -1332,6 +1583,12 @@ Large PR Handling:
         "--generate-steps",
         action="store_true",
         help="Generate problem-solving steps after code review analysis"
+    )
+    
+    parser.add_argument(
+        "--github-comments",
+        action="store_true",
+        help="Interactively create GitHub PR comments for found issues (requires gh CLI)"
     )
     
     parser.add_argument(
@@ -1492,6 +1749,7 @@ def main():
     base_branch = args.base
     prompt_key = args.prompt
     generate_steps = args.generate_steps
+    github_comments = args.github_comments
     
     print_colored("🚀 AI-Powered Code Review Tool", Colors.HEADER)
     print_colored("=" * 50, Colors.HEADER)
@@ -1513,6 +1771,8 @@ def main():
     
     if generate_steps:
         print_colored("🔧 Problem-solving steps will be generated after analysis", Colors.OKCYAN)
+    if github_comments:
+        print_colored("🐙 GitHub PR comments will be created interactively", Colors.OKCYAN)
     
     # Verify git repository
     check_git_repo()
@@ -1555,12 +1815,20 @@ def main():
         print_colored("=" * 80, Colors.HEADER)
         print(steps)
     
+    # Handle GitHub comments if requested
+    if github_comments:
+        success = handle_github_comments(analysis, base_branch, current_branch)
+        if not success:
+            print_colored("⚠️  GitHub commenting encountered issues", Colors.WARNING)
+    
     # Save to file
     save_analysis(analysis, base_branch, current_branch, steps)
     
     print_colored("\n✅ Analysis complete!", Colors.OKGREEN)
     if generate_steps:
         print_colored("✅ Problem-solving steps generated!", Colors.OKGREEN)
+    if github_comments:
+        print_colored("✅ GitHub integration completed!", Colors.OKGREEN)
 
 if __name__ == "__main__":
     main()

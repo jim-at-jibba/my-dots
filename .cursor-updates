@@ -25,3 +25,5 @@
 ## Recent Changes
 
 - **Enhanced code review script for large PRs**: Added intelligent chunking, file filtering, and token limit handling to avoid Claude API errors on large diffs
+
+- **Added interactive GitHub CLI integration**: Users can selectively comment on specific issues found during analysis with corrected regex pattern supporting both `**` formatted and plain backtick file references.
