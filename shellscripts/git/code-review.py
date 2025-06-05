@@ -15,10 +15,14 @@ from pathlib import Path
 # Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 DEFAULT_BASE_BRANCH = "staging"  # Default base branch
-MODEL = "claude-opus-4-20250514"  # Claude Opus 4
+MODEL = "claude-sonnet-4-20250514"  # Claude Opus 4
 
-# Analysis prompt
-ANALYSIS_PROMPT = """
+# Available prompts
+PROMPTS = {
+    "react-native": {
+        "name": "React Native/TypeScript",
+        "description": "Expert React Native and TypeScript code review",
+        "prompt": """
 You are a senior React Native and TypeScript engineer with 10+ years of experience building production mobile applications. You have deep expertise in:
 
 - React Native architecture patterns and performance optimization
@@ -151,6 +155,303 @@ Here are the changes between {base_branch} and {target_branch}:
 
 Please provide a thorough analysis following this framework.
 """
+    },
+    
+    "general": {
+        "name": "General Code Review",
+        "description": "General purpose code review for any language/framework",
+        "prompt": """
+You are a senior software engineer with extensive experience in code review and software architecture. 
+
+## Task
+Analyze the code changes between the {base_branch} branch and {target_branch} branch. Provide a comprehensive technical review.
+
+## Important: Line-Specific Analysis
+When reviewing code changes, ALWAYS reference specific files and line numbers. Use this format:
+- **File references**: `src/path/file.ext`
+- **Line references**: `Line 23` or `Lines 15-18`
+- **Change references**: `@@ -10,7 +10,8 @@` (when referencing diff chunks)
+
+For each issue, improvement, or observation, cite the exact location where it occurs.
+
+## Analysis Framework
+
+### 1. **Code Quality**
+- Code clarity and readability
+- Proper naming conventions
+- Code organization and structure
+- Documentation and comments
+- Potential bugs or logic errors
+
+### 2. **Performance & Efficiency**
+- Algorithm efficiency
+- Memory usage patterns
+- Database query optimization
+- Caching strategies
+- Resource management
+
+### 3. **Security Considerations**
+- Input validation and sanitization
+- Authentication and authorization
+- Data exposure risks
+- Dependency vulnerabilities
+- Configuration security
+
+### 4. **Architecture & Design**
+- Design patterns usage
+- Separation of concerns
+- Code reusability
+- Maintainability
+- Testing strategies
+
+### 5. **Dependencies & Configuration**
+- New dependencies and their impact
+- Version updates and breaking changes
+- Configuration changes
+- Build and deployment considerations
+
+## Output Format
+
+### Executive Summary
+**Risk Level**: [LOW/MEDIUM/HIGH]
+**Deployment Ready**: [YES/NO/WITH_CONDITIONS]
+**Key Highlights**: [2-3 bullet points of most important findings]
+
+### Detailed Analysis
+
+#### 🔍 **Critical Issues** (Must Fix Before Merge)
+- [List any blocking issues with specific file and line references]
+
+#### ⚠️ **Warnings** (Should Address)
+- [List concerns with specific file and line references]
+
+#### ✅ **Improvements** (Positive Changes)
+- [Highlight good practices with specific file and line references]
+
+#### 🔧 **Recommendations**
+1. [Specific actionable recommendations with file:line references]
+2. [Testing suggestions]
+3. [Monitoring considerations]
+
+#### 📁 **File-by-File Analysis**
+For each modified file, provide:
+- **Risk assessment** for that file
+- **Specific line-by-line comments** for critical changes
+- **Testing requirements** for that file
+
+---
+
+Here are the changes between {base_branch} and {target_branch}:
+
+```diff
+{git_diff}
+```
+
+Please provide a thorough analysis following this framework.
+"""
+    },
+    
+    "python": {
+        "name": "Python Code Review",
+        "description": "Python-focused code review with PEP standards",
+        "prompt": """
+You are a senior Python developer with expertise in Python best practices, PEP standards, and modern Python development.
+
+## Task
+Analyze the Python code changes between {base_branch} and {target_branch}. Focus on Python-specific concerns and best practices.
+
+## Important: Line-Specific Analysis
+When reviewing code changes, ALWAYS reference specific files and line numbers. Use this format:
+- **File references**: `src/module.py`
+- **Line references**: `Line 23` or `Lines 15-18`
+
+For each issue, improvement, or observation, cite the exact location where it occurs.
+
+## Analysis Framework
+
+### 1. **Python Standards & Style**
+- PEP 8 compliance (formatting, naming conventions)
+- PEP 257 docstring conventions
+- Type hints and annotations (PEP 484, 526)
+- Import organization and structure
+- Code readability and pythonic patterns
+
+### 2. **Code Quality & Safety**
+- Exception handling patterns
+- Resource management (context managers, file handling)
+- Memory efficiency and generator usage
+- Potential security vulnerabilities
+- Code complexity and maintainability
+
+### 3. **Testing & Documentation**
+- Test coverage and quality
+- Docstring completeness and accuracy
+- Type annotation coverage
+- Example usage in docstrings
+
+### 4. **Performance & Efficiency**
+- Algorithm efficiency and Big O considerations
+- Appropriate data structure usage
+- Database queries and ORM usage
+- Async/await patterns if applicable
+- Memory usage patterns
+
+### 5. **Dependencies & Environment**
+- New package dependencies
+- Version compatibility
+- Requirements.txt or pyproject.toml changes
+- Virtual environment considerations
+
+## Output Format
+
+### Executive Summary
+**Risk Level**: [LOW/MEDIUM/HIGH]
+**Deployment Ready**: [YES/NO/WITH_CONDITIONS]
+**Key Highlights**: [2-3 bullet points of most important findings]
+
+### Detailed Analysis
+
+#### 🔍 **Critical Issues** (Must Fix Before Merge)
+- [List any blocking issues with specific file and line references]
+
+#### ⚠️ **Warnings** (Should Address)
+- [List concerns with specific file and line references]
+
+#### ✅ **Improvements** (Positive Changes)
+- [Highlight good practices with specific file and line references]
+
+#### 🐍 **Python-Specific Recommendations**
+- PEP compliance suggestions
+- Pythonic pattern improvements
+- Performance optimizations
+- Testing enhancements
+
+#### 📁 **File-by-File Analysis**
+For each modified Python file, provide:
+- **PEP compliance check**
+- **Type annotation coverage**
+- **Specific line-by-line comments**
+- **Testing recommendations**
+
+---
+
+Here are the changes between {base_branch} and {target_branch}:
+
+```diff
+{git_diff}
+```
+
+Please provide a thorough analysis following this framework.
+"""
+    },
+    
+    "web": {
+        "name": "Web Development (React/JS/TS)",
+        "description": "Frontend web development review for React, JavaScript, and TypeScript",
+        "prompt": """
+You are a senior frontend developer with expertise in modern web development, React, JavaScript, and TypeScript.
+
+## Task
+Analyze the web development code changes between {base_branch} and {target_branch}. Focus on frontend best practices, performance, and user experience.
+
+## Important: Line-Specific Analysis
+When reviewing code changes, ALWAYS reference specific files and line numbers. Use this format:
+- **File references**: `src/components/Button.tsx`
+- **Line references**: `Line 23` or `Lines 15-18`
+
+For each issue, improvement, or observation, cite the exact location where it occurs.
+
+## Analysis Framework
+
+### 1. **Code Quality & TypeScript**
+- Type safety and TypeScript best practices
+- Component design patterns
+- Props interface design
+- Generic usage and type utilities
+- ESLint/Prettier compliance
+
+### 2. **React Best Practices**
+- Component composition and reusability
+- Hook usage and custom hooks
+- State management patterns
+- Effect dependencies and cleanup
+- Performance optimization (memoization, lazy loading)
+
+### 3. **Performance & User Experience**
+- Bundle size impact
+- Runtime performance (re-renders, computations)
+- Accessibility (WCAG compliance)
+- SEO considerations
+- Loading states and error boundaries
+
+### 4. **Styling & Design**
+- CSS/SCSS organization
+- Responsive design patterns
+- Design system compliance
+- CSS-in-JS patterns (if applicable)
+- Animation and transition performance
+
+### 5. **Testing & Quality Assurance**
+- Unit test coverage
+- Integration test patterns
+- E2E test considerations
+- Accessibility testing
+- Performance testing
+
+## Output Format
+
+### Executive Summary
+**Risk Level**: [LOW/MEDIUM/HIGH]
+**Deployment Ready**: [YES/NO/WITH_CONDITIONS]
+**Key Highlights**: [2-3 bullet points of most important findings]
+
+### Detailed Analysis
+
+#### 🔍 **Critical Issues** (Must Fix Before Merge)
+- [List any blocking issues with specific file and line references]
+
+#### ⚠️ **Warnings** (Should Address)
+- [List concerns with specific file and line references]
+
+#### ✅ **Improvements** (Positive Changes)
+- [Highlight good practices with specific file and line references]
+
+#### 🌐 **Web-Specific Considerations**
+- **Bundle Size**: [Impact on load times]
+- **Performance**: [Runtime performance impact]
+- **Accessibility**: [A11y compliance check]
+- **SEO**: [Search engine optimization impact]
+
+#### 🔧 **Recommendations**
+1. [Performance optimizations]
+2. [Accessibility improvements]
+3. [Testing strategies]
+4. [Code organization suggestions]
+
+#### 📁 **Component-by-Component Analysis**
+For each modified component/file:
+- **Reusability assessment**
+- **Performance impact**
+- **Accessibility compliance**
+- **Testing coverage**
+
+---
+
+Here are the changes between {base_branch} and {target_branch}:
+
+```diff
+{git_diff}
+```
+
+Please provide a thorough analysis following this framework.
+"""
+    }
+}
+
+DEFAULT_PROMPT = "react-native"
+
+# Analysis prompt (legacy - now uses PROMPTS dict)
+ANALYSIS_PROMPT = PROMPTS[DEFAULT_PROMPT]["prompt"]
 
 class Colors:
     """Terminal colors for better UX"""
@@ -242,13 +543,15 @@ When referencing changes, use the NEW line numbers (from the `+new_start` in the
 """
     return context + diff
 
-def analyze_with_claude(diff: str, base_branch: str, target_branch: str) -> str:
+def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_key: str = DEFAULT_PROMPT) -> str:
     """Send diff to Claude for analysis"""
     if not ANTHROPIC_API_KEY:
         print_colored("❌ Error: ANTHROPIC_API_KEY environment variable not set", Colors.FAIL)
         print_colored("Please set your API key: export ANTHROPIC_API_KEY='your-api-key'", Colors.OKBLUE)
         sys.exit(1)
     
+    prompt_info = PROMPTS[prompt_key]
+    print_colored(f"🤖 Using '{prompt_info['name']}' prompt...", Colors.OKBLUE)
     print_colored("🤖 Sending to Claude Opus 4 for analysis...", Colors.OKBLUE)
     
     try:
@@ -257,7 +560,7 @@ def analyze_with_claude(diff: str, base_branch: str, target_branch: str) -> str:
         # Enhance diff with context for better line number understanding
         enhanced_diff = enhance_diff_with_context(diff)
         
-        prompt = ANALYSIS_PROMPT.format(
+        prompt = prompt_info["prompt"].format(
             base_branch=base_branch,
             target_branch=target_branch,
             git_diff=enhanced_diff
@@ -290,16 +593,29 @@ def save_analysis(analysis: str, base_branch: str, target_branch: str):
     except Exception as e:
         print_colored(f"⚠️  Could not save to file: {str(e)}", Colors.WARNING)
 
+def list_prompts():
+    """Display available prompts"""
+    print_colored("📝 Available Prompts:", Colors.HEADER)
+    print_colored("-" * 40, Colors.HEADER)
+    
+    for key, prompt_info in PROMPTS.items():
+        status = " (default)" if key == DEFAULT_PROMPT else ""
+        print_colored(f"  {key:<15} - {prompt_info['name']}{status}", Colors.OKCYAN)
+        print_colored(f"                  {prompt_info['description']}", Colors.OKBLUE)
+        print()
+
 def parse_arguments():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(
-        description="React Native TypeScript Branch Analysis Tool",
+        description="AI-Powered Code Review Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s                    # Compare current branch with staging
-  %(prog)s -b main           # Compare current branch with main
-  %(prog)s --base develop    # Compare current branch with develop
+  %(prog)s                              # Compare current branch with staging using React Native prompt
+  %(prog)s -b main                     # Compare current branch with main
+  %(prog)s -p python                   # Use Python-specific prompt
+  %(prog)s -b develop -p general       # Compare with develop using general prompt
+  %(prog)s --list-prompts              # Show available prompts
         """
     )
     
@@ -309,16 +625,41 @@ Examples:
         help=f"Base branch to compare against (default: {DEFAULT_BASE_BRANCH})"
     )
     
+    parser.add_argument(
+        "-p", "--prompt",
+        default=DEFAULT_PROMPT,
+        choices=list(PROMPTS.keys()),
+        help=f"Analysis prompt to use (default: {DEFAULT_PROMPT}). Choose from: {', '.join(PROMPTS.keys())}"
+    )
+    
+    parser.add_argument(
+        "--list-prompts",
+        action="store_true",
+        help="List available prompts and exit"
+    )
+    
     return parser.parse_args()
 
 def main():
     """Main script execution"""
     # Parse arguments
     args = parse_arguments()
-    base_branch = args.base
     
-    print_colored("🚀 React Native TypeScript Branch Analysis Tool", Colors.HEADER)
+    # Handle list prompts option
+    if args.list_prompts:
+        list_prompts()
+        sys.exit(0)
+    
+    base_branch = args.base
+    prompt_key = args.prompt
+    
+    print_colored("🚀 AI-Powered Code Review Tool", Colors.HEADER)
     print_colored("=" * 50, Colors.HEADER)
+    
+    # Show selected prompt info
+    prompt_info = PROMPTS[prompt_key]
+    print_colored(f"📝 Using prompt: {prompt_info['name']}", Colors.OKCYAN)
+    print_colored(f"   {prompt_info['description']}", Colors.OKBLUE)
     
     # Verify git repository
     check_git_repo()
@@ -341,7 +682,7 @@ def main():
     print_colored(f"📁 Files changed: {files_changed}", Colors.OKBLUE)
     
     # Analyze with Claude
-    analysis = analyze_with_claude(diff, base_branch, current_branch)
+    analysis = analyze_with_claude(diff, base_branch, current_branch, prompt_key)
     
     # Display results
     print_colored("\n" + "=" * 80, Colors.HEADER)
