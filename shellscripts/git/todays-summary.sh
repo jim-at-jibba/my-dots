@@ -1,30 +1,49 @@
 #!/bin/zsh
+# ==============================================
+# Enhanced Git Commit Summary & Analysis Tool
+# ==============================================
+#
+# Analyzes your git commits from all branches and generates a detailed summary with AI processing.
+# Shows commits made by the current git user, categorized by type of work.
+#
+# Usage Examples:
+#    ./script.sh                                    # Interactive mode with AI summary
+#    ./script.sh ~/projects/my-repo                 # Interactive date selection with AI
+#    ./script.sh --today ~/projects/my-repo         # Today's commits with AI summary
+#    ./script.sh --week ~/projects/my-repo          # This week's commits with AI summary
+#    ./script.sh --since "2 weeks ago" ~/repo       # Custom timeframe with AI
+#    ./script.sh --repos ~/repo1 ~/repo2 --week     # Multiple repos, this week with AI
+#    ./script.sh --no-ai --week ~/projects/my-repo  # This week's commits without AI
+#
+# ==============================================
 
 # Function to show usage
 show_usage() {
   cat <<EOF
 Usage: $0 [options] [repository-path]
 
-Analyzes your git commits from all branches and generates a detailed summary for LLM processing.
+Analyzes your git commits and generates a categorized summary with optional AI processing.
 Shows commits made by the current git user.
 
 Options:
   -h, --help              Show this help message
   -t, --today             Show today's commits
   -y, --yesterday         Show yesterday's commits
-  -d, --date DATE         Show commits for a specific date (format: YYYY-MM-DD)
   -w, --week              Show this week's commits (Monday to Sunday)
+  -s, --since TIMEFRAME   Show commits since timeframe (e.g., "2 weeks ago", "2025-05-01")
   -r, --repos REPOS...    Specify one or more repository paths (separated by spaces)
+  --ai                    Use AI (fabric) to generate enhanced summary (default)
+  --no-ai                 Disable AI processing
 
 If no options are provided, shows interactive selection menus.
 
 Examples:
-    $0                                       # Interactive mode
-    $0 ~/projects/my-repo                    # Interactive date selection for single repo
-    $0 --today ~/projects/my-repo            # Today's commits for single repo
-    $0 --date 2025-05-28 ~/projects/my-repo  # Commits for specific date
-    $0 --week ~/projects/my-repo             # This week's commits (Monday to Sunday)
-    $0 --yesterday --repos ~/repo1 ~/repo2   # Yesterday's commits for multiple repos
+    $0                                           # Interactive mode with AI summary
+    $0 ~/projects/my-repo                        # Interactive date selection with AI
+    $0 --today ~/projects/my-repo                # Today's commits with AI summary
+    $0 --since "1 month ago" ~/projects/my-repo  # Last month's commits with AI
+    $0 --week --no-ai ~/projects/my-repo         # This week's commits without AI
+    $0 --repos ~/repo1 ~/repo2 --week            # Multiple repos, this week with AI
 EOF
   exit 1
 }
@@ -32,11 +51,15 @@ EOF
 # Function to find git repositories
 find_git_repos() {
   local search_dirs=("$HOME/projects" "$HOME/repos" "$HOME/code" "$HOME/dev" ".")
-  local repos=""
-
+  
   for dir in "${search_dirs[@]}"; do
     if [[ -d "$dir" ]]; then
-      fd -H -t d '^\.git$' "$dir" -x echo {//} 2>/dev/null
+      # Use fd if available, otherwise fall back to find
+      if command -v fd >/dev/null 2>&1; then
+        fd -H -t d '^\.git$' "$dir" -x echo {//} 2>/dev/null
+      else
+        find "$dir" -name ".git" -type d 2>/dev/null | sed 's|/.git$||'
+      fi
     fi
   done
 }
@@ -58,12 +81,56 @@ validate_repo() {
   return 0
 }
 
+# Function to extract the main topic from a commit message
+get_commit_topic() {
+    local msg="$1"
+    # Convert message to lowercase for better matching
+    msg=$(echo "$msg" | tr '[:upper:]' '[:lower:]')
+    
+    # Check for bug fixes first
+    if echo "$msg" | grep -q "fix\|issue\|bug\|error\|crash\|resolve"; then
+        echo "Bug Fixes"
+    # Check for new features
+    elif echo "$msg" | grep -q "add\|implement\|create\|initialize\|new\|feature"; then
+        echo "New Features"
+    # Check for improvements and refactoring
+    elif echo "$msg" | grep -q "refactor\|enhance\|improve\|optimize\|clean\|performance"; then
+        echo "Improvements & Refactoring"
+    # Check for updates
+    elif echo "$msg" | grep -q "update\|upgrade\|bump\|version\|merge"; then
+        echo "Updates"
+    # Check for cleanup
+    elif echo "$msg" | grep -q "remove\|delete\|deprecate\|cleanup"; then
+        echo "Cleanup"
+    # Check for documentation
+    elif echo "$msg" | grep -q "doc\|readme\|comment"; then
+        echo "Documentation"
+    # Check for testing
+    elif echo "$msg" | grep -q "test\|spec"; then
+        echo "Testing"
+    else
+        echo "Other Changes"
+    fi
+}
+
+# Function to print section if it exists and has content
+print_section() {
+    local file="$1"
+    local title="$2"
+    if [[ -f "$file" && -s "$file" ]]; then
+        echo "\n$title:"
+        echo "----------------------------------------"
+        cat "$file"
+        echo ""
+    fi
+}
+
 # Function to process a single repository
 process_repository() {
   local repo_path="$1"
-  local start_date="$2"
-  local end_date="$3"
-  local date_range_display="$4"
+  local timeframe="$2"
+  local date_range_display="$3"
+  local use_ai="$4"
   
   # Get absolute path and validate repository
   local abs_repo_path=$(cd "$repo_path" 2>/dev/null && pwd)
@@ -82,7 +149,6 @@ process_repository() {
     return 1
   fi
   
-  local today=$(date +%Y-%m-%d)
   local repo_name=$(basename "$abs_repo_path")
   
   # Create temp file and write header
@@ -91,73 +157,169 @@ process_repository() {
 # Commit Summary - $repo_name
 Repository: $abs_repo_path
 Date Range: $date_range_display
-----------------------------------------
+User: $git_user_email
+========================================
 EOF
   
-  # Get commit messages with more details for weekly summaries
-  if [[ "$IS_WEEKLY" == "true" ]]; then
-    # For weekly summaries, include more details and group by day
-    echo "\n## Commits by day:\n" >>"$temp_file"
-    
-    # Get list of days with commits in the date range
-    local days=$(git log --all --author="$git_user_email" \
-      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-      --date=short --format="%ad" | sort -u)
-    
-    # For each day, list the commits
-    for day in $days; do
-      echo "\n### $day" >>"$temp_file"
-      echo "----------------------------------------" >>"$temp_file"
-      git --no-pager log --all --author="$git_user_email" \
-        --since="$day 00:00:00" --until="$day 23:59:59" \
-        --pretty=format:"%h - %s (%cr) <%an>" --reverse >>"$temp_file"
-      echo "----------------------------------------" >>"$temp_file"
-    done
-    
-    # Add files changed statistics
-    echo "\n\n## Files changed:\n" >>"$temp_file"
-    git log --all --author="$git_user_email" \
-      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-      --name-only --pretty=format:"" | sort | uniq -c | sort -nr | head -10 >>"$temp_file"
-    
-    # Add detailed prompt for weekly summary
-    cat <<EOF >>"$temp_file"
-
-----------------------------------------
-Prompt:
-Based on these commit messages, provide a comprehensive weekly summary of work done in this repository.
-Please include:
-1. Key accomplishments and milestones reached
-2. Major features implemented or enhanced
-3. Important bug fixes
-4. Refactoring or code improvements
-5. Patterns or themes in the work
-6. Technical challenges addressed
-
-Organize the summary by categories of work rather than by day, and highlight the most significant changes.
-EOF
+  echo "\nProcessing repository: $repo_name"
+  echo "Date Range: $date_range_display"
+  echo "========================================\n"
+  
+  # Get all commits for the timeframe
+  local commits=""
+  if [[ "$timeframe" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    # Date format YYYY-MM-DD
+    commits=$(git --no-pager log --all --author="$git_user_email" \
+      --since="$timeframe 00:00:00" --until="$timeframe 23:59:59" \
+      --pretty=format:"%h - %s (%cr) <%an>")
   else
-    # For daily summaries, keep it simple
-    echo "\nCommits for $start_date:" >>"$temp_file"
-    echo "----------------------------------------" >>"$temp_file"
-    git --no-pager log --all --author="$git_user_email" \
-      --since="$start_date 00:00:00" --until="$end_date 23:59:59" \
-      --pretty=format:"%h - %s (%cr) <%an>" --reverse >>"$temp_file"
-    echo "----------------------------------------" >>"$temp_file"
-    
-    # Add simple prompt for LLM
-    cat <<EOF >>"$temp_file"
-
-----------------------------------------
-Prompt:
-Based on these commit messages, provide a brief summary of the work done in this repository.
-Include the main features, bug fixes, or improvements that were made.
-EOF
+    # Relative timeframe like "1 week ago"
+    commits=$(git --no-pager log --all --author="$git_user_email" \
+      --since="$timeframe" --pretty=format:"%h - %s (%cr) <%an>")
   fi
   
-  # Output and cleanup
-  response=$(cat "$temp_file" | fabric -m "gpt-4.1-mini" -cp ai)
-  echo "$response"
+  if [[ -z "$commits" ]]; then
+    echo "No commits found for the specified timeframe."
+    cd "$original_dir" || return 1
+    return 0
+  fi
+  
+  # Create temporary files for categorized commits
+  local tmp_dir=$(mktemp -d)
+  local new_features="$tmp_dir/new_features"
+  local improvements="$tmp_dir/improvements"
+  local bug_fixes="$tmp_dir/bug_fixes"
+  local updates="$tmp_dir/updates"
+  local cleanup="$tmp_dir/cleanup"
+  local documentation="$tmp_dir/documentation"
+  local testing="$tmp_dir/testing"
+  local other="$tmp_dir/other"
+  
+  # Categorize commits
+  echo "$commits" | while IFS= read -r commit; do
+    if [[ -n "$commit" ]]; then
+      # Extract just the commit message, removing hash and timestamp
+      local msg=$(echo "$commit" | sed 's/^[a-f0-9]\+ - \(.*\) ([0-9].*ago) <.*>/\1/')
+      local topic=$(get_commit_topic "$msg")
+      
+      case "$topic" in
+        "New Features")
+          echo "$commit" >> "$new_features"
+          ;;
+        "Improvements & Refactoring")
+          echo "$commit" >> "$improvements"
+          ;;
+        "Bug Fixes")
+          echo "$commit" >> "$bug_fixes"
+          ;;
+        "Updates")
+          echo "$commit" >> "$updates"
+          ;;
+        "Cleanup")
+          echo "$commit" >> "$cleanup"
+          ;;
+        "Documentation")
+          echo "$commit" >> "$documentation"
+          ;;
+        "Testing")
+          echo "$commit" >> "$testing"
+          ;;
+        *)
+          echo "$commit" >> "$other"
+          ;;
+      esac
+    fi
+  done
+  
+  # Add categorized summary to temp file
+  echo "\nKey Developments:\n" >>"$temp_file"
+  
+  # Print organized summary to both console and temp file
+  print_section "$new_features" "New Features" | tee -a "$temp_file"
+  print_section "$improvements" "Improvements & Refactoring" | tee -a "$temp_file"
+  print_section "$bug_fixes" "Bug Fixes" | tee -a "$temp_file"
+  print_section "$updates" "Updates" | tee -a "$temp_file"
+  print_section "$cleanup" "Cleanup" | tee -a "$temp_file"
+  print_section "$documentation" "Documentation" | tee -a "$temp_file"
+  print_section "$testing" "Testing" | tee -a "$temp_file"
+  print_section "$other" "Other Changes" | tee -a "$temp_file"
+  
+  # Print recent changes (last 24 hours)
+  echo "\nMost Recent Changes (last 24 hours):" | tee -a "$temp_file"
+  echo "----------------------------------------" | tee -a "$temp_file"
+  local recent_commits=$(git --no-pager log --all --author="$git_user_email" \
+    --since="24 hours ago" --pretty=format:"%h - %s (%cr) <%an>")
+  if [[ -n "$recent_commits" ]]; then
+    echo "$recent_commits" | tee -a "$temp_file"
+  else
+    echo "No commits in the last 24 hours" | tee -a "$temp_file"
+  fi
+  echo "" | tee -a "$temp_file"
+  
+  # Print total commits
+  local total=$(echo "$commits" | grep -c "^[a-f0-9]")
+  echo "\nTotal commits: $total" | tee -a "$temp_file"
+  
+  # Add AI prompt to temp file
+  cat <<EOF >>"$temp_file"
+
+========================================
+AI Summary Prompt:
+Based on these categorized commit messages, provide a detailed summary following this exact format:
+
+Let me provide a detailed summary of your work this week across all major development areas:
+
+1. [Major Feature/Area Name] (Time Period - e.g., "Last 24 Hours - Present")
+• [Specific accomplishment with technical details]
+• [Another accomplishment]
+• [Continue with bullet points for this area]
+
+2. [Another Major Feature/Area] (Time Period - e.g., "2-3 Days Ago")
+• [Accomplishments in this area]
+• [Technical improvements made]
+
+[Continue with numbered sections organized by major development areas and time periods]
+
+Key Statistics:
+• Total Commits: [number]
+• New Features: [number] commits
+• Improvements & Refactoring: [number] commits
+• Bug Fixes: [number] commits
+• Updates: [number] commits
+• Cleanup: [number] commits
+• Other Changes: [number] commits
+
+[Final paragraph summarizing the focus of the work period and highlighting the most recent work]
+
+IMPORTANT FORMATTING REQUIREMENTS:
+- Organize by MAJOR DEVELOPMENT AREAS/FEATURES, not just by commit categories
+- Include time periods for each section (Last 24 Hours, 2-3 Days Ago, etc.)
+- Use bullet points (•) for individual accomplishments
+- Group related commits into meaningful development themes
+- Provide technical details and business context
+- End with key statistics and a summary paragraph
+- Focus on the most impactful and recent work first
+========================================
+EOF
+  
+  # Use AI processing if requested and fabric is available
+  if [[ "$use_ai" == "true" ]]; then
+    if command -v fabric >/dev/null 2>&1; then
+      echo "\n🤖 Generating AI Summary...\n"
+      local ai_response=$(cat "$temp_file" | fabric -m "gpt-4o-mini" -cp ai)
+      echo "$ai_response"
+    else
+      echo "\n⚠️  AI processing requested but 'fabric' command not found."
+      echo "Install fabric (https://github.com/danielmiessler/fabric) to use AI features."
+      echo "\nFor manual AI processing, copy the above output and use the prompt at the end."
+    fi
+  else
+    echo "\n📋 AI processing disabled. For AI-enhanced summary, re-run without --no-ai flag."
+    echo "Or copy the output above and use with your preferred AI tool using the prompt at the end."
+  fi
+  
+  # Cleanup
+  rm -rf "$tmp_dir"
   rm "$temp_file"
   
   # Return to original directory
@@ -167,31 +329,31 @@ EOF
 # Initialize variables
 INTERACTIVE=true
 TODAY_DATE=$(date +%Y-%m-%d)
-YESTERDAY_DATE=$(date -v-1d +%Y-%m-%d)
+YESTERDAY_DATE=$(date -v-1d +%Y-%m-%d 2>/dev/null || date -d yesterday +%Y-%m-%d)
 
 # Calculate the current week's Monday and Sunday
 CURRENT_DAY=$(date +%u) # 1 is Monday, 7 is Sunday
-
-# Calculate days to subtract to get to Monday (if today is Monday, subtract 0)
 DAYS_TO_MONDAY=$((CURRENT_DAY - 1))
-if [[ $DAYS_TO_MONDAY -lt 0 ]]; then
-  DAYS_TO_MONDAY=0
-fi
-
-# Calculate days to add to get to Sunday (if today is Sunday, add 0)
 DAYS_TO_SUNDAY=$((7 - CURRENT_DAY))
-if [[ $DAYS_TO_SUNDAY -lt 0 ]]; then
-  DAYS_TO_SUNDAY=0
-fi
 
 # Calculate Monday and Sunday dates
-MONDAY_DATE=$(date -v-${DAYS_TO_MONDAY}d +%Y-%m-%d) # Go back to Monday
-SUNDAY_DATE=$(date -v+${DAYS_TO_SUNDAY}d +%Y-%m-%d) # Go forward to Sunday
+if command -v gdate >/dev/null 2>&1; then
+  # GNU date (available via brew install coreutils on macOS)
+  MONDAY_DATE=$(gdate -d "${DAYS_TO_MONDAY} days ago" +%Y-%m-%d)
+  SUNDAY_DATE=$(gdate -d "${DAYS_TO_SUNDAY} days" +%Y-%m-%d)
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS BSD date
+  MONDAY_DATE=$(date -v-${DAYS_TO_MONDAY}d +%Y-%m-%d)
+  SUNDAY_DATE=$(date -v+${DAYS_TO_SUNDAY}d +%Y-%m-%d)
+else
+  # Linux date
+  MONDAY_DATE=$(date -d "${DAYS_TO_MONDAY} days ago" +%Y-%m-%d)
+  SUNDAY_DATE=$(date -d "${DAYS_TO_SUNDAY} days" +%Y-%m-%d)
+fi
 
-START_DATE=""
-END_DATE=""
+TIMEFRAME=""
 DATE_RANGE_DISPLAY=""
-IS_WEEKLY=false
+USE_AI=true
 REPOSITORIES=()
 
 # Parse command line arguments
@@ -202,42 +364,31 @@ while [[ $# -gt 0 ]]; do
       ;;
     -t|--today)
       INTERACTIVE=false
-      START_DATE="$TODAY_DATE"
-      END_DATE="$TODAY_DATE"
+      TIMEFRAME="$TODAY_DATE"
       DATE_RANGE_DISPLAY="Today's commits"
       shift
       ;;
     -y|--yesterday)
       INTERACTIVE=false
-      START_DATE="$YESTERDAY_DATE"
-      END_DATE="$YESTERDAY_DATE"
+      TIMEFRAME="$YESTERDAY_DATE"
       DATE_RANGE_DISPLAY="Yesterday's commits"
       shift
       ;;
     -w|--week)
       INTERACTIVE=false
-      START_DATE="$MONDAY_DATE"
-      END_DATE="$SUNDAY_DATE"
+      TIMEFRAME="$MONDAY_DATE"
       DATE_RANGE_DISPLAY="This week's commits (${MONDAY_DATE} to ${SUNDAY_DATE})"
-      IS_WEEKLY=true
       shift
       ;;
-    -d|--date)
+    -s|--since)
       INTERACTIVE=false
       shift
       if [[ $# -gt 0 ]]; then
-        CUSTOM_DATE="$1"
-        # Validate date format (YYYY-MM-DD)
-        if [[ ! "$CUSTOM_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-          echo "Error: Invalid date format. Please use YYYY-MM-DD format." >&2
-          exit 1
-        fi
-        START_DATE="$CUSTOM_DATE"
-        END_DATE="$CUSTOM_DATE"
-        DATE_RANGE_DISPLAY="Commits for $CUSTOM_DATE"
+        TIMEFRAME="$1"
+        DATE_RANGE_DISPLAY="Commits since $1"
         shift
       else
-        echo "Error: Date argument is missing." >&2
+        echo "Error: Timeframe argument is missing." >&2
         show_usage
       fi
       ;;
@@ -250,17 +401,22 @@ while [[ $# -gt 0 ]]; do
         shift
       done
       ;;
+    --ai)
+      USE_AI=true
+      shift
+      ;;
+    --no-ai)
+      USE_AI=false
+      shift
+      ;;
     -*)
       echo "Unknown option: $1" >&2
       show_usage
       ;;
     *)
       # If a single repository is provided without --repos
-      if [[ -z "$REPOSITORIES" && $INTERACTIVE == false ]]; then
+      if [[ ${#REPOSITORIES[@]} -eq 0 ]]; then
         REPOSITORIES=("$1")
-      elif [[ $INTERACTIVE == true ]]; then
-        REPOSITORIES=("$1")
-        # If only repository is provided but not date, keep date selection interactive
       fi
       shift
       ;;
@@ -270,7 +426,23 @@ done
 # If interactive mode and no repositories specified, show repository selection
 if [[ $INTERACTIVE == true && ${#REPOSITORIES[@]} -eq 0 ]]; then
   echo "Searching for git repositories..."
-  REPO_PATH=$(find_git_repos | sort -u | fzf --height 40% --reverse --header="Select a repository")
+  local repos_found=$(find_git_repos | sort -u)
+  
+  if [[ -z "$repos_found" ]]; then
+    echo "No git repositories found in common directories."
+    echo "Please specify a repository path manually."
+    exit 1
+  fi
+  
+  if command -v fzf >/dev/null 2>&1; then
+    REPO_PATH=$(echo "$repos_found" | fzf --height 40% --reverse --header="Select a repository")
+  else
+    echo "Available repositories:"
+    echo "$repos_found" | nl
+    echo "Enter the number of the repository to analyze:"
+    read selection
+    REPO_PATH=$(echo "$repos_found" | sed -n "${selection}p")
+  fi
   
   if [[ -z "$REPO_PATH" ]]; then
     echo "No repository selected."
@@ -280,46 +452,69 @@ if [[ $INTERACTIVE == true && ${#REPOSITORIES[@]} -eq 0 ]]; then
   REPOSITORIES=("$REPO_PATH")
 fi
 
-# If no date range specified, show date range selection
-if [[ -z "$START_DATE" ]]; then
-  DATE_RANGE=$(printf "Today's commits\nYesterday's commits\nThis week's commits\nCustom date" | \
-    fzf --height 20% --reverse --header="Select commit date range")
+# If no timeframe specified, show timeframe selection
+if [[ -z "$TIMEFRAME" ]]; then
+  local timeframe_options="Today's commits
+Yesterday's commits
+This week's commits
+Last week
+Last 2 weeks
+Last month
+Custom timeframe"
   
-  if [[ -z "$DATE_RANGE" ]]; then
-    echo "No date range selected."
+  if command -v fzf >/dev/null 2>&1; then
+    TIMEFRAME_CHOICE=$(echo "$timeframe_options" | fzf --height 30% --reverse --header="Select commit timeframe")
+  else
+    echo "Select timeframe:"
+    echo "$timeframe_options" | nl
+    echo "Enter the number:"
+    read selection
+    TIMEFRAME_CHOICE=$(echo "$timeframe_options" | sed -n "${selection}p")
+  fi
+  
+  if [[ -z "$TIMEFRAME_CHOICE" ]]; then
+    echo "No timeframe selected."
     exit 1
   fi
   
-  case "$DATE_RANGE" in
+  case "$TIMEFRAME_CHOICE" in
   "Today's commits")
-    START_DATE="$TODAY_DATE"
-    END_DATE="$TODAY_DATE"
-    DATE_RANGE_DISPLAY="$DATE_RANGE"
+    TIMEFRAME="$TODAY_DATE"
+    DATE_RANGE_DISPLAY="$TIMEFRAME_CHOICE"
     ;;
   "Yesterday's commits")
-    START_DATE="$YESTERDAY_DATE"
-    END_DATE="$YESTERDAY_DATE"
-    DATE_RANGE_DISPLAY="$DATE_RANGE"
+    TIMEFRAME="$YESTERDAY_DATE"
+    DATE_RANGE_DISPLAY="$TIMEFRAME_CHOICE"
     ;;
   "This week's commits")
-    START_DATE="$MONDAY_DATE"
-    END_DATE="$SUNDAY_DATE"
+    TIMEFRAME="$MONDAY_DATE"
     DATE_RANGE_DISPLAY="This week's commits (${MONDAY_DATE} to ${SUNDAY_DATE})"
-    IS_WEEKLY=true
     ;;
-  "Custom date")
-    echo "Enter date (YYYY-MM-DD):"
-    read CUSTOM_DATE
-    # Validate date format
-    if [[ ! "$CUSTOM_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-      echo "Error: Invalid date format. Please use YYYY-MM-DD format." >&2
-      exit 1
-    fi
-    START_DATE="$CUSTOM_DATE"
-    END_DATE="$CUSTOM_DATE"
-    DATE_RANGE_DISPLAY="Commits for $CUSTOM_DATE"
+  "Last week")
+    TIMEFRAME="1 week ago"
+    DATE_RANGE_DISPLAY="Last week's commits"
+    ;;
+  "Last 2 weeks")
+    TIMEFRAME="2 weeks ago"
+    DATE_RANGE_DISPLAY="Last 2 weeks' commits"
+    ;;
+  "Last month")
+    TIMEFRAME="1 month ago"
+    DATE_RANGE_DISPLAY="Last month's commits"
+    ;;
+  "Custom timeframe")
+    echo "Enter timeframe (e.g., '2 weeks ago', '2025-05-01', 'Monday'):"
+    read CUSTOM_TIMEFRAME
+    TIMEFRAME="$CUSTOM_TIMEFRAME"
+    DATE_RANGE_DISPLAY="Commits since $CUSTOM_TIMEFRAME"
     ;;
   esac
+fi
+
+# Default timeframe if still not set
+if [[ -z "$TIMEFRAME" ]]; then
+  TIMEFRAME="1 week ago"
+  DATE_RANGE_DISPLAY="Last week's commits"
 fi
 
 # Save original directory
@@ -327,9 +522,7 @@ ORIGINAL_DIR=$(pwd)
 
 # Process each repository
 for repo in "${REPOSITORIES[@]}"; do
-  echo "Processing repository: $repo"
-  echo "-------------------------------------------"
-  process_repository "$repo" "$START_DATE" "$END_DATE" "$DATE_RANGE_DISPLAY"
+  process_repository "$repo" "$TIMEFRAME" "$DATE_RANGE_DISPLAY" "$USE_AI"
   
   # Always return to original directory between repositories
   cd "$ORIGINAL_DIR" 2>/dev/null || {
@@ -337,7 +530,12 @@ for repo in "${REPOSITORIES[@]}"; do
     exit 1
   }
   
-  echo ""
-  echo "-------------------------------------------"
-  echo ""
+  # Add separator between repositories if processing multiple
+  if [[ ${#REPOSITORIES[@]} -gt 1 ]]; then
+    echo "\n========================================"
+    echo "========================================"
+    echo ""
+  fi
 done
+
+echo "✅ Analysis complete!"

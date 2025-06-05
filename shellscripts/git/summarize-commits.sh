@@ -1,14 +1,25 @@
 #!/bin/zsh
 
+# ==============================================
+# Git Commit Summary & Analysis Tool
+# ==============================================
+#
 # To get a high-level summary of your work:
 # 1. Run this script: summarize-commits.sh "1 week ago"
-# 2. Copy the output (which includes categorized commits by type)
-# 3. Use with the following prompt:
+# 2. Copy ALL the output below (including all sections and stats)
+# 3. Use with this prompt to get an organized summary:
 #
 # 📋 Weekly Dev Summary
 #
 # ```
-# [paste script output here]
+# [paste the ENTIRE script output here, including:
+#  • New Features
+#  • Improvements & Refactoring
+#  • Bug Fixes
+#  • Updates
+#  • Cleanup
+#  • Recent Changes
+#  • Total commits]
 # ```
 #
 # Show:
@@ -17,9 +28,8 @@
 # • Key fixes
 # • Stats
 #
-# The AI will provide a structured summary of your development work organized by major themes and timing.
-# The script automatically categorizes commits into: New Features, Improvements & Refactoring,
-# Bug Fixes, Updates, and Cleanup.
+# The AI will provide a structured summary organized by major themes and timing.
+# ==============================================
 
 # Function to extract the main topic from a commit message
 get_commit_topic() {
