@@ -1,8 +1,15 @@
 # Cursor Updates
 
 ## 2024-12-19
+
 - Updated `shellscripts/git/code-review.py` to automatically compare staging with currently checked out branch, removing interactive branch selection.
 
-- Modified repomix-selector.sh to respect gitignore patterns when displaying files in fzf using fd-find or git ls-files 
+- Modified repomix-selector.sh to respect gitignore patterns when displaying files in fzf using fd-find or git ls-files
 
-- Added command line argument parsing to the code review script allowing users to specify a custom base branch via `-b` or `--base` flags, with staging remaining as the default. 
+- Added command line argument parsing to the code review script allowing users to specify a custom base branch via `-b` or `--base` flags, with staging remaining as the default.
+
+- Added multiple specialized prompts for different types of code review (React Native, Python, Web, General) with `-p`/`--prompt` flag and `--list-prompts` option to see available choices.
+
+- Updated save_analysis function to automatically create an 'analysis' folder and save all analysis files there.
+
+- Added filename sanitization to handle branch names with special characters (e.g., forward slashes) that would cause file system errors.

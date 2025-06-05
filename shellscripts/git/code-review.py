@@ -582,14 +582,33 @@ def analyze_with_claude(diff: str, base_branch: str, target_branch: str, prompt_
         print_colored(f"❌ Error calling Claude API: {str(e)}", Colors.FAIL)
         sys.exit(1)
 
+def sanitize_filename(name: str) -> str:
+    """Sanitize branch name for use in filename"""
+    # Replace invalid filename characters with underscores
+    invalid_chars = ['/', '\\', ':', '*', '?', '"', '<', '>', '|']
+    sanitized = name
+    for char in invalid_chars:
+        sanitized = sanitized.replace(char, '_')
+    return sanitized
+
 def save_analysis(analysis: str, base_branch: str, target_branch: str):
-    """Save analysis to file"""
-    filename = f"analysis_{target_branch}_vs_{base_branch}.md"
+    """Save analysis to file in analysis folder"""
+    # Create analysis directory if it doesn't exist
+    analysis_dir = Path("analysis")
+    analysis_dir.mkdir(exist_ok=True)
+    
+    # Sanitize branch names for filename
+    safe_target = sanitize_filename(target_branch)
+    safe_base = sanitize_filename(base_branch)
+    
+    filename = f"analysis_{safe_target}_vs_{safe_base}.md"
+    filepath = analysis_dir / filename
+    
     try:
-        with open(filename, 'w') as f:
+        with open(filepath, 'w') as f:
             f.write(f"# Branch Analysis: {target_branch} vs {base_branch}\n\n")
             f.write(analysis)
-        print_colored(f"💾 Analysis saved to: {filename}", Colors.OKGREEN)
+        print_colored(f"💾 Analysis saved to: {filepath}", Colors.OKGREEN)
     except Exception as e:
         print_colored(f"⚠️  Could not save to file: {str(e)}", Colors.WARNING)
 
