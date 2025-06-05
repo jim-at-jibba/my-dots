@@ -218,13 +218,34 @@ You are a senior React Native and TypeScript engineer with 10+ years of experien
 ## Task
 Analyze the code changes between the staging branch and the provided branch. Provide a comprehensive technical review focusing on React Native and TypeScript specific concerns.
 
-## Important: Line-Specific Analysis
-When reviewing code changes, ALWAYS reference specific files and line numbers. Use this format:
-- **File references**: `src/components/Button.tsx`
-- **Line references**: `Line 23` or `Lines 15-18`
-- **Change references**: `@@ -10,7 +10,8 @@` (when referencing diff chunks)
+## CRITICAL: Exact Format Requirements for GitHub Integration
 
-For each issue, improvement, or observation, cite the exact location where it occurs.
+When listing issues in the Critical Issues, Warnings, and Improvements sections, you MUST use this EXACT format for each line:
+
+**Required Format:**
+```
+- `filename.ext:Line X` - Description of the issue
+```
+
+**Examples:**
+```
+- `src/components/Button.tsx:Line 23` - Missing null check for props.onPress
+- `src/utils/api.ts:Lines 45-48` - Potential memory leak in event listener
+- `app/screens/Home.tsx:Line 12` - Consider using useMemo for expensive calculation
+```
+
+**Format Rules:**
+1. Start with `- ` (dash and space)
+2. Use backticks around `filename:Line X` 
+3. Use `:Line X` for single lines or `:Lines X-Y` for ranges
+4. Follow with ` - ` (space, dash, space)
+5. Then the description
+6. NO bold formatting (**) around the backticks
+7. NO extra formatting or bullets
+
+**File Extensions to Include:** .tsx, .ts, .jsx, .js, .py, .java, .cpp, .c, .h, .swift, .kt, .rb, .go, .rs, .php, .cs
+
+This format is required for automated GitHub PR comment generation.
 
 ## Analysis Framework
 
@@ -373,13 +394,34 @@ You are a senior React Native and TypeScript engineer with 10+ years of experien
 ## Task
 Analyze the code changes between the staging branch and the provided branch. Provide a comprehensive technical review focusing on React Native, TypeScript, and Breedr-specific styling concerns.
 
-## Important: Line-Specific Analysis
-When reviewing code changes, ALWAYS reference specific files and line numbers. Use this format:
-- **File references**: `src/components/Button.tsx`
-- **Line references**: `Line 23` or `Lines 15-18`
-- **Change references**: `@@ -10,7 +10,8 @@` (when referencing diff chunks)
+## CRITICAL: Exact Format Requirements for GitHub Integration
 
-For each issue, improvement, or observation, cite the exact location where it occurs.
+When listing issues in the Critical Issues, Warnings, and Improvements sections, you MUST use this EXACT format for each line:
+
+**Required Format:**
+```
+- `filename.ext:Line X` - Description of the issue
+```
+
+**Examples:**
+```
+- `src/components/Button.tsx:Line 23` - Missing null check for props.onPress
+- `src/utils/api.ts:Lines 45-48` - Potential memory leak in event listener
+- `app/screens/Home.tsx:Line 12` - Consider using useMemo for expensive calculation
+```
+
+**Format Rules:**
+1. Start with `- ` (dash and space)
+2. Use backticks around `filename:Line X` 
+3. Use `:Line X` for single lines or `:Lines X-Y` for ranges
+4. Follow with ` - ` (space, dash, space)
+5. Then the description
+6. NO bold formatting (**) around the backticks
+7. NO extra formatting or bullets
+
+**File Extensions to Include:** .tsx, .ts, .jsx, .js, .py, .java, .cpp, .c, .h, .swift, .kt, .rb, .go, .rs, .php, .cs
+
+This format is required for automated GitHub PR comment generation.
 
 ## Analysis Framework
 
@@ -1328,12 +1370,27 @@ def get_pr_number(base_branch: str, target_branch: str) -> Optional[str]:
         return None
 
 def parse_issues_from_analysis(analysis: str) -> List[CodeIssue]:
-    """Parse code issues from the analysis text"""
+    """Parse code issues from the analysis text with multiple pattern support"""
     issues = []
     lines = analysis.split('\n')
     
     current_section = None
     issue_type = None
+    
+    # Multiple regex patterns to handle different formats
+    patterns = [
+        # Primary pattern: - `file.ext:Line X` - description
+        r'^\s*[-*]\s*`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))`\s*[-–—]\s*(.+)$',
+        
+        # Pattern with bold formatting: - **`file.ext:Line X`** - description  
+        r'^\s*[-*]\s*\*\*`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))`\*\*\s*[-–—]\s*(.+)$',
+        
+        # Pattern without bullet: `file.ext:Line X` - description
+        r'^\s*`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))`\s*[-–—]\s*(.+)$',
+        
+        # Pattern with Format prefix: Format: `file.ext:Line X - description`
+        r'^\s*(?:Format:\s*)?`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))\s*[-–—]\s*([^`]+)`$'
+    ]
     
     for line in lines:
         line = line.strip()
@@ -1357,26 +1414,26 @@ def parse_issues_from_analysis(analysis: str) -> List[CodeIssue]:
         
         # Parse issue lines
         if current_section and line and not line.startswith('#'):
-            # Look for file:line pattern - handles both bullet points and direct mentions, with or without ** formatting
-            # Format: "- **`file.tsx:Line 27`** - description" or "- `file.tsx:Line 27` - description"
-            file_line_match = re.search(r'(?:[-*]\s*)?(?:\*\*)?`([^`]+\.(?:tsx?|jsx?|py|js|ts|java|cpp|c|h|swift|kt|rb|go|rs|php|cs)):(?:Line\s*(\d+)|Lines\s*(\d+)-(\d+))`(?:\*\*)?\s*[-–—]\s*(.+)', line)
-            
-            if file_line_match:
-                groups = file_line_match.groups()
-                file_path = groups[0]
-                line_num = groups[1] or groups[2]  # Single line or start of range
-                description = groups[4].strip() if len(groups) > 4 and groups[4] else "No description"  # Description is the 5th group (index 4)
-                
-                if line_num:
-                    line_num = int(line_num)
-                
-                issues.append(CodeIssue(
-                    file_path=file_path,
-                    line_number=line_num,
-                    issue_type=issue_type,
-                    description=description,
-                    full_context=line
-                ))
+            # Try each pattern until one matches
+            for pattern in patterns:
+                file_line_match = re.search(pattern, line)
+                if file_line_match:
+                    groups = file_line_match.groups()
+                    file_path = groups[0]
+                    line_num = groups[1] or groups[2]  # Single line or start of range
+                    description = groups[4].strip() if len(groups) > 4 and groups[4] else "No description"
+                    
+                    if line_num:
+                        line_num = int(line_num)
+                    
+                    issues.append(CodeIssue(
+                        file_path=file_path,
+                        line_number=line_num,
+                        issue_type=issue_type,
+                        description=description,
+                        full_context=line
+                    ))
+                    break  # Stop trying patterns once we find a match
     
     return issues
 
@@ -1521,6 +1578,26 @@ def handle_github_comments(analysis: str, base_branch: str, target_branch: str) 
     issues = parse_issues_from_analysis(analysis)
     if not issues:
         print_colored("ℹ️  No commentable issues found in analysis", Colors.WARNING)
+        print_colored("💡 Tip: Issues must be in 'Critical Issues', 'Warnings', or 'Improvements' sections", Colors.OKBLUE)
+        print_colored("💡 Format: - `filename.ext:Line X` - Description", Colors.OKBLUE)
+        
+        # Debug: Show what sections were found
+        lines = analysis.split('\n')
+        sections_found = []
+        for line in lines:
+            line = line.strip()
+            if '🔍 **Critical Issues**' in line or 'Critical Issues' in line:
+                sections_found.append('Critical Issues')
+            elif '⚠️ **Warnings**' in line or 'Warnings' in line:
+                sections_found.append('Warnings')
+            elif '✅ **Improvements**' in line or 'Improvements' in line:
+                sections_found.append('Improvements')
+        
+        if sections_found:
+            print_colored(f"📋 Found sections: {', '.join(sections_found)}", Colors.OKCYAN)
+        else:
+            print_colored("❌ No recognized sections found in analysis", Colors.WARNING)
+        
         return True
     
     print_colored(f"🔍 Found {len(issues)} potential issues to comment on", Colors.OKCYAN)
