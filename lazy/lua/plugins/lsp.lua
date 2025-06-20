@@ -22,7 +22,7 @@ return {
       keys[#keys + 1] = { "<leader>cr", false }
       keys[#keys + 1] = { "<leader>cr", false }
       keys[#keys + 1] = {
-        "<leader>dd",
+        "grd",
         function()
           require("telescope.builtin").lsp_definitions({ reuse_win = true })
         end,
@@ -30,22 +30,16 @@ return {
         has = "definition",
       }
       keys[#keys + 1] = {
-        "<leader>dr",
+        "grr",
         "<cmd>Telescope lsp_references<cr>",
         desc = "References",
       }
 
-      keys[#keys + 1] = { "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Show docs (LSP)" }
+      keys[#keys + 1] = { "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Show docs (LSP)" }
 
       keys[#keys + 1] = {
-        "<leader>dl",
+        "gdl",
         "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>",
-        desc = "Show live diagnostics (LSP)",
-      }
-
-      keys[#keys + 1] = {
-        "<leader>dn",
-        "<cmd>lua vim.diagnostic.goto_next({ border = 'rounded', max_width = 100 })<CR>",
         desc = "Show live diagnostics (LSP)",
       }
 
