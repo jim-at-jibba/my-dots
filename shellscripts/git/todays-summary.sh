@@ -50,7 +50,7 @@ EOF
 
 # Function to find git repositories
 find_git_repos() {
-  local search_dirs=("$HOME/projects" "$HOME/repos" "$HOME/code" "$HOME/dev" ".")
+  local search_dirs=("$HOME/projects" "$HOME/repos" "$HOME/code" "$HOME/dev" ".", "$HOME/dotfiles")
   
   for dir in "${search_dirs[@]}"; do
     if [[ -d "$dir" ]]; then
@@ -131,6 +131,7 @@ process_repository() {
   local timeframe="$2"
   local date_range_display="$3"
   local use_ai="$4"
+  local sunday_date="$5"
   
   # Get absolute path and validate repository
   local abs_repo_path=$(cd "$repo_path" 2>/dev/null && pwd)
@@ -142,10 +143,10 @@ process_repository() {
   local original_dir=$(pwd)
   cd "$abs_repo_path" || return 1
   
-  # Get current user's email from git config
-  local git_user_email=$(git config user.email)
-  if [[ -z "$git_user_email" ]]; then
-    echo "Error: Unable to get git user email in repository '$abs_repo_path'. Please configure git user.email" >&2
+  # Get current user's name from git config
+  local git_user_name=$(git config user.name)
+  if [[ -z "$git_user_name" ]]; then
+    echo "Error: Unable to get git user name in repository '$abs_repo_path'. Please configure git user.name" >&2
     return 1
   fi
   
@@ -157,7 +158,7 @@ process_repository() {
 # Commit Summary - $repo_name
 Repository: $abs_repo_path
 Date Range: $date_range_display
-User: $git_user_email
+User: $git_user_name
 ========================================
 EOF
   
@@ -167,14 +168,19 @@ EOF
   
   # Get all commits for the timeframe
   local commits=""
-  if [[ "$timeframe" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-    # Date format YYYY-MM-DD
-    commits=$(git --no-pager log --all --author="$git_user_email" \
+  if [[ "$date_range_display" =~ "This week's commits" ]]; then
+    # Special handling for "this week" - use Monday to Sunday range
+    commits=$(git --no-pager log --all --author="$git_user_name" \
+      --since="$timeframe 00:00:00" --until="$sunday_date 23:59:59" \
+      --pretty=format:"%h - %s (%cr) <%an>")
+  elif [[ "$timeframe" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    # Date format YYYY-MM-DD (single day)
+    commits=$(git --no-pager log --all --author="$git_user_name" \
       --since="$timeframe 00:00:00" --until="$timeframe 23:59:59" \
       --pretty=format:"%h - %s (%cr) <%an>")
   else
     # Relative timeframe like "1 week ago"
-    commits=$(git --no-pager log --all --author="$git_user_email" \
+    commits=$(git --no-pager log --all --author="$git_user_name" \
       --since="$timeframe" --pretty=format:"%h - %s (%cr) <%an>")
   fi
   
@@ -247,7 +253,7 @@ EOF
   # Print recent changes (last 24 hours)
   echo "\nMost Recent Changes (last 24 hours):" | tee -a "$temp_file"
   echo "----------------------------------------" | tee -a "$temp_file"
-  local recent_commits=$(git --no-pager log --all --author="$git_user_email" \
+  local recent_commits=$(git --no-pager log --all --author="$git_user_name" \
     --since="24 hours ago" --pretty=format:"%h - %s (%cr) <%an>")
   if [[ -n "$recent_commits" ]]; then
     echo "$recent_commits" | tee -a "$temp_file"
@@ -522,7 +528,7 @@ ORIGINAL_DIR=$(pwd)
 
 # Process each repository
 for repo in "${REPOSITORIES[@]}"; do
-  process_repository "$repo" "$TIMEFRAME" "$DATE_RANGE_DISPLAY" "$USE_AI"
+  process_repository "$repo" "$TIMEFRAME" "$DATE_RANGE_DISPLAY" "$USE_AI" "$SUNDAY_DATE"
   
   # Always return to original directory between repositories
   cd "$ORIGINAL_DIR" 2>/dev/null || {
