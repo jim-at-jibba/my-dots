@@ -16,7 +16,6 @@ if git diff --staged --quiet; then
 fi
 
 echo "Generating commit message..."
-# git diff --staged | fabric -m claude-3-7-sonnet-latest  -p summarize_git_diff >commit_msg.tmp
 git diff --staged | /Users/jamesbest/.claude/local/claude -p "Summarize the changes in this git diff following conversional commit strategy, I ONLY want the commit message and no explaination" --output-format text >commit_msg.tmp 
 
 if [ -s commit_msg.tmp ]; then
