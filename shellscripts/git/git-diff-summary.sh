@@ -16,7 +16,7 @@ if git diff --staged --quiet; then
 fi
 
 echo "Generating commit message..."
-git diff --staged | /Users/jamesbest/.claude/local/claude -p "Summarize the changes in this git diff following conversional commit strategy, I ONLY want the commit message and no explaination" --output-format text >commit_msg.tmp 
+git diff --staged | /Users/jamesbest/.claude/local/claude -p "Summarize the changes in this git diff following conversional commit strategy, I ONLY want the commit message and no explaination, no speical characters. Just the commit message" --output-format text >commit_msg.tmp 
 
 if [ -s commit_msg.tmp ]; then
   echo "Enter/edit commit message (press Ctrl+D when done):"
