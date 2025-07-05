@@ -5,7 +5,7 @@ local my_active_content = function()
   local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
   local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
   local filename = MiniStatusline.section_filename { trunc_width = 140 }
-  local grapple = require('grapple').statusline()
+  -- local grapple = require('grapple').statusline()
 
   return MiniStatusline.combine_groups {
     { hl = mode_hl, strings = { mode } },
@@ -13,7 +13,7 @@ local my_active_content = function()
     '%<', -- Mark general truncate point
     { hl = 'MiniStatuslineFilename', strings = { filename } },
     '%=', -- End left alignment
-    { hl = mode_hl, strings = { grapple } },
+    -- { hl = mode_hl, strings = { grapple } },
   }
 end
 
