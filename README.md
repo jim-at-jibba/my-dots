@@ -1,4 +1,4 @@
-# My Dots
+# My Dots test
 
 When setting up a new computer dont forget to install the following:
 
