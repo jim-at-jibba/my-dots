@@ -1,3 +1,4 @@
+local diagnostic_icons = require('icons').diagnostics
 local methods = vim.lsp.protocol.Methods
 
 return {
@@ -77,6 +78,11 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client then
+            require('lightbulb').attach_lightbulb(event.buf, client.id)
+          end
+
           if client:supports_method(methods.textDocument_definition) then
             map('grd', function()
               require('fzf-lua').lsp_definitions { jump1 = true }
@@ -121,35 +127,90 @@ return {
         end,
       })
 
-      -- Diagnostic Config
-      -- See :help vim.diagnostic.Opts
+      for severity, icon in pairs(diagnostic_icons) do
+        local hl = 'DiagnosticSign' .. severity:sub(1, 1) .. severity:sub(2):lower()
+        vim.fn.sign_define(hl, { text = icon, texthl = hl })
+      end
+
+      -- Diagnostic configuration.
       vim.diagnostic.config {
-        severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
-        signs = vim.g.have_nerd_font and {
-          text = {
-            [vim.diagnostic.severity.ERROR] = '󰅚 ',
-            [vim.diagnostic.severity.WARN] = '󰀪 ',
-            [vim.diagnostic.severity.INFO] = '󰋽 ',
-            [vim.diagnostic.severity.HINT] = '󰌶 ',
-          },
-        } or {},
-        -- virtual_text = false,
         virtual_text = {
-          source = 'if_many',
+          prefix = '',
           spacing = 2,
           format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
+            -- Use shorter, nicer names for some sources:
+            local special_sources = {
+              ['Lua Diagnostics.'] = 'lua',
+              ['Lua Syntax Check.'] = 'lua',
             }
-            return diagnostic_message[diagnostic.severity]
+
+            local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+            if diagnostic.source then
+              message = string.format('%s %s', message, special_sources[diagnostic.source] or diagnostic.source)
+            end
+            if diagnostic.code then
+              message = string.format('%s[%s]', message, diagnostic.code)
+            end
+
+            return message .. ' '
+          end,
+        },
+        float = {
+          source = 'if_many',
+          -- Show severity icons as prefixes.
+          prefix = function(diag)
+            local level = vim.diagnostic.severity[diag.severity]
+            local prefix = string.format(' %s ', diagnostic_icons[level])
+            return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
           end,
         },
       }
+
+      -- -- Diagnostic Config
+      -- -- See :help vim.diagnostic.Opts
+      -- vim.diagnostic.config {
+      --   severity_sort = true,
+      --   underline = { severity = vim.diagnostic.severity.ERROR },
+      --   signs = vim.g.have_nerd_font and {
+      --     text = {
+      --       [vim.diagnostic.severity.ERROR] = '󰅚 ',
+      --       [vim.diagnostic.severity.WARN] = '󰀪 ',
+      --       [vim.diagnostic.severity.INFO] = '󰋽 ',
+      --       [vim.diagnostic.severity.HINT] = '󰌶 ',
+      --     },
+      --   } or {},
+      --   virtual_text = false,
+      --   -- virtual_text = {
+      --   --   prefix = '',
+      --   --   spacing = 2,
+      --   --   format = function(diagnostic)
+      --   --     -- Use shorter, nicer names for some sources:
+      --   --     local special_sources = {
+      --   --       ['Lua Diagnostics.'] = 'lua',
+      --   --       ['Lua Syntax Check.'] = 'lua',
+      --   --     }
+      --   --
+      --   --     local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+      --   --     if diagnostic.source then
+      --   --       message = string.format('%s %s', message, special_sources[diagnostic.source] or diagnostic.source)
+      --   --     end
+      --   --     if diagnostic.code then
+      --   --       message = string.format('%s[%s]', message, diagnostic.code)
+      --   --     end
+      --   --
+      --   --     return message .. ' '
+      --   --   end,
+      --   -- },
+      --   float = {
+      --     source = 'if_many',
+      --     -- Show severity icons as prefixes.
+      --     prefix = function(diag)
+      --       local level = vim.diagnostic.severity[diag.severity]
+      --       local prefix = string.format(' %s ', diagnostic_icons[level])
+      --       return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
+      --     end,
+      --   },
+      -- }
 
       -- Setup LSP completion capabilities
       local capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)

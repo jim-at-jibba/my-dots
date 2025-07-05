@@ -30,6 +30,12 @@ return {
         mode = { 'n', 'x' },
       },
       { '<leader>fc', '<cmd>FzfLua highlights<cr>', desc = 'Highlights' },
+      { '<leader><leader>', '<cmd>FzfLua buffers<cr>', desc = 'Buffers' },
+      { '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Buffers' },
+      -- git
+      { '<leader>gc', '<cmd>FzfLua git_commits<CR>', desc = 'Commits' },
+      { '<leader>gs', '<cmd>FzfLua git_status<CR>', desc = 'Status' },
+
       { '<leader>sd', '<cmd>FzfLua lsp_document_diagnostics<cr>', desc = 'Document diagnostics' },
       { '<leader>sf', '<cmd>FzfLua files<cr>', desc = 'Find files' },
       { '<C-p>', '<cmd>FzfLua files<cr>', desc = 'Find files' },
@@ -41,6 +47,9 @@ return {
     },
     opts = function()
       local actions = require 'fzf-lua.actions'
+      local config = require 'fzf-lua.config'
+
+      config.defaults.actions.files['ctrl-t'] = require('trouble.sources.fzf').actions.open
 
       return {
         { 'border-fused', 'hide' },
