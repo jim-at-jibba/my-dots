@@ -1,6 +1,104 @@
 local diagnostic_icons = require('icons').diagnostics
 local methods = vim.lsp.protocol.Methods
 
+--- Sets up LSP keymaps and autocommands for the given buffer.
+---@param client vim.lsp.Client
+---@param bufnr integer
+local function on_attach(client, bufnr)
+  ---@param lhs string
+  ---@param rhs string|function
+  ---@param desc string
+  ---@param mode? string|string[]
+  local map = function(keys, func, desc, mode)
+    mode = mode or 'n'
+    vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+  end
+
+  -- Rename the variable under your cursor.
+  --  Most Language Servers support renaming across files, etc.
+  map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+  -- Execute a code action, usually your cursor needs to be on top of an error
+  -- or a suggestion from your LSP for this to activate.
+  map('gra', function()
+    require('tiny-code-action').code_action()
+  end, '[G]oto Code [A]ction', { 'n', 'x' })
+
+  map('grr', '<cmd>FzfLua lsp_references<cr>', 'vim.lsp.buf.references()')
+
+  map('grt', '<cmd>FzfLua lsp_typedefs<cr>', 'Go to type definition')
+
+  map('<leader>gs', '<cmd>FzfLua lsp_document_symbols<cr>', 'Document symbols')
+
+  map('gh', vim.lsp.buf.hover, '[H]over')
+
+  -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
+  ---@param client vim.lsp.Client
+  ---@param method vim.lsp.protocol.Method
+  ---@param bufnr? integer some lsp support methods only in specific files
+  ---@return boolean
+  local function client_supports_method(client, method, bufnr2)
+    if vim.fn.has 'nvim-0.11' == 1 then
+      return client:supports_method(method, bufnr)
+    else
+      return client.supports_method(method, { bufnr = bufnr2 })
+    end
+  end
+
+  if client then
+    require('lightbulb').attach_lightbulb(bufnr, client.id)
+  end
+
+  if client:supports_method(methods.textDocument_definition) then
+    map('grd', function()
+      require('fzf-lua').lsp_definitions { jump1 = true }
+    end, 'Go to definition')
+    map('grD', function()
+      require('fzf-lua').lsp_definitions { jump1 = false }
+    end, 'Peek definition')
+  end
+
+  if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr) then
+    local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      buffer = bufnr,
+      group = highlight_augroup,
+      callback = vim.lsp.buf.document_highlight,
+    })
+
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      buffer = bufnr,
+      group = highlight_augroup,
+      callback = vim.lsp.buf.clear_references,
+    })
+
+    vim.api.nvim_create_autocmd('LspDetach', {
+      group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+      callback = function(event2)
+        vim.lsp.buf.clear_references()
+        vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+      end,
+    })
+  end
+
+  if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, bufnr) then
+    map('<leader>th', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+    end, '[T]oggle Inlay [H]ints')
+  end
+
+  if client:supports_method(methods.textDocument_signatureHelp) then
+    map('<C-k>', function()
+      -- Close the completion menu first (if open).
+      if require('blink.cmp.completion.windows.menu').win:is_open() then
+        require('blink.cmp').hide()
+      end
+
+      vim.lsp.buf.signature_help()
+    end, 'Signature help', 'i')
+  end
+end
+
 return {
   -- LSP Plugins
   {
@@ -35,95 +133,15 @@ return {
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          local map = function(keys, func, desc, mode)
-            mode = mode or 'n'
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          -- I don't think this can happen but it's a wild world out there.
+          if not client then
+            return
           end
 
-          -- Rename the variable under your cursor.
-          --  Most Language Servers support renaming across files, etc.
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-
-          -- Execute a code action, usually your cursor needs to be on top of an error
-          -- or a suggestion from your LSP for this to activate.
-          map('gra', function()
-            require('tiny-code-action').code_action()
-          end, '[G]oto Code [A]ction', { 'n', 'x' })
-
-          map('grr', '<cmd>FzfLua lsp_references<cr>', 'vim.lsp.buf.references()')
-
-          map('grt', '<cmd>FzfLua lsp_typedefs<cr>', 'Go to type definition')
-
-          map('<leader>gs', '<cmd>FzfLua lsp_document_symbols<cr>', 'Document symbols')
-
-          map('gh', vim.lsp.buf.hover, '[H]over')
-
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
-          ---@return boolean
-          local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
-          end
-
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-          if client then
-            require('lightbulb').attach_lightbulb(event.buf, client.id)
-          end
-
-          if client:supports_method(methods.textDocument_definition) then
-            map('grd', function()
-              require('fzf-lua').lsp_definitions { jump1 = true }
-            end, 'Go to definition')
-            map('grD', function()
-              require('fzf-lua').lsp_definitions { jump1 = false }
-            end, 'Peek definition')
-          end
-
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-              end,
-            })
-          end
-
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
-          end
+          on_attach(client, args.buf)
         end,
       })
 
