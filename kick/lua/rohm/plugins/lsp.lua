@@ -87,6 +87,21 @@ local function on_attach(client, bufnr)
     end, '[T]oggle Inlay [H]ints')
   end
 
+  -- Show diagnostics on hover
+  vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = bufnr,
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+        border = 'rounded',
+        source = 'always',
+        prefix = ' ',
+      }
+      vim.diagnostic.open_float(nil, opts)
+    end,
+  })
+
   if client:supports_method(methods.textDocument_signatureHelp) then
     map('<C-k>', function()
       -- Close the completion menu first (if open).
@@ -152,27 +167,28 @@ return {
 
       -- Diagnostic configuration.
       vim.diagnostic.config {
-        virtual_text = {
-          prefix = '',
-          spacing = 2,
-          format = function(diagnostic)
-            -- Use shorter, nicer names for some sources:
-            local special_sources = {
-              ['Lua Diagnostics.'] = 'lua',
-              ['Lua Syntax Check.'] = 'lua',
-            }
-
-            local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
-            if diagnostic.source then
-              message = string.format('%s %s', message, special_sources[diagnostic.source] or diagnostic.source)
-            end
-            if diagnostic.code then
-              message = string.format('%s[%s]', message, diagnostic.code)
-            end
-
-            return message .. ' '
-          end,
-        },
+        virtual_text = false,
+        -- virtual_text = {
+        --   prefix = '',
+        --   spacing = 2,
+        --   format = function(diagnostic)
+        --     -- Use shorter, nicer names for some sources:
+        --     local special_sources = {
+        --       ['Lua Diagnostics.'] = 'lua',
+        --       ['Lua Syntax Check.'] = 'lua',
+        --     }
+        --
+        --     local message = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+        --     if diagnostic.source then
+        --       message = string.format('%s %s', message, special_sources[diagnostic.source] or diagnostic.source)
+        --     end
+        --     if diagnostic.code then
+        --       message = string.format('%s[%s]', message, diagnostic.code)
+        --     end
+        --
+        --     return message .. ' '
+        --   end,
+        -- },
         float = {
           source = 'if_many',
           -- Show severity icons as prefixes.
