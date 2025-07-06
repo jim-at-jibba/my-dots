@@ -16,7 +16,10 @@ if git diff --staged --quiet; then
 fi
 
 echo "Generating commit message..."
-git diff --staged | /Users/jamesbest/.claude/local/claude -p "Summarize the changes in this git diff following conversional commit strategy, I ONLY want the commit message and no explaination, no speical characters. Just the commit message" --output-format text >commit_msg.tmp 
+if ! git diff --staged | claude -p "Summarize the changes in this git diff following conventional commit strategy. I ONLY want the commit message with no explanation." --output-format text >commit_msg.tmp 2>/dev/null; then
+  echo "Error: Failed to generate commit message. Please check if claude is installed and accessible."
+  exit 1
+fi 
 
 if [ -s commit_msg.tmp ]; then
   echo "Enter/edit commit message (press Ctrl+D when done):"
