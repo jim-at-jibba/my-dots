@@ -16,7 +16,7 @@ if git diff --staged --quiet; then
 fi
 
 echo "Generating commit message..."
-if ! git diff --staged | claude -p "Summarize the changes in this git diff following conventional commit strategy. I ONLY want the commit message with no explanation." --output-format text >commit_msg.tmp 2>/dev/null; then
+if ! git diff --staged | claude --model sonnet -p "Summarize the changes in this git diff following conventional commit strategy. I ONLY want the commit message with no explanation." --output-format text >commit_msg.tmp 2>/dev/null; then
   echo "Error: Failed to generate commit message. Please check if claude is installed and accessible."
   exit 1
 fi 
