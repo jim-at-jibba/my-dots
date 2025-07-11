@@ -1,5 +1,3 @@
-# https://dev.to/thraizz/fix-slow-zsh-startup-due-to-nvm-408k
-# zmodload zsh/zprof
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -21,8 +19,7 @@ DISABLE_AUTO_TITLE="true"
 
 # plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 # plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
-zstyle ':omz:plugins:nvm' lazy yes
-plugins=(git vi-mode nvm zsh-autosuggestions)
+plugins=(git vi-mode zsh-autosuggestions)
 
 # User configuration
 # TERM=xterm-256color
@@ -276,13 +273,8 @@ eval "$(zoxide init --cmd j zsh)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Added by Windsurf
-export PATH="/Users/jamesbest/.codeium/windsurf/bin:$PATH"
-
 # Task Master aliases added on 24/04/2025
 alias tm='task-master'
 alias taskmaster='task-master'
-alias claude="/Users/jamesbest/.claude/local/claude"
-
-# Added by Windsurf
-export PATH="/Users/jamesbest/.codeium/windsurf/bin:$PATH"
+# alias claude="/Users/jamesbest/.claude/local/claude"
+eval "$(fnm env --use-on-cd --shell zsh)"
