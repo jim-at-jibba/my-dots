@@ -12,6 +12,18 @@ return {
           changedelete = { text = '~' },
         },
       },
+      keys = {
+        {
+          ']h',
+          ":lua require'gitsigns'.next_hunk()<CR>",
+          desc = 'Next Hunk',
+        },
+        {
+          '[h',
+          ":lua require'gitsigns'.prev_hunk()<CR>",
+          desc = 'Prev Hunk',
+        },
+      },
     },
     -- Highlight todo, notes, etc in comments
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
