@@ -42,7 +42,7 @@ fi
 if [ -d "$TEMPLATE_DIR/commands" ]; then
     echo "Setting up commands..."
     mkdir -p "$TARGET_DIR/commands"
-    
+
     # Copy all command files from template
     for file in "$TEMPLATE_DIR/commands"/*; do
         if [ -f "$file" ]; then
@@ -81,6 +81,51 @@ if [ -d "$TARGET_DIR/hooks" ]; then
     find "$TARGET_DIR/hooks" -name "*.py" -exec chmod +x {} \;
     find "$TARGET_DIR/hooks" -name "*.sh" -exec chmod +x {} \;
 fi
+
+# # Handle Core markdown files
+# if [ -d "$TEMPLATE_DIR/Core" ]; then
+#     echo "Setting up Core markdown files..."
+#
+#     # Create Core directory in target
+#     mkdir -p "$TARGET_DIR/Core"
+#
+#     # Copy individual Core files so @references work
+#     for core_file in "$TEMPLATE_DIR/Core"/*.md; do
+#         if [ -f "$core_file" ]; then
+#             filename=$(basename "$core_file")
+#             if [ "$filename" != "CLAUDE.md" ]; then
+#                 echo "  Copying $filename"
+#                 cp "$core_file" "$TARGET_DIR/Core/"
+#             fi
+#         fi
+#     done
+#
+#     # Handle CLAUDE.md with @references
+#     if [ -f "$TEMPLATE_DIR/Core/CLAUDE.md" ]; then
+#         # Create a temporary file for the new CLAUDE.md content
+#         TEMP_CLAUDE_FILE=$(mktemp)
+#
+#         # If CLAUDE.md exists in target, preserve it
+#         if [ -f "$TARGET_DIR/CLAUDE.md" ]; then
+#             echo "  Preserving existing CLAUDE.md content..."
+#             cat "$TARGET_DIR/CLAUDE.md" > "$TEMP_CLAUDE_FILE"
+#             echo "" >> "$TEMP_CLAUDE_FILE"
+#             echo "# Claude Framework" >> "$TEMP_CLAUDE_FILE"
+#             echo "" >> "$TEMP_CLAUDE_FILE"
+#         else
+#             echo "  Creating new CLAUDE.md with Core references..."
+#             echo "# Claude Framework" > "$TEMP_CLAUDE_FILE"
+#             echo "" >> "$TEMP_CLAUDE_FILE"
+#         fi
+#
+#         # Add the Core CLAUDE.md content (this contains the @references)
+#         cat "$TEMPLATE_DIR/Core/CLAUDE.md" >> "$TEMP_CLAUDE_FILE"
+#
+#         # Move the temporary file to the final location
+#         mv "$TEMP_CLAUDE_FILE" "$TARGET_DIR/CLAUDE.md"
+#         echo "  Core references integrated into CLAUDE.md"
+#     fi
+# fi
 
 echo "Claude configuration setup complete!"
 echo "Template files copied to $TARGET_DIR/"
