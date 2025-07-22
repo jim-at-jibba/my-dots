@@ -278,3 +278,7 @@ alias tm='task-master'
 alias taskmaster='task-master'
 # alias claude="/Users/jamesbest/.claude/local/claude"
 eval "$(fnm env --use-on-cd --shell zsh)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+alias claude="/Users/jamesbest/.claude/local/claude"

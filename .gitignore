@@ -24,3 +24,4 @@ lazy/lua/plugins/theme.lua
 sketchybar/colors.sh
 shellscripts/commit_msg.tmp
 gobang/config.toml
+logs
