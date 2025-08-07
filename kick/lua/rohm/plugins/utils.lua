@@ -1,6 +1,5 @@
 return {
   {
-    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
       'lewis6991/gitsigns.nvim',
       opts = {
@@ -44,7 +43,7 @@ return {
       lazy = false,
       opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = false },
+        dashboard = { enabled = true },
         explorer = { enabled = false },
         indent = { enabled = true },
         input = { enabled = true },
