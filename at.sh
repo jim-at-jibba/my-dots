@@ -103,13 +103,14 @@ nightfoxday)
   configure_tmux_light
   configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dayfox"}}}'
   dark-mode off
-  # configure_spacebar
+  configure_spacebar
   ;;
 nightfoxnord)
   configure_kitty
   configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "nordfox"}}}'
   dark-mode on
+  configure_sketchybar
   # configure_spacebar
   ;;
 nightfoxtera)
@@ -125,6 +126,7 @@ nightfoxdawn)
   configure_tmux
   configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dawnfox"}}}'
   dark-mode off
+  configure_sketchybar
   # configure_spacebar
   ;;
 nightowl)
