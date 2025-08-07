@@ -249,7 +249,8 @@ return {
       mason_lspconfig.setup {
         ensure_installed = {
           'lua_ls', -- Lua
-          'ts_ls', -- TypeScript/JavaScript
+          -- 'ts_ls', -- TypeScript/JavaScript
+          'vtsls',
           'rust_analyzer', -- Rust
         },
         handlers = {
