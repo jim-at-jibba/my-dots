@@ -43,15 +43,15 @@ if [ -d "$TEMPLATE_DIR/commands" ]; then
     echo "Setting up commands..."
     mkdir -p "$TARGET_DIR/commands"
 
-    # Copy all command files from template
-    for file in "$TEMPLATE_DIR/commands"/*; do
-        if [ -f "$file" ]; then
-            filename=$(basename "$file")
-            if [ -f "$TARGET_DIR/commands/$filename" ]; then
-                echo "  Skipping $filename (already exists)"
+    # Copy all command files and directories from template recursively
+    for item in "$TEMPLATE_DIR/commands"/*; do
+        if [ -e "$item" ]; then
+            basename_item=$(basename "$item")
+            if [ -e "$TARGET_DIR/commands/$basename_item" ]; then
+                echo "  Skipping $basename_item (already exists)"
             else
-                echo "  Adding $filename"
-                cp "$file" "$TARGET_DIR/commands/"
+                echo "  Adding $basename_item"
+                cp -r "$item" "$TARGET_DIR/commands/"
             fi
         fi
     done
