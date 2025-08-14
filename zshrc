@@ -67,6 +67,7 @@ plugins=(git vi-mode zsh-autosuggestions)
   export PATH="/Users/jamesbest/.cargo/bin:$PATH"
   export PATH="$HOME/bin:$PATH"
   export PATH="/usr/local/share/dotnet:$PATH"
+  export PATH="$HOME/.foundry/bin:$PATH"
   export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@3.2/lib -L/usr/local/opt/zlib/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/openssl@3.2/include -I/usr/local/opt/zlib/include"
   source $ZSH/oh-my-zsh.sh
