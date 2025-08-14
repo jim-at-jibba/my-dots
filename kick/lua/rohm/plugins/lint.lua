@@ -11,6 +11,7 @@ return {
         javascriptreact = { 'eslint' },
         typescript = { 'eslint' },
         typescriptreact = { 'eslint' },
+        solidity = { 'solhint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

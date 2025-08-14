@@ -29,6 +29,13 @@ return {
           }
         end
       end,
+      formatters = {
+        forge_fmt = {
+          command = 'forge',
+          args = { 'fmt', '--raw', '-' },
+          stdin = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
@@ -41,6 +48,7 @@ return {
         css = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd', 'prettier', stop_after_first = true },
         json = { 'prettierd', 'prettier', stop_after_first = true },
+        solidity = { 'forge_fmt' },
       },
     },
   },
