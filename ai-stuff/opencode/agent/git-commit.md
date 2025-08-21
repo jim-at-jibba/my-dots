@@ -31,10 +31,3 @@ tools:
 - `[queue-payment-processing] moved generateMonthlyStatementJob to queue from admin`
 - `[admin] new action for creating manual adjustments in user profile`
 
-## Precommit Checks
-
-- Precommit checks run before the main commit action
-- Only run precommit checks that meet their triggering conditions
-- If any precommit check fails, immediately abort the entire process (both precommit and commit actions)
-- Display an error message and do not proceed until the issue is fixed
-
