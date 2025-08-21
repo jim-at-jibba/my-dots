@@ -283,3 +283,6 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 alias claude="/Users/jamesbest/.claude/local/claude"
+
+# opencode
+export PATH=/Users/jamesbest/.opencode/bin:$PATH
