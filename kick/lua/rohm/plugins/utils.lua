@@ -47,6 +47,7 @@ return {
         explorer = { enabled = false },
         indent = { enabled = true },
         input = { enabled = true },
+        scratch = { enabled = false },
         picker = { enabled = false },
         notifier = { enabled = true },
         quickfile = { enabled = false },
