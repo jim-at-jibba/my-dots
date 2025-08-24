@@ -1,9 +1,5 @@
 ---
 description: Git Create PR
-mode: subagent
-tools:
-  write: false
-  edit: false
 ---
 # How to Create a Pull Request Using GitHub CLI
 

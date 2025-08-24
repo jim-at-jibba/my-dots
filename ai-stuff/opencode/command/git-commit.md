@@ -1,12 +1,8 @@
 ---
-description: Git Commit Task
-mode: subagent
-tools:
-  write: false
-  edit: false
+description: Git Commit Command
 ---
 
-# Create new git commit task
+Git commit for all staged files following these rules:
 
 - Takes all changed and new files, suggests a commit message, ALWAYS asks for confirmation, and creates the commit ONLY after explicit approval
 - This task is one of ONLY two places where committing is allowed (the other being commit-fast)
