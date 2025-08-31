@@ -49,6 +49,7 @@ return {
         html = { 'prettierd', 'prettier', stop_after_first = true },
         json = { 'prettierd', 'prettier', stop_after_first = true },
         solidity = { 'forge_fmt' },
+        python = { 'ruff', stop_after_first = true },
       },
     },
   },
