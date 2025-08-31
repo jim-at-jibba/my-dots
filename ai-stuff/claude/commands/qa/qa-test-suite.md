@@ -16,3 +16,5 @@ Output format:
 - Success criteria (must pass vs should pass)
 
 Focus on actionable test scenarios without fluff. The base branch for comparison is always "staging".
+
+**Use this command to perform a comprehensive analysis of what has been done on this branch and create a test suite that can be given to a QA team**
