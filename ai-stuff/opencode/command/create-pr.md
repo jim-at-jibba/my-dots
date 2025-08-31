@@ -1,7 +1,8 @@
 ---
 description: Git Create PR
 ---
-# How to Create a Pull Request Using GitHub CLI
+
+Create a draft PR for the current branch following the instructions below:
 
 This guide explains how to create pull requests using GitHub CLI in our project.
 

@@ -2,7 +2,7 @@
 description: Breedr Mobile code review
 ---
 
-# Breedr Mobile Code Review Command
+Review the current branches changes against staging and create a review based on the instructions below:
 
 ## Instructions
 

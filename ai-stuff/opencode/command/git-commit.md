@@ -2,8 +2,9 @@
 description: Git Commit Command
 ---
 
-Git commit for all staged files following these rules:
+Git commit for all changed and new files following these rules:
 
+- Group changed together into logical commits but dont over do it
 - Takes all changed and new files, suggests a commit message, ALWAYS asks for confirmation, and creates the commit ONLY after explicit approval
 - This task is one of ONLY two places where committing is allowed (the other being commit-fast)
 - Format of commit message depends on the affected files:
