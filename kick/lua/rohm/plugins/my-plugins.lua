@@ -1,5 +1,5 @@
 return {
   {
-    dir = '~/code/other/termogotchi-nvim',
+    -- dir = '~/code/other/termogotchi-nvim',
   },
 }
