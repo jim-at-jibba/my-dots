@@ -7,4 +7,4 @@ customCommands:
     description: Pick AI commit
     command: git-commit
     context: files
-    subprocess: true
+    output: terminal
