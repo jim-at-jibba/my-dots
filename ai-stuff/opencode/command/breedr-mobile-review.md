@@ -2,14 +2,18 @@
 description: Breedr Mobile code review
 ---
 
+# Breedr Mobile code review
+
 Review the current branches changes against staging and create a review based on the instructions below:
 
 ## Instructions
 
 ### Context
+
 Comprehensive code review for Breedr mobile application with specialized focus on React Native, TypeScript, and react-native-unistyles. Combines automated analysis, security scanning, and structured feedback with Breedr-specific styling requirements. You are a senior React Native and TypeScript engineer with 10+ years of experience building production mobile applications.
 
 ### Requirements
+
 - Git repository with commits to review
 - React Native and TypeScript project structure
 - react-native-unistyles styling framework
@@ -85,7 +89,19 @@ Comprehensive code review for Breedr mobile application with specialized focus o
    - Review test maintainability
    - Mobile-specific testing requirements
 
-8. **Documentation Review**
+8. **Declarative & Functional Programming Style**
+  - **Immutable data patterns**: Check for direct state mutations vs immutable updates
+  - **Pure functions**: Identify side effects and recommend extraction to pure functions
+  - **Declarative React patterns**: Flag imperative DOM manipulation, prefer declarative JSX
+  - **Function composition**: Review for opportunities to compose smaller functions
+  - **Data transformations**: Ensure use of map/filter/reduce over imperative loops
+  - **Conditional rendering**: Verify ternary operators used instead of && for conditional rendering
+  - **Hook dependencies**: Check useEffect/useMemo/useCallback dependency arrays for completeness
+  - **State structure**: Recommend normalized/flat state structures over nested objects
+  - **Event handlers**: Prefer inline arrow functions or useCallback for event handling
+  - **Data flow**: Ensure unidirectional data flow patterns are maintained
+
+9. **Documentation Review**
    - Check inline documentation
    - Verify API documentation updates
    - Review changelog entries
@@ -108,6 +124,9 @@ Comprehensive code review for Breedr mobile application with specialized focus o
 - [ ] Type checking passes (`tsc --noEmit`)
 - [ ] Unistyles theme consistency verified
 - [ ] Responsive design tested across breakpoints
+- [ ] Declarative and functional programming patterns followed
+- [ ] Immutable data handling practices implemented
+- [ ] Pure functions preferred over impure implementations
 
 ### Format Requirements
 
@@ -161,6 +180,14 @@ When listing issues in Critical Issues, Warnings, and Improvements sections, use
 - **Battery Usage**: [Impact on device battery consumption]
 - **Memory Usage**: [Memory footprint changes]
 
+#### 🔄 **Declarative & Functional Programming Assessment**
+- **Immutability**: [Check for direct state mutations and recommend immutable patterns]
+- **Pure Functions**: [Identify side effects and opportunities for pure function extraction]
+- **Declarative Patterns**: [Flag imperative code that could be more declarative]
+- **Data Transformations**: [Review usage of map/filter/reduce vs imperative loops]
+- **Hook Dependencies**: [Verify complete dependency arrays in useEffect/useMemo/useCallback]
+- **State Structure**: [Assess state normalization and flat vs nested structures]
+
 ##### 🔧 **Recommendations**
 1. [Specific actionable recommendations with file:line references]
 2. [Unistyles migration suggestions for modified styles]
@@ -187,6 +214,9 @@ For each modified file, provide:
 - [ ] Responsive design tested across breakpoints
 - [ ] Memory leak testing on older devices
 - [ ] Network connectivity edge cases tested
+- [ ] Functional programming patterns validated
+- [ ] Immutable data handling verified
+- [ ] Pure function compliance checked
 
 #### Context Questions Addressed
 1. What is the business impact of these changes?
