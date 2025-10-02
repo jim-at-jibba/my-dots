@@ -37,7 +37,7 @@ current_year=$(date +"%Y")
 current_month=$(date +"%B")
 
 # Construct the file path
-file_path="/Users/jamesbest/MyBrain/MyBrain/07_Dev Journal/$current_year/$current_month/$current_date.md"
+file_path="/Users/jamesbest/vault2025/02 Daily/$current_year/$current_month/$current_date.md"
 
 # Check if the file exists
 if [ ! -f "$file_path" ]; then

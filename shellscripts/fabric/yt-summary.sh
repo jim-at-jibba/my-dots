@@ -12,11 +12,10 @@ generate_header() {
   echo "---"
   echo "title: \"$title\""
   echo "url: $url"
-  echo "date: $d"
-  echo "type: video_summary"
-  echo "tags:"
-  echo "  - 🪴weedy"
-  echo "  - 🤖generated"
+  echo "Type: #type"
+  echo "Area: #area"
+  echo "Keyword: #keyword"
+  echo "Created At: $d"
   echo "source:" "$url"
   echo "---"
   echo
@@ -30,7 +29,7 @@ read -p "Video URL: " video_url
 # Replace gum confirm with simple yes/no prompt
 read -p "Do you want to extract wisdom from this video? (y/N) " response
 if [[ "$response" =~ ^[Yy]$ ]]; then
-  dest="$HOME/MyBrain/MyBrain/00_Fleeting"
+  dest="$HOME/vault2025/01 Inbox"
   # Display the entered URL and ask for confirmation
   echo "Entered URL: $video_url"
 
