@@ -46,85 +46,85 @@ configure_lazy() {
 
 case $color in
 rosepinemoon)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode on
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
   configure_sketchybar
   # configure_spacebar
   ;;
 rosepinedawn)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode off
   configure_sketchybar
   # configure_spacebar
   configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
   ;;
 evergarden)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode on
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "evergarden"}}}'
   configure_sketchybar
   # configure_spacebar
   ;;
 everforestdark)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
+  # configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
   configure_sketchybar
   ;;
 everforestlight)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode off
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
+  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
   configure_sketchybar
   ;;
 poimandres)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   dark-mode on
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "poimandres"}}}'
   configure_sketchybar
   ;;
 nightfoxdusk)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "duskfox"}}}'
   dark-mode on
   configure_sketchybar
   # configure_spacebar
   ;;
 nightfoxday)
-  configure_kitty
-  configure_tmux_light
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dayfox"}}}'
+  # configure_kitty
+  # configure_tmux_light
+  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dayfox"}}}'
   dark-mode off
   configure_spacebar
   ;;
 nightfoxnord)
-  configure_kitty
-  configure_tmux
+  # configure_kitty
+  # configure_tmux
   configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "nordfox"}}}'
   dark-mode on
   configure_sketchybar
   # configure_spacebar
   ;;
 nightfoxtera)
-  configure_kitty
-  configure_tmux
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "terafox"}}}'
+  # configure_kitty
+  # configure_tmux
+  # configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "terafox"}}}'
   dark-mode on
   configure_sketchybar
   # configure_spacebar
   ;;
 nightfoxdawn)
-  configure_kitty
-  configure_tmux
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dawnfox"}}}'
+  # configure_kitty
+  # configure_tmux
+  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dawnfox"}}}'
   dark-mode off
   configure_sketchybar
   # configure_spacebar
@@ -166,12 +166,9 @@ solarizedlight)
   configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "NeoSolarized"}}}'
   configure_spacebar
   ;;
-tokyonight)
-  configure_kitty
-  configure_tmux
+tokyonightstorm)
+  configure_sketchybar
   dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "tokyonight"}}}'
-  configure_spacebar
   ;;
 cyberdreamdark)
   configure_kitty
@@ -188,7 +185,7 @@ cyberdreamlight)
   configure_spacebar
   ;;
 *)
-  echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl oldworld"
+  echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl oldworld tokyonightstorm"
   exit 1
   ;;
 esac
