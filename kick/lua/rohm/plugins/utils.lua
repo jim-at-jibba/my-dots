@@ -28,15 +28,15 @@ return {
     { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
     -- Oil
-    -- {
-    --   'stevearc/oil.nvim',
-    --   opts = {},
-    --   -- Optional dependencies
-    --   dependencies = { 'nvim-tree/nvim-web-devicons' },
-    --   keys = {
-    --     { '-', '<cmd>Oil<CR>', desc = 'Open oil' },
-    --   },
-    -- },
+    {
+      'stevearc/oil.nvim',
+      opts = {},
+      -- Optional dependencies
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      keys = {
+        { '-', '<cmd>Oil<CR>', desc = 'Open oil' },
+      },
+    },
     {
       'folke/snacks.nvim',
       priority = 1000,
