@@ -19,7 +19,7 @@ DISABLE_AUTO_TITLE="true"
 
 # plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 # plugins=(git zsh-completions httpie vi-mode zsh-autosuggestions)
-plugins=(git vi-mode zsh-autosuggestions)
+plugins=(git zsh-autosuggestions)
 
 # User configuration
 # TERM=xterm-256color
@@ -294,3 +294,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+eval "$(llm cmdcomp --init zsh)"
+bindkey '^U' __llm_cmdcomp
