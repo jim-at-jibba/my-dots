@@ -1,0 +1,10 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+customCommands:
+  - key: <c-t>
+    description: Pick AI commit
+    command: git-commit
+    context: files
+    output: terminal
