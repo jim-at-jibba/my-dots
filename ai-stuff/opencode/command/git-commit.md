@@ -1,30 +1,27 @@
 ---
-description: Git Commit Command
+description: "Create a git commit with AI-generated message following project guidelines"
+model: "github-copilot/gpt-4.1"
+arguments: []
 ---
 
-Git commit for all changed and new files following these rules:
+Create a git commit for staged changes with an AI-generated commit message that follows the seven rules of good commit messages. If no files are staged, then ask to clarify what should be committed.
 
-- Group changed together into logical commits but dont over do it
-- Takes all changed and new files, suggests a commit message, ALWAYS asks for confirmation, and creates the commit ONLY after explicit approval
-- This task is one of ONLY two places where committing is allowed (the other being commit-fast)
-- Format of commit message depends on the affected files:
-  - For package changes (e.g., apps/graphql): `[package1,package2] description of changes`
-    - Git-related files: `[gitignore] description of changes`
-    - Claude related files (e. g. CLAUDE.md or changes in .claude folder): `[claude] description of changes`
-    - Other root configs: use appropriate descriptor in square brackets
-  - Description should start with lowercase letter
-  - Description should be concise and explain what was changed
-- The scope in square brackets should be consistent across all suggested message options - it's a fixed rule based on the files changed, not something to vary between options
-- When suggesting commit messages, use `git log -n 100 --oneline` to review the most recent commit messages for inspiration on format and style
-- Format the suggested commit messages in orange text to make them more readable in the terminal
-- Only after I explicitly confirm or modify the commit message, proceed with `git commit -m "message"`
-- If I tell you that you can push the changes, you can run `git push` directly without asking for permission
-- Do NOT add Claude co-authorship footer to commits
+This command will:
 
-## Examples of Good Commit Messages
+1. Analyze current git status and changes
+2. Generate a commit message following these guidelines:
+   - Subject line limited to 50 characters (72 hard limit)
+   - Capitalized subject line
+   - No period at end of subject
+   - Imperative mood ("Add feature" not "Added feature")
+   - Body wrapped at 72 characters explaining what and why
+   - Separate subject from body with blank line
 
-- `[ui] fix username retrieval issues in Header component on initial render`
-- `[alerts] new notification module for system and maintenance type of alerts`
-- `[queue-payment-processing] moved generateMonthlyStatementJob to queue from admin`
-- `[admin] new action for creating manual adjustments in user profile`
+The commit message will focus on:
 
+- What problem this commit solves
+- Why the change was made (not how)
+- Any side effects or consequences
+- Clear, concise summary of the change
+
+Follow the project's git commit guidelines and ensure the message explains the motivation behind the changes rather than just describing the code changes.
