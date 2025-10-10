@@ -25,3 +25,5 @@ sketchybar/colors.sh
 shellscripts/commit_msg.tmp
 gobang/config.toml
 logs
+test.js
+test.ts
