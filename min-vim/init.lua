@@ -21,15 +21,20 @@ vim.g.mapleader = " "
 
 require("lazy").setup({
 	{
-		"dustinblackman/oatmeal.nvim",
-		cmd = { "Oatmeal" },
-		keys = {
-			{ "<leader>om", mode = "n", desc = "Start Oatmeal session" },
+		"jim-at-jibba/nvim-redraft",
+		dependencies = {
+			{ "folke/snacks.nvim", opts = { input = {} } },
 		},
-		opts = {
-			backend = "ollama",
-			model = "codellama:latest",
-		},
+		config = function()
+			require("nvim-redraft").setup({
+				-- Optional configuration
+				system_prompt = "You are a code editing assistant...",
+				keybindings = {
+					visual_edit = "<leader>ae",
+				},
+			})
+		end,
+		build = "cd ts && npm install && npm run build",
 	},
 }, {
 	defaults = { version = false },
