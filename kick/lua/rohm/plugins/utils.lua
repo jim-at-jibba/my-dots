@@ -43,11 +43,11 @@ return {
       lazy = false,
       opts = {
         bigfile = { enabled = true },
-        dashboard = { enabled = false },
+        dashboard = { enabled = true },
         explorer = { enabled = false },
         indent = { enabled = true },
         input = { enabled = true },
-        scratch = { enabled = false },
+        scratch = { enabled = true },
         picker = { enabled = false },
         notifier = { enabled = true },
         quickfile = { enabled = false },

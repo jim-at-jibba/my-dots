@@ -5,3 +5,4 @@
 # General rules for agents
 
 - NEVER delete files without confirmation!!
+- sacrifice grammar for the sake of concision
