@@ -20,11 +20,23 @@ vim.g.mapleader = " "
 -- require("utils")
 
 require("lazy").setup({
+
+	-- {
+	-- 	dir = "~/code/other/nvim-redraft/",
+	-- 	config = function()
+	-- 		require("nvim-redraft").setup({
+	-- 			llm = {
+	-- 				models = {
+	-- 					{ provider = "openai", model = "gpt-4o-mini", label = "GPT-4o Mini" },
+	-- 				},
+	-- 				default_model_index = 1,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- 	build = "cd ts && npm install && npm run build",
+	-- },
 	{
 		"jim-at-jibba/nvim-redraft",
-		dependencies = {
-			{ "folke/snacks.nvim", opts = { input = {} } },
-		},
 		config = function()
 			require("nvim-redraft").setup({
 				-- Optional configuration
