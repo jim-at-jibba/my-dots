@@ -100,9 +100,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
--- vim.cmd 'colorscheme rose-pine'
--- vim.cmd 'colorscheme terafox'
-vim.cmd 'colorscheme dawnfox'
+vim.cmd 'colorscheme rose-pine'
+-- vim.cmd 'colorscheme dawnfox'
+-- vim.cmd 'colorscheme nordfox'
 -- vim.cmd 'colorscheme tokyonight-storm'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
