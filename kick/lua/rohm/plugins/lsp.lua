@@ -27,23 +27,6 @@ return {
     config = function()
       local mason_lspconfig = require 'mason-lspconfig'
 
-      for severity, icon in pairs(diagnostic_icons) do
-        local hl = 'DiagnosticSign' .. severity:sub(1, 1) .. severity:sub(2):lower()
-        vim.fn.sign_define(hl, { text = icon, texthl = hl })
-      end
-
-      vim.diagnostic.config {
-        virtual_text = false,
-        float = {
-          source = 'if_many',
-          prefix = function(diag)
-            local level = vim.diagnostic.severity[diag.severity]
-            local prefix = string.format(' %s ', diagnostic_icons[level])
-            return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
-          end,
-        },
-      }
-
       local capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
 
       local servers = {
@@ -83,10 +66,6 @@ return {
           map('grt', '<cmd>FzfLua lsp_typedefs<cr>', 'Go to type definition')
           map('<leader>gs', '<cmd>FzfLua lsp_document_symbols<cr>', 'Document symbols')
           map('gh', vim.lsp.buf.hover, '[H]over')
-
-          if client then
-            require('lightbulb').attach_lightbulb(bufnr, client.id)
-          end
 
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_definition) then
             map('grd', function()
@@ -136,7 +115,6 @@ return {
                 source = 'always',
                 prefix = ' ',
               }
-              vim.diagnostic.open_float(nil, opts)
             end,
           })
 
