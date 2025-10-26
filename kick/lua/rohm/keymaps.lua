@@ -44,3 +44,5 @@ map('t', '<C-j>', [[<C-\><C-n><C-w>j]], { desc = 'Move focus to the lower window
 map('t', '<C-k>', [[<C-\><C-n><C-w>k]], {})
 map('t', '<C-l>', [[<C-\><C-n><C-w>l]], {})
 -- map('n', '-', ':lua MiniFiles.open()<CR>', { desc = 'Open MiniFiles' })
+--
+vim.api.nvim_set_keymap('n', '<leader>r', '<Cmd>vsp | terminal java %<CR>', { noremap = true, silent = true })
