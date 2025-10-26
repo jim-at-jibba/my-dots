@@ -296,3 +296,9 @@ esac
 # pnpm end
 eval "$(llm cmdcomp --init zsh)"
 bindkey '^U' __llm_cmdcomp
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jamesbest/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jamesbest/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jamesbest/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jamesbest/google-cloud-sdk/completion.zsh.inc'; fi
