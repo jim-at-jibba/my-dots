@@ -33,7 +33,7 @@ return {
       { '<leader><leader>', '<cmd>FzfLua buffers<cr>', desc = 'Buffers' },
       { '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Buffers' },
       -- git
-      { '<leader>gc', '<cmd>FzfLua git_commits<CR>', desc = 'Commits' },
+      -- { '<leader>gc', '<cmd>FzfLua git_commits<CR>', desc = 'Commits' },
       { '<leader>gs', '<cmd>FzfLua git_status<CR>', desc = 'Status' },
 
       { '<leader>sd', '<cmd>FzfLua lsp_document_diagnostics<cr>', desc = 'Document diagnostics' },
