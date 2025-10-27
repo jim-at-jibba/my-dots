@@ -35,6 +35,7 @@ return {
         vtsls = {},
         rust_analyzer = {},
         jdtls = {},
+        copilot = {},
       }
 
       for server_name, config in pairs(servers) do
