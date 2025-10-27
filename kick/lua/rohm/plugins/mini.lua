@@ -7,12 +7,32 @@ local my_active_content = function()
   local filename = MiniStatusline.section_filename { trunc_width = 140 }
   local grapple = require('grapple').statusline()
 
+  -- sidekick status
+  local sidekick_status = ''
+  local sidekick_hl = 'MiniStatuslineDevinfo'
+  local ok, status_module = pcall(require, 'sidekick.status')
+  if ok then
+    local status = status_module.get()
+    if status then
+      local icon = ' '
+      sidekick_status = icon
+      if status.kind == 'Error' then
+        sidekick_hl = 'DiagnosticError'
+      elseif status.busy then
+        sidekick_hl = 'DiagnosticWarn'
+      else
+        sidekick_hl = 'Special'
+      end
+    end
+  end
+
   return MiniStatusline.combine_groups {
     { hl = mode_hl, strings = { mode } },
     { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
     '%<', -- Mark general truncate point
     { hl = 'MiniStatuslineFilename', strings = { filename } },
     '%=', -- End left alignment
+    { hl = sidekick_hl, strings = { sidekick_status } },
     { hl = mode_hl, strings = { grapple } },
   }
 end
