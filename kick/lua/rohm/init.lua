@@ -58,6 +58,8 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.opt.winborder = 'rounded'
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -106,8 +108,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 vim.cmd 'colorscheme rose-pine'
 -- vim.cmd 'colorscheme dawnfox'
--- vim.cmd 'colorscheme nordfox'
--- vim.cmd 'colorscheme tokyonight-storm'
+-- vim.cmd 'colorscheme terafox'
+-- vim.cmd 'colorscheme catppuccin-macchiato'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
