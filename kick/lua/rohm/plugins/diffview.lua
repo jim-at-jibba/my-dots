@@ -11,7 +11,7 @@ return {
     'DiffviewFocusFiles',
   },
   keys = {
-    { '<leader>gf', '<cmd>DiffviewFileHistory %<cr>', desc = 'File history' },
+    { '<leader>gf', '<cmd>DiffviewFileHistory %<cr>', desc = 'Current File history' },
     { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diff view open' },
     { '<leader>gc', '<cmd>DiffviewClose<cr>', desc = 'Diff view close' },
   },
