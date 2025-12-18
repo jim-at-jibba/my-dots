@@ -124,6 +124,8 @@ alias p="pbpaste"
 
 alias image_gen="cd ~/dotfiles/shellscripts/image_generator && ./image_generator.sh"
 
+alias clean_my_mac="npx mac-cleaner-cli"
+
 # Git
 ##########
 alias gs="git status -s \
