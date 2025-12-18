@@ -1,5 +1,8 @@
 return {
   {
+    dir = '~/code/other/ariake.nvim/',
+  },
+  {
     -- dir = '~/code/other/termogotchi-nvim',
   },
   {
@@ -15,6 +18,7 @@ return {
       require('nvim-redraft').setup {
         llm = {
           models = {
+            { provider = 'cerebras', model = 'qwen-3-235b-a22b-instruct-2507', label = 'Cerebras Qwen' },
             { provider = 'xai', model = 'grok-4-fast-non-reasoning', label = 'Grok 4 Fast' },
             { provider = 'xai', model = 'grok-code-fast-1', label = 'Grok Code Fast 1' },
             { provider = 'openai', model = 'gpt-4o-mini', label = 'GPT-4o Mini' },
