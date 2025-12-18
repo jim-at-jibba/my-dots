@@ -1,117 +1,74 @@
 ---
-description: Git Create PR
+description: "Create GitHub PR with well-crafted title and description"
+model: github-copilot/gpt-5-mini
+arguments:
+  - name: base
+    description: "Base branch (default: staging)"
+    required: false
 ---
 
-Create a draft PR for the current branch following the instructions below:
+Create a GitHub pull request for the current branch. Be decisive — create the PR without asking for confirmation.
 
-This guide explains how to create pull requests using GitHub CLI in our project.
+## Steps
 
-## Prerequisites
+1. **Parse arguments**: Use $ARGUMENTS as base branch. If empty, default to `staging`.
 
-1. Install GitHub CLI if you haven't already:
+2. **Gather context** (run in parallel):
+   - `git log <base>..HEAD --oneline` — commits on this branch
+   - `git diff <base>..HEAD --stat` — files changed
+   - `git branch --show-current` — current branch name
+   - Check if branch is pushed: `git rev-parse --abbrev-ref @{upstream}`
 
-   ```bash
-   # macOS
-   brew install gh
+3. **If context is unclear**: If commits/diff don't provide enough context to understand what changed and how to test it, read the top 3-5 most-changed files to understand the implementation.
 
-   # Windows
-   winget install --id GitHub.cli
+4. **Push if needed**: If branch is not pushed, run `git push -u origin HEAD`
 
-   # Linux
-   # Follow instructions at https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-   ```
+5. **Extract ticket number**: Look for `BRD-XXXX` pattern in branch name. If not found, leave ticket blank.
 
-2. Authenticate with GitHub:
-   ```bash
-   gh auth login
-   ```
-
-## Creating a New Pull Request
-
-1. First, prepare your PR description following the template in @.github/pull_request_template.md
-
-2. Use the `gh pr create --draft` command to create a new pull request:
-
-   ```bash
-   # Basic command structure
-   gh pr create --draft --title "✨(scope): Your descriptive title" --body "Your PR description" --base main 
-   ```
-
-
-## Best Practices
-
-1. **PR Title Format**: Use conventional commit format with emojis
-
-   - Always include an appropriate emoji at the beginning of the title
-   - Use the actual emoji character (not the code representation like `:sparkles:`)
+6. **Write the PR title**:
+   - Capitalized imperative mood: "Add", "Fix", "Update", "Refactor" (NOT "fix:" or "feat:")
+   - Concise but descriptive (~50 chars)
+   - Append ticket in parentheses if found: `(BRD-1234)`
    - Examples:
-     - `✨(supabase): Add staging remote configuration`
-     - `🐛(auth): Fix login redirect issue`
-     - `📝(readme): Update installation instructions`
+     - Good: "Fix profile validation for empty email fields (BRD-1234)"
+     - Good: "Add CSV export to reports screen"
+     - Bad: "Bug fix" (too vague)
+     - Bad: "fix: update validation" (no conventional commit prefixes)
 
-2. **Description Template**: Always use our PR template structure from @.github/pull_request_template.md:
+7. **Write the PR description** using this template:
 
-3. **Template Accuracy**: Ensure your PR description precisely follows the template structure:
+```markdown
+## Summary
+- (2-4 bullet points explaining WHY this change was made and WHAT it does)
+- (Focus on motivation and impact, not just listing files)
 
-   - Don't modify or rename the PR-Agent sections (`pr_agent:summary` and `pr_agent:walkthrough`)
-   - Keep all section headers exactly as they appear in the template
-   - Don't add custom sections that aren't in the template
+## How to Test
+- (2-4 bullet points with concrete steps to verify the change)
+- (Include: where to navigate, what to do, what to expect)
+- (Example: "1. Go to Profile > Edit. 2. Clear email field and submit. 3. Should show validation error.")
 
-4. **Draft PRs**: Start as draft when the work is in progress
-   - Use `--draft` flag in the command
-   - Convert to ready for review when complete using `gh pr ready`
+## Ticket
+BRD-XXXX (or "N/A" if no ticket)
 
-### Common Mistakes to Avoid
+## Screenshots
+(Leave empty — author will add manually if this is a UI change)
 
-1. **Incorrect Section Headers**: Always use the exact section headers from the template
-2. **Adding Custom Sections**: Stick to the sections defined in the template
-3. **Using Outdated Templates**: Always refer to the current @.github/pull_request_template.md file
-
-### Missing Sections
-
-Always include all template sections, even if some are marked as "N/A" or "None"
-
-## Additional GitHub CLI PR Commands
-
-Here are some additional useful GitHub CLI commands for managing PRs:
-
-```bash
-# List your open pull requests
-gh pr list --author "@me"
-
-# Check PR status
-gh pr status
-
-# View a specific PR
-gh pr view <PR-NUMBER>
-
-# Check out a PR branch locally
-gh pr checkout <PR-NUMBER>
-
-# Convert a draft PR to ready for review
-gh pr ready <PR-NUMBER>
-
-# Add reviewers to a PR
-gh pr edit <PR-NUMBER> --add-reviewer username1,username2
-
-# Merge a PR
-gh pr merge <PR-NUMBER> --squash
+## Checklist
+- [ ] I have performed a self-review of my code
+- [ ] I have added tests (or tests are not applicable)
+- [ ] If user-facing: posted in #product-playground with a demo video
 ```
 
-## Using Templates for PR Creation
-
-To simplify PR creation with consistent descriptions, you can create a template file:
-
-1. Create a file named `pr-template.md` with your PR template
-2. Use it when creating PRs:
-
+8. **Create the PR**:
 ```bash
-gh pr create --draft --title "feat(scope): Your title" --body-file pr-template.md --base main
+gh pr create --base <base> --title "<title>" --body "<description>"
 ```
 
-## Related Documentation
+9. **Output**: Show the PR URL. One line. Done.
 
-- [PR Template](.github/pull_request_template.md)
-- [Conventional Commits](https://www.conventionalcommits.org/)
-- [GitHub CLI documentation](https://cli.github.com/manual/)
+## Key Principles
 
+- **Explain the WHY**: The summary should answer "why does this change exist?" not just "what files changed"
+- **Be concise**: Reviewers skim. Bullet points > paragraphs.
+- **No fluff**: Don't add sections you won't use. The template is minimal by design.
+- **Decisive**: Create the PR immediately. User can edit on GitHub if needed.
