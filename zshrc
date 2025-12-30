@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/jamesbest/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # export LC_ALL=en_US.UTF-8
 # Pat to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -304,3 +311,6 @@ if [ -f '/Users/jamesbest/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jamesbest/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jamesbest/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Added by Antigravity
+export PATH="/Users/jamesbest/.antigravity/antigravity/bin:$PATH"
