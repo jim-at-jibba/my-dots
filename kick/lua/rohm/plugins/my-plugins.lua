@@ -3,6 +3,23 @@ return {
     dir = '~/code/other/ariake.nvim/',
   },
   {
+    dir = '~/code/other/nvim-stride/',
+    lazy = false,
+    config = function()
+      require('stride').setup {
+        mode = 'both', -- Try "refactor" or "both" for V2 features
+        show_remote = true, -- Show remote suggestions
+        debug = true, -- Enable debug logging (check :messages)
+        disabled_filetypes = { 'oil' }, -- Filetypes to disable (e.g., {"markdown", "text"})
+
+        -- V2: Tracking settings
+        max_tracked_changes = 10, -- Max edits to track
+        token_budget = 1000, -- Max tokens for change history in prompt
+        small_file_threshold = 200, -- Files <= this send whole content
+      }
+    end,
+  },
+  {
     -- dir = '~/code/other/termogotchi-nvim',
   },
   {

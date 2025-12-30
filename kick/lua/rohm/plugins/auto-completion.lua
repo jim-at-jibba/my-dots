@@ -10,7 +10,21 @@ return {
         ['<CR>'] = { 'accept', 'fallback' },
         ['<C-\\>'] = { 'hide', 'fallback' },
         ['<C-n>'] = { 'select_next', 'show' },
-        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        -- ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<Tab>'] = {
+          'snippet_forward',
+          function(cmp)
+            -- Check if stride has a suggestion first
+            local ok, ui = pcall(require, 'stride.ui')
+            if ok and ui.current_suggestion then
+              return require('stride').accept()
+            end
+            -- Otherwise let blink handle it
+            return cmp.select_next()
+          end,
+          'snippet_forward',
+          'fallback',
+        },
         -- ['<Tab>'] = {
         --   -- 'snippet_forward',
         --   -- function() -- sidekick next edit suggestion
