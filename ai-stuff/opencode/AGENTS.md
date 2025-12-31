@@ -40,6 +40,32 @@ function getUserById(id: string): User { ... }
 function getUserById(id: string): User { ... }
 ```
 
+## TypeScript Rules
+
+- **Always provide explicit types** - Never leave function params, return types, or complex objects untyped
+- **Avoid `any`** - Use `unknown`, generics, or proper types; `any` cascades through codebase
+- **Avoid type assertions (`as`)** - Fix underlying type issues instead of casting
+- **Use lowercase primitives** - `string`, `number`, `boolean` not `String`, `Number`, `Boolean`
+- **Derive types from constants** - Use `as const` + `typeof` instead of redundant interfaces
+- **Type function params with named objects for 3+ params or any boolean** - `fn({ enabled: true })` not `fn(true)`
+
+## Code Quality Rules
+
+- **Remove dead code** - No unused styles, variables, functions, or defensive fallbacks
+- **Extract pure functions** - Complex logic should be testable outside components
+- **No logic in useEffect that belongs in handlers** - Side effects only
+- **Question useMemo/useCallback** - Only use when there's measurable benefit
+- **Positive conditions first** - `condition ? <A /> : null` not `!condition ? null : <A />`
+- **Use Promise.allSettled for batch operations** - When partial success is acceptable
+
+## Organization Rules
+
+- **Types/interfaces outside components** - At file top or separate file
+- **Constants outside components** - Unless truly component-scoped
+- **StyleSheet after component** - Consistent ordering
+- **Colocate related code** - Params near component, types near usage
+- **Remove stale comments** - Especially backward-compat notes; add context if keeping
+
 ## Bash Commands
 
 **File reading commands:**
