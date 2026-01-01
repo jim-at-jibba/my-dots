@@ -55,14 +55,6 @@ return {
           NormalFloat = { bg = 'surface' },
           FloatTitle = { bg = 'surface' },
 
-          TelescopeTitle = { fg = 'love', bold = true },
-          TelescopePromptNormal = { bg = 'surface' },
-          TelescopePromptBorder = { fg = 'surface', bg = 'surface' },
-          TelescopeResultsNormal = { fg = 'text', bg = 'nc' },
-          TelescopeResultsBorder = { fg = 'nc', bg = 'nc' },
-          TelescopePreviewNormal = { fg = 'text', bg = 'overlay' },
-          TelescopePreviewBorder = { fg = 'overlay', bg = 'overlay' },
-
           NoiceCmdLinePrompt = { fg = 'foam', bold = true },
           NoiceCmdlinePopup = { fg = 'iris', bg = 'nc' },
           NoiceCmdlinePopupBorder = { fg = 'nc', bg = 'nc' },
