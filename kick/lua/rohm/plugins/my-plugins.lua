@@ -3,6 +3,10 @@ return {
     dir = '~/code/other/ariake.nvim/',
   },
   {
+    dir = '~/code/oss/micropython.nvim/',
+    dependencies = { 'akinsho/toggleterm.nvim', 'stevearc/dressing.nvim' },
+  },
+  {
     dir = '~/code/other/nvim-stride/',
     lazy = false,
     config = function()
