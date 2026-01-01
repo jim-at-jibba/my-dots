@@ -8,3 +8,31 @@ customCommands:
     command: git-commit
     context: files
     output: terminal
+  - key: "<c-a>" # ctrl + a
+    description: "pick AI commit"
+    command: |
+      if [ "{{.Form.Action}}" = "edit" ]; then
+        echo "{{.Form.Msg}}" > .git/COMMIT_EDITMSG && nvim .git/COMMIT_EDITMSG && [ -s .git/COMMIT_EDITMSG ] && git commit -F .git/COMMIT_EDITMSG || echo "Commit message is empty, commit aborted."
+      else
+        git commit -m "{{.Form.Msg}}"
+      fi
+    context: "files"
+    output: terminal
+    prompts:
+      - type: "menuFromCommand"
+        title: "AI Commit Messages"
+        key: "Msg"
+        command: "lazycommit commit"
+        filter: "^(?P<raw>.+)$"
+        valueFormat: "{{ .raw }}"
+        labelFormat: "{{ .raw | green }}"
+      - type: "menu"
+        title: "Choose Action"
+        key: "Action"
+        options:
+          - name: "Commit directly"
+            description: "Use this message as-is"
+            value: "direct"
+          - name: "Edit before commit"
+            description: "Open in editor first"
+            value: "edit"
