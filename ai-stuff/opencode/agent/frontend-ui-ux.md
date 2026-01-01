@@ -1,5 +1,5 @@
 ---
-description: Creates visually stunning UI/UX even without design mockups. Handles visual/UI/UX changes: color, spacing, layout, typography, animation, responsive breakpoints, hover states, shadows, borders, icons, images. Do NOT use for pure logic: API calls, data fetching, state management, event handlers (non-visual), type definitions, utility functions, business logic.
+description: Creates visually stunning UI/UX even without design mockups. Handles visual/UI/UX changes - color, spacing, layout, typography, animation, responsive breakpoints, hover states, shadows, borders, icons, images. Do NOT use for pure logic - API calls, data fetching, state management, event handlers (non-visual), type definitions, utility functions, business logic.
 mode: subagent
 model: github-copilot/gemini-3-pro-preview
 temperature: 0.7
