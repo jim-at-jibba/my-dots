@@ -1,3 +1,37 @@
 system_message: "You are a helpful assistant that generates git commit messages, and pull request titles."
-commit_message_template: "Based on the following git diff, generate 10 conventional commit messages. Each message should be on a new line, without any numbering or bullet points:\n\n%s"
+commit_message_template: "Based on the following git diff, generate 10 conventional commit messages, focus on what problem this commit solves, why the change was made (not how) and the motivation behind the changes. The subject line should be concise and describe the change, completing the sentence “If applied, this commit will …”. Each message should be on a new line, without any numbering or bullet points:\n\n%s"
 pr_title_template: "Based on the following git diff, generate 10 pull request title suggestions. Each title should be on a new line, without any numbering or bullet points:\n\n%s"
+
+# commit_message_template: |
+#   Based on the following git diff, generate a single well-crafted commit message.
+#
+#   ## Commit Message Rules
+#
+#   **Subject line:**
+#   - Start with a capital letter
+#   - Use imperative mood (Add, Fix, Update, etc.)
+#   - 50 characters or less
+#   - No period at the end
+#   - Must describe the actual change — not generic "Fix script" but "Update complexity threshold to 20"
+#   - Litmus test: The subject should complete the sentence "If applied, this commit will ___"
+#
+#   **Body (if needed for complex changes):**
+#   - Leave one blank line after the subject
+#   - Wrap at 72 characters
+#   - Explain what and why, not how
+#   - Use bullet points with "-" for lists
+#   - Each bullet point should start with a capital letter
+#
+#   **Focus on:**
+#   - What problem this commit solves
+#   - Why the change was made (not how)
+#   - Motivation behind the changes
+#
+#   **Examples of good vs bad:**
+#   - Bad: "Fix complexity report script"
+#   - Good: "Update complexity-report default threshold to 20"
+#   - Bad: "Update file"
+#   - Good: "Extract validation helpers to reduce complexity"
+#
+#   Git diff:
+#   %s
