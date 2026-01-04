@@ -6,6 +6,7 @@ vim.g.maplocalleader = ' '
 
 require 'rohm.lazy_init'
 require 'rohm.keymaps'
+require 'rohm.theme'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -106,11 +107,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
--- vim.cmd 'colorscheme rose-pine'
--- vim.cmd 'colorscheme NeoSolarized'
--- vim.cmd 'colorscheme dawnfox'
-vim.cmd 'colorscheme terafox'
--- vim.cmd 'colorscheme catppuccin-macchiato'
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

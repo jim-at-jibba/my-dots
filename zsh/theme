@@ -9,14 +9,8 @@ nightfoxday [Nightfox Day]
 nightfoxnord [Nightfox Nord]
 nightfoxtera [Nightfox Tera]
 nightfoxdawn [Nightfox Dawn]
-nightowl [Night Owl]
-nordic [Nordic]
-ariake [Ariake]
-tokyonightstorm [Tokyo Night]
-poimandres [Poimandres]
-evergarden [Evergarden]
-everforestdark [Everforest Dark]
-everforestlight [Everforest Light]
+solarizeddark [Solarized Dark]
+solarizedlight [Solarized Light]
 "
 
 # local cmd=$(echo $themes | eval "fzf ${FZF_DEFAULT_OPTS} --header='[themes:show]'" | awk '{print $1}')

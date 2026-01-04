@@ -8,184 +8,53 @@ sketchybar=${dotfiles}/sketchybar
 kitty=${dotfiles}/kitty
 tmux=${dotfiles}/tmux
 
-configure_spacebar() {
-  cat ${spacebar}/base ${spacebar}/${color} >${spacebar}/spacebarrc && brew services restart spacebar
-}
-
-configure_sketchybar() {
-  cat ${sketchybar}/colors/${color}.sh >${sketchybar}/colors.sh && sketchybar --reload
-}
-
 configure_kitty() {
-  cat ${kitty}/base.conf ${kitty}/${color}.conf >${dotfiles}/kitty.conf
+	cat ${kitty}/base.conf ${kitty}/${color}.conf >${dotfiles}/kitty.conf
 }
 
-configure_tmux_light() {
-  cat ${tmux}/base.conf ${tmux}/light.conf >${dotfiles}/tmux.conf
-  tmux source-file ~/.tmux.conf
-}
-
-configure_tmux() {
-  cat ${tmux}/base.conf >${dotfiles}/tmux.conf
-  tmux source-file ~/.tmux.conf
-}
-
-configure_tmux_dark() {
-  cat ${tmux}/base.conf ${tmux}/dark.conf >${dotfiles}/tmux.conf
-  tmux source-file ~/.tmux.conf
-}
-
-configure_vim() {
-  echo $1 >${dotfiles}/daily-driver/lua/color.lua
-  echo $1 >${dotfiles}/lazy/lua/color.lua
-}
-
-configure_lazy() {
-  echo $1 >${dotfiles}/lazy/lua/plugins/theme.lua
+configure_kick() {
+	echo $1 >${dotfiles}/kick/lua/rohm/theme.lua
 }
 
 case $color in
 rosepinemoon)
-  # configure_kitty
-  # configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
-  configure_sketchybar
-  # configure_spacebar
-  ;;
+	dark-mode on
+	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
+	;;
 rosepinedawn)
-  # configure_kitty
-  # configure_tmux
-  dark-mode off
-  configure_sketchybar
-  # configure_spacebar
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "rose-pine"}}}'
-  ;;
-evergarden)
-  # configure_kitty
-  # configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "evergarden"}}}'
-  configure_sketchybar
-  # configure_spacebar
-  ;;
-everforestdark)
-  # configure_kitty
-  # configure_tmux
-  dark-mode on
-  # configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
-  configure_sketchybar
-  ;;
-everforestlight)
-  # configure_kitty
-  # configure_tmux
-  dark-mode off
-  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "everforest"}}}'
-  configure_sketchybar
-  ;;
-poimandres)
-  # configure_kitty
-  # configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "poimandres"}}}'
-  configure_sketchybar
-  ;;
+	dark-mode off
+	configure_kick 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
+	;;
 nightfoxdusk)
-  # configure_kitty
-  # configure_tmux
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "duskfox"}}}'
-  dark-mode on
-  configure_sketchybar
-  # configure_spacebar
-  ;;
+	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme duskfox")'
+	dark-mode on
+	;;
 nightfoxday)
-  # configure_kitty
-  # configure_tmux_light
-  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dayfox"}}}'
-  dark-mode off
-  configure_spacebar
-  ;;
+	configure_kick 'vim.cmd("set background=light")\nvim.cmd("colorscheme dayfox")'
+	dark-mode off
+	;;
 nightfoxnord)
-  # configure_kitty
-  # configure_tmux
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "nordfox"}}}'
-  dark-mode on
-  configure_sketchybar
-  # configure_spacebar
-  ;;
+	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme nordfox")'
+	dark-mode on
+	;;
 nightfoxtera)
-  # configure_kitty
-  # configure_tmux
-  # configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "terafox"}}}'
-  dark-mode on
-  configure_sketchybar
-  # configure_spacebar
-  ;;
+	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme terafox")'
+	dark-mode on
+	;;
 nightfoxdawn)
-  # configure_kitty
-  # configure_tmux
-  # configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "dawnfox"}}}'
-  dark-mode off
-  configure_sketchybar
-  # configure_spacebar
-  ;;
-nightowl)
-  configure_kitty
-  configure_tmux
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "night-owl"}}}'
-  dark-mode on
-  configure_sketchybar
-  # configure_spacebar
-  ;;
-nordic)
-  configure_kitty
-  configure_tmux
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "nordic"}}}'
-  dark-mode on
-  # configure_spacebar
-  ;;
-ariake)
-  configure_kitty
-  configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "ariake"}}}'
-  configure_sketchybar
-  # configure_spacebar
-  ;;
+	configure_kick 'vim.cmd("set background=light")\nvim.cmd("colorscheme dawnfox")'
+	dark-mode off
+	;;
 solarizeddark)
-  configure_kitty
-  configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "NeoSolarized"}}}'
-  configure_spacebar
-  ;;
+	dark-mode on
+	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme NeoSolarized")'
+	;;
 solarizedlight)
-  configure_kitty
-  configure_tmux
-  dark-mode off
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "NeoSolarized"}}}'
-  configure_spacebar
-  ;;
-tokyonightstorm)
-  configure_sketchybar
-  dark-mode on
-  ;;
-cyberdreamdark)
-  configure_kitty
-  configure_tmux
-  dark-mode on
-  configure_lazy 'vim.cmd("set background=dark")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "cyberdream"}}}'
-  configure_spacebar
-  ;;
-cyberdreamlight)
-  configure_kitty
-  configure_tmux
-  dark-mode off
-  configure_lazy 'vim.cmd("set background=light")\nreturn { { "LazyVim/LazyVim", opts = { colorscheme = "cyberdream"}}}'
-  configure_spacebar
-  ;;
+	dark-mode off
+	configure_kick 'vim.cmd("set background=light")\nvim.cmd("colorscheme NeoSolarized")'
+	;;
 *)
-  echo "Supported colorschemes: rose pine moon, rose pine dawn, nightfox-nord, nightfox-dawn, nightfox-dusk, nightfox-tera nightowl oldworld tokyonightstorm"
-  exit 1
-  ;;
+	echo "Supported colorschemes: rosepinemoon, rosepinedawn, nightfoxdusk, nightfoxday, nightfoxnord, nightfoxtera, nightfoxdawn, solarizeddark, solarizedlight"
+	exit 1
+	;;
 esac
