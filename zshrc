@@ -101,20 +101,6 @@ plugins=(git zsh-autosuggestions)
 
 # }}}
 
-
-# # intergrates autojump with fzf
-j() {
-    if [[ "$#" -ne 0 ]]; then
-        cd $(autojump $@)
-        return
-    fi
-    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' | fzf --header 'Search....')"
-}
-
-ff() {
-    aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
-}
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -128,9 +114,6 @@ alias btoff="blueutil -p 0"
 # Fabric
 alias up="cp -R ~/dotfiles/shellscripts/fabric/custompatterns/* ~/.config/fabric/patterns && echo 'Patterns updated!'"
 alias p="pbpaste"
-
-alias image_gen="cd ~/dotfiles/shellscripts/image_generator && ./image_generator.sh"
-
 alias clean_my_mac="npx mac-cleaner-cli"
 
 # Git
@@ -168,11 +151,8 @@ alias f='fuck'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias lip="ip addr show en0"
-alias server="python3 -m http.server"
-alias daily='teamocil mob; teamocil wiki'
 export EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
-export sso='aws sso login --profile breedr_develop_data_analysis_user'
 # Can be added as an alias in your zshrc
 alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | fzf | xargs yarn test --silent -i"
 alias y="yazi"
@@ -180,16 +160,6 @@ alias y="yazi"
 # Docker
 alias ld="lazydocker"
 
-# go
-alias coverage="go test -coverprofile=coverage.out && go tool cover -html=coverage.out"
-
-# tmux
-name () { printf '\033]2;%s\033\\' "$1";tmux set -g pane-border-format "#{pane_index} #T"; }           # Name pane
-alias layout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
-
-
-# Teamocil Autocomplete
-# alias tee='teamocil'
 
 # Hacking
 ##########
@@ -200,11 +170,8 @@ alias patch="~/hacking/scripts/patch.sh"
 ###########
 alias bs='npx browser-sync start --server --files "**/*.*"'
 alias cat='bat'
-alias genyshell='/Applications/Genymotion\ Shell.app/Contents/MacOS/genyshell'
 alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 alias nmdelete='find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;'
-alias readme='npx readme-md-generator'
-alias run="(jq -r '.scripts|to_entries[]|((.key))' package.json) | fzf-tmux -p --border-label='Yarn run' | xargs yarn"
 alias love='open "$(basename "$PWD")" -a /Applications/love.app'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -283,15 +250,8 @@ eval "$(zoxide init --cmd j zsh)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Task Master aliases added on 24/04/2025
-alias tm='task-master'
-alias taskmaster='task-master'
-# alias claude="/Users/jamesbest/.claude/local/claude"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-alias claude="/Users/jamesbest/.claude/local/claude"
 
 # opencode
 export PATH=/Users/jamesbest/.opencode/bin:$PATH
