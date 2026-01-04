@@ -1,9 +1,6 @@
 font-family=Berkeley Mono
 font-style=SemiCondensed
 font-size=18
-#theme = Builtin Solarized Dark
-theme = Rose Pine Moon
-# theme = Terafox
 cursor-style = block
 bold-is-bright = true
 mouse-hide-while-typing = true
@@ -31,6 +28,4 @@ keybind = ctrl+a>e=equalize_splits
 
 # other
 copy-on-select = clipboard
-
-
-
+theme = Rose Pine Moon
