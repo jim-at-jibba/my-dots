@@ -1,0 +1,36 @@
+font-family=Berkeley Mono
+font-style=SemiCondensed
+font-size=18
+#theme = Builtin Solarized Dark
+theme = Rose Pine Moon
+# theme = Terafox
+cursor-style = block
+bold-is-bright = true
+mouse-hide-while-typing = true
+
+window-padding-balance = true 
+window-save-state = always
+macos-titlebar-style=transparent
+
+
+
+# keybindings
+keybind = ctrl+a>r=reload_config
+keybind = ctrl+x>x=close_surface
+
+
+keybind = ctrl+a>j=goto_split:bottom
+keybind = ctrl+a>k=goto_split:top
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>l=goto_split:right
+
+
+keybind = ctrl+a>z=toggle_split_zoom
+
+keybind = ctrl+a>e=equalize_splits
+
+# other
+copy-on-select = clipboard
+
+
+
