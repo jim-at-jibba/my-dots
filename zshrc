@@ -108,7 +108,7 @@ j() {
         cd $(autojump $@)
         return
     fi
-    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  gum filter --placeholder 'Search....')"
+    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' | fzf --header 'Search....')"
 }
 
 ff() {
@@ -174,7 +174,7 @@ export EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export REACT_EDITOR='/Users/jamesbest/neovim/bin/nvim'
 export sso='aws sso login --profile breedr_develop_data_analysis_user'
 # Can be added as an alias in your zshrc
-alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | gum filter | xargs yarn test --silent -i"
+alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | fzf | xargs yarn test --silent -i"
 alias y="yazi"
 
 # Docker

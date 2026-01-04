@@ -15,7 +15,7 @@ kp              [kill:path]
 ks              [kill:tcp]
 theme           [themes]"
 
-local cmd=$(echo $helptxt | eval "gum filter --placeholder 'Pick a command'" | awk '{print $1}')
+local cmd=$(echo $helptxt | fzf --header 'Pick a command' | awk '{print $1}')
 
 if [[ -n $cmd ]]; then
  eval ${cmd}

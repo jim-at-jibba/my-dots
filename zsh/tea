@@ -10,7 +10,7 @@ dev [Empty dev window]
 wiki [Wiki and til]
 "
 
-local cmd=$(echo $teamocils | eval "gum filter --placeholder 'Pick a teamocil layout'" | awk '{print $1}')
+local cmd=$(echo $teamocils | fzf --header 'Pick a teamocil layout' | awk '{print $1}')
 
 if [[ -n $cmd ]]; then
  teamocil ${cmd}

@@ -32,7 +32,7 @@ run_test_for_file() {
 export -f run_test_for_file
 
 # Find files excluding certain directories and picking up test files, then allow user selection
-selected_files=$(rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios/**' -g '*test*' --files | gum filter)
+selected_files=$(rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios/**' -g '*test*' --files | fzf)
 
 # Check if user made a selection
 if [ -z "$selected_files" ]; then

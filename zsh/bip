@@ -3,7 +3,7 @@
 # mnemonic [B]rew [I]nstall [P]lugin
 
 # local inst=$(brew search | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
-local inst=$(brew search | eval "gum filter 'Search for a brew package'")
+local inst=$(brew search | fzf --header 'Search for a brew package')
 
 if [[ $inst ]]; then
   for prog in $(echo $inst)
