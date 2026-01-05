@@ -1,42 +1,3 @@
-local my_active_content = function()
-  local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
-  local git = MiniStatusline.section_git { trunc_width = 40 }
-  local diff = MiniStatusline.section_diff { trunc_width = 75 }
-  local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
-  local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
-  local filename = MiniStatusline.section_filename { trunc_width = 140 }
-  local grapple = require('grapple').statusline()
-
-  -- sidekick status
-  local sidekick_status = ''
-  local sidekick_hl = 'MiniStatuslineDevinfo'
-  local ok, status_module = pcall(require, 'sidekick.status')
-  if ok then
-    local status = status_module.get()
-    if status then
-      local icon = ' '
-      sidekick_status = icon
-      if status.kind == 'Error' then
-        sidekick_hl = 'DiagnosticError'
-      elseif status.busy then
-        sidekick_hl = 'DiagnosticWarn'
-      else
-        sidekick_hl = 'Special'
-      end
-    end
-  end
-
-  return MiniStatusline.combine_groups {
-    { hl = mode_hl, strings = { mode } },
-    { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
-    '%<', -- Mark general truncate point
-    { hl = 'MiniStatuslineFilename', strings = { filename } },
-    '%=', -- End left alignment
-    { hl = sidekick_hl, strings = { sidekick_status } },
-    { hl = mode_hl, strings = { grapple } },
-  }
-end
-
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -58,23 +19,48 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { content = { active = my_active_content } }
+      -- Mini statusline (commented out - using lualine instead)
+      -- local my_active_content = function()
+      --   local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+      --   local git = MiniStatusline.section_git { trunc_width = 40 }
+      --   local diff = MiniStatusline.section_diff { trunc_width = 75 }
+      --   local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+      --   local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
+      --   local filename = MiniStatusline.section_filename { trunc_width = 140 }
+      --   local grapple = require('grapple').statusline()
+      --   local sidekick_status = ''
+      --   local sidekick_hl = 'MiniStatuslineDevinfo'
+      --   local ok, status_module = pcall(require, 'sidekick.status')
+      --   if ok then
+      --     local status = status_module.get()
+      --     if status then
+      --       local icon = ' '
+      --       sidekick_status = icon
+      --       if status.kind == 'Error' then
+      --         sidekick_hl = 'DiagnosticError'
+      --       elseif status.busy then
+      --         sidekick_hl = 'DiagnosticWarn'
+      --       else
+      --         sidekick_hl = 'Special'
+      --       end
+      --     end
+      --   end
+      --   return MiniStatusline.combine_groups {
+      --     { hl = mode_hl, strings = { mode } },
+      --     { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+      --     '%<',
+      --     { hl = 'MiniStatuslineFilename', strings = { filename } },
+      --     '%=',
+      --     { hl = sidekick_hl, strings = { sidekick_status } },
+      --     { hl = mode_hl, strings = { grapple } },
+      --   }
+      -- end
+      -- local statusline = require 'mini.statusline'
+      -- statusline.setup { content = { active = my_active_content } }
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.icons').setup()
       require('mini.pairs').setup()
       -- require('mini.files').setup()
