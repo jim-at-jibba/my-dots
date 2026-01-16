@@ -1,6 +1,6 @@
 font-family=Berkeley Mono
 font-style=SemiCondensed
-font-size=18
+font-size=16
 cursor-style = block
 bold-is-bright = true
 mouse-hide-while-typing = true
@@ -28,4 +28,4 @@ keybind = ctrl+a>e=equalize_splits
 
 # other
 copy-on-select = clipboard
-theme = Terafox
+theme = Rose Pine Dawn
