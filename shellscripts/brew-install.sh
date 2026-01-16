@@ -18,31 +18,68 @@ brew update
 brew install zsh
 
 PACKAGES=(
-  git
-  yarn
-  postgresql
-  ack
-  autojump
+  asdf
+  atuin
   bat
+  btop
+  bun
+  cmake
+  curl
+  diff-so-fancy
+  docker-compose
   elixir
+  erlang
+  exa
+  fastlane
+  fd
   ffmpeg
+  fmt
+  fnm
   fzf
-  htop
-  mongodb
-  neovim
-  netcat
-  nmap
-  reacttach-to-user-namespace
-  redis
+  gemini-cli
+  gh
+  git-delta
+  gtop
+  httpie
+  jq
+  just
+  lazydocker
+  lazygit
+  lua
+  lua-language-server
+  luarocks
+  llm
+  magic-wormhole
+  maven
+  pidcat
+  pnpm
+  prettierd
+  rgbds
   ripgrep
-  tmux
+  speedtest-cli
+  sqlite
+  starship
+  stylua
+  thefuck
+  tree
+  watchman
+  webp
   wget
-  youtube-dl
-  zsh-completions
+  yq
+  yt-dlp
+  zellij
+  zoxide
+)
+
+CASKS=(
+  ghostty
 )
 
 echo "Installing packages..."
 brew install ${PACKAGES[@]}
+
+echo "Installing cask apps..."
+brew install --cask ${CASKS[@]}
 
 echo "Cleaning up..."
 brew cleanup
