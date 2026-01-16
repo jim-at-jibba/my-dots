@@ -9,12 +9,16 @@ return {
           watcher = {
             javascript = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
             typescript = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
+            javascriptreact = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
+            typescriptreact = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
             jsx = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
             tsx = [[console.log('%watcher_marker_start', %filename: %log_target, '%watcher_marker_end')]],
           },
           default = {
             javascript = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
             typescript = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
+            javascriptreact = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
+            typescriptreact = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
             jsx = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
             tsx = [[console.log("%log_marker %log_target: %filename  %line_number", %log_target)]],
             python = [[print("%log_marker %log_target:  %line_number", %log_target)]],

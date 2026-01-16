@@ -45,7 +45,7 @@ return {
             { provider = 'openai',     model = 'gpt-4o-mini',                    label = 'GPT-4o Mini' },
             { provider = 'openai',     model = 'gpt-4o',                         label = 'GPT-4o' },
             { provider = 'anthropic',  model = 'claude-haiku-4-5-20251001',      label = 'Claude 4.5 Haiku' },
-            { provider = 'copilot',    model = 'gpt-4o',                         label = 'Copilot GPT-4o' },
+            -- { provider = 'copilot',    model = 'gpt-4o',                         label = 'Copilot GPT-4o' },
             { provider = 'openrouter', model = 'z-ai/glm-4.5-air',               label = 'Z-ai 4.5 Air' },
           },
           default_model_index = 1, -- Optional: start with first model

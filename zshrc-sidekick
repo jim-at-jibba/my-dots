@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 # Completions
 # ------------------------------------------------------------------------------
 fpath=("/Users/jamesbest/.oh-my-zsh/custom/completions" $fpath)
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 fpath=(~/dotfiles/zsh "${fpath[@]}")
 autoload -Uz compinit && compinit
 autoload -Uz utils tl kp ks vim tmuxify theme tea
@@ -48,6 +49,9 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 # Homebrew
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
+# Make ruby use its own openssl
+export RUBY_BUILD_VENDOR_OPENSSL=1
+
 # Languages & Runtimes
 
 
@@ -59,6 +63,12 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:
 export PATH="$HOME/neovim/bin:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# ASDF
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 
 # Dedupe PATH
 typeset -U PATH fpath
