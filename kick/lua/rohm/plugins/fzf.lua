@@ -38,7 +38,7 @@ return {
 
       { '<leader>sd', '<cmd>FzfLua lsp_document_diagnostics<cr>', desc = 'Document diagnostics' },
       { '<leader>sf', '<cmd>FzfLua files<cr>', desc = 'Find files' },
-      { '<C-p>', '<cmd>FzfLua global<cr>', desc = 'Global find' },
+      -- { '<C-p>', '<cmd>FzfLua global<cr>', desc = 'Global find' },
       { '<leader>sg', '<cmd>FzfLua live_grep<cr>', desc = 'Grep' },
       { '<leader>sg', '<cmd>FzfLua grep_visual<cr>', desc = 'Grep', mode = 'x' },
       { '<leader>sh', '<cmd>FzfLua help_tags<cr>', desc = 'Help' },
