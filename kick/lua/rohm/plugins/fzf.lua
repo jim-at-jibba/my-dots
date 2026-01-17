@@ -86,15 +86,20 @@ return {
             vertical = 'up:40%',
           },
         },
-        defaults = { git_icons = false },
+        defaults = {
+          git_icons = false,
+          file_ignore_patterns = { 'node_modules', '%.git/' },
+        },
         -- Configuration for specific commands.
         files = {
+          fd_opts = '--type f --hidden --exclude .git --exclude node_modules',
           winopts = {
             preview = { hidden = true },
           },
         },
         grep = {
           header_prefix = icons.misc.search .. ' ',
+          rg_opts = '--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --glob=!node_modules/',
           rg_glob_fn = function(query, opts)
             local regex, flags = query:match(string.format('^(.*)%s(.*)$', opts.glob_separator))
             -- Return the original query if there's no separator.

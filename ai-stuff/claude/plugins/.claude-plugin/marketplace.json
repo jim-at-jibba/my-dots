@@ -1,0 +1,23 @@
+{
+  "name": "jibba-plugins",
+  "owner": {
+    "name": "Rohm",
+    "email": "jim@justjibba.net"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugins",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "feature-dev",
+      "source": "./feature-dev",
+      "description": "Comprehensive feature development workflow with specialized agents for codebase exploration, architecture design, and quality review",
+      "version": "1.0.0",
+      "author": {
+        "name": "Rohm",
+        "email": "jim@justjibba.net"
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+# ==============================================================================
+# ZSH Configuration
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Oh-My-Zsh Setup
+# ------------------------------------------------------------------------------
+export ZSH=$HOME/.oh-my-zsh
+plugins=(git zsh-autosuggestions)
+DISABLE_AUTO_TITLE="true"
+source $ZSH/oh-my-zsh.sh
+
+# ------------------------------------------------------------------------------
+# Completions
+# ------------------------------------------------------------------------------
+fpath=("/Users/jamesbest/.oh-my-zsh/custom/completions" $fpath)
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+fpath=(~/dotfiles/zsh "${fpath[@]}")
+autoload -Uz compinit && compinit
+autoload -Uz utils tl kp ks vim tmuxify theme tea
+
+# ------------------------------------------------------------------------------
+# Environment Variables
+# ------------------------------------------------------------------------------
+
+# Editors
+#export EDITOR="$HOME/neovim/bin/nvim"
+# export REACT_EDITOR="$HOME/neovim/bin/nvim"
+
+# FZF
+export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Misc
+export BAT_THEME="TwoDark"
+export ERL_AFLAGS="-kernel shell_history enabled"
+export PIP_REQUIRE_VIRTUALENV=true
+
+# Build flags
+#export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/openssl@3.2/lib -L/usr/local/opt/zlib/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/openssl@3.2/include -I/usr/local/opt/zlib/include"
+
+# ------------------------------------------------------------------------------
+# PATH Configuration
+# ------------------------------------------------------------------------------
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
+# Homebrew
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# Make ruby use its own openssl
+export RUBY_BUILD_VENDOR_OPENSSL=1
+
+# Languages & Runtimes
+
+
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/29.0.2:$PATH"
+
+# Tools
+export PATH="$HOME/neovim/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# ASDF
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+# Dedupe PATH
+typeset -U PATH fpath
+
+# ------------------------------------------------------------------------------
+# Aliases - Navigation
+# ------------------------------------------------------------------------------
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# ------------------------------------------------------------------------------
+# Aliases - Git
+# ------------------------------------------------------------------------------
+alias gs="git status -s | fzf --no-sort --reverse --preview 'git diff --color=always {+2} | diff-so-fancy' --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up --preview-window=right:60%:wrap"
+alias gr='git remote -v'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glogNoDays="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias ga='git add .'
+alias gpush='git push'
+alias gpull='git pull'
+alias gme='git config user.name "jim-at-jibba"'
+alias workname="git config user.name 'James Best' && git config user.email 'james.best@reedr.co'"
+alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
+alias lg="lazygit"
+alias epoc="date +%s | pbcopy"
+
+# ------------------------------------------------------------------------------
+# Aliases - General
+# ------------------------------------------------------------------------------
+alias v='NVIM_APPNAME=kick nvim'
+alias c='clear'
+alias cat='bat'
+
+# ------------------------------------------------------------------------------
+# Aliases - Bluetooth
+# ------------------------------------------------------------------------------
+alias bton="blueutil -p 1"
+alias btoff="blueutil -p 0"
+
+# ------------------------------------------------------------------------------
+# Aliases - Docker
+# ------------------------------------------------------------------------------
+alias ld="lazydocker"
+
+# ------------------------------------------------------------------------------
+# Aliases - Development
+# ------------------------------------------------------------------------------
+alias bs='npx browser-sync start --server --files "**/*.*"'
+alias nmlist='find . -name "node_modules" -type d -prune -print | xargs du -chs'
+alias nmdelete='find . -name "node_modules" -type d -prune -print -exec rm -rf "{}" \;'
+alias love='open "$(basename "$PWD")" -a /Applications/love.app'
+alias ft="rg -g '!./node_modules/**' -g '!./vendor/**' -g '!./ios' -g '*test*' --files | fzf | xargs yarn test --silent -i"
+alias whereami='npx @rafaelrinaldi/whereami -f json'
+alias clean_my_mac="npx mac-cleaner-cli"
+
+
+# ------------------------------------------------------------------------------
+# Aliases - Java
+# ------------------------------------------------------------------------------
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
+alias java11='export JAVA_HOME=$JAVA_11_HOME'
+
+# ------------------------------------------------------------------------------
+# Functions
+# ------------------------------------------------------------------------------
+gitnm() { git branch --no-merge "$1"; }
+
+# ------------------------------------------------------------------------------
+# Tool Initialization
+# ------------------------------------------------------------------------------
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
+eval "$(zoxide init --cmd j zsh)"
+eval "$(fnm env --use-on-cd --shell zsh)"
+#eval "$(llm cmdcomp --init zsh)"
+bindkey '^U' __llm_cmdcomp
