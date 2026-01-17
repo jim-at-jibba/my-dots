@@ -37,6 +37,7 @@ return {
 
     config = function()
       require('nvim-redraft').setup {
+        diff_mode = true,
         llm = {
           models = {
             { provider = 'cerebras', model = 'qwen-3-235b-a22b-instruct-2507', label = 'Cerebras Qwen' },
