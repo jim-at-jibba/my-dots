@@ -1,2 +1,2 @@
-vim.cmd("set background=light")
+vim.cmd("set background=dark")
 vim.cmd("colorscheme rose-pine")
