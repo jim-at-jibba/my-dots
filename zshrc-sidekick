@@ -96,6 +96,9 @@ alias workname="git config user.name 'James Best' && git config user.email 'jame
 alias gitname="git config user.name 'James Best' && git config user.email 'jim@justjibba.net'"
 alias lg="lazygit"
 alias epoc="date +%s | pbcopy"
+alias l='eza --long --header --all --icons'
+alias ls='eza --header'
+alias tree='eza --tree --level=2'
 
 # ------------------------------------------------------------------------------
 # Aliases - General

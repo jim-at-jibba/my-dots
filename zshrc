@@ -127,9 +127,9 @@ alias epoc="date +%s | pbcopy"
 # Aliases - General
 # ------------------------------------------------------------------------------
 alias v='NVIM_APPNAME=kick nvim'
-alias l='exa --long --header --all --icons'
-alias ls='exa --header'
-alias tree='exa --tree --level=2'
+alias l='eza --long --header --all --icons'
+alias ls='eza --header'
+alias tree='eza --tree --level=2'
 alias c='clear'
 alias cat='bat'
 alias y="yazi"
