@@ -27,9 +27,11 @@ rosepinemoon)
 	dark-mode on
 	configure_kick 'vim.cmd("set background=dark")\nvim.cmd("colorscheme rose-pine")'
 	configure_ghostty "Rose Pine Moon"
+  configure_kitty
 	;;
 rosepinedawn)
 	dark-mode off
+  configure_kitty
 	configure_kick 'vim.cmd("set background=light")\nvim.cmd("colorscheme rose-pine")'
 	configure_ghostty "Rose Pine Dawn"
 	;;
