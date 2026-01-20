@@ -9,7 +9,6 @@
 
 import os
 import sys
-from pathlib import Path
 from dotenv import load_dotenv
 
 def main():
@@ -43,7 +42,7 @@ def main():
     
     try:
         from elevenlabs.client import ElevenLabs
-        from elevenlabs import play
+        from elevenlabs.play import play
         
         # Initialize client
         elevenlabs = ElevenLabs(api_key=api_key)
@@ -64,8 +63,8 @@ def main():
             # Generate and play audio directly
             audio = elevenlabs.text_to_speech.convert(
                 text=text,
-                voice_id="XW70ikSsadUbinwLMZ5w",  # Specified voice
-                model_id="eleven_turbo_v2_5",
+                voice_id="JBFqnCBsd6RMkjVDRZzb",  # Requested voice
+                model_id="eleven_turbo_v2_5", # eleven_flash_v2_5 is also an option
                 output_format="mp3_44100_128",
             )
             
